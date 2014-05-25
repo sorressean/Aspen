@@ -1,0 +1,14 @@
+#!/bin/sh
+#runs aspen repeatedly, in case of a crash.
+#sleeps to make sure we don't just reboot over and over if there's a problem.
+while true; do
+if [ -f bin/aspen ]; then
+cd bin;./aspen
+sleep 30
+else
+echo "No binary found."
+echo "Please type cd src and make to compile."
+exit 1
+fi
+done
+
