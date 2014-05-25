@@ -1,0 +1,1 @@
+valgrind --leak-check=yes --log-file=memcheck.log ./aspen
