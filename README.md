@@ -16,6 +16,6 @@ Aspen was created to address many issues:
 I began work on aspen in late 2009, after trying out a few different engines for what I wanted. I ran into all of the issues outlined above, in one form or another before I finally decided to jump in and work on it. For a while, we were hosted on Googlecode before I decided to convert this into my own mud and work on it closed source. I've explained my reasons and motivations for open sourcing the project [here](http://tysdomain.com/blog/?p=192).
 
 ## Is Aspen ready-to-use?
-The short answer is probably not. The even longer answer is no; Aspen is currently in development, and as such is not ready for primetime. We still welcome anyone who wishes to use it; if you would like to contribute to the engine, we would greatly appreciate any contributions. Our todo list can     be found [wiki/todo](here). You are more than welcome to work on any of those, as well as any other section of your choosing.
+The short answer is probably not. The even longer answer is no; Aspen is currently in development, and as such is not ready for primetime. We still welcome anyone who wishes to use it; if you would like to contribute to the engine, we would greatly appreciate any contributions. Our todo list can     be found [wiki/todo.md](here). You are more than welcome to work on any of those, as well as any other section of your choosing.
 ## Community
 We do not currently have a mailing list in place for discussions; you can find us on IRC: irc.freenode.net, #aspenmud.
