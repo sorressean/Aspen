@@ -283,11 +283,11 @@ bool InitializeDirectories()
 //we shouldn't initialize, but we need to die if the directories don't exist already.
 //otherwise we just get errors later.
 #ifdef NO_INIT_DEFAULTS
-    if (DirectoryExists("data") && DirectoryExists("data/players") && DirectoryExists("data/state"))
+    if (DirectoryExists("../data") && DirectoryExists("../data/players") && DirectoryExists("../data/state"))
         {
             return true;
         }
-    if (DirectoryExists("logs"))
+    if (DirectoryExists("../logs"))
         {
             return true;
         }
@@ -298,9 +298,9 @@ bool InitializeDirectories()
 
 //we can init defaults.
 //we just create the dirs here, if they already exists the calls will fail and noone cares.
-mkdir("data", 0);
-mkdir("data/players", 0);
-mkdir("data/state", 0);
-
+mkdir("../data", 0700);
+mkdir("../data/players", 0700);
+mkdir("../data/state", 0700);
+mkdir("../logs", 0700);
 return true;
 }
