@@ -66,7 +66,7 @@ O_FILES += $(patsubst %.cpp,%.o, $(filter %.cpp, $(S_FILES)))
 all: $(O_FILES)
 	@$(RM) $(OUTPUT)
 	@$(ECHO) Linking.
-	@$(CC) $(LDFLAGS) $(CFLAGS) -o $(OUTPUT) $(O_FILES)
+	@$(CC) $(CFLAGS) -o $(OUTPUT) $(O_FILES) $(LDFLAGS)
 
 %.o: %.cpp
 	@$(ECHO) Compiling $<.
