@@ -34,7 +34,7 @@ static bool InitializeDirectories();
 
 int main(int argc, const char** argv)
 {
-    World* world = NULL;
+    World* world = nullptr;
     BOOL copyover=false; //are we rebooting for copyover?
     int listener=0; //the socket to listen on when recovering from copyover
     int port = 0;
@@ -57,6 +57,8 @@ int main(int argc, const char** argv)
     gettimeofday(&start, NULL);
 #endif
 
+//we check to see if dirs exist.
+//if we can create them, we do so. Otherwise we just fail when they don't exist.
     if (!InitializeDirectories())
         {
             std::cerr << "Error: could not create directories." << std::endl;
