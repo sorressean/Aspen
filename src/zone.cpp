@@ -137,6 +137,7 @@ Room* Zone::AddRoom(VNUM num)
 
     _rnums = temp;
     room->SetOnum(num);
+    room->SetZone(this);
     _rooms[num] = room;
     _roomobjs.push_back(room);
     world->AddRoom(room);
