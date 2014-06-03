@@ -15,9 +15,9 @@ class Affect
     Attribute* _attribute;
     int _duration;
 public:
-/**
-Creates an affect, providing an attribute and the duration (in game ticks).
-*/
+    /**
+    Creates an affect, providing an attribute and the duration (in game ticks).
+    */
     Affect(int duration, Attribute* attr);
     Affect();
     ~Affect();

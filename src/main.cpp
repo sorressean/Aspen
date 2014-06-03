@@ -17,16 +17,9 @@
 #include "player.h"
 #include "calloutManager.h"
 #include "modules.h"
-#ifdef MODULE_SCRIPTING
-#include "scripts/scripts.h"
-#endif
 #include "zone.h"
 #include "components.h"
 #include "constants.h"
-#ifdef OLC
-#include "olc.h"
-#endif
-#include "socials.h"
 #include "world.h"
 
 //prototypes:
@@ -112,22 +105,6 @@ int main(int argc, const char** argv)
             return EXIT_FAILURE;
         }
     InitializeChannels();
-#ifdef MODULE_SCRIPTING
-    if (!InitializeScript())
-        {
-            world->WriteLog("Could not initialize scripting.", ERR);
-            return EXIT_FAILURE;
-        }
-#endif
-
-#ifdef OLC
-    if(!InitializeOlc())
-        {
-            world->WriteLog("Could not initialize OLC.", ERR);
-            return EXIT_FAILURE;
-        }
-#endif
-
     if (!InitializeModules())
         {
             world->WriteLog("Could not initialize modules.", ERR);
@@ -136,12 +113,6 @@ int main(int argc, const char** argv)
     if (!InitializeZones())
         {
             world->WriteLog("could not initialize zones.", ERR);
-            return EXIT_FAILURE;
-        }
-
-    if (!InitializeSocials())
-        {
-            world->WriteLog("Could not initialize the socials system.", ERR);
             return EXIT_FAILURE;
         }
 
