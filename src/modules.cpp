@@ -1,3 +1,5 @@
+#include "conf.h"
+#include "mud.h"
 #include "modules.h"
 #include "player.h"
 #include "socials.h"
@@ -37,6 +39,12 @@ BOOL InitializeModules()
         }
 #endif
 #ifdef OLC
+//initialize the base system first:
+    if (!InitializeOlc())
+        {
+            return false;
+        }
+//initialize other OLCS now
     if (!InitializeOlcs())
         {
             return false;
