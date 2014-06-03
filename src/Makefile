@@ -11,7 +11,7 @@ ECHO = echo
 PROF =
 CC	=c++
 #debugging code (should always be used except for special cases).
-CFLAGS	= -g -pedantic -std=c++11 -Og
+CFLAGS	= -g -pedantic -std=c++11 -O1
 #release:
 #CFLAGS = -s -O3 -std=c++0x -DNDEBUG -flto
 #warning flags
