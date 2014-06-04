@@ -11,6 +11,7 @@
 #include "scripts/scripts.h"
 #endif
 #ifdef OLC
+#include "olc.h"
 #include "olcs.h"
 #endif
 
@@ -36,7 +37,12 @@ BOOL InitializeModules()
             return false;
         }
 #endif
+
 #ifdef OLC
+    if (!InitializeOlc())
+        {
+            return false;
+        }
     if (!InitializeOlcs())
         {
             return false;

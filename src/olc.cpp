@@ -380,11 +380,6 @@ BOOL InitializeOlc()
     World* world = World::GetPtr();
     CMDOlcSet* cmd = NULL;
 
-    if (!InitializeStaticObjectOlcs())
-        {
-            return false;
-        }
-
     cmd = new CMDOlcSet();
     cmd->SetName("oedit");
     cmd->SetSubcmd(COS_OBJECT);
