@@ -16,7 +16,6 @@
 #include "inputHandlers.h"
 #include "property.h"
 #include "living.h"
-#include "constants.h"
 
 void InitializeGenCommands()
 {
@@ -628,14 +627,8 @@ CMDExperience::CMDExperience()
 BOOL CMDExperience::Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args, int subcmd)
 {
     std::stringstream st;
-    float perc = 0;
-    int exp = mobile->GetExperience();
     int level = mobile->GetLevel();
-    int cost = GetLevelCost(level+1);
-    perc = (exp/cost) * 100.0F;
-    st << "You have " << exp << "experience and need " << cost << " to reach level " << level+1;
-    st << " (" << perc << "%)." << std::endl;
-    st << "Your exp cap is " << mobile->GetCap() << std::endl;
+    st << "You are level " << level << std::endl;
     mobile->Message(MSG_INFO, st.str());
     return true;
 }

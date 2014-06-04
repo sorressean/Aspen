@@ -24,7 +24,6 @@
 #include "option.h"
 #include "optionMeta.h"
 #include "optionManager.h"
-#include "constants.h"
 
 Player::Player()
 {
@@ -407,11 +406,6 @@ void Player::GainExperience(int exp)
 {
     _experience += exp;
 }
-int Player::GetCap() const
-{
-    return GetLevelCap(GetLevel());
-}
-
 FLAG Player::GetPflag() const
 {
     return _pflag;

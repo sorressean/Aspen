@@ -19,7 +19,6 @@
 #include "modules.h"
 #include "zone.h"
 #include "components.h"
-#include "constants.h"
 #include "world.h"
 
 //prototypes:
@@ -65,7 +64,6 @@ int main(int argc, const char** argv)
             return EXIT_FAILURE;
         }
 
-    InitializeConstants();
     world = World::GetPtr();
     world->WriteLog("Initializing "+std::string(MUD_NAME)+".");
 

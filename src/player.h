@@ -83,7 +83,6 @@ public:
     int GetExperience() const;
     void SetExperience(int experience);
     void GainExperience(int exp);
-    int GetCap() const;
     FLAG GetPflag() const;
     void SetPflag(FLAG flag);
     UINT GetOnlineTime() const;

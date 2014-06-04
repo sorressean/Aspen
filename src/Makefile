@@ -48,8 +48,8 @@ room.cpp zone.cpp com_builder.cpp com_movement.cpp ComponentFactory.cpp\
 components.cpp olc.cpp socials.cpp olcs.cpp callout.cpp\
 option.cpp baseSocket.cpp banList.cpp listener.cpp inputHandlers.cpp\
 componentMeta.cpp property.cpp uuid.cpp olcGroup.cpp olcManager.cpp\
-match.cpp calloutManager.cpp constants.cpp optionManager.cpp flag.cpp\
-optionMeta.cpp bitfield.cpp attribute.cpp affect.cpp door.cpp
+match.cpp calloutManager.cpp optionManager.cpp flag.cpp door.cpp\
+optionMeta.cpp bitfield.cpp attribute.cpp affect.cpp
 S_FILES += xml/tinystr.cpp  xml/tinyxml.cpp  xml/tinyxmlerror.cpp  xml/tinyxmlparser.cpp  
 
 ###
