@@ -1,12 +1,12 @@
+#include <tinyxml.h>
 #include <dirent.h>
 #include <sys/stat.h>
 #include <string>
 #include <list>
 #include <vector>
-#include <algorithm>
 #include <unordered_map>
-#include <tinyxml.h>
 #include <functional>
+#include <algorithm>
 #include "zone.h"
 #include "world.h"
 #include "room.h"
@@ -32,33 +32,24 @@ Zone::Zone()
 }
 Zone::~Zone()
 {
-    std::vector<StaticObject*>::iterator sit, sitEnd;
-    std::list<Entity*>::iterator oit, oitEnd;
-    std::vector<Room*>::iterator rit, ritEnd;
-    std::vector<Npc*>::iterator mit, mitEnd;
-
-    sitEnd = _virtualobjs.end();
-    for(sit = _virtualobjs.begin(); sit != sitEnd; ++sit)
+    for(auto it: _virtualobjs)
         {
-            delete (*sit);
+            delete it;
         }
 
-    oitEnd = _objects.end();
-    for (oit = _objects.begin(); oit != oitEnd; ++oit)
+    for (auto it: _objects)
         {
-            delete (*oit);
+            delete it;
         }
 
-    ritEnd = _roomobjs.end();
-    for (rit = _roomobjs.begin(); rit != ritEnd; ++rit)
+    for (auto it: _roomobjs)
         {
-            delete (*rit);
+            delete it;
         }
 
-    mitEnd = _mobobjs.end();
-    for (mit = _mobobjs.begin(); mit != mitEnd; ++mit)
+    for (auto it: _mobobjs)
         {
-            delete (*mit);
+            delete it;
         }
 }
 
@@ -158,7 +149,6 @@ BOOL Zone::RemoveRoom(VNUM num)
                             delete _rooms[num];
                             _rooms.erase(num);
                             return true;
-                            break;
                         }
                 }
         }
@@ -223,16 +213,13 @@ StaticObject* Zone::GetVirtual(VNUM num)
             return _virtuals[num];
         }
 
-    return NULL;
+    return nullptr;
 }
 void Zone::GetVirtuals(std::vector<StaticObject*>* objects)
 {
-    std::unordered_map<VNUM, StaticObject*>::iterator it, itEnd;
-
-    itEnd = _virtuals.end();
-    for (it = _virtuals.begin(); it != itEnd; ++it)
+    for (auto it: _virtuals)
         {
-            objects->push_back((*it).second);
+            objects->push_back(it.second);
         }
 }
 BOOL Zone::VirtualExists(VNUM num)
@@ -242,7 +229,7 @@ BOOL Zone::VirtualExists(VNUM num)
 
 Npc* Zone::AddNpc()
 {
-    Npc* mob = NULL;
+    Npc* mob = nullptr;
     VNUM num = 0;
 
     if (_mnums.empty())
@@ -287,18 +274,11 @@ Npc* Zone::GetNpc(VNUM num)
             return _mobs[num];
         }
 
-    return NULL;
+    return nullptr;
 }
-
 void Zone::GetNpcs(std::vector<Npc*>* npcs)
 {
-    std::vector<Npc*>::iterator it, itEnd;
-
-    itEnd = _mobobjs.end();
-    for (it = _mobobjs.begin(); it != itEnd; ++it)
-        {
-            npcs->push_back((*it));
-        }
+    std::copy(_mobobjs.begin(), _mobobjs.end(), npcs->begin());
 }
 BOOL Zone::NpcExists(VNUM num)
 {
@@ -328,6 +308,7 @@ Npc* Zone::CreateNpc(VNUM num, Room* origin)
     return ret;
 }
 void Zone::CalculateVnumRanges()
+
 {
     int i = 0; //for counter
 
@@ -370,6 +351,7 @@ void Zone::CalculateVnumRanges()
                 }
         }
 }
+
 void Zone::Update()
 {
 }
@@ -394,8 +376,6 @@ void Zone::Serialize(TiXmlElement* root)
 void Zone::Deserialize(TiXmlElement* zone)
 {
     unsigned int u = 0;
-    std::vector<Room*>::iterator rit, ritEnd;
-    std::vector<StaticObject*>::iterator vit, vitEnd;
     World* world = World::GetPtr();
 
     _name = zone->Attribute("name");
@@ -415,18 +395,16 @@ void Zone::Deserialize(TiXmlElement* zone)
     DeserializeList<Room, std::vector<Room*> >(zone, "rooms", _roomobjs);
     DeserializeList<Npc, std::vector<Npc*> >(zone, "npcs", _mobobjs);
 
-    ritEnd = _roomobjs.end();
-    for (rit = _roomobjs.begin(); rit != ritEnd; ++rit)
+    for (auto it: _roomobjs)
         {
-            world->AddRoom((*rit));
-            (*rit)->SetZone(this);
+            world->AddRoom(it);
+            it->SetZone(this);
         }
 
-    vitEnd = _virtualobjs.end();
-    for (vit = _virtualobjs.begin(); vit != vitEnd; ++vit)
+    for (auto it: _virtualobjs)
         {
-            _virtuals[(*vit)->GetOnum()] = (*vit);
-            world->AddVirtual((*vit));
+            _virtuals[it->GetOnum()] = it;
+            world->AddVirtual(it);
         }
 }
 
@@ -435,6 +413,7 @@ BOOL InitializeZones()
     World* world = World::GetPtr();
     point p;
     struct stat FInfo;
+
     world->WriteLog("Initializing areas.");
     if ((stat(AREA_STARTFILE,&FInfo))!=-1)
         {
@@ -459,7 +438,7 @@ BOOL InitializeZones()
                 {
                     return false;
                 }
-            zone->SetRange(1, 500);
+            zone->SetRange(1, 100);
             zone->CalculateVnumRanges();
             Room* room = zone->AddRoom(ROOM_START);
             room->SetName("A blank room");
@@ -509,9 +488,9 @@ BOOL Zone::SaveZones()
 BOOL Zone::LoadZones()
 {
     World* world = World::GetPtr();
-    Zone* zone=NULL;
-    TiXmlElement* root = NULL;
-    TiXmlNode* node = NULL;
+    Zone* zone=nullptr;
+    TiXmlElement* root = nullptr;
+    TiXmlNode* node = nullptr;
     dirent* cdir = NULL;
     DIR* dir = opendir(AREA_DIR);
 
@@ -552,7 +531,7 @@ BOOL Zone::LoadZones()
 CEVENT(Zone, Autosave)
 {
     zone_saves++;
-    if (zone_saves >= 150)
+    if (zone_saves >= 100)
         {
             Zone::SaveZones();
             zone_saves = 0;
