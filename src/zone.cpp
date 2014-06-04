@@ -278,7 +278,7 @@ Npc* Zone::GetNpc(VNUM num)
 }
 void Zone::GetNpcs(std::vector<Npc*>* npcs)
 {
-    std::copy(_mobobjs.begin(), _mobobjs.end(), npcs->begin());
+    std::copy(_mobobjs.begin(), _mobobjs.end(), std::back_inserter(*npcs));
 }
 BOOL Zone::NpcExists(VNUM num)
 {
