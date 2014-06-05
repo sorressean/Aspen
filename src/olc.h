@@ -198,15 +198,17 @@ public:
 
 //converts the olc  data type to a string representation.
 std::string OlcTypeToString(OLCDT dt);
-
-//we use the same command for oset, mset and rset.
-//we use subcmd to tell us what command was actually called.
-class CMDOlcSet:public Command
-{
-public:
-    CMDOlcSet();
-    void ShowGroup(Player* mobile, OlcGroup* group);
-    BOOL Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args,int subcmd);
-};
+void ShowGroup(Player* mobile, OlcGroup* group);
+/**
+Parses the room vnum off of the argument along with component.
+\param the player calling (mainly used for the location for "here" references).
+\param the arg string to parse.
+\param A reference to the vnum variable to receive the vnum.
+\param A reference to the component string that will receive the name of the component (if any).
+\param A flag to determine if this is in room (so that "here" will apply).
+\return True on success (with vnum and possibly component set), false otherwise.
+\note We do not check for the existance of the vnum or component here.
+*/
+bool ParseVnum(Player* mobile, std::string& arg, VNUM & num, std::string& comp, bool inroom=false);
 
 BOOL InitializeOlc();

@@ -85,10 +85,7 @@ std::string OlcTypeToString(OLCDT dt)
         }
 }
 
-CMDOlcSet::CMDOlcSet()
-{
-}
-void CMDOlcSet::ShowGroup(Player* mobile, OlcGroup* group)
+void ShowGroup(Player* mobile, OlcGroup* group)
 {
     std::stringstream st;
     std::vector<IOlcEntry*>* entries = new std::vector<IOlcEntry*>();
@@ -103,273 +100,56 @@ void CMDOlcSet::ShowGroup(Player* mobile, OlcGroup* group)
         }
     mobile->Message(MSG_LIST, st.str());
 }
-BOOL CMDOlcSet::Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args,int subcmd)
+
+bool ParseVnum(Player* mobile, std::string& arg, VNUM & num, std::string& comp, bool inroom)
 {
-    World* world = World::GetPtr();
-    OlcManager* omanager = world->GetOlcManager();
-    OlcGroup* group = NULL;
-    IOlcEntry* entry = NULL;
-    VNUM vnum = 0;
+    num = 0;
+    comp.clear();
     size_t dotpos = 0;
-    std::string component;
-    Component* ocomponent = NULL;
-    ComponentMeta* meta = NULL;
-    std::vector<std::string>::iterator it;
-    std::string name;
-    std::string value;
+    std::string numpart;
 
-    union
-    {
-        Room* r;
-        StaticObject* o;
-        Npc* n;
-    } o;
-    o.o = NULL;
-
-    if (args.size() == 0)
+//check to see if there was a component attached.
+//if not, the vnum shouldn't contain a '.'
+    dotpos = arg.find('.');
+    if (dotpos == std::string::npos) //no component found
         {
-            mobile->Message(MSG_ERROR, "Syntax: "+verb+" <vnum>[.component] [field] [value].");
-            return false;
+//check if we're parsing a room vnum and whether or not "here" was used.
+            if (inroom && arg == "here")
+                {
+                    num = mobile->GetLocation()->GetOnum();
+                    return true;
+                }
+//this has to be a vnum:
+            try
+                {
+                    num = (VNUM)boost::lexical_cast<VNUM>(arg);
+                    return true;
+                }
+            catch (boost::bad_lexical_cast e)
+                {
+                    return false;
+                }
         }
 
-//we see if there was a component attached to the object number.
-    dotpos = args[0].find('.');
-    if(dotpos == std::string::npos) //no component iidentifier found
+//there was a component attached.
+//we split it up first:
+    numpart = arg.substr(0, dotpos);
+    comp = arg.erase(0, dotpos + 1);
+//check for "here" and room:
+    if (inroom && numpart == "here")
         {
-            if (subcmd == COS_ROOM && args[0]  == "here")
-                {
-                    vnum = mobile->GetLocation()->GetOnum();
-                }
-            else
-                {
-                    try
-                        {
-                            vnum = (VNUM)boost::lexical_cast<unsigned int>(args[0]);
-                        }
-                    catch (boost::bad_lexical_cast e)
-                        {
-                            mobile->Message(MSG_ERROR, "Invalid vnum.");
-                            return false;
-                        }
-                }
-        }
-    else //there was a component attached.
-        {
-            if (subcmd == COS_ROOM && args[0].substr(0,dotpos) == "here")
-                {
-                    vnum = mobile->GetLocation()->GetOnum();
-                }
-            else
-                {
-                    try
-                        {
-                            vnum = boost::lexical_cast<unsigned int>(args[0].substr(0, dotpos));
-                        }
-                    catch (boost::bad_lexical_cast e)
-                        {
-                            mobile->Message(MSG_ERROR, "Invalid vnum.");
-                            return false;
-                        }
-                }
-            component = args[0].erase(0, dotpos + 1);
-        }
-    if (vnum < 1)
-        {
-            mobile->Message(MSG_ERROR, "Invalid vnum.");
-            return false;
-        }
-
-//now we need to get the object we're actually editing.
-    switch(subcmd)
-        {
-        case COS_OBJECT:
-            o.o = world->GetVirtual(vnum);
-            if (!component.length())
-                {
-                    group = omanager->GetGroup(OLCGROUP::STATIC);
-                    if (!group)
-                        {
-                            mobile->Message(MSG_ERROR, "That group does not exist.");
-                            return false;
-                        }
-                    break;
-                }
-            else
-                {
-                    ocomponent = o.o->GetComponent(component);
-                    if (!ocomponent)
-                        {
-                            mobile->Message(MSG_ERROR, "That component does not exist.");
-                            return false;
-                        }
-                    meta = ocomponent->GetMeta();
-                    if (!meta)
-                        {
-                            mobile->Message(MSG_ERROR, "That component does not have a meta attached.");
-                            return false;
-                        }
-                    if (meta->GetOlcGroup() == OLCGROUP::NONE)
-                        {
-                            mobile->Message(MSG_ERROR, "There is no olc attached to that component.");
-                            return false;
-                        }
-                    group = omanager->GetGroup(meta->GetOlcGroup());
-                    if (!group)
-                        {
-                            mobile->Message(MSG_ERROR, "That group does not exist.");
-                            return false;
-                        }
-                }
-            break;
-        case COS_ROOM:
-            o.r = world->GetRoom(vnum);
-            if (!component.length())
-                {
-                    group = omanager->GetGroup(OLCGROUP::ROOM);
-                    if (!group)
-                        {
-                            mobile->Message(MSG_ERROR, "That group does not exist.");
-                            return false;
-                        }
-                    break;
-                }
-            else
-                {
-                    ocomponent = o.r->GetComponent(component);
-                    if (!ocomponent)
-                        {
-                            mobile->Message(MSG_ERROR, "That component does not exist.");
-                            return false;
-                        }
-                    meta = ocomponent->GetMeta();
-                    if (!meta)
-                        {
-                            mobile->Message(MSG_ERROR, "That component does not have a meta attached.");
-                            return false;
-                        }
-                    if (meta->GetOlcGroup() == OLCGROUP::NONE)
-                        {
-                            mobile->Message(MSG_ERROR, "There is no olc attached to that component.");
-                            return false;
-                        }
-                    group = omanager->GetGroup(meta->GetOlcGroup());
-                    if (!group)
-                        {
-                            mobile->Message(MSG_ERROR, "That group does not exist.");
-                            return false;
-                        }
-                }
-            break;
-        case COS_MOB:
-            o.n = world->GetNpc(vnum);
-            if (!component.length())
-                {
-                    group = omanager->GetGroup(OLCGROUP::NPC);
-                    if (!group)
-                        {
-                            mobile->Message(MSG_ERROR, "That group does not exist.");
-                            return false;
-                        }
-                    break;
-                }
-            else
-                {
-                    ocomponent = o.n->GetComponent(component);
-                    if (!ocomponent)
-                        {
-                            mobile->Message(MSG_ERROR, "That component does not exist.");
-                            return false;
-                        }
-                    meta = ocomponent->GetMeta();
-                    if (!meta)
-                        {
-                            mobile->Message(MSG_ERROR, "That component does not have a meta attached.");
-                            return false;
-                        }
-                    if (meta->GetOlcGroup() == OLCGROUP::NONE)
-                        {
-                            mobile->Message(MSG_ERROR, "There is no olc attached to that component.");
-                            return false;
-                        }
-                    group = omanager->GetGroup(meta->GetOlcGroup());
-                    if (!group)
-                        {
-                            mobile->Message(MSG_ERROR, "That group does not exist.");
-                            return false;
-                        }
-                }
-            break;
-        }
-
-    if (!o.o)
-        {
-            mobile->Message(MSG_ERROR, "That vnum does not exist.");
-            return false;
-        }
-
-    if (args.size() == 1) //we only have an object or object.component, show entries.
-        {
-            ShowGroup(mobile, group);
+            num = mobile->GetLocation()->GetOnum();
             return true;
         }
-    name = args[1];
-    entry = group->GetEntry(name);
-
-    if (args.size() <= 2 && entry && entry->GetInputType() != OLCDT::EDITOR)
+//no here, convert the vnum:
+    try
         {
-            mobile->Message(MSG_ERROR, "Syntax: "+verb+" <vnum> <field");
+            num = boost::lexical_cast<VNUM>(arg.substr(0, dotpos));
+            return true;
+        }
+    catch (boost::bad_lexical_cast e)
+        {
             return false;
-        }
-
-    if (entry->RequiresInput())
-        {
-            it = args.begin();
-            advance(it, 2);
-            value = Explode(args, it);
-        }
-    else
-        {
-            value.clear();
-        }
-
-    switch(subcmd)
-        {
-        case COS_OBJECT:
-        {
-            if (entry->HandleInput(mobile, o.o, value))
-                {
-                    mobile->Message(MSG_INFO, "ok.");
-                }
-            else
-                {
-                    mobile->Message(MSG_ERROR, "Invalid input.");
-                }
-            break;
-        }
-        case COS_ROOM:
-        {
-            if (entry->HandleInput(mobile, o.r, value))
-                {
-                    mobile->Message(MSG_INFO, "ok.");
-                }
-            else
-                {
-                    mobile->Message(MSG_ERROR, "Invalid input.");
-                }
-            break;
-        }
-        case COS_MOB:
-        {
-            if (entry->HandleInput(mobile, o.n, value))
-                {
-                    mobile->Message(MSG_INFO, "ok.");
-                }
-            else
-                {
-                    mobile->Message(MSG_ERROR, "Invalid input.");
-                }
-            break;
-        }
         }
 
     return true;
@@ -378,19 +158,5 @@ BOOL CMDOlcSet::Execute(const std::string &verb, Player* mobile,std::vector<std:
 BOOL InitializeOlc()
 {
     World* world = World::GetPtr();
-    CMDOlcSet* cmd = NULL;
-
-    cmd = new CMDOlcSet();
-    cmd->SetName("oedit");
-    cmd->SetSubcmd(COS_OBJECT);
-    world->commands.AddCommand(cmd);
-    cmd = new CMDOlcSet();
-    cmd->SetName("redit");
-    cmd->SetSubcmd(COS_ROOM);
-    world->commands.AddCommand(cmd);
-    cmd = new CMDOlcSet();
-    cmd->SetName("medit");
-    cmd->SetSubcmd(COS_MOB);
-    world->commands.AddCommand(cmd);
     return true;
 }
