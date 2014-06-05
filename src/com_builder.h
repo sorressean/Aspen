@@ -10,80 +10,80 @@ void InitializeBuilderCommands();
 class CMDZlist:public Command
 {
 public:
-  CMDZlist();
-  BOOL Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args,int subcmd);
+    CMDZlist();
+    BOOL Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args,int subcmd);
 };
 
 class CMDRlist:public Command
 {
 public:
-  CMDRlist();
-  BOOL Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args,int subcmd);
+    CMDRlist();
+    BOOL Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args,int subcmd);
 };
 
 class CMDDig:public Command
 {
 public:
-  CMDDig();
-  BOOL Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args,int subcmd);
+    CMDDig();
+    BOOL Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args,int subcmd);
 };
 
 class CMDAStats: public Command
 {
 public:
-  CMDAStats();
-  BOOL Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args,int subcmd);
-  std::string Stats(Player* mobile, Zone* area);
+    CMDAStats();
+    BOOL Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args,int subcmd);
+    std::string Stats(Player* mobile, Zone* area);
 };
 
 class CMDVCreate:public Command
 {
 public:
-  CMDVCreate();
-  BOOL Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args,int subcmd);
+    CMDVCreate();
+    BOOL Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args,int subcmd);
 };
 
 class CMDVList:public Command
 {
 public:
-  CMDVList();
-  BOOL Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args,int subcmd);
+    CMDVList();
+    BOOL Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args,int subcmd);
 };
 
 class CMDMCreate:public Command
 {
 public:
-  CMDMCreate();
-  BOOL Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args,int subcmd);
+    CMDMCreate();
+    BOOL Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args,int subcmd);
 };
 
 class CMDMList:public Command
 {
 public:
-  CMDMList();
-  BOOL Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args,int subcmd);
+    CMDMList();
+    BOOL Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args,int subcmd);
 };
 
 class CMDMLoad:public Command
 {
 public:
-  CMDMLoad();
-  BOOL Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args,int subcmd);
+    CMDMLoad();
+    BOOL Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args,int subcmd);
 };
 
 class CMDAddComponent:public Command
 {
 public:
-  CMDAddComponent();
-  BOOL Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args,int subcmd);
+    CMDAddComponent();
+    BOOL Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args,int subcmd);
 };
 
 
 class CMDGoto:public Command
 {
 public:
-  CMDGoto();
-  BOOL Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args,int subcmd);
+    CMDGoto();
+    BOOL Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args,int subcmd);
 };
 
 
