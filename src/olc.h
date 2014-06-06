@@ -17,11 +17,13 @@
 #include "utils.h"
 
 class OlcGroup;
-//olcset command subcommands
-#define COS_OBJECT 1
-#define COS_ROOM 2
-#define COS_MOB 3
-
+//used to tell what type of object we're editing.
+enum class OlcEditType
+{
+    Room,
+    Object,
+    NPC
+};
 enum class OLCGROUP
 {
     NONE,
@@ -210,5 +212,21 @@ Parses the room vnum off of the argument along with component.
 \note We do not check for the existance of the vnum or component here.
 */
 bool ParseVnum(Player* mobile, std::string& arg, VNUM & num, std::string& comp, bool inroom=false);
+/**
+Handles an OLC entry after we've found component/vnum etc.
+\param The player object responsible for editing.
+\param the object we're editing.
+\param The OLC group we are working with.
+\param The args passed to the edit command.
+\param the type of object being edited.
+*/
+bool HandleEntry(Player* mobile, Entity* obj, OlcGroup* group, std::vector<std::string&> args, OlcEditType type);
+
+class CMDREdit:public Command
+{
+public:
+    CMDREdit();
+    BOOL Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args, int subcmd);
+};
 
 BOOL InitializeOlc();
