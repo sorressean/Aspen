@@ -635,7 +635,6 @@ CMDGoto::CMDGoto()
 BOOL CMDGoto::Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args,int subcmd)
 {
     World* world = World::GetPtr();
-    std::stringstream st;
     Room* room = nullptr;
     VNUM toid = 0;
 
@@ -659,9 +658,8 @@ BOOL CMDGoto::Execute(const std::string &verb, Player* mobile,std::vector<std::s
             return false;
         }
 
-    st << "Found room " << room->GetOnum() << "\n";
     mobile->MoveTo(room);
-    mobile->Message(MSG_INFO, st.str());
+    mobile->Message(MSG_INFO, room->DoLook(mobile));
 
     return true;
 }
