@@ -220,12 +220,26 @@ Handles an OLC entry after we've found component/vnum etc.
 \param The args passed to the edit command.
 \param the type of object being edited.
 */
-bool HandleEntry(Player* mobile, Entity* obj, OlcGroup* group, std::vector<std::string> &args, OlcEditType type);
+bool HandleEntry(Player* mobile, BaseObject* obj, OlcGroup* group, std::vector<std::string> &args, OlcEditType type);
 
 class CMDREdit:public Command
 {
 public:
     CMDREdit();
+    BOOL Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args, int subcmd);
+};
+
+class CMDMEdit:public Command
+{
+public:
+    CMDMEdit();
+    BOOL Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args, int subcmd);
+};
+
+class CMDOEdit:public Command
+{
+public:
+    CMDOEdit();
     BOOL Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args, int subcmd);
 };
 

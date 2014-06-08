@@ -157,7 +157,7 @@ bool ParseVnum(Player* mobile, std::string& arg, VNUM & num, std::string& comp, 
 }
 
 //Used to call edit on the object.
-static inline bool DoEdit(Player* mobile, Entity* obj, IOlcEntry* entry, const std::string& input, OlcEditType type)
+static inline bool DoEdit(Player* mobile, BaseObject* obj, IOlcEntry* entry, const std::string& input, OlcEditType type)
 {
     switch(type)
         {
@@ -172,7 +172,7 @@ static inline bool DoEdit(Player* mobile, Entity* obj, IOlcEntry* entry, const s
     return false;
 }
 
-bool HandleEntry(Player* mobile, Entity* obj, OlcGroup* group, std::vector<std::string> &args, OlcEditType type)
+bool HandleEntry(Player* mobile, BaseObject* obj, OlcGroup* group, std::vector<std::string> &args, OlcEditType type)
 {
     IOlcEntry* entry = nullptr;
     std::string name;
@@ -230,7 +230,7 @@ BOOL CMDREdit::Execute(const std::string &verb, Player* mobile,std::vector<std::
     Component* component = nullptr;
     ComponentMeta* cmeta = nullptr;
     OlcManager* omanager = world->GetOlcManager();
-    OlcGroup* group = nullptr;;
+    OlcGroup* group = nullptr;
     Room* targ = nullptr;
     VNUM num = 0;
     std::string comp;
@@ -268,13 +268,16 @@ BOOL CMDREdit::Execute(const std::string &verb, Player* mobile,std::vector<std::
                     mobile->Message(MSG_ERROR, "That group does not exist.");
                     return false;
                 }
+            return HandleEntry(mobile, targ, group, args, OlcEditType::Room);
         }
+
 //component was provided:
     component = targ->GetComponent(comp);
-    {
-        mobile->Message(MSG_ERROR, "That component does not exist.");
-        return false;
-    }
+    if (!component)
+        {
+            mobile->Message(MSG_ERROR, "That component does not exist.");
+            return false;
+        }
     cmeta = component->GetMeta();
     if (!cmeta)
         {
@@ -296,9 +299,173 @@ BOOL CMDREdit::Execute(const std::string &verb, Player* mobile,std::vector<std::
     return HandleEntry(mobile, targ, group, args, OlcEditType::Room);
 }
 
+CMDMEdit::CMDMEdit()
+{
+    SetName("medit");
+    SetAccess(RANK_BUILDER);
+}
+BOOL CMDMEdit::Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args, int subcmd)
+{
+    World* world = World::GetPtr();
+    Zone* zon = mobile->GetLocation()->GetZone();
+    Component* component = nullptr;
+    ComponentMeta* cmeta = nullptr;
+    OlcManager* omanager = world->GetOlcManager();
+    OlcGroup* group = nullptr;
+    Npc* targ = nullptr;
+    VNUM num = 0;
+    std::string comp;
+
+    if (args.size() == 0)
+        {
+            mobile->Message(MSG_ERROR, "Syntax: medit <vnum>[.component] [field] [value].");
+            return false;
+        }
+
+    if (!ParseVnum(mobile, args[0], num, comp))
+        {
+            mobile->Message(MSG_ERROR, "Invalid vnum.");
+            return false;
+        }
+    if (num < 1 || !zon->NpcExists(num))
+        {
+            mobile->Message(MSG_ERROR, "That vnum does not exist.");
+            return false;
+        }
+
+    targ = world->GetNpc(num);
+    if (targ == nullptr)
+        {
+            mobile->Message(MSG_ERROR, "Could not retrieve specified NPC.");
+            return false;
+        }
+
+//no component:
+    if (!comp.length())
+        {
+            group = omanager->GetGroup(OLCGROUP::NPC);
+            if (!group)
+                {
+                    mobile->Message(MSG_ERROR, "That group does not exist.");
+                    return false;
+                }
+            return HandleEntry(mobile, targ, group, args, OlcEditType::Npc);
+        }
+
+//component was provided:
+    component = targ->GetComponent(comp);
+    if (!component)
+        {
+            mobile->Message(MSG_ERROR, "That component does not exist.");
+            return false;
+        }
+    cmeta = component->GetMeta();
+    if (!cmeta)
+        {
+            mobile->Message(MSG_ERROR, "That component does not have a meta attached.");
+            return false;
+        }
+    if (cmeta->GetOlcGroup() == OLCGROUP::NONE)
+        {
+            mobile->Message(MSG_ERROR, "There is no olc attached to that component.");
+            return false;
+        }
+    group = omanager->GetGroup(cmeta->GetOlcGroup());
+    if (!group)
+        {
+            mobile->Message(MSG_ERROR, "That group does not exist.");
+            return false;
+        }
+
+    return HandleEntry(mobile, targ, group, args, OlcEditType::Npc);
+}
+
+CMDOEdit::CMDOEdit()
+{
+    SetName("oedit");
+    SetAccess(RANK_BUILDER);
+}
+BOOL CMDOEdit::Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args, int subcmd)
+{
+    World* world = World::GetPtr();
+    Zone* zon = mobile->GetLocation()->GetZone();
+    Component* component = nullptr;
+    ComponentMeta* cmeta = nullptr;
+    OlcManager* omanager = world->GetOlcManager();
+    OlcGroup* group = nullptr;
+    StaticObject* targ = nullptr;
+    VNUM num = 0;
+    std::string comp;
+
+    if (args.size() == 0)
+        {
+            mobile->Message(MSG_ERROR, "Syntax: oedit <vnum>[.component] [field] [value].");
+            return false;
+        }
+
+    if (!ParseVnum(mobile, args[0], num, comp))
+        {
+            mobile->Message(MSG_ERROR, "Invalid vnum.");
+            return false;
+        }
+    if (num < 1 || !zon->VirtualExists(num))
+        {
+            mobile->Message(MSG_ERROR, "That vnum does not exist.");
+            return false;
+        }
+
+    targ = world->GetVirtual(num);
+    if (targ == nullptr)
+        {
+            mobile->Message(MSG_ERROR, "Could not retrieve specified virtual object.");
+            return false;
+        }
+
+//no component:
+    if (!comp.length())
+        {
+            group = omanager->GetGroup(OLCGROUP::STATIC);
+            if (!group)
+                {
+                    mobile->Message(MSG_ERROR, "That group does not exist.");
+                    return false;
+                }
+            return HandleEntry(mobile, targ, group, args, OlcEditType::Object);
+        }
+
+//component was provided:
+    component = targ->GetComponent(comp);
+    if (!component)
+        {
+            mobile->Message(MSG_ERROR, "That component does not exist.");
+            return false;
+        }
+    cmeta = component->GetMeta();
+    if (!cmeta)
+        {
+            mobile->Message(MSG_ERROR, "That component does not have a meta attached.");
+            return false;
+        }
+    if (cmeta->GetOlcGroup() == OLCGROUP::NONE)
+        {
+            mobile->Message(MSG_ERROR, "There is no olc attached to that component.");
+            return false;
+        }
+    group = omanager->GetGroup(cmeta->GetOlcGroup());
+    if (!group)
+        {
+            mobile->Message(MSG_ERROR, "That group does not exist.");
+            return false;
+        }
+
+    return HandleEntry(mobile, targ, group, args, OlcEditType::Object);
+}
+
 BOOL InitializeOlc()
 {
     World* world = World::GetPtr();
     world->commands.AddCommand(new CMDREdit());
+    world->commands.AddCommand(new CMDMEdit());
+    world->commands.AddCommand(new CMDOEdit());
     return true;
 }
