@@ -416,6 +416,12 @@ void Zone::Deserialize(TiXmlElement* zone)
             _virtuals[it->GetOnum()] = it;
             world->AddVirtual(it);
         }
+
+    for (auto it: _mobobjs)
+        {
+            world->AddNpc(it);
+            _mobs[it->GetOnum()] = it;
+        }
 }
 
 BOOL InitializeZones()
