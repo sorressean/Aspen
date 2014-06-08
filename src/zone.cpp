@@ -406,14 +406,12 @@ void Zone::Deserialize(TiXmlElement* zone)
         {
             world->AddRoom(it);
             _rooms[it->GetOnum()] = it;
-            _roomobjs->push_back(it);
             it->SetZone(this);
         }
 
     for (auto it: _virtualobjs)
         {
             _virtuals[it->GetOnum()] = it;
-            _virtualobjs->push_back(it);
             world->AddVirtual(it);
         }
 }
