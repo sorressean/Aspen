@@ -400,18 +400,20 @@ void Zone::Deserialize(TiXmlElement* zone)
 
     DeserializeList<StaticObject, std::vector<StaticObject*> >(zone, "vobjes", _virtualobjs);
     DeserializeList<Room, std::vector<Room*> >(zone, "rooms", _roomobjs);
-    world->WriteLog(" Zone is " + GetName() + " and number of rooms is " );
     DeserializeList<Npc, std::vector<Npc*> >(zone, "npcs", _mobobjs);
 
     for (auto it: _roomobjs)
         {
             world->AddRoom(it);
+            _rooms[it->GetOnum()] = it;
+            _roomobjs->push_back(it);
             it->SetZone(this);
         }
 
     for (auto it: _virtualobjs)
         {
             _virtuals[it->GetOnum()] = it;
+            _virtualobjs->push_back(it);
             world->AddVirtual(it);
         }
 }

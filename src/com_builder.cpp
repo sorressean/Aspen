@@ -637,7 +637,6 @@ BOOL CMDGoto::Execute(const std::string &verb, Player* mobile,std::vector<std::s
     World* world = World::GetPtr();
     std::stringstream st;
     Room* room = nullptr;
-    Room* location = (Room*)mobile->GetLocation();
     VNUM toid = 0;
 
     if (args.size() != 1)
