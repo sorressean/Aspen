@@ -73,6 +73,8 @@ public:
     *Max: the maximum range.
     */
     void SetRange(int min, int max);
+    int  GetMinVnum();
+    int  GetMaxVnum();
     /*----------------------------------------------------------------------------*/
     /**
     *Adds the specified room.

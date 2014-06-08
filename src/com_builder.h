@@ -77,4 +77,24 @@ public:
     CMDAddComponent();
     BOOL Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args,int subcmd);
 };
+
+
+class CMDGoto:public Command
+{
+public:
+    CMDGoto();
+    BOOL Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args,int subcmd);
+};
+
+
+
+// create zone wizard command
+class CMDZcreate:public Command
+{
+public:
+    CMDZcreate();
+    BOOL Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args,int subcmd);
+};
+
+
 #endif

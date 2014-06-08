@@ -66,7 +66,14 @@ void Zone::SetRange(int min, int max)
     _vnumrange.min = min;
     _vnumrange.max = max;
 }
-
+int  Zone::GetMinVnum()
+{
+    return _vnumrange.min;
+}
+int  Zone::GetMaxVnum()
+{
+    return _vnumrange.max;
+}
 Room* Zone::AddRoom()
 {
     World* world = World::GetPtr();
@@ -157,7 +164,7 @@ BOOL Zone::RemoveRoom(VNUM num)
 }
 void Zone::GetRooms(std::vector<Room*> *rooms)
 {
-    std::copy(_roomobjs.begin(), _roomobjs.end(), rooms->begin());
+    std::copy(_roomobjs.begin(), _roomobjs.end(), std::back_inserter(*rooms));
 }
 BOOL Zone::RoomExists(VNUM num)
 {
@@ -398,12 +405,15 @@ void Zone::Deserialize(TiXmlElement* zone)
     for (auto it: _roomobjs)
         {
             world->AddRoom(it);
+            _rooms[it->GetOnum()] = it;
+            _roomobjs->push_back(it);
             it->SetZone(this);
         }
 
     for (auto it: _virtualobjs)
         {
             _virtuals[it->GetOnum()] = it;
+            _virtualobjs->push_back(it);
             world->AddVirtual(it);
         }
 }

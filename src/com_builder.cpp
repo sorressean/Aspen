@@ -26,6 +26,8 @@ void InitializeBuilderCommands()
     world->commands.AddCommand(new CMDMList());
     world->commands.AddCommand(new CMDMLoad());
     world->commands.AddCommand(new CMDAddComponent());
+    world->commands.AddCommand(new CMDGoto());
+    world->commands.AddCommand(new CMDZcreate());
 }
 
 //zlist
@@ -82,7 +84,6 @@ BOOL CMDRlist::Execute(const std::string &verb, Player* mobile,std::vector<std::
     std::stringstream st;
     std::vector<Room*> nums;
     std::vector<Room*>::iterator it, itEnd;
-    Lower(args[0]);
     Zone* zone=world->GetZone(args[0]);
     Room* room=NULL;
 
@@ -94,7 +95,6 @@ BOOL CMDRlist::Execute(const std::string &verb, Player* mobile,std::vector<std::
 
     zone->GetRooms(&nums);
     st << "Found " << (int)nums.size() << ((int)nums.size()==0?"room":"rooms") << ".\n";
-
     itEnd=nums.end();
     for (it = nums.begin(); it != itEnd; ++it)
         {
@@ -624,5 +624,105 @@ BOOL CMDAddComponent::Execute(const std::string &verb, Player* mobile,std::vecto
         }
 
     mobile->Message(MSG_INFO, "Component added.");
+    return true;
+}
+
+CMDGoto::CMDGoto()
+{
+    SetName("goto");
+    SetAccess(RANK_BUILDER);
+}
+BOOL CMDGoto::Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args,int subcmd)
+{
+    World* world = World::GetPtr();
+    std::stringstream st;
+    Room* room = nullptr;
+    VNUM toid = 0;
+
+    if (args.size() != 1)
+        {
+            mobile->Message(MSG_ERROR,"Syntax: goto <room number> teleports you to that room.\n");
+            return false;
+        }
+
+    toid = atoi(args[0].c_str());
+    if (!toid)
+        {
+            mobile->Message(MSG_ERROR, "Invalid rnum given.");
+            return false;
+        }
+
+    room = (Room*)world->GetRoom(toid);
+    if (!room)
+        {
+            mobile->Message(MSG_ERROR, "That rnum does not exist.");
+            return false;
+        }
+
+    st << "Found room " << room->GetOnum() << "\n";
+    mobile->MoveTo(room);
+    mobile->Message(MSG_INFO, st.str());
+
+    return true;
+}
+
+CMDZcreate::CMDZcreate()
+{
+    SetName("zcreate");
+    SetAccess(RANK_BUILDER);
+}
+BOOL CMDZcreate::Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args,int subcmd)
+{
+    World* world = World::GetPtr();
+    std::stringstream st;
+    Room* room = nullptr;
+    int  min=0;
+    int max = 0;
+    Zone* newZone = nullptr;
+    point p;
+    std::vector<Zone*> zones;
+
+    if (args.size() != 3)
+        {
+            mobile->Message(MSG_ERROR,"Syntax: zcreate <name of zone> <min> <max> creates a new zone with the name and rooms available in the range from min to max\n");
+            return false;
+        }
+
+    min  = atoi(args[1].c_str());
+    max   = atoi(args[2].c_str());
+
+    if (!max || !min || min > max || min <= 0)
+        {
+            mobile->Message(MSG_ERROR,"Invalid num range. Syntax: zcreate <name of zone> <min> <max> creates a new zone with the name and rooms available in the range from min to max\n");
+            return false;
+        }
+
+    if (world->GetZone(args[0]) == nullptr)
+        {
+            mobile->Message(MSG_ERROR,"Error: zone with name already  exists.\n");
+            return false;
+        }
+
+    world->GetZones(&zones);
+    for (auto it: zones)
+        {
+            if((min >= it->GetMinVnum() && min <= it->GetMaxVnum()) || (max  >= it->GetMinVnum() && max  <= it->GetMaxVnum()))
+                {
+                    mobile->Message(MSG_ERROR,"Error: Min and max values overlap with " + it->GetName() + " zone \n");
+                    return false;
+                }
+        }
+
+    newZone = new Zone();
+    newZone->SetName(args[0]);
+    newZone->SetRange(min, max);
+    room = newZone->AddRoom();
+    room->SetName("An empty room");
+    room->SetCoord(p);
+    world->AddZone(newZone);
+
+    st << "Created zone with name " <<  newZone->GetName() << " with one empty room."  << "\n";
+    mobile->Message(MSG_INFO, st.str());
+
     return true;
 }
