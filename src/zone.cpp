@@ -236,6 +236,7 @@ BOOL Zone::VirtualExists(VNUM num)
 
 Npc* Zone::AddNpc()
 {
+    World* world = World::GetPtr();
     Npc* mob = nullptr;
     VNUM num = 0;
 
@@ -254,6 +255,7 @@ Npc* Zone::AddNpc()
     mob->SetOnum(num);
     _mobs[num] = mob;
     _mobobjs.push_back(mob);
+    world->AddNpc(mob);
     return mob;
 }
 BOOL Zone::RemoveNpc(VNUM num)
