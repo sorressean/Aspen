@@ -49,7 +49,7 @@ components.cpp olc.cpp socials.cpp olcs.cpp callout.cpp\
 option.cpp baseSocket.cpp banList.cpp listener.cpp inputHandlers.cpp\
 componentMeta.cpp property.cpp uuid.cpp olcGroup.cpp olcManager.cpp\
 match.cpp calloutManager.cpp optionManager.cpp flag.cpp door.cpp\
-optionMeta.cpp bitfield.cpp attribute.cpp affect.cpp
+optionMeta.cpp bitfield.cpp attribute.cpp affect.cpp modules/modules.cpp
 S_FILES += xml/tinystr.cpp  xml/tinyxml.cpp  xml/tinyxmlerror.cpp  xml/tinyxmlparser.cpp  
 
 ###
@@ -59,8 +59,7 @@ S_FILES += xml/tinystr.cpp  xml/tinyxml.cpp  xml/tinyxmlerror.cpp  xml/tinyxmlpa
 
 #include the external modules into the makefile:
 include $(patsubst %,%/include.mod, $(COREMODULES))
-include $(patsubst %,mod/%/include.mod, $(MODULES))
-
+include modules/include.mod
 O_FILES += $(patsubst %.cpp,%.o, $(filter %.cpp, $(S_FILES)))
 
 all: $(O_FILES)
@@ -71,7 +70,7 @@ all: $(O_FILES)
 %.o: %.cpp
 	@$(ECHO) Compiling $<.
 	@$(CC) $(PROF) -c $(CFLAGS) -o $(patsubst %.cpp,%.o, $<) $<
-
+	
 clean:
 	@$(ECHO) Cleaning
 	@$(RM) $(O_FILES)
