@@ -2,6 +2,7 @@
 #include "com_movement.h"
 #include "player.h"
 #include "world.h"
+#include "objectManager.h"
 #include "room.h"
 #include "exit.h"
 
@@ -25,6 +26,7 @@ void InitializeMovementCommands()
 BOOL DoMove(const std::string &verb, Player* mobile,std::vector<std::string> &args,int subcmd)
 {
     World* world = World::GetPtr();
+    ObjectManager* omanager = world->GetObjectManager();
 
     ExitDirection direction = (ExitDirection)subcmd;
     Room* room = NULL;
@@ -56,11 +58,11 @@ BOOL DoMove(const std::string &verb, Player* mobile,std::vector<std::string> &ar
             return false;
         }
 
-    dest = (Room*)world->GetRoom(exit->GetTo());
+    dest = omanager->GetRoom(exit->GetTo());
     mobile->MoveTo(dest);
     dest->events.CallEvent("OnEnter", NULL, (void*)dest);
 
-    mobile->Message(MSG_INFO, (world->GetRoom(exit->GetTo()))->DoLook(mobile));
+    mobile->Message(MSG_INFO, (omanager->GetRoom(exit->GetTo()))->DoLook(mobile));
     return true;
 }
 

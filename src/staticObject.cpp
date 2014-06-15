@@ -5,6 +5,7 @@
 #include "staticObject.h"
 #include "baseObject.h"
 #include "world.h"
+#include "objectManager.h"
 #ifdef MODULE_SCRIPTING
 #include "scripts/scripts.h"
 #endif
@@ -92,6 +93,7 @@ BOOL StaticObject::Recycle(Entity* obj)
 BOOL StaticObject::RecycleContents()
 {
     World* world = World::GetPtr();
+    ObjectManager* omanager = world->GetObjectManager();
     std::vector<Entity*>::iterator it, itEnd;
 
     if (descendants.size())
@@ -99,7 +101,7 @@ BOOL StaticObject::RecycleContents()
             itEnd = descendants.end();
             for (it = descendants.begin(); it != itEnd; ++it)
                 {
-                    world->RecycleObject((*it));
+                    omanager->RecycleObject((*it));
                 }
         }
 

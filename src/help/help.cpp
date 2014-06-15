@@ -66,6 +66,17 @@ BOOL CMDHedit::Execute(const std::string &verb, Player* mobile,std::vector<std::
 }
 #endif
 
+EVENT(CleanupHelp)
+{
+    World* world = World::GetPtr();
+
+    HelpTable* table = (HelpTable*)world->GetProperty("help");
+    if (table)
+        {
+            delete table;
+        }
+}
+
 BOOL InitializeHelp()
 {
 #ifdef MODULE_HELP
@@ -73,17 +84,12 @@ BOOL InitializeHelp()
 
     world->WriteLog("Initializing help.");
     HelpTable* table = new HelpTable();
-    if (!table)
-        {
-            world->WriteLog("Error creating help table.", CRIT);
-            return false;
-        }
+
     world->AddProperty("help", (void*)table);
-    //world->events.AddCallback("Shutdown", CleanupHelp);
+    world->events.AddCallback("Shutdown", CleanupHelp);
     world->commands.AddCommand(new CMDHelp());
     world->commands.AddCommand(new CMDHedit());
 #endif
 
     return true;
 }
-

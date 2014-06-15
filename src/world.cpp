@@ -2,6 +2,7 @@
 #include <sys/types.h>
 #include <dirent.h>
 #include <list>
+#include <algorithm>
 #include <unistd.h>
 #include <map>
 #include <unordered_map>
@@ -22,13 +23,13 @@
 #include "zone.h"
 #include "option.h"
 #include "optionManager.h"
+#include "objectManager.h"
 #include "serializer.h"
 #include "event.h"
 #include "delayedEvent.h"
 #include "eventManager.h"
 #include "calloutManager.h"
 #include "com_gen.h"
-#include "staticObject.h"
 
 World* World::_ptr;
 World* World::GetPtr()
@@ -43,25 +44,15 @@ World* World::GetPtr()
 World::World()
 {
     _running = true;
-    _logs = new std::map<std::string, Log*>();
-    RegisterLog(EVENT_FILE, EVENT_NAME);
-    _users=new std::list<Player*>();
-    _prompts = new std::unordered_map<char, PROMPTCB>();
-    _channels=new std::map<int,Channel*>();
-    _options = new OptionManager();
-    _cfactory=new ComponentFactory();
-    _properties=new std::map<std::string,void*>();
-    _zones=new std::vector<Zone*>();
-    _objects=new std::unordered_map<VNUM,StaticObject*>();
-    _rooms = new std::unordered_map<VNUM, Room*>();
-    _npcs = new std::unordered_map<VNUM, Npc*>();
-    _olcs = new OlcManager();
-    _state = new std::map<std::string, ISerializable*>();
     _chanid=1;
-    _server = NULL;
+    _server = nullptr;
+    _motd = nullptr;
+    _banner = nullptr;
     _updates = 0;
     _totalUpdateTime = 0;
     _totalSleepTime = 0;
+
+    RegisterLog(EVENT_FILE, EVENT_NAME);
 //events
     events.RegisterEvent("LivingPulse",new DelayedEvent(LIVING_PULSE,0));
     events.RegisterEvent("WorldPulse", new DelayedEvent(WORLD_PULSE, 0));
@@ -84,44 +75,28 @@ World::~World()
         {
             delete [] _banner;
         }
-    if (_server)
-        {
-            delete _server;
-        }
-    delete _users;
 
-    for (auto lit: *_logs)
+    for (auto lit: _logs)
         {
             delete lit.second;
         }
-    delete _logs;
 
-    for (auto cit: *_channels)
+    for (auto cit: _channels)
         {
             delete cit.second;
         }
-    delete _channels;
 
-    for (auto cit: *_state)
+    for (auto cit: _state)
         {
             delete cit.second;
         }
-    delete _state;
 
-    for (Zone* zone: *_zones)
+    for (Zone* zone: _zones)
         {
             delete zone;
         }
-    delete _zones;
 
-    delete _options;
-    delete _cfactory;
-    delete _properties;
-    delete _prompts;
-    delete _rooms;
-    delete _npcs;
-    delete _objects;
-    delete _olcs;
+    delete _server;
 }
 
 void World::InitializeServer()
@@ -132,7 +107,7 @@ void World::InitializeServer()
 void World::Shutdown()
 {
     std::list <Player*>::iterator it, itEnd;
-    std::list<Player*> players(_users->begin(), _users->end());
+    std::list<Player*> players(_users.begin(), _users.end());
 
     Player* person = NULL;
 
@@ -141,16 +116,20 @@ void World::Shutdown()
         {
             person = (*it);
             person->Message(MSG_CRITICAL,"The mud is shutting down now. Your Character will be autosaved.");
+            person->Save(true);
             person->GetSocket()->Kill();
         }
+
     _running = false;
     SaveState();
     events.CallEvent("Shutdown", NULL, static_cast<void*>(this));
 }
+
 void World::Copyover(Player* mobile)
 {
     int cuptime = (int)time(NULL);
     int ruptime = (int)GetRealUptime();
+
     FILE* copyover = NULL;
     char buff[16];
 
@@ -165,7 +144,7 @@ void World::Copyover(Player* mobile)
     sockaddr_in* addr=NULL;
 //itterate through the players and write info to their copyover file:
 
-    for (Player* person: *_users)
+    for (Player* person: _users)
         {
             if (person->GetSocket()->GetConnectionType() != ConnectionType::Game)
                 {
@@ -184,13 +163,14 @@ void World::Copyover(Player* mobile)
 
     fprintf(copyover,"-1\n");
     fclose(copyover);
+
     events.CallEvent("Copyover", NULL, static_cast<void*>(this));
-    memset(buff,0,16);
     snprintf(buff,16,"%d",_server->GetListener());
 
     Update();
     SaveState();
     execl(BIN_FILE,BIN_FILE,"-c",buff,(char*)NULL);
+
     mobile->Write("Copyover failed!\n");
 }
 
@@ -199,21 +179,21 @@ Server* World::GetServer() const
     return _server;
 }
 
-OlcManager* World::GetOlcManager() const
+OlcManager* World::GetOlcManager()
 {
-    return _olcs;
+    return &_olcs;
 }
 
 ComponentFactory* World::GetComponentFactory()
 {
-    return _cfactory;
+    return &_cfactory;
 }
 
 Log* World::GetLog(const std::string &name)
 {
     if (LogExists(name))
         {
-            return (*_logs)[name];
+            return (_logs)[name];
         }
     else
         {
@@ -222,11 +202,11 @@ Log* World::GetLog(const std::string &name)
 }
 OptionManager* World::GetOptionManager()
 {
-    return _options;
+    return &_options;
 }
-std::list <Player*> *World::GetPlayers() const
+std::list <Player*> *World::GetPlayers()
 {
-    return _users;
+    return &_users;
 }
 
 BOOL World::AddPlayer(Player* player)
@@ -240,24 +220,20 @@ BOOL World::AddPlayer(Player* player)
             return false;
         }
 
-    _users->push_back(player);
+    _users.push_back(player);
     return true;
 }
 BOOL World::RemovePlayer(Player* player)
 {
     std::list<Player*>::iterator it, itEnd;
 
-
-    if (_users->size())
+    itEnd = _users.end();
+    for (it = _users.begin(); it != itEnd; ++it)
         {
-            itEnd = _users->end();
-            for (it = _users->begin(); it != itEnd; ++it)
+            if ((*it) == player)
                 {
-                    if ((*it) == player)
-                        {
-                            _users->erase(it);
-                            return true;
-                        }
+                    _users.erase(it);
+                    return true;
                 }
         }
 
@@ -265,17 +241,11 @@ BOOL World::RemovePlayer(Player* player)
 }
 Player* World::FindPlayer(const std::string &name) const
 {
-    std::list<Player*>::iterator it, itEnd;
-
-    if (_users->size())
+    for (auto it: _users)
         {
-            itEnd=_users->end();
-            for (it = _users->begin(); it != itEnd; ++it)
+            if (it->GetName()==name)
                 {
-                    if ((*it)->GetName()==name)
-                        {
-                            return (*it);
-                        }
+                    return it;
                 }
         }
 
@@ -297,23 +267,18 @@ Player* World::LoadPlayer(const std::string &name) const
 
 void World::GetChannelNames(std::list <std::string>* out)
 {
-    std::map<int,Channel*>::iterator it, itEnd;
-
-    itEnd = _channels->end();
-    for (it = _channels->begin(); it != itEnd; ++it)
+    for (auto it: _channels)
         {
-            out->push_back(((*it).second)->GetName());
+            out->push_back(it.second->GetName());
         }
 }
 
 BOOL World::ChannelExists(Channel* chan)
 {
-    std::map<int, Channel*>::iterator it, itEnd;
 
-    itEnd = _channels->end();
-    for (it = _channels->begin(); it != itEnd; ++it)
+    for (auto it: _channels)
         {
-            if ((*it).second == chan)
+            if (it.second == chan)
                 {
                     return true;
                 }
@@ -326,7 +291,7 @@ BOOL World::AddChannel(Channel* chan,BOOL command)
     OptionMeta* opt = nullptr;
     if (!ChannelExists(chan))
         {
-            (*_channels)[_chanid]=chan;
+            _channels[_chanid]=chan;
             opt = new OptionMeta();
             opt->SetName(chan->GetName());
             opt->SetHelp("Toggles the channel.");
@@ -341,7 +306,8 @@ BOOL World::AddChannel(Channel* chan,BOOL command)
                 {
                     opt->SetValue(Variant(0));
                 }
-            _options->AddOption(opt);
+            _options.AddOption(opt);
+
             if (command)
                 {
                     CMDChan* com = new CMDChan();
@@ -352,8 +318,10 @@ BOOL World::AddChannel(Channel* chan,BOOL command)
                         {
                             com->AddAlias(chan->GetAlias());
                         }
+
                     commands.AddCommand(com);
                 }
+
             _chanid++;
             return true;
         }
@@ -361,27 +329,25 @@ BOOL World::AddChannel(Channel* chan,BOOL command)
     return false;
 }
 
-Channel* World::FindChannel(const int id) const
+Channel* World::FindChannel(int id)
 {
-    if (!_channels->count(id))
+    if (!_channels.count(id))
         {
             return NULL;
         }
-    return (*_channels)[id];
+
+    return _channels[id];
 }
 
 Channel* World::FindChannel(const std::string &name)
 {
 //This method is a bit slower because we have to iterate through the mapping ourselves.
-    std::map<int,Channel*>::iterator it;
-    std::map<int, Channel*>::iterator itEnd;
 
-    itEnd = _channels->end();
-    for (it = _channels->begin(); it != itEnd; ++it)
+    for (auto it: _channels)
         {
-            if ((*it).second->GetName()==name)
+            if ((it.second)->GetName()==name)
                 {
-                    return ((*it).second);
+                    return (it.second);
                 }
         }
 
@@ -404,8 +370,8 @@ BOOL World::InitializeFiles()
         {
             return false;
         }
+    _banner[fs.st_size] = '\0';;
 
-    memset(_banner,0, (size_t)fs.st_size+1);
 //open and load the banner:
     FILE* banner_fd=fopen(LOGIN_FILE,"r");
     if (!banner_fd)
@@ -436,14 +402,8 @@ BOOL World::InitializeFiles()
         }
 
     _motd=new char[fs.st_size+1];
-    if (!_motd)
-        {
-            delete []_banner;
-            _banner = NULL;
-            return false;
-        }
+    _motd[fs.st_size] = '\0';
 
-    memset(_motd,0,(size_t)(fs.st_size+1));
     FILE* motd_fd=fopen(MOTD_FILE,"r");
     if (!motd_fd)
         {
@@ -468,7 +428,6 @@ BOOL World::InitializeFiles()
     return true;
 }
 
-
 const char* World::GetBanner() const
 {
     return _banner;
@@ -488,38 +447,34 @@ void World::Update()
 //flushes the output buffers of all sockets.
     _server->FlushSockets();
 //update living objects:
-    if (_users->size())
+    for (auto pit: _users)
         {
-            for (auto pit: *_users)
-                {
-                    pit->Update();
-                }
+            pit->Update();
         }
-    for (auto npc: *_npcs)
-        {
-            (npc.second)->Update();
-        }
-    for (auto zone: *_zones)
+
+    for (auto zone: _zones)
         {
             zone->Update();
         }
+    _objectManager.Update();
     callouts->Update();
 
     _updates ++;
     gettimeofday(&end, NULL);
     _totalUpdateTime += ((end.tv_sec - start.tv_sec) * 1000000);
     _totalUpdateTime += (end.tv_usec - start.tv_usec);
+
 //sleep so that we don't kill our cpu
     _totalSleepTime += _server->Sleep(PULSES_PER_SECOND);
 }
 
 BOOL World::RegisterComponent(ComponentMeta* meta)
 {
-    return _cfactory->RegisterComponent(meta->GetName(), meta);
+    return _cfactory.RegisterComponent(meta->GetName(), meta);
 }
 Component*  World::CreateComponent(const std::string &name)
 {
-    return _cfactory->Create(name);
+    return _cfactory.Create(name);
 }
 
 time_t World::GetRealUptime() const
@@ -542,28 +497,31 @@ void World::SetCopyoverUptime(time_t tm)
 
 BOOL World::AddProperty(const std::string &name,void* ptr)
 {
-    if (!_properties->count(name))
+    if (!_properties.count(name))
         {
-            (*_properties)[name]=ptr;
+            _properties[name]=ptr;
             return true;
         }
+
     return false;
 }
-void* World::GetProperty(const std::string &name) const
+void* World::GetProperty(const std::string &name)
 {
-    if (_properties->count(name))
+    if (_properties.count(name))
         {
-            return (*_properties)[name];
+            return _properties[name];
         }
+
     return NULL;
 }
 BOOL World::RemoveProperty(const std::string &name)
 {
-    if (_properties->count(name))
+    if (_properties.count(name))
         {
-            _properties->erase(name);
+            _properties.erase(name);
             return true;
         }
+
     return false;
 }
 
@@ -600,13 +558,6 @@ BOOL World::DoCommand(Player* mobile,std::string args)
             // copy the command
             cmd = args.substr(0, i);
         }
-//make the command lowercase
-    /*
-        for (int n = 0; n < (int)cmd.length(); n++) {
-            cmd[n] = tolower(cmd[n]);
-        }
-    */
-
     // are there any arguments to parse?
     if (i != len)
         {
@@ -700,338 +651,33 @@ BOOL World::DoCommand(Player* mobile,std::string args)
     return false;
 }
 
-Entity* World::MatchKeyword(const std::string &name, Player* caller)
-{
-    if ((name=="me")||(name==caller->GetName()))
-        {
-            return (Entity*)caller;
-        }
-    if (name.length() < caller->GetName().length() && caller->GetName().substr(name.length()) == name)
-        {
-            return (Entity*)caller;
-        }
-    if (name == "here")
-        {
-            return (caller->GetLocation());
-        }
-
-    return NULL;
-}
-
-Entity* World::MatchObject(const std::string &name,Player* caller)
-{
-    std::list<Entity*> *contents; //holds contents for the location and current caller.
-    std::list<Entity*>* val;
-    std::list<Entity*>::iterator it, itEnd;
-    Entity* obj = NULL;
-
-    obj = MatchKeyword(name, caller);
-    if (obj)
-        {
-            return obj;
-        }
-
-    contents = new std::list<Entity*>();
-    val = caller->GetLocation()->GetContents();
-    contents->insert(contents->begin(), val->begin(), val->end());
-    val = caller->GetContents();
-    contents->insert(contents->begin(), val->begin(), val->end());
-    obj = MatchObjectInList(name, val);
-    delete contents;
-    return obj;
-}
-Entity* World::MatchObjectInList(const std::string &name, std::list<Entity*> *olist)
-{
-    std::list<Entity*>::iterator it, itEnd;
-    std::string sub; //used for holding the subpart of the number.
-    std::string temp; //used for holding a temp copy of the name after it is trimmed.
-    std::string alias; //holds a copy of the alias.
-    Entity* obj = NULL; //the object we are currently examining/returning.
-    std::vector<std::string>* aliases = NULL; //a list of aliases.
-    std::vector<std::string>::iterator ait, aitEnd;
-    int number = 0; //used for holding the actual number.
-    int count = 0; //used for holding the number of objects found.
-    size_t marker; //used for holding the position of the '.'.
-
-    if (!olist->size())
-        {
-            return NULL;
-        }
-
-//we check to see if the string has a '.', if so, there's a number.
-    marker = name.find_first_of(".");
-//check to see if it is 1) at the beginning, or 2) at the end.
-    if ((marker == 0) || (marker == name.length()))
-        {
-            return NULL;
-        }
-
-    if (marker != std::string::npos)   //we found something.
-        {
-            sub = name.substr(marker); //the subnumber.
-            temp = name.substr(marker+1); //trim off the x. bit
-            number = atoi(sub.c_str());
-            if (number == 0)
-                {
-                    return NULL;
-                }
-
-            itEnd = olist->end();
-            for (it = olist->begin(); it != itEnd && count < number; ++it)
-                {
-                    obj = *it;
-                    if (obj->GetName().length() < temp.length())   //we check for a partial match
-                        {
-                            if (obj->GetName().substr(temp.length()) == temp)
-                                {
-                                    count++; //we found a match, increase the counter.
-                                    continue;
-                                }
-                        }
-                    if (obj->GetName() == temp)   //full match
-                        {
-                            count++;
-                            continue;
-                        }
-
-//now we check a list of aliases.
-                    aliases = obj->GetAliases();
-                    if (aliases->size())
-                        {
-                            aitEnd = aliases->end();
-                            for (ait = aliases->begin(); ait != aitEnd; ++ait)
-                                {
-                                    alias = (*ait);
-                                    if (alias.length() < temp.length())   //we check for a partial match
-                                        {
-                                            if (alias.substr(temp.length()) == temp)
-                                                {
-                                                    count++; //we found a match, increase the counter.
-                                                    continue;
-                                                }
-                                        }
-                                    if (alias == temp)   //full match
-                                        {
-                                            count++;
-                                            continue;
-                                        }
-                                }
-                        }
-                }
-            if (count != (number -1))
-                {
-                    return NULL;
-                }
-            else
-                {
-                    return obj;
-                }
-        }
-    else
-        {
-            itEnd = olist->end();
-            for (it = olist->begin(); it != itEnd; ++it)
-                {
-                    obj = *it;
-
-                    if (obj->GetName().length() < temp.length())   //we check for a partial match
-                        {
-                            if (obj->GetName().substr(temp.length()) == temp)
-                                {
-                                    return obj;
-                                }
-                        }
-                    if (obj->GetName() == temp)   //full match
-                        {
-                            return obj;
-                        }
-
-//now we check a list of aliases.
-                    aliases = obj->GetAliases();
-                    if (aliases->size())
-                        {
-                            aitEnd = aliases->end();
-                            for (ait = aliases->begin(); ait != aitEnd; ++ait)
-                                {
-                                    alias = *ait;
-                                    if (alias.length() < temp.length())   //we check for a partial match
-                                        {
-                                            if (alias.substr(temp.length()) == temp)
-                                                {
-                                                    return obj;
-                                                }
-                                        }
-                                    if (alias == temp)   //full match
-                                        {
-                                            return obj;
-                                        }
-                                }
-                        }
-                }
-        }
-
-    return NULL;
-}
-Entity* World::MatchObjectInVector(const std::string &name, std::vector<Entity*> *olist)
-{
-    std::vector<Entity*>::iterator it, itEnd;
-    std::string sub; //used for holding the subpart of the number.
-    std::string temp; //used for holding a temp copy of the name after it is trimmed.
-    std::string alias; //holds a copy of the alias.
-    Entity* obj = NULL; //the object we are currently examining/returning.
-    std::vector<std::string>* aliases = NULL; //a list of aliases.
-    std::vector<std::string>::iterator ait, aitEnd;
-    int number = 0; //used for holding the actual number.
-    int count = 0; //used for holding the number of objects found.
-    size_t marker; //used for holding the position of the '.'.
-
-    if (!olist->size())
-        {
-            return NULL;
-        }
-
-//we check to see if the string has a '.', if so, there's a number.
-    marker = name.find_first_of(".");
-//check to see if it is 1) at the beginning, or 2) at the end.
-    if ((marker == 0) || (marker == name.length()))
-        {
-            return NULL;
-        }
-
-    if (marker != std::string::npos)   //we found something.
-        {
-            sub = name.substr(marker); //the subnumber.
-            temp = name.substr(marker+1); //trim off the x. bit
-            number = atoi(sub.c_str());
-            if (number == 0)
-                {
-                    return NULL;
-                }
-
-            itEnd = olist->end();
-            for (it = olist->begin(); it != itEnd && count < number; ++it)
-                {
-                    obj = *it;
-                    if (obj->GetName().length() < temp.length())   //we check for a partial match
-                        {
-                            if (obj->GetName().substr(temp.length()) == temp)
-                                {
-                                    count++; //we found a match, increase the counter.
-                                    continue;
-                                }
-                        }
-                    if (obj->GetName() == temp)   //full match
-                        {
-                            count++;
-                            continue;
-                        }
-
-//now we check a list of aliases.
-                    aliases = obj->GetAliases();
-                    if (aliases->size())
-                        {
-                            aitEnd = aliases->end();
-                            for (ait = aliases->begin(); ait != aitEnd; ++ait)
-                                {
-                                    alias = (*ait);
-                                    if (alias.length() < temp.length())   //we check for a partial match
-                                        {
-                                            if (alias.substr(temp.length()) == temp)
-                                                {
-                                                    count++; //we found a match, increase the counter.
-                                                    continue;
-                                                }
-                                        }
-                                    if (alias == temp)   //full match
-                                        {
-                                            count++;
-                                            continue;
-                                        }
-                                }
-                        }
-                }
-            if (count != (number -1))
-                {
-                    return NULL;
-                }
-            else
-                {
-                    return obj;
-                }
-        }
-    else
-        {
-            itEnd = olist->end();
-            for (it = olist->begin(); it != itEnd; ++it)
-                {
-                    obj = *it;
-
-                    if (obj->GetName().length() < temp.length())   //we check for a partial match
-                        {
-                            if (obj->GetName().substr(temp.length()) == temp)
-                                {
-                                    return obj;
-                                }
-                        }
-                    if (obj->GetName() == temp)   //full match
-                        {
-                            return obj;
-                        }
-
-//now we check a list of aliases.
-                    aliases = obj->GetAliases();
-                    if (aliases->size())
-                        {
-                            aitEnd = aliases->end();
-                            for (ait = aliases->begin(); ait != aitEnd; ++ait)
-                                {
-                                    alias = *ait;
-                                    if (alias.length() < temp.length())   //we check for a partial match
-                                        {
-                                            if (alias.substr(temp.length()) == temp)
-                                                {
-                                                    return obj;
-                                                }
-                                        }
-                                    if (alias == temp)   //full match
-                                        {
-                                            return obj;
-                                        }
-                                }
-                        }
-                }
-        }
-
-    return NULL;
-}
-
 BOOL World::AddZone(Zone* zone)
 {
-    std::vector<Zone*>::iterator it;
-    std::vector<Zone*>::iterator itEnd = _zones->end();
 
-    if (_zones->size())
+    if (_zones.size())
         {
-            for (it=_zones->begin(); it != itEnd; ++it)
+            for (auto it:_zones)
                 {
-                    if ((*it)==zone)
+                    if (it == zone)
                         {
                             return false;
                         }
                 }
         }
-    _zones->push_back(zone);
+
+    _zones.push_back(zone);
     return true;
 }
 BOOL World::RemoveZone(Zone* zone)
 {
-    std::vector<Zone*>::iterator it;
-    std::vector <Zone*>::iterator itEnd = _zones->end();
-    for (it = _zones->begin(); it != itEnd; ++it)
+    std::vector<Zone*>::iterator it, itEnd;
+
+    itEnd = _zones.end();
+    for (it = _zones.begin(); it != itEnd; ++it)
         {
-            if ((*it)==zone)
+            if (*it ==zone)
                 {
-                    _zones->erase(it);
+                    _zones.erase(it);
                     return true;
                 }
         }
@@ -1040,15 +686,12 @@ BOOL World::RemoveZone(Zone* zone)
 }
 Zone* World::GetZone(const std::string &name)
 {
-    std::vector <Zone*>::iterator it;
-    std::vector<Zone*>::iterator itEnd = _zones->end();
 
-
-    for (it=_zones->begin(); it != itEnd; it++)
+    for (auto it: _zones)
         {
-            if (name==(*it)->GetName())
+            if (name==it->GetName())
                 {
-                    return (*it);
+                    return it;
                 }
         }
 
@@ -1056,216 +699,13 @@ Zone* World::GetZone(const std::string &name)
 }
 BOOL World::GetZones(std::vector<Zone*> *zones)
 {
-    if (!zones)
-        {
-            return false;
-        }
-
-    std::vector<Zone*>::iterator it;
-    std::vector<Zone*>::iterator itEnd = _zones->end();
-
-    if (_zones->size())
-        {
-            for (it=_zones->begin(); it != itEnd; ++it)
-                {
-                    zones->push_back((*it));
-                }
-        }
+    std::copy(_zones.begin(), _zones.end(), std::back_inserter(*zones));
     return true;
-}
-
-Entity* World::CreateObject(VNUM obj)
-{
-    if (obj != 0 && !VirtualExists(obj))
-        {
-            WriteLog("Tried to create virtual with nonexistant vnum", ERR);
-            return NULL;
-        }
-
-    Entity* object = NULL;
-    StaticObject* virt = NULL;
-
-    virt = (*_objects)[obj];
-    object = virt->Create();
-    return object;
-}
-BOOL World::RecycleObject(Entity* obj)
-{
-    if(!obj)
-        {
-            return false;
-        }
-
-//we recursively recycle everything in contents.
-    Entity* location = NULL;
-    StaticObject* vobj = NULL;
-    std::list<Entity*>::iterator it, itEnd;
-    std::list<Entity*>* contents = obj->GetContents();
-
-//recursively delete objects held by the object being deleted.
-    itEnd = contents->end();
-    for (it = contents->begin(); it != itEnd; ++it)
-        {
-            RecycleObject((*it));
-        }
-
-//check to see if this object is stored in another. If so, we need to remove it.
-    location = obj->GetLocation();
-    if (location)
-        {
-            location->ObjectLeave(obj);
-        }
-
-//recycle this instance with it's virtual object, if there is one.
-    if (obj->GetOnum())
-        {
-            vobj = GetVirtual(obj->GetOnum());
-            if (vobj)
-                {
-                    vobj->Recycle(obj);
-                }
-        }
-
-    events.CallEvent("ObjectDestroyed", NULL, (void*)obj);
-    delete obj;
-    return true;
-}
-
-BOOL World::AddVirtual(StaticObject* obj)
-{
-    VNUM num = 0;
-    if (!obj)
-        {
-            return false;
-        }
-
-    num = obj->GetOnum();
-    if (VirtualExists(num))
-        {
-            return false;
-        }
-
-    (*_objects)[num] = obj;
-    return true;
-}
-BOOL World::VirtualExists(VNUM num)
-{
-    return (_objects->count(num)? true:false);
-}
-StaticObject* World::GetVirtual(VNUM num)
-{
-    if (!VirtualExists(num))
-        {
-            return NULL;
-        }
-
-    return (*_objects)[num];
-}
-BOOL World::RemoveVirtual(VNUM num)
-{
-    StaticObject* virt = GetVirtual(num);
-    if (!virt)
-        {
-            return false;
-        }
-
-    virt->RecycleContents();
-    _objects->erase(num);
-    return true;
-}
-
-BOOL World::AddRoom(Room* room)
-{
-    VNUM num = 0;
-    if (!room)
-        {
-            return false;
-        }
-
-    num = room->GetOnum();
-    if (RoomExists(num))
-        {
-            return false;
-        }
-
-    (*_rooms)[num] = room;
-    return true;
-}
-BOOL World::RemoveRoom(VNUM num)
-{
-    Room* room = NULL;
-
-    room = GetRoom(num);
-    if (!room)
-        {
-            return false;
-        }
-
-    _rooms->erase(room->GetOnum());
-    return true;
-}
-BOOL World::RoomExists(VNUM num)
-{
-    return _rooms->count(num)? true : false;
-}
-Room* World::GetRoom(VNUM num)
-{
-    if (!RoomExists(num))
-        {
-            return NULL;
-        }
-
-    return (*_rooms)[num];
-}
-
-BOOL World::AddNpc(Npc* mob)
-{
-    VNUM num = 0;
-
-    if (!mob)
-        {
-            return false;
-        }
-
-    num = mob->GetOnum();
-    if (NpcExists(num))
-        {
-            return false;
-        }
-
-    (*_npcs)[num] = mob;
-    return true;
-}
-BOOL World::RemoveNpc(VNUM num)
-{
-    Npc* mob = NULL;
-
-    mob = GetNpc(num);
-    if (!mob)
-        {
-            return false;
-        }
-
-    _npcs->erase(mob->GetOnum());
-    return true;
-}
-bool World::NpcExists(VNUM num)
-{
-    return  (_npcs->count(num) ? true : false);
-}
-Npc*  World::GetNpc(VNUM num)
-{
-    if (!NpcExists(num))
-        {
-            return NULL;
-        }
-
-    return (*_npcs)[num];
 }
 
 BOOL World::LogExists(const std::string &name)
 {
-    if (_logs->count(name))
+    if (_logs.count(name))
         {
             return true;
         }
@@ -1283,7 +723,7 @@ BOOL World::RegisterLog(const std::string &path, const std::string &name)
             Log* log = new Log(path);
             if (log)
                 {
-                    (*_logs)[name] = log;
+                    _logs[name] = log;
                     return true;
                 }
         }
@@ -1308,7 +748,7 @@ void World::SetRunning(BOOL running)
 
 BOOL World::PromptExists(char prompt)
 {
-    return (_prompts->count(prompt)==0? false:true);
+    return (_prompts.count(prompt)==0? false:true);
 }
 BOOL World::RegisterPrompt(char c, PROMPTCB callback)
 {
@@ -1317,7 +757,7 @@ BOOL World::RegisterPrompt(char c, PROMPTCB callback)
             return false;
         }
 
-    (*_prompts)[c] = callback;
+    _prompts[c] = callback;
     return true;
 }
 std::string World::BuildPrompt(const std::string &prompt, Player* mobile)
@@ -1332,7 +772,7 @@ std::string World::BuildPrompt(const std::string &prompt, Player* mobile)
                 {
                     if (PromptExists((*it)))
                         {
-                            ret += ((*_prompts)[(*it)])(mobile);
+                            ret += (_prompts[(*it)])(mobile);
                         }
                     else
                         {
@@ -1357,7 +797,7 @@ BOOL World::AddState(const std::string &name, ISerializable* s)
             return false;
         }
 
-    (*_state)[name] = s;
+    _state[name] = s;
     return true;
 }
 BOOL World::RemoveState(const std::string &name)
@@ -1367,20 +807,20 @@ BOOL World::RemoveState(const std::string &name)
             return false;
         }
 
-    _state->erase(name);
+    _state.erase(name);
     return true;
 }
 BOOL World::StateExists(const std::string &name)
 {
-    return (_state->count(name)==1?true:false);
+    return (_state.count(name)==1?true:false);
 }
 
 BOOL World::SaveState()
 {
     std::map<std::string, ISerializable*>::iterator sit, sitEnd;
     TiXmlElement* element = NULL;
-    sitEnd = _state->end();
-    for (sit = _state->begin(); sit != sitEnd; ++sit)
+    sitEnd = _state.end();
+    for (sit = _state.begin(); sit != sitEnd; ++sit)
         {
             TiXmlDocument doc;
             TiXmlDeclaration *decl = new TiXmlDeclaration("1.0", "", "");
@@ -1429,7 +869,7 @@ BOOL World::LoadState()
                 }
             else
                 {
-                    (*_state)[name]->Deserialize(root);
+                    _state[name]->Deserialize(root);
                 }
         }
 
@@ -1448,4 +888,9 @@ unsigned long long int World::GetUpdateTime() const
 unsigned long long int World::GetSleepTime() const
 {
     return _totalSleepTime;
+}
+
+ObjectManager* World::GetObjectManager()
+{
+    return &_objectManager;
 }

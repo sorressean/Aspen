@@ -13,6 +13,7 @@
 #include "command.h"
 #include "olc.h"
 #include "editor.h"
+#include "objectManager.h"
 #ifdef MODULE_SCRIPTING
 #include "scripts/scripts.h"
 #endif
@@ -85,6 +86,7 @@ void Entity::Deserialize(TiXmlElement* root)
     TiXmlNode* node = NULL;
     TiXmlElement* obj = NULL;
     World* world = World::GetPtr();
+    ObjectManager* omanager = world->GetObjectManager();
     int loc;
 
 //contents
@@ -110,7 +112,7 @@ void Entity::Deserialize(TiXmlElement* root)
         }
     else
         {
-            _location=world->GetRoom(loc);
+            _location=omanager->GetRoom(loc);
         }
 
 //and now we notify everything that an object was loaded:

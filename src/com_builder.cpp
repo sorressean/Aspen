@@ -6,6 +6,7 @@
 #include <iomanip>
 #include "com_builder.h"
 #include "world.h"
+#include "objectManager.h"
 #include "player.h"
 #include "zone.h"
 #include "room.h"
@@ -118,6 +119,7 @@ CMDDig::CMDDig()
 BOOL CMDDig::Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args,int subcmd)
 {
     World* world = World::GetPtr();
+    ObjectManager* omanager = world->GetObjectManager();
     std::stringstream st;
     Room* room = NULL;
     Room* location = (Room*)mobile->GetLocation();
@@ -193,7 +195,7 @@ BOOL CMDDig::Execute(const std::string &verb, Player* mobile,std::vector<std::st
         }
     else
         {
-            room = (Room*)world->GetRoom(toid);
+            room = omanager->GetRoom(toid);
             if (!room)
                 {
                     mobile->Message(MSG_ERROR, "That rnum does not exist.");
@@ -635,6 +637,7 @@ CMDGoto::CMDGoto()
 BOOL CMDGoto::Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args,int subcmd)
 {
     World* world = World::GetPtr();
+    ObjectManager* omanager = world->GetObjectManager();
     Room* room = nullptr;
     VNUM toid = 0;
 
@@ -651,7 +654,7 @@ BOOL CMDGoto::Execute(const std::string &verb, Player* mobile,std::vector<std::s
             return false;
         }
 
-    room = (Room*)world->GetRoom(toid);
+    room = omanager->GetRoom(toid);
     if (!room)
         {
             mobile->Message(MSG_ERROR, "That rnum does not exist.");

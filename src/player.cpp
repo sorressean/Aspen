@@ -8,7 +8,6 @@
 #include <list>
 #include <vector>
 #include <cstring>
-#include <iostream>
 #include <sstream>
 #include <functional>
 #include "mud.h"
@@ -18,6 +17,7 @@
 #include "eventargs.h"
 #include "utils.h"
 #include "world.h"
+#include "objectManager.h"
 #include "exception.h"
 #include "olc.h"
 #include "calloutManager.h"
@@ -315,6 +315,7 @@ void Player::EnterGame()
 void Player::EnterGame(BOOL quiet)
 {
     World* world = World::GetPtr();
+    ObjectManager* omanager = world->GetObjectManager();
 
     Living::EnterGame();
 //add the player to the users list:
@@ -322,7 +323,7 @@ void Player::EnterGame(BOOL quiet)
 //move the player if it doesn't already have a location
     if (GetLocation()==NULL)
         {
-            MoveTo(world->GetRoom(ROOM_START));
+            MoveTo(omanager->GetRoom(ROOM_START));
         }
     else
         {

@@ -1,8 +1,3 @@
-/*
-*world
-*This class is responsible for managing users, zones, mobs and coordenating the mud world
-*All of the core functions will be kept within this class, and tasks delegated to other classes as needed for organizational purposes.
-*/
 #pragma once
 #ifndef WORLD_H
 #define WORLD_H
@@ -20,37 +15,34 @@
 #include "event.h"
 #include "eventManager.h"
 #include "player.h"
-#include "npc.h"
 #include "component.h"
 #include "componentMeta.h"
 #include "ComponentFactory.h"
 #include "serializer.h"
-#include "room.h"
-#include "entity.h"
-#include "staticObject.h"
-#include "npc.h"
 #include "zone.h"
 #include "olcManager.h"
 #include "optionManager.h"
+#include "objectManager.h"
 
 typedef std::function<std::string (Player*)> PROMPTCB;
-
+/**
+This class is responsible for managing collections of objects (users, zones etc) as well as holding references to manager objects.
+All of the core functions will be kept within this class, and tasks delegated to other classes as needed for organizational purposes.
+*/
 class World
 {
     static World* _ptr;
     Server* _server; //our main server object.
-    ComponentFactory* _cfactory;
-    std::list <Player*> *_users; //a list of the currently connected players.
-    std::unordered_map<char, PROMPTCB> *_prompts;
-    std::map <int,Channel*>* _channels;
-    std::map<std::string, Log*> *_logs;
-    std::map <std::string,void*> *_properties;
-    std::map<std::string, ISerializable*> *_state;
-    std::vector<Zone*> *_zones;
-    std::unordered_map<VNUM ,Room*> *_rooms;
-    std::unordered_map<VNUM, StaticObject*> *_objects;
-    std::unordered_map<VNUM, Npc*> *_npcs;
-    OlcManager* _olcs;
+    ComponentFactory _cfactory;
+    std::list <Player*> _users; //a list of the currently connected players.
+    std::unordered_map<char, PROMPTCB> _prompts;
+    std::map <int,Channel*> _channels;
+    std::map<std::string, Log*> _logs;
+    std::map <std::string,void*> _properties;
+    std::map<std::string, ISerializable*> _state;
+    std::vector<Zone*> _zones;
+    OlcManager _olcs;
+    ObjectManager _objectManager;
     int _chanid;
     unsigned long long int _updates;
     unsigned long long int _totalUpdateTime;
@@ -61,7 +53,7 @@ class World
 //mud text buffers
     char* _motd;
     char* _banner;
-    OptionManager* _options;
+    OptionManager _options;
 public:
     static World* GetPtr();
 //these are objects we need to store on each entity.
@@ -70,41 +62,45 @@ public:
 
     World();
     ~World();
-    /*
-    *Initializes the server object.
+
+    /**
+    Initializes the server object.
     */
     void InitializeServer();
-    /*
-    *Shuts down the mud: saves open objects, sends messages to players, etc.
+    /**
+    Shuts down the mud: saves open objects, sends messages to players, etc.
     */
     void Shutdown();
-    /*
-    *Performs a copyover.
-    *Param: [in] the person who initiated the copyover.
+    /**
+    Performs a copyover.
+    \param: [in] the player who initiated the copyover.
     */
     void Copyover(Player* mobile);
-    /*
-    *Returns: a pointer to the main server object.
+    /**
+    Returns a pointer to the main server object.
     */
     Server* GetServer() const;
-    OlcManager* GetOlcManager() const;
-    /*
-    *Returns a pointer to the component factory object.
+    /**
+    Returns a pointer to the OLC manager.
+    */
+    OlcManager* GetOlcManager();
+    /**
+    Returns a pointer to the component factory object.
     */
     ComponentFactory* GetComponentFactory();
-    /*
-    *Returns: a pointer to a list of pointers to player objects.
+    /**
+    Returns: a pointer to a list of pointers to player objects.
     */
-    std::list <Player*> *GetPlayers() const;
-    /*
-    *Adds the player to the players list.
-    *Only connected players should be added. Inactive players shouldn't be in this list.
-    *Param: [in] a pointer to the player object to add.
+    std::list <Player*> *GetPlayers();
+    /**
+    Adds the player to the players list.
+    Only connected players should be added. Inactive players shouldn't be in this list.
+    \param: [in] a pointer to the player object to add.
     */
     BOOL AddPlayer(Player* player);
-    /*
-    *Removes the specified player from the list of active players.
-    *Param: [in] A pointer to the player object
+    /**
+    Removes the specified player from the list of active players.
+    \param: [in] A pointer to the player object
     */
     BOOL RemovePlayer(Player* player);
     /*
@@ -129,7 +125,7 @@ public:
     *Param: [in] the id of the channel.
     *Return: a pointer to the channel object if it was found, NULLotherwise.
     */
-    Channel* FindChannel(const int id) const;
+    Channel* FindChannel(int id);
     /*
     *Will locate a channel object based on it's name.
     *Param: [in] The name of the channel to locate.
@@ -193,7 +189,7 @@ public:
     *Param: [in] the name of the property.
     *Return: a pointer to the object, NULL if the property wasn't found.
     */
-    void* GetProperty(const std::string &name) const;
+    void* GetProperty(const std::string &name);
     /*
     *Removes the property from the property table.
     *Param: [in] the name of the property to remove.
@@ -234,7 +230,6 @@ public:
     *Param: [in] the name of the object.
     *Return: A pointer to the object, NULL if it wasn't found.
     */
-
     Entity* MatchObject(const std::string &name,Player* caller);
     /*
     *Matches an object in a list.
@@ -275,69 +270,6 @@ public:
     */
     BOOL GetZones(std::vector<Zone*> *zones);
 
-    /*
-    *Tries to create a copy of an Entity from a virtual object.
-    *Param: [in] the vnum of the object to clone.
-    *Return: A pointer to the new object on success, NULL on failure.
-    */
-    Entity* CreateObject(VNUM obj);
-    /*
-    *Recycles the specified  object, as well as removes it from the virtual obj statistics.
-    *Also cleans up the object and the contents of that object.
-    */
-    BOOL RecycleObject(Entity* obj);
-    /*
-    *Adds the specified virtual object to the list.
-    *Param: [in] a pointer to the static object to add.
-    *Return: True on success, false on failure.
-    */
-    BOOL AddVirtual(StaticObject* obj);
-    /*
-    *Checks to see if the specified virtual object exists.
-    *Param: [in] the  num of the virtual object to check.
-    *Return: True if the object exists, false otherwise.
-    */
-    BOOL VirtualExists(VNUM num);
-    /*
-    *Retrieves a pointer to the specified virtual object.
-    *Param: [in] the vnum of the object.
-    *Return: A pointer to the object, NULL if it was not found.
-    */
-    StaticObject* GetVirtual(VNUM num);
-    /*
-    *Removes the specified virtual, as well as deletes each individual object that belongs to it.
-    *Param: [in] the vnum of the object to remove.
-    *Return: True on success, false on failure.
-    */
-    BOOL RemoveVirtual(VNUM num);
-    /*
-    *Tries to add the specified room.
-    *Param: [in] a pointer to the room to be added.
-    *Return: True on success, false on failure.
-    */
-    BOOL AddRoom(Room* room);
-    /*
-    *Tries to remove the specified room.
-    *Param: [in] the VNUM of the room to remove.
-    *Return: True on success, false on failure.
-    */
-    BOOL RemoveRoom(VNUM num);
-    /*
-    *Checks to see if the specified room exists.
-    *Param: [in] the VNUM of the room.
-    *Return: True on success, false on failure.
-    */
-    BOOL RoomExists(VNUM num);
-    /*
-    *Tries to retrieve the specified room.
-    *Param: [in] the vnum of the room.
-    *Return: a pointer to the room object on success, NULL otherwise.
-    */
-    Room* GetRoom(VNUM num);
-    BOOL AddNpc(Npc* mob);
-    BOOL RemoveNpc(VNUM num);
-    bool NpcExists(VNUM num);
-    Npc*  GetNpc(VNUM num);
     /*
     *Checks to see if the log exists.
     *Param: [in] the name of the log.
@@ -424,5 +356,6 @@ public:
     unsigned long long int GetUpdates() const;
     unsigned long long int GetUpdateTime() const;
     unsigned long long int GetSleepTime() const;
+    ObjectManager* GetObjectManager();
 };
 #endif

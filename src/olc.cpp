@@ -8,6 +8,7 @@
 #include "olc.h"
 #include "baseObject.h"
 #include "world.h"
+#include "objectManager.h"
 #include "socket.h"
 #include "editor.h"
 #include "eventargs.h"
@@ -226,6 +227,7 @@ CMDREdit::CMDREdit()
 BOOL CMDREdit::Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args, int subcmd)
 {
     World* world = World::GetPtr();
+    ObjectManager* objmanager = world->GetObjectManager();
     Zone* zon = mobile->GetLocation()->GetZone();
     Component* component = nullptr;
     ComponentMeta* cmeta = nullptr;
@@ -252,7 +254,7 @@ BOOL CMDREdit::Execute(const std::string &verb, Player* mobile,std::vector<std::
             return false;
         }
 
-    targ = world->GetRoom(num);
+    targ = objmanager->GetRoom(num);
     if (targ == nullptr)
         {
             mobile->Message(MSG_ERROR, "Could not retrieve specified room.");
@@ -307,6 +309,7 @@ CMDMEdit::CMDMEdit()
 BOOL CMDMEdit::Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args, int subcmd)
 {
     World* world = World::GetPtr();
+    ObjectManager* objmanager = world->GetObjectManager();
     Zone* zon = mobile->GetLocation()->GetZone();
     Component* component = nullptr;
     ComponentMeta* cmeta = nullptr;
@@ -333,7 +336,7 @@ BOOL CMDMEdit::Execute(const std::string &verb, Player* mobile,std::vector<std::
             return false;
         }
 
-    targ = world->GetNpc(num);
+    targ = objmanager->GetNpc(num);
     if (targ == nullptr)
         {
             mobile->Message(MSG_ERROR, "Could not retrieve specified NPC.");
@@ -388,6 +391,7 @@ CMDOEdit::CMDOEdit()
 BOOL CMDOEdit::Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args, int subcmd)
 {
     World* world = World::GetPtr();
+    ObjectManager* objmanager = world->GetObjectManager();
     Zone* zon = mobile->GetLocation()->GetZone();
     Component* component = nullptr;
     ComponentMeta* cmeta = nullptr;
@@ -414,7 +418,7 @@ BOOL CMDOEdit::Execute(const std::string &verb, Player* mobile,std::vector<std::
             return false;
         }
 
-    targ = world->GetVirtual(num);
+    targ = objmanager->GetVirtual(num);
     if (targ == nullptr)
         {
             mobile->Message(MSG_ERROR, "Could not retrieve specified virtual object.");

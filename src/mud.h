@@ -30,6 +30,7 @@ class BaseObject;
 class StaticObject;
 class Zone;
 class Room;
+class ObjectManager;
 
 struct OLC_DATA;
 
