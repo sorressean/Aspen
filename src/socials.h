@@ -32,7 +32,7 @@ typedef struct
 class Socials
 {
     VNUM _socid;
-    std::map <std::string, SOCIAL_DATA*> *_slist;
+    std::map <std::string, SOCIAL_DATA*> _slist;
     std::string _notargPattern;
     std::string _targPattern;
     static Socials* _ptr;
@@ -63,7 +63,7 @@ public:
     *param: [in] The name of the social.
     *Return: A pointer to the SOCIAL_DATA struct, NULL if it doesn't exist.
     */
-    SOCIAL_DATA* GetSocial(const std::string &name) const;
+    SOCIAL_DATA* GetSocial(const std::string &name);
     /*
     *Formats the social into a string that can be sent to a room.
     *Param: [in] the social_data entry for the social.

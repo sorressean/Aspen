@@ -21,23 +21,13 @@ Socials* Socials::GetPtr()
 void Socials::Initialize()
 {
     _socid = 1;
-    _slist = new std::map <std::string, SOCIAL_DATA*>();
 }
 Socials::~Socials()
 {
-    std::map<std::string, SOCIAL_DATA*>::iterator it, itEnd;
 
-    if (_slist&&_slist->size())
+    for (auto it:_slist)
         {
-            itEnd = _slist->end();
-            for (it = _slist->begin(); it != itEnd; ++it)
-                {
-                    delete (*it).second;
-                }
-        }
-    if (_slist)
-        {
-            delete _slist;
+            delete it.second;
         }
 }
 
@@ -48,27 +38,20 @@ void Socials::Save()
     TiXmlElement* social = NULL;
     TiXmlDeclaration *decl = new TiXmlDeclaration("1.0", "", "");
     doc.LinkEndChild(decl);
+    SOCIAL_DATA* sdata = NULL;
 
-    std::map<std::string, SOCIAL_DATA*>::iterator it, itEnd;
-    SOCIAL_DATA* d = NULL;
-
-//if there are socials, print them.
-    if (_slist->size())
+    for (auto it: _slist)
         {
-            itEnd = _slist->end();
-            for (it = _slist->begin(); it != itEnd; ++it)
-                {
-                    d = (*it).second;
-                    social = new TiXmlElement("social");
-                    social->SetAttribute("id", (int)d->id);
-                    social->SetAttribute("name", d->name.c_str());
-                    social->SetAttribute("ynotarg", d->ynotarg.c_str());
-                    social->SetAttribute("rnotarg", d->rnotarg.c_str());
-                    social->SetAttribute("ttarg", d->ttarg.c_str());
-                    social->SetAttribute("rtarg", d->rtarg.c_str());
-                    social->SetAttribute("ytarg", d->ytarg.c_str());
-                    socials->LinkEndChild(social);
-                }
+            sdata = it.second;
+            social = new TiXmlElement("social");
+            social->SetAttribute("id", (int)sdata->id);
+            social->SetAttribute("name", sdata->name.c_str());
+            social->SetAttribute("ynotarg", sdata->ynotarg.c_str());
+            social->SetAttribute("rnotarg", sdata->rnotarg.c_str());
+            social->SetAttribute("ttarg", sdata->ttarg.c_str());
+            social->SetAttribute("rtarg", sdata->rtarg.c_str());
+            social->SetAttribute("ytarg", sdata->ytarg.c_str());
+            socials->LinkEndChild(social);
         }
     doc.LinkEndChild(socials);
     doc.SaveFile(SOCIALS_FILE);
@@ -76,8 +59,7 @@ void Socials::Save()
 void Socials::Load()
 {
     World* world = World::GetPtr();
-
-    int id;
+    int id = 0;
     TiXmlDocument doc(SOCIALS_FILE);
     TiXmlElement* socials = NULL;
     TiXmlElement* social = NULL;
@@ -93,6 +75,7 @@ void Socials::Load()
 #endif
             return;
         }
+
     if (!doc.LoadFile())
         {
             world->WriteLog("Could not load XML socials file.");
@@ -122,7 +105,7 @@ void Socials::Load()
                             _socid = id+1;
                         }
 
-                    (*_slist)[data->name] = data;
+                    _slist[data->name] = data;
                     data = NULL;
                 }
         }
@@ -130,7 +113,7 @@ void Socials::Load()
 
 BOOL Socials::SocialExists(const std::string &name) const
 {
-    return (_slist->count(name) == 0? false:true);
+    return (_slist.count(name) == 0? false:true);
 }
 BOOL Socials::AddSocial(const std::string &name, const std::string &ynotarg, const std::string &rnotarg, const std::string &ytarg, const std::string &rtarg, const std::string &ttarg)
 {
@@ -148,17 +131,18 @@ BOOL Socials::AddSocial(const std::string &name, const std::string &ynotarg, con
     data->ytarg = ytarg;
     data->id = _socid;
     _socid++;
-    (*_slist)[name] = data;
+
+    _slist[name] = data;
     return true;
 }
-SOCIAL_DATA* Socials::GetSocial(const std::string &name) const
+SOCIAL_DATA* Socials::GetSocial(const std::string &name)
 {
     if (!SocialExists(name))
         {
             return NULL;
         }
 
-    return (*_slist)[name];
+    return _slist[name];
 }
 
 void Socials::InitializeDefaultSocials()
@@ -182,18 +166,15 @@ void Socials::InitializeDefaultSocials()
 
 void Socials::AddCommands()
 {
-    std::map <std::string, SOCIAL_DATA*>::iterator it;
-    std::map <std::string, SOCIAL_DATA*>::iterator itEnd;
     World* world = World::GetPtr();
 
     world->WriteLog("Adding social commands.");
-    itEnd = _slist->end();
-    for (it = _slist->begin(); it != itEnd; ++it)
+    for (auto it: _slist)
         {
             CMDSocials*com = new CMDSocials();
-            com->SetName((*it).second->name);
+            com->SetName(it.second->name);
             com->SetType(social);
-            com->SetSubcmd((*it).second->id);
+            com->SetSubcmd(it.second->id);
             world->commands.AddCommand(com);
         }
 }
@@ -204,6 +185,7 @@ EVENT(socials_shutdown)
     world->WriteLog("Cleaning up socials.");
     Socials* soc = Socials::GetPtr();
     soc->Save();
+    delete soc;
 }
 
 CMDSocials::CMDSocials()
