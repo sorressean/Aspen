@@ -548,6 +548,8 @@ BOOL Zone::LoadZones()
             zone->Deserialize(root);
             world->AddZone(zone);
         }
+
+    closedir(dir);
     return true;
 }
 

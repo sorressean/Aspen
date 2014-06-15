@@ -13,18 +13,6 @@ ObjectManager::ObjectManager()
 }
 ObjectManager::~ObjectManager()
 {
-    for (auto it: _rooms)
-        {
-            delete it.second;
-        }
-    for (auto it: _objects)
-        {
-            delete it.second;
-        }
-    for (auto it: _npcs)
-        {
-            delete it.second;
-        }
 }
 
 void ObjectManager::Update()
