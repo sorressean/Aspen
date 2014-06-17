@@ -17,5 +17,9 @@ I began work on aspen in late 2009, after trying out a few different engines for
 
 ## Is Aspen ready-to-use?
 The short answer is probably not. The even longer answer is no; Aspen is currently in development, and as such is not ready for primetime. We still welcome anyone who wishes to use it; if you would like to contribute to the engine, we would greatly appreciate any contributions. Our todo list can     be found [here](https://github.com/sorressean/aspen/wiki/todo). You are more than welcome to work on any of those, as well as any other section of your choosing.
+
 ## Community
 We do not currently have a mailing list in place for discussions; you can find us on IRC: irc.freenode.net, #aspenmud.
+
+## Support the project
+This project is essentially driven by one developer; I have a lot of other constraints on my time, as much as I'd like to dedicate full-time to this project. If you are interested in this project, please feel free to either donate or get in touch with me, I'd love to know how it is being used. If you wish to donate, you may do so [here](http://tysdomain.com/page/donate).

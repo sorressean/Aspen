@@ -13,10 +13,10 @@ EventManager::EventManager()
 }
 EventManager::~EventManager()
 {
-    std::map<std::string, Event*>::iterator it;
-    for (it=_events.begin(); it!=_events.end(); it++)
+
+    for (auto it: _events)
         {
-            delete (*it).second;
+            delete it.second;
         }
 }
 BOOL EventManager::IsEventRegistered(const std::string &name)
