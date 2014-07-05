@@ -7,19 +7,42 @@
 #include <string>
 #include <vector>
 #include <list>
+#include <functional>
 #include "mud.h"
 #include "conf.h"
+
 enum COMMAND_TYPE {movement, normal, script, social, channel, all};
+typedef std::function<bool (const std::string &, Player* ,std::vector<std::string> &, int)> CHOOK_CB;
+
+/**
+This structure holds data for individual command hooks.
+The priority is what is used to soart the commands.
+For example, if you want your stats section to show up in score before your questpoints section
+you would give the stats a priority of 1, and maybe 10 for questpoints etc.
+*/
+struct CommandHook
+{
+    int id; //ID for removing hooks, if needed.
+    int priority;
+    CHOOK_CB cb;
+};
 
 class Command
 {
 protected:
     std::string _name;
-    std::list<std::string> _aliases;
+    std::vector<std::string> _aliases;
+    std::list<CommandHook*> _prehook;
+    std::list<CommandHook*> _posthook;
     int _subcmd;
     COMMAND_TYPE _type;
     FLAG _access;
     POSITION _position;
+
+    bool AddHook(CommandHook* hook, std::list<CommandHook*>* _hooks);
+    bool RemoveHook(int id, std::list<CommandHook*>* _hooks);
+    bool ExecuteHooks(const std::string &verb, Player* mobile,std::vector<std::string> &args,int subcmd, std::list<CommandHook*>* _hooks);
+
 public:
     Command();
     virtual ~Command();
@@ -38,6 +61,13 @@ public:
     POSITION GetPosition() const;
     virtual BOOL Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args,int subcmd) = 0;
     virtual BOOL CanExecute(Player* mobile, int subcmd);
+
+    bool AddPrehook(CommandHook* hook);
+    bool RemovePrehook(int id);
+    bool ExecutePrehooks(const std::string &verb, Player* mobile,std::vector<std::string> &args,int subcmd);
+    bool AddPosthook(CommandHook* hook);
+    bool RemovePosthook(int id);
+    bool ExecutePosthooks(const std::string &verb, Player* mobile,std::vector<std::string> &args,int subcmd);
 };
 
 /*

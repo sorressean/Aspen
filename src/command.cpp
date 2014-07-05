@@ -6,6 +6,11 @@
 #include "com_builder.h"
 #include "com_movement.h"
 
+static bool chook_comp(CommandHook* a, CommandHook* b)
+{
+    return (a->id < b->id);
+}
+
 Command::Command()
 {
     _name = "";
@@ -26,6 +31,7 @@ std::string Command::GetName() const
 {
     return _name;
 }
+
 BOOL Command::AddAlias(const std::string &name)
 {
     if (HasAlias(name))
@@ -38,15 +44,14 @@ BOOL Command::AddAlias(const std::string &name)
 }
 BOOL Command::RemoveAlias(const std::string &name)
 {
-    std::list <std::string>::iterator it;
-    std::list <std::string>::iterator itEnd;
-    itEnd=_aliases.end();
+    std::vector <std::string>::iterator it, itEnd;
 
+    itEnd=_aliases.end();
     for (it = _aliases.begin(); it != itEnd; ++it)
         {
             if ((*it) == name)
                 {
-                    _aliases.remove((*it));
+                    _aliases.erase(it);
                     return true;
                 }
         }
@@ -55,17 +60,13 @@ BOOL Command::RemoveAlias(const std::string &name)
 }
 BOOL Command::HasAlias(const std::string &name, BOOL partialMatch)
 {
-    std::list <std::string>::iterator it;
-    std::list <std::string>::iterator itEnd;
-    itEnd=_aliases.end();
-
-    for (it = _aliases.begin(); it != itEnd; ++it)
+    for (auto it: _aliases)
         {
-            if ((*it) == name)
+            if (it == name)
                 {
                     return true;
                 }
-            else if ((partialMatch) && (name.length() < (*it).length()) && ((*it).substr(name.length()) == name))
+            else if ((partialMatch) && (name.length() < it.length()) && (it.substr(name.length()) == name))
                 {
                     return true;
                 }
@@ -73,6 +74,7 @@ BOOL Command::HasAlias(const std::string &name, BOOL partialMatch)
 
     return false;
 }
+
 void Command::SetSubcmd(int subcmd)
 {
     _subcmd = subcmd;
@@ -110,6 +112,72 @@ BOOL Command::CanExecute(Player* mobile, int subcmd)
     return true;
 }
 
+//hook operations.
+bool Command::AddHook(CommandHook* hook, std::list<CommandHook*>* _hooks)
+{
+    if (!hook)
+        {
+            return false;
+        }
+
+    _hooks->push_back(hook);
+    _hooks->sort(chook_comp);
+    return true;
+}
+bool Command::RemoveHook(int id, std::list<CommandHook*>* _hooks)
+{
+    std::list<CommandHook*>::iterator it, itEnd;
+
+    itEnd = _hooks->end();
+    for (it = _hooks->begin(); it != itEnd; ++it)
+        {
+            if ((*it)->id == id)
+                {
+                    _hooks->erase(it);
+                    return true;
+                }
+        }
+
+    return false;
+}
+bool Command::ExecuteHooks(const std::string &verb, Player* mobile,std::vector<std::string> &args,int subcmd, std::list<CommandHook*>* _hooks)
+{
+    for (auto it: *_hooks)
+        {
+            if (!it->cb(verb, mobile, args, subcmd))
+                {
+                    return false;
+                }
+        }
+
+    return true;
+}
+
+bool Command::AddPrehook(CommandHook* hook)
+{
+    return AddHook(hook, &_prehook);
+}
+bool Command::RemovePrehook(int id)
+{
+    return RemoveHook(id, &_prehook);
+}
+bool Command::ExecutePrehooks(const std::string &verb, Player* mobile,std::vector<std::string> &args,int subcmd)
+{
+    return ExecuteHooks(verb, mobile, args, subcmd, &_prehook);
+}
+
+bool Command::AddPosthook(CommandHook* hook)
+{
+    return AddHook(hook, &_posthook);
+}
+bool Command::RemovePosthook(int id)
+{
+    return RemoveHook(id, &_posthook);
+}
+bool Command::ExecutePosthooks(const std::string &verb, Player* mobile,std::vector<std::string> &args,int subcmd)
+{
+    return ExecuteHooks(verb, mobile, args, subcmd, &_posthook);
+}
 
 Commandable::Commandable()
 {
