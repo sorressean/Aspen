@@ -1,3 +1,4 @@
+#include <iostream>
 #include <unistd.h>
 #include <sys/ioctl.h>
 #include <sys/socket.h>
@@ -93,10 +94,24 @@ bool Socket::Read()
 
     while (true)
         {
-            size = recv(_control, temp, 4096, 0);
-            if (size <= 0)
+            size = read(_control, temp, 4096);
+            if (size == -1) //error
                 {
-                    break;
+//these are ok, we just continue on.
+                    if (errno == EAGAIN || errno == EWOULDBLOCK)
+                        {
+                            return true;
+                        }
+///other errors means we have a problem.
+                    else
+                        {
+                            return false;
+                        }
+                }
+//linkdead
+            if (size == 0)
+                {
+                    return false;
                 }
             /*
                   else if (errno == EAGAIN || size == 4096)
