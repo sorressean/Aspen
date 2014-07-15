@@ -1,4 +1,3 @@
-#include <iostream>
 /*
 *A basic server class.
 *Manages all game connections and socket operations for the game.
@@ -45,7 +44,6 @@ Server::Server()
     {
         CheckLinkdeaths(cb);
     },false);
-    std::cout << id << std::endl;
 }
 Server::~Server()
 {
@@ -68,7 +66,6 @@ void Server::CheckLinkdeaths(Callout* cb)
             node = (*it);
             if (tm-(node->added) >= LINKDEATH_TIME)
                 {
-                    std::cout << node->mobile->GetName() << std::endl;
                     node->mobile->LeaveGame();
                     delete node->mobile;
                     delete node;
