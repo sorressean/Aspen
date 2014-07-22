@@ -40,8 +40,6 @@ class Server
 public:
     Server  ();
     ~Server ();
-    void CheckLinkdeaths(Callout* cb);
-
     /**
     *Establishes a listening point
     *param [in] The port to open as a listening poDWORD.
@@ -76,5 +74,12 @@ public:
     void AddSock(Socket* sock);
 //Retrieves a pointer to the banlist container object.
     BanList* GetBanList() const;
+
+    /**
+    A callout, used to periodically check linkdead players.
+    Will disconnect player if they have been linkdead to long.
+    */
+    void CheckLinkdeaths(Callout* cb);
+    bool IsUserLinkdead(const std::string& name) const;
 };
 #endif

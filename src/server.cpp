@@ -40,7 +40,7 @@ Server::Server()
     world->AddState("banlist", blist);
     // initialize lastSleep
     gettimeofday(&lastSleep, NULL);
-    int id = manager->RegisterCallout(30, 0, [this](Callout* cb)
+    manager->RegisterCallout(30, 0, [this](Callout* cb)
     {
         CheckLinkdeaths(cb);
     },false);
@@ -347,4 +347,17 @@ void Server::AddSock(Socket* sock)
 BanList* Server::GetBanList() const
 {
     return blist;
+}
+
+bool Server::IsUserLinkdead(const std::string& name) const
+{
+    for (auto it:_linkdead)
+        {
+            if (it->mobile->GetName() == name)
+                {
+                    return true;
+                }
+        }
+
+    return false;
 }
