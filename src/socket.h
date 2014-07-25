@@ -219,7 +219,6 @@ public:
     bool HandleNewpassInput();
     bool HandleVerpassInput();
     bool HandleGenderInput();
-    bool HandleRaceInput();
     void InitializeNewPlayer();
     BOOL HandleCommand();
 };
