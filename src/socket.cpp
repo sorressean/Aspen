@@ -566,16 +566,16 @@ bool Socket::HandleNameInput()
 {
     Player* mob = nullptr;
     std::string input;
-World* world = World::GetPtr();
-Server* server = world->GetServer();
+    World* world = World::GetPtr();
+    Server* server = world->GetServer();
     input = PopCommand();
 
 //new player:
     if (input=="new")
         {
             Write("Welcome, what name would you like?\n");
-    AllocatePlayer();
-    mob = GetPlayer();
+            AllocatePlayer();
+            mob = GetPlayer();
             SetConnectionType(ConnectionType::Newname);
             return true;
         }
@@ -593,19 +593,19 @@ Server* server = world->GetServer();
             Write("That player doesn't exist.\nWhat is your name? Type new for a new character.\n");
             return true;
         }
-mob = server->GetLinkdeadUser(input);
-if (mob)
-{
-_mobile = mob;
-    Write(TELNET_ECHO_OFF);
-    Write("\n");
-    Write("Password?\n");
-    SetConnectionType(ConnectionType::Password);
-return true;
-}
+    mob = server->GetLinkdeadUser(input);
+    if (mob)
+        {
+            _mobile = mob;
+            Write(TELNET_ECHO_OFF);
+            Write("\n");
+            Write("Password?\n");
+            SetConnectionType(ConnectionType::Password);
+            return true;
+        }
 
-AllocatePlayer();
-mob = GetPlayer();
+    AllocatePlayer();
+    mob = GetPlayer();
 //set the players name to the one specified and try to load the file.
     mob->SetName(input);
     mob->Load();
@@ -618,8 +618,8 @@ mob = GetPlayer();
 }
 bool Socket::HandlePasswordInput()
 {
-World* world = World::GetPtr();
-Server* server = world->GetServer();
+    World* world = World::GetPtr();
+    Server* server = world->GetServer();
     Player* mobile = GetPlayer();
     std::string input;
 
@@ -636,12 +636,12 @@ Server* server = world->GetServer();
     Write(TELNET_ECHO_ON);
     SetConnectionType(ConnectionType::Game);
     mobile->SetSocket(this);
-if (server->GetLinkdeadUser(mobile->GetName()))
-{
-server->RemoveLinkdeadUser(mobile->GetName());
-Write("Reconnected.\n");
-return true;
-}
+    if (server->GetLinkdeadUser(mobile->GetName()))
+        {
+            server->RemoveLinkdeadUser(mobile->GetName());
+            Write("Reconnected.\n");
+            return true;
+        }
 
     mobile->SetLastLogin((UINT)time(NULL));
     mobile->EnterGame(false);

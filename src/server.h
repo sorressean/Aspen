@@ -81,6 +81,6 @@ public:
     */
     void CheckLinkdeaths(Callout* cb);
     Player* GetLinkdeadUser(const std::string& name) const;
-void RemoveLinkdeadUser(const std::string& name);
+    void RemoveLinkdeadUser(const std::string& name);
 };
 #endif

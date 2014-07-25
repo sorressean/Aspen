@@ -363,15 +363,15 @@ Player* Server::GetLinkdeadUser(const std::string& name) const
 }
 void Server::RemoveLinkdeadUser(const std::string& name)
 {
-std::list<LinkdeathNode*>::iterator it, itEnd;
-LinkdeathNode* node = nullptr;
+    std::list<LinkdeathNode*>::iterator it, itEnd;
+    LinkdeathNode* node = nullptr;
 
-itEnd = _linkdead.end();
-for (it = _linkdead.begin(); it != itEnd; ++it)
-{
-node = (*it);
-it = _linkdead.erase(it);
-delete node;
-return;
-}
+    itEnd = _linkdead.end();
+    for (it = _linkdead.begin(); it != itEnd; ++it)
+        {
+            node = (*it);
+            it = _linkdead.erase(it);
+            delete node;
+            return;
+        }
 }
