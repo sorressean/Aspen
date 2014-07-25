@@ -19,7 +19,7 @@
 #define MAX_CHAN_HISTORY_LENGTH 20 //the maximum number of entries channels will log.
 #define GAME_IDLE_TIME (60*60) //the amount of time someone will be able to idle before they are kicked.
 #define LOGIN_IDLE_TIME (30) //the amount of time someone will be able to idle at login.
-#define LINKDEATH_TIME (15)
+#define LINKDEATH_TIME (60*10)
 #define ELAPSED_STARTUP //shows the elapsed time it took the mud to initialize.
 /*
 *Comment this out if you want all scripting functions enabled by default.
