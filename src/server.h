@@ -80,6 +80,7 @@ public:
     Will disconnect player if they have been linkdead to long.
     */
     void CheckLinkdeaths(Callout* cb);
-    bool IsUserLinkdead(const std::string& name) const;
+    Player* GetLinkdeadUser(const std::string& name) const;
+void RemoveLinkdeadUser(const std::string& name);
 };
 #endif

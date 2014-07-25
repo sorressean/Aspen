@@ -349,15 +349,29 @@ BanList* Server::GetBanList() const
     return blist;
 }
 
-bool Server::IsUserLinkdead(const std::string& name) const
+Player* Server::GetLinkdeadUser(const std::string& name) const
 {
     for (auto it:_linkdead)
         {
             if (it->mobile->GetName() == name)
                 {
-                    return true;
+                    return it->mobile;
                 }
         }
 
-    return false;
+    return nullptr;
+}
+void Server::RemoveLinkdeadUser(const std::string& name)
+{
+std::list<LinkdeathNode*>::iterator it, itEnd;
+LinkdeathNode* node = nullptr;
+
+itEnd = _linkdead.end();
+for (it = _linkdead.begin(); it != itEnd; ++it)
+{
+node = (*it);
+it = _linkdead.erase(it);
+delete node;
+return;
+}
 }
