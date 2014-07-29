@@ -230,7 +230,7 @@ BOOL CMDREdit::Execute(const std::string &verb, Player* mobile,std::vector<std::
     ObjectManager* objmanager = world->GetObjectManager();
     Zone* zon = mobile->GetLocation()->GetZone();
     Component* component = nullptr;
-    ComponentMeta* cmeta = nullptr;
+    IComponentMeta* cmeta = nullptr;
     OlcManager* omanager = world->GetOlcManager();
     OlcGroup* group = nullptr;
     Room* targ = nullptr;
@@ -312,7 +312,7 @@ BOOL CMDMEdit::Execute(const std::string &verb, Player* mobile,std::vector<std::
     ObjectManager* objmanager = world->GetObjectManager();
     Zone* zon = mobile->GetLocation()->GetZone();
     Component* component = nullptr;
-    ComponentMeta* cmeta = nullptr;
+    IComponentMeta* cmeta = nullptr;
     OlcManager* omanager = world->GetOlcManager();
     OlcGroup* group = nullptr;
     Npc* targ = nullptr;
@@ -394,7 +394,7 @@ BOOL CMDOEdit::Execute(const std::string &verb, Player* mobile,std::vector<std::
     ObjectManager* objmanager = world->GetObjectManager();
     Zone* zon = mobile->GetLocation()->GetZone();
     Component* component = nullptr;
-    ComponentMeta* cmeta = nullptr;
+    IComponentMeta* cmeta = nullptr;
     OlcManager* omanager = world->GetOlcManager();
     OlcGroup* group = nullptr;
     StaticObject* targ = nullptr;

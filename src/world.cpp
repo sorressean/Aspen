@@ -17,7 +17,7 @@
 #include "socket.h"
 #include "command.h"
 #include "component.h"
-#include "componentMeta.h"
+#include "componentMeta.hpp"
 #include "ComponentFactory.h"
 #include "utils.h"
 #include "zone.h"
@@ -468,7 +468,7 @@ void World::Update()
     _totalSleepTime += _server->Sleep(PULSES_PER_SECOND);
 }
 
-BOOL World::RegisterComponent(ComponentMeta* meta)
+BOOL World::RegisterComponent(IComponentMeta* meta)
 {
     return _cfactory.RegisterComponent(meta->GetName(), meta);
 }

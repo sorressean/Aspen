@@ -110,7 +110,7 @@ BOOL StaticObject::RecycleContents()
 
 void StaticObject::Serialize(TiXmlElement* root)
 {
-    std::vector<ComponentMeta*>::iterator it, itEnd;
+    std::vector<IComponentMeta*>::iterator it, itEnd;
     TiXmlElement* obj = new TiXmlElement("staticobj");
     TiXmlElement* component = NULL;
     BaseObject::Serialize(obj);
@@ -133,7 +133,7 @@ void StaticObject::Deserialize(TiXmlElement* root)
     TiXmlNode* node = NULL;
     TiXmlElement* cmeta = NULL;
     TiXmlElement* components = NULL;
-    ComponentMeta* com = NULL;
+    IComponentMeta* com = NULL;
     std::string cname;
 
     node = root->FirstChild("components");

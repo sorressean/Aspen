@@ -16,7 +16,7 @@
 #include "eventManager.h"
 #include "player.h"
 #include "component.h"
-#include "componentMeta.h"
+#include "componentMeta.hpp"
 #include "ComponentFactory.h"
 #include "serializer.h"
 #include "zone.h"
@@ -150,7 +150,7 @@ public:
     *[in] the component init callback.
     *Return: True if the component was registered, false otherwise.
     */
-    BOOL RegisterComponent(ComponentMeta* meta);
+    BOOL RegisterComponent(IComponentMeta* meta);
     /*
     *Creates the specified component
     *Parameters: [in] the name of the component to create.

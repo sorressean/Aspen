@@ -9,18 +9,18 @@
 #include "entity.h"
 #include "event.h"
 #include "eventManager.h"
-#include "componentMeta.h"
+#include "componentMeta.hpp"
 #include "property.h"
 
 class Component
 {
     BaseObject* _object; //The object associated with the component (it's parent).
-    ComponentMeta* _parent;
+    IComponentMeta* _parent;
     BOOL _attached; //set if the component is attached to an object.
 public:
     Property variables;
     EventManager events;
-    Component(ComponentMeta* parent);
+    Component(IComponentMeta* parent);
     Component();
     virtual ~Component();
     virtual void Serialize(TiXmlElement* root);
@@ -35,7 +35,7 @@ public:
     */
     void SetObject(BaseObject* obj);
     BaseObject* GetObject() const;
-    ComponentMeta* GetMeta();
+    IComponentMeta* GetMeta();
     /*
     *Attaches the component to the object, sets the object if needed.
     *Also adds dependencies to the object, if they are not already added.

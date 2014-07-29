@@ -1,15 +1,15 @@
 #include <map>
 #include "ComponentFactory.h"
 #include "component.h"
-#include "componentMeta.h"
+#include "componentMeta.hpp"
 
 ComponentFactory::ComponentFactory()
 {
-    _components = new std::map <std::string, ComponentMeta*>();
+    _components = new std::map <std::string, IComponentMeta*>();
 }
 ComponentFactory::~ComponentFactory()
 {
-    std::map <std::string, ComponentMeta*>::iterator it, itEnd;
+    std::map <std::string, IComponentMeta*>::iterator it, itEnd;
 
     itEnd = _components->end();
     for (it = _components->begin(); it != itEnd; ++it)
@@ -25,7 +25,7 @@ BOOL ComponentFactory::HasComponent(const std::string &name)
     return (_components->count(name)==0?false:true);
 }
 
-BOOL ComponentFactory::RegisterComponent(const std::string &name, ComponentMeta* meta)
+BOOL ComponentFactory::RegisterComponent(const std::string &name, IComponentMeta* meta)
 {
     if (HasComponent(name))
         {
@@ -41,12 +41,12 @@ Component* ComponentFactory::Create(const std::string &name)
 {
     if (HasComponent(name))
         {
-            return (*_components)[name]->Create((*_components)[name]);
+            return (*_components)[name]->Create();
         }
 
     return NULL;
 }
-ComponentMeta* ComponentFactory::GetMeta(const std::string &name)
+IComponentMeta* ComponentFactory::GetMeta(const std::string &name)
 {
     if (HasComponent(name))
         {

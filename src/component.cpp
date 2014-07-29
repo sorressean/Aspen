@@ -16,7 +16,7 @@ void Component::_Init()
     events.CallEvent("OnCreate", NULL, (void*)this);
 }
 
-Component::Component(ComponentMeta* parent):_parent(parent)
+Component::Component(IComponentMeta* parent):_parent(parent)
 {
     _Init();
 }
@@ -50,7 +50,7 @@ BaseObject* Component::GetObject() const
 {
     return _object;
 }
-ComponentMeta* Component::GetMeta()
+IComponentMeta* Component::GetMeta()
 {
     return _parent;
 }

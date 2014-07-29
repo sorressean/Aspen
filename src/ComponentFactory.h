@@ -9,11 +9,11 @@
 #include "mud.h"
 #include "conf.h"
 #include "component.h"
-#include "componentMeta.h"
+#include "componentMeta.hpp"
 
 class ComponentFactory
 {
-    std::map <std::string, ComponentMeta*> *_components;
+    std::map <std::string, IComponentMeta*> *_components;
 public:
     ComponentFactory();
     ~ComponentFactory();
@@ -29,13 +29,13 @@ public:
     *[in] a function pointer for the creation method of the component.
     *Returns: True on success, false on failure.
     */
-    BOOL RegisterComponent(const std::string &name, ComponentMeta* meta);
+    BOOL RegisterComponent(const std::string &name, IComponentMeta* meta);
     /*
     *Creates the specified component if it's in the registered components.
     *Param: [in] the name of the component.
     *Returns: A pointer to the object created, or NULL if the component wasn't created.
     */
     Component* Create(const std::string &name);
-    ComponentMeta* GetMeta(const std::string &name);
+    IComponentMeta* GetMeta(const std::string &name);
 };
 #endif

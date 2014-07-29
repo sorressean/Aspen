@@ -5,7 +5,7 @@
 #include "mud.h"
 #include "baseObject.h"
 #include "olc.h"
-#include "componentMeta.h"
+#include "componentMeta.hpp"
 #ifdef MODULE_SCRIPTING
 #include "scripts/scripts.h"
 #endif
@@ -15,7 +15,7 @@ class StaticObject:public BaseObject
 {
     unsigned int _totalCount;
     std::vector<Entity*> descendants;
-    std::vector<ComponentMeta*> _components;
+    std::vector<IComponentMeta*> _components;
 public:
     StaticObject();
     ~StaticObject();

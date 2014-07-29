@@ -10,7 +10,6 @@ Living::Living()
     _level = 1;
     _position = POSITION::standing;
     _gender = Gender::Female;
-    World* world = World::GetPtr();
 }
 Living::~Living()
 {
