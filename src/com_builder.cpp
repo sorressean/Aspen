@@ -42,27 +42,24 @@ BOOL CMDZlist::Execute(const std::string &verb, Player* mobile,std::vector<std::
     World* world = World::GetPtr();
 
     std::stringstream st;
-    std::vector<Zone*> *zones=new std::vector<Zone*>();
-    std::vector<Zone*>::iterator it, itEnd;
+    std::vector<Zone*> zones;
 
-    world->GetZones(zones);
+    world->GetZones(&zones);
 
-    if (zones->size())
+    if (zones.size())
         {
-            st << "Showing " << zones->size() << (zones->size()==1?"zone":"zones") << ".\n";
-            itEnd = zones->end();
-            for (it = zones->begin(); it != itEnd; ++it)
+            st << "Showing " << zones.size() << (zones.size()==1?"zone":"zones") << ".\n";
+            for (auto it: zones)
                 {
-                    st << ((*it)->GetName()) << "\n";
+                    st << (it->GetName()) << "\n";
                 }
         }
     else
         {
             st << "No zones found.";
         }
-    mobile->Message(MSG_LIST,st.str());
-    delete zones;
 
+    mobile->Message(MSG_LIST,st.str());
     return true;
 }
 
