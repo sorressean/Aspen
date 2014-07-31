@@ -53,6 +53,8 @@ class CMDCommands:public Command
 {
 public:
     CMDCommands();
+    void GetCommands(Player*mobile, std::vector<std::string>& names, CommandType filter);
+    void Syntax(Player* mobile, const std::string& verb) const;
     BOOL Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args,int subcmd);
 };
 class CMDHist:public Command

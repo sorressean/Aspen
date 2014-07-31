@@ -18,7 +18,7 @@ CMDHelp::CMDHelp()
 {
     SetName("help");
     AddAlias("h");
-    SetType(normal);
+    SetType(CommandType::Information);
 }
 BOOL CMDHelp::Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args,int subcmd)
 {

@@ -173,7 +173,7 @@ void Socials::AddCommands()
         {
             CMDSocials*com = new CMDSocials();
             com->SetName(it.second->name);
-            com->SetType(social);
+            com->SetType(CommandType::Social);
             com->SetSubcmd(it.second->id);
             world->commands.AddCommand(com);
         }

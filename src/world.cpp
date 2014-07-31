@@ -538,6 +538,7 @@ BOOL World::DoCommand(Player* mobile,std::string args)
     std::vector <Command*>::iterator it; //an iterator for iterating through the command list
     std::vector <Command*>::iterator itEnd; //an iterator to point to the end of the commands list.
 
+//handle special commands.
     if (args[0] == '\"' || args[0] == '\'')
         {
             cmd="say";
@@ -588,32 +589,21 @@ BOOL World::DoCommand(Player* mobile,std::string args)
                         }
                 }
         }
+
 //locate and execute the command:
 //check the built-in commands first, then contents, then location.
-    itEnd = cptr->end();
-    for (it = cptr->begin(); it != itEnd; ++it)
+    for (auto it: *cptr)
         {
-            if (((*it)->GetName() == cmd)||((*it)->HasAlias(cmd, true)))
+            if ((it->GetName() == cmd)||(it->HasAlias(cmd, true)))
                 {
-                    if (!mobile->HasAccess((*it)->GetAccess()))
+                    if (!mobile->HasAccess(it->GetAccess()))
                         {
                             return false;
                         }
-                    switch((*it)->GetType())
-                        {
-                        default:
-                            WriteLog("Invalid command type.");
-                            break;
-                        case normal:
-                        case social:
-                        case movement:
-                        case channel:
-                            (*it)->Execute((*it)->GetName(), mobile, params, (*it)->GetSubcmd());
-                            return true;
-                            break;
-                        case script:
-                            break;
-                        }
+
+//execute command.
+                    /*todo: add script command handling here.*/
+                    it->Execute(it->GetName(), mobile, params, it->GetSubcmd());
                 }
         }
 //todo: check inventory and room commands here.
@@ -621,30 +611,15 @@ BOOL World::DoCommand(Player* mobile,std::string args)
     if (location)
         {
             cptr = location->commands.GetPtr();
-            itEnd = cptr->end();
-            for (it = cptr->begin(); it != itEnd; ++it)
+            for (auto it: *cptr)
                 {
-                    if (((*it)->GetName() == cmd)||((*it)->HasAlias(cmd, true)))
+                    if ((it->GetName() == cmd)||(it->HasAlias(cmd, true)))
                         {
-                            if (!mobile->HasAccess((*it)->GetAccess()))
+                            if (!mobile->HasAccess(it->GetAccess()))
                                 {
                                     return false;
                                 }
-                            switch((*it)->GetType())
-                                {
-                                default:
-                                    WriteLog("Invalid command type.");
-                                    break;
-                                case normal:
-                                case social:
-                                case movement:
-                                case channel:
-                                    (*it)->Execute((*it)->GetName(), mobile, params, (*it)->GetSubcmd());
-                                    return true;
-                                    break;
-                                case script:
-                                    break;
-                                }
+                            it->Execute(it->GetName(), mobile, params, it->GetSubcmd());
                         }
                 }
         }

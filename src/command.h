@@ -11,7 +11,10 @@
 #include "mud.h"
 #include "conf.h"
 
-enum COMMAND_TYPE {movement, normal, script, social, channel, all};
+enum class CommandType
+{
+    Misc, Builder, Admin, God, Information, Object, Movement, Script, Social, Channel, Communication, All
+};
 typedef std::function<bool (const std::string &, Player* ,std::vector<std::string> &, int)> CHOOK_CB;
 
 /**
@@ -35,7 +38,7 @@ protected:
     std::list<CommandHook*> _prehook;
     std::list<CommandHook*> _posthook;
     int _subcmd;
-    COMMAND_TYPE _type;
+    CommandType _type;
     FLAG _access;
     POSITION _position;
 
@@ -53,8 +56,8 @@ public:
     BOOL RemoveAlias(const std::string &name);
     void SetSubcmd(int subcmd);
     int GetSubcmd() const;
-    void SetType(COMMAND_TYPE type);
-    COMMAND_TYPE GetType() const;
+    void SetType(CommandType type);
+    CommandType GetType() const;
     void SetAccess(FLAG access);
     FLAG GetAccess() const;
     void SetPosition(POSITION position);
@@ -103,7 +106,7 @@ public:
     *Param: [out] A pointer to a list of strings that the function can fill in.
     *[in] The player object.
     */
-    virtual void ListCommands(std::vector <std::string>* list,Player* mobile, COMMAND_TYPE filter=all);
+    virtual void ListCommands(std::vector <std::string>* list,Player* mobile, CommandType filter=CommandType::All);
     /*
     *Gets a pointer to the vector of commands.
     *return: a pointer to the vector of pointers to Command objects.

@@ -261,51 +261,138 @@ CMDCommands::CMDCommands()
 {
     SetName("commands");
 }
-BOOL CMDCommands::Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args,int subcmd)
+void CMDCommands::GetCommands(Player*mobile, std::vector<std::string>& names, CommandType filter)
 {
     World* world = World::GetPtr();
+    std::vector<std::string> commands;
 
+    world->commands.ListCommands(&commands,mobile, filter);
+    std::copy(commands.begin(), commands.end(), std::back_inserter(names));
+}
+void CMDCommands::Syntax(Player* mobile, const std::string& verb) const
+{
+    std::stringstream st;
+
+    st << "Syntax: " << verb << "[";
+    if (mobile->HasAccess(RANK_BUILDER))
+        {
+            st << "builder|";
+        }
+    if (mobile->HasAccess(RANK_ADMIN))
+        {
+            st << "admin|";
+        }
+    if (mobile->HasAccess(RANK_GOD))
+        {
+            st << "god|";
+        }
+    st << "information|object|movement|communication|all].";
+
+    mobile->Message(MSG_INFO, st.str());
+}
+BOOL CMDCommands::Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args,int subcmd)
+{
     std::vector <std::string> commands;
     std::vector<std::string> headers;
-    headers.push_back("command");
-    headers.push_back("command");
-    headers.push_back("command");
-    headers.push_back("command");
-
-    COMMAND_TYPE type;
+    int count = 0;
 
     if (!args.size())
         {
-            type=all;
-        }
-    else     if (args[0] == "general")
-        {
-            type = normal;
-        }
-    else if (args[0] == "all")
-        {
-            type = all;
-        }
-    else if (args[0] == "social")
-        {
-            type = social;
-        }
-    else if (args[0] == "movement")
-        {
-            type = movement;
-        }
-    else if (args[0] == "channel")
-        {
-            type = channel;
-        }
-    else
-        {
-            mobile->Message(MSG_INFO, "You must specify a valid type.\nValid types are: movement, general, all, channel and social.");
+            Syntax(mobile, verb);
             return false;
         }
 
-    world->commands.ListCommands(&commands,mobile, type);
-    mobile->Message(MSG_LIST, Columnize(&commands, 4, &headers));
+    if (args[0] == "god")
+        {
+            if (!mobile->HasAccess(RANK_GOD))
+                {
+                    Syntax(mobile, verb);
+                    return false;
+                }
+            else
+                {
+                    GetCommands(mobile, commands, CommandType::God);
+                }
+        }
+    else if (args[0] == "admin")
+        {
+            if (!mobile->HasAccess(RANK_ADMIN))
+                {
+                    Syntax(mobile, verb);
+                    return false;
+                }
+            else
+                {
+                    GetCommands(mobile, commands, CommandType::Admin);
+                }
+        }
+    else if (args[0] == "builder")
+        {
+            if (!mobile->HasAccess(RANK_BUILDER))
+                {
+                    Syntax(mobile, verb);
+                    return false;
+                }
+            else
+                {
+                    GetCommands(mobile, commands, CommandType::Builder);
+                }
+        }
+    else if (args[0] == "misc")
+        {
+            GetCommands(mobile, commands, CommandType::Misc);
+        }
+    else if (args[0] == "information")
+        {
+            GetCommands(mobile, commands, CommandType::Information);
+        }
+    else if (args[0] == "object")
+        {
+            GetCommands(mobile, commands, CommandType::Object);
+        }
+    else if (args[0] == "movement")
+        {
+            GetCommands(mobile, commands, CommandType::Movement);
+        }
+    else if (args[0] == "social")
+        {
+            GetCommands(mobile, commands, CommandType::Social);
+        }
+    else if (args[0] == "communication")
+        {
+            GetCommands(mobile, commands, CommandType::Channel);
+            GetCommands(mobile, commands, CommandType::Communication);
+        }
+    else if (args[0] == "all")
+        {
+            GetCommands(mobile, commands, CommandType::All);
+        }
+    else
+        {
+            Syntax(mobile, verb);
+            return false;
+        }
+
+    count = Min((int)commands.size(),4);
+    if (count == 0)
+        {
+            mobile->Message(MSG_INFO, "No commands found.");
+            return true;
+        }
+
+    switch(count)
+        {
+        case 4:
+            headers.push_back("command");
+        case 3:
+            headers.push_back("command");
+        case 2:
+            headers.push_back("command");
+        case 1:
+            headers.push_back("command");
+        }
+
+    mobile->Message(MSG_LIST, Columnize(&commands, count, &headers));
     return true;
 }
 

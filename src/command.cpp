@@ -15,7 +15,7 @@ Command::Command()
 {
     _name = "";
     _subcmd=0;
-    _type = normal;
+    _type = CommandType::Misc;
     _access = BitSet(0, RANK_PLAYER);
     _position = POSITION::any;
 }
@@ -83,11 +83,11 @@ int Command::GetSubcmd() const
 {
     return _subcmd;
 }
-void Command::SetType(COMMAND_TYPE type)
+void Command::SetType(CommandType type)
 {
     _type = type;
 }
-COMMAND_TYPE Command::GetType() const
+CommandType Command::GetType() const
 {
     return _type;
 }
@@ -243,19 +243,15 @@ BOOL Commandable::CommandExists(const std::string &name)
 
     return false;
 }
-void Commandable::ListCommands(std::vector <std::string>* list, Player* mobile, COMMAND_TYPE filter)
+void Commandable::ListCommands(std::vector <std::string>* list, Player* mobile, CommandType filter)
 {
-    std::vector <Command*>::iterator it;
-    std::vector <Command*>::iterator itEnd;
-
-    itEnd = _commands->end();
-    for (it = _commands->begin(); it != itEnd; ++it)
+    for (auto it: *_commands)
         {
-            if (mobile->HasAccess((*it)->GetAccess()))
+            if (mobile->HasAccess(it->GetAccess()))
                 {
-                    if (((*it)->GetType() == filter) || (filter == all))
+                    if ((it->GetType() == filter) || (filter == CommandType::All))
                         {
-                            list->push_back((*it)->GetName());
+                            list->push_back(it->GetName());
                         }
                 }
         }
