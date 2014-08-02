@@ -1,0 +1,5 @@
+#!/bin/sh
+echo "Beginning CPPCheck."
+cppcheck --enable=performance,information,portability,unusedFunction -q --std=posix --std=c++11 ../src 2>cppcheck.log
+echo "CPPCheck finished, results written to cppcheck.log."
+
