@@ -7,9 +7,7 @@
 #ifdef MODULE_HELP
 #include "help/help.h"
 #endif
-#ifdef MODULE_SCRIPTING
-#include "scripts/scripts.h"
-#endif
+#include "scripts/script.h"
 #ifdef OLC
 #include "olc.h"
 #include "olcs.h"
@@ -17,12 +15,10 @@
 
 BOOL InitializeModules()
 {
-#ifdef MODULE_SCRIPTING
     if (!InitializeScript())
         {
             return false;
         }
-#endif
 
 #ifdef MODULE_SYSLOG
     if(!InitializeSyslog())

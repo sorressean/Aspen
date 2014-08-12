@@ -3,10 +3,6 @@
 #include "event.h"
 #include "eventManager.h"
 #include "exception.h"
-#ifdef MODULE_SCRIPTING
-#include "scripts/scripts.h"
-#include "scripts/scr_events.h"
-#endif
 
 EventManager::EventManager()
 {

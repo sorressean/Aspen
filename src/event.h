@@ -26,13 +26,6 @@ public:
 typedef void (*EVENTCB)(EventArgs*,void*);
 typedef std::function<void (EventArgs*, void*)> EVENTFUNC;
 /*
-*We need to forward declare this so that we don't have circular includes.
-*/
-#ifdef MODULE_SCRIPTING
-struct lua_State;
-#endif
-
-/*
 *This holds our event function object, as well as an ID associated with each event.
 */
 struct EventContainer

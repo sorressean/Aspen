@@ -4,10 +4,6 @@
 #include <functional>
 #include "event.h"
 #include "exception.h"
-#ifdef MODULE_SCRIPTING
-#include "scripts/scripts.h"
-#include "scripts/scr_events.h"
-#endif
 
 Event::Event()
 {
@@ -101,7 +97,7 @@ void Event::Invoke(EventArgs* args, void* caller)
 #ifdef MODULE_SCRIPTING
             if ((*it)->script)
                 {
-                    SCR_CallEvent((*it)->obj, (*it)->func, args, caller);
+//                    SCR_CallEvent((*it)->obj, (*it)->func, args, caller);
                 }
             else
                 {

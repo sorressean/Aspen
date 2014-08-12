@@ -6,10 +6,6 @@
 #include "baseObject.h"
 #include "olc.h"
 #include "componentMeta.hpp"
-#ifdef MODULE_SCRIPTING
-#include "scripts/scripts.h"
-#endif
-
 class Npc;
 class StaticObject:public BaseObject
 {

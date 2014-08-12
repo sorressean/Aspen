@@ -6,9 +6,6 @@
 #include "baseObject.h"
 #include "world.h"
 #include "objectManager.h"
-#ifdef MODULE_SCRIPTING
-#include "scripts/scripts.h"
-#endif
 #ifdef OLC
 #include "olc.h"
 #include "olcGroup.h"

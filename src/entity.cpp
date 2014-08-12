@@ -15,7 +15,7 @@
 #include "editor.h"
 #include "objectManager.h"
 #ifdef MODULE_SCRIPTING
-#include "scripts/scripts.h"
+#include "scripts/script.h"
 #endif
 
 Entity::Entity()

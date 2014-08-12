@@ -80,10 +80,8 @@ protected:
     StringSetter _setter;
 public:
     OlcStringEntry(const std::string &name, const std::string &help, FLAG flag, OLCDT dt, const StringGetter getter, const StringSetter setter)
-        :IOlcEntry(name, help, flag, dt)
+        :IOlcEntry(name, help, flag, dt), _setter(setter), _getter(getter)
     {
-        _setter = setter;
-        _getter = getter;
     }
     bool HandleInput(Player* mobile, void* o, const std::string& input)
     {
@@ -102,10 +100,8 @@ protected:
     StringSetter _setter;
 public:
     OlcEditorEntry(const std::string &name, const std::string &help, FLAG flag, OLCDT dt, const StringGetter getter, const StringSetter setter)
-        :IOlcEntry(name, help, flag, dt)
+        :IOlcEntry(name, help, flag, dt), _setter(setter), _getter(getter)
     {
-        _setter = setter;
-        _getter = getter;
     }
     EVENT(Save)
     {
@@ -154,11 +150,8 @@ protected:
     EnumSetter _setter;
 public:
     OlcEnumEntry(const std::string &name, const std::string &help, FLAG flag, OLCDT dt, const EnumGetter getter, const EnumSetter setter, const std::map<std::string, E> &vals)
-        :IOlcEntry(name, help, flag, dt)
+        :IOlcEntry(name, help, flag, dt), _getter(getter), _setter(setter), _vals(vals)
     {
-        _setter = setter;
-        _getter = getter;
-        _vals = vals;
     }
     bool HandleInput(Player* mobile, void* o, const std::string& input)
     {

@@ -22,7 +22,7 @@ must not be misrepresented as being the original software.
 distribution.
 */
 
-#include "../../includes/tinyxml.h"
+#include "../../include/tinyxml.h"
 
 // The goal of the seperate error file is to make the first
 // step towards localization. tinyxml (currently) only supports
