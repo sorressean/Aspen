@@ -1,0 +1,1 @@
+S_FILES += scripts/script.cpp scripts/scr_BaseObject.cpp
