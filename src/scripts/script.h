@@ -1,4 +1,5 @@
 #pragma once
+#include <angelscript.h>
 #include "../mud.h"
 #include "../conf.h"
 #include "../event.h"

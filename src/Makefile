@@ -64,7 +64,7 @@ include $(patsubst %,%/include.mod, $(COREMODULES))
 include modules/include.mod
 O_FILES += $(patsubst %.cpp,%.o, $(filter %.cpp, $(S_FILES)))
 
-all: $(O_FILES)
+all: $(O_FILES) ../lib/libangelscript.a
 	@$(RM) $(OUTPUT)
 	@$(ECHO) Linking.
 	@$(CC) $(CFLAGS) -o $(OUTPUT) $(O_FILES) $(LDFLAGS)
@@ -72,7 +72,10 @@ all: $(O_FILES)
 %.o: %.cpp
 	@$(ECHO) Compiling $<.
 	@$(CC) $(PROF) -c $(CFLAGS) -o $(patsubst %.cpp,%.o, $<) $<
-	
+
+../lib/libangelscript.a:
+	@cd ../angelscript && make
+
 clean:
 	@$(ECHO) Cleaning
 	@$(RM) $(O_FILES)
