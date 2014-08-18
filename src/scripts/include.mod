@@ -1,1 +1,1 @@
-S_FILES += scripts/script.cpp scripts/scr_BaseObject.cpp
+S_FILES += scripts/script.cpp scripts/scr_BaseObject.cpp scripts/scr_Entity.cpp

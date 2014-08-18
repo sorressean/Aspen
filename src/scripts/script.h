@@ -15,6 +15,7 @@ public:
     static ScriptEngine* GetPtr();
     asIScriptEngine* GetBaseEngine();
     bool RegisterMethod(const char* obj, const char* decl, asSFuncPtr ptr);
+    bool RegisterObject(const char* obj);
     EVENT(Shutdown);
 };
 
