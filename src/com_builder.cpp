@@ -37,26 +37,28 @@ CMDZlist::CMDZlist()
     SetAccess(RANK_BUILDER);
     SetName("zlist");
 }
+void CMDZlist::Syntax(Player* mobile, int subcmd)
+{
+    mobile->Message(MSG_INFO, "Syntax: zlist.");
+    mobile->Message(MSG_INFO, "Shows a list of all zones.");
+}
 BOOL CMDZlist::Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args,int subcmd)
 {
     World* world = World::GetPtr();
-
     std::stringstream st;
     std::vector<Zone*> zones;
 
     world->GetZones(&zones);
-
-    if (zones.size())
+    if (!zones.size())
         {
-            st << "Showing " << zones.size() << (zones.size()==1?"zone":"zones") << ".\n";
+            st << "No zones found.";
+        }
+    else
+        {
             for (auto it: zones)
                 {
                     st << (it->GetName()) << "\n";
                 }
-        }
-    else
-        {
-            st << "No zones found.";
         }
 
     mobile->Message(MSG_LIST,st.str());
@@ -69,40 +71,40 @@ CMDRlist::CMDRlist()
     SetName("rlist");
     SetAccess(RANK_BUILDER);
 }
+void CMDRlist::Syntax(Player* mobile, int subcmd)
+{
+    std::stringstream st;
+    st << "Syntax: rlist [zone]>" << std::endl;
+    st << "Lists all rooms in the specified zone, or the current zone if no argument is provided.";
+    mobile->Message(MSG_INFO, st.str());
+}
 BOOL CMDRlist::Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args,int subcmd)
 {
     World* world = World::GetPtr();
+    std::stringstream st;
+    std::vector<Room*> rooms;
+    Zone* zone = nullptr;
 
     if (!args.size())
         {
-            mobile->Message(MSG_ERROR,"You need to provide the name of a zone to list rooms for.");
-            return false;
+            zone = mobile->GetLocation()->GetZone();
         }
-
-    std::stringstream st;
-    std::vector<Room*> nums;
-    std::vector<Room*>::iterator it, itEnd;
-    Zone* zone=world->GetZone(args[0]);
-    Room* room=NULL;
-
+    else
+        {
+            zone=world->GetZone(args[0]);
+        }
     if (!zone)
         {
             mobile->Message(MSG_ERROR,"That zone doesn't exist.");
             return false;
         }
 
-    zone->GetRooms(&nums);
-    st << "Found " << (int)nums.size() << ((int)nums.size()==0?"room":"rooms") << ".\n";
-    itEnd=nums.end();
-    for (it = nums.begin(); it != itEnd; ++it)
+    zone->GetRooms(&rooms);
+    for (auto it: rooms)
         {
-            room = (*it);
-            if (room)
-                {
-                    st << "[" << room->GetOnum() << "] " << room->GetName() << "\n";
-                }
-            room=NULL;
+            st << "[" << it->GetOnum() << "] " << it->GetName() << "\n";
         }
+    st << "Found " << (int)rooms.size() << ((int)rooms.size()==0?"room":"rooms") << ".\n";
     mobile->Message(MSG_LIST,st.str());
     return true;
 }
@@ -112,6 +114,13 @@ CMDDig::CMDDig()
 {
     SetName("dig");
     SetAccess(RANK_BUILDER);
+}
+void CMDDig::Syntax(Player* mobile, int subcmd)
+{
+    std::stringstream st;
+    st << "Syntax: dig <direction> [to <vnum]" << std::endl;
+    st << "Digs from the current room to the specified direction. If a vnum is provided, exits will be created to and from the provided room.";
+    mobile->Message(MSG_INFO, st.str());
 }
 BOOL CMDDig::Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args,int subcmd)
 {
