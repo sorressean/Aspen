@@ -1,4 +1,5 @@
-#Netbase Makefile
+#Angelscript Aspen Makefile.
+#This is not the origenal makefile, it was created specifically for Aspen.
 OUTPUT=../lib/libangelscript.a
 AR = ar
 RANLIB = ranlib
