@@ -2,7 +2,6 @@
 #include <string>
 #include <sstream>
 #include <iomanip>
-#include <boost/lexical_cast.hpp>
 #include "mud.h"
 #include "conf.h"
 #include "olc.h"
@@ -124,10 +123,10 @@ bool ParseVnum(Player* mobile, std::string& arg, VNUM & num, std::string& comp, 
 //this has to be a vnum:
             try
                 {
-                    num = (VNUM)boost::lexical_cast<VNUM>(arg);
+                    num = (VNUM)tonum(arg.c_str());
                     return true;
                 }
-            catch (boost::bad_lexical_cast e)
+            catch (std::bad_cast e)
                 {
                     return false;
                 }
@@ -146,10 +145,10 @@ bool ParseVnum(Player* mobile, std::string& arg, VNUM & num, std::string& comp, 
 //no here, convert the vnum:
     try
         {
-            num = boost::lexical_cast<VNUM>(arg.substr(0, dotpos));
+            num = (VNUM)tonum(arg.c_str());
             return true;
         }
-    catch (boost::bad_lexical_cast e)
+    catch (std::bad_cast e)
         {
             return false;
         }

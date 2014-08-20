@@ -131,7 +131,6 @@ BOOL CMDDig::Execute(const std::string &verb, Player* mobile,std::vector<std::st
     Room* location = (Room*)mobile->GetLocation();
     point p;
     VNUM toid = 0;
-
     Zone* zone = NULL;
     Exit* orig = NULL; //from current room to another room.
     Exit* other = NULL; //from other room to current.
@@ -145,9 +144,7 @@ BOOL CMDDig::Execute(const std::string &verb, Player* mobile,std::vector<std::st
         }
     if (!args.size())
         {
-            mobile->Message(MSG_ERROR,"Syntax: dig <direction> Creates another room in the direction you specified, and creates exits back and forth.\n"
-                            "dig <direction> <rnum> Creates an exit in the specified direction to the specified rnum.\n"
-                            "dig <direction> to <rnum> Creates an exit in the specified room to the specified rnum.");
+            Syntax(mobile);
             return false;
         }
 

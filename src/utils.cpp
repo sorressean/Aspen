@@ -9,6 +9,7 @@
 #include <cmath>
 #include <sstream>
 #include <iomanip>
+#include <typeinfo>
 #include <boost/uuid/uuid.hpp>
 #include <boost/uuid/random_generator.hpp>
 #include <boost/uuid/uuid_io.hpp>
@@ -17,6 +18,23 @@
 #include <sys/time.h>
 #include "utils.h"
 #include "editor.h"
+
+int tonum(const char* str)
+{
+    const char*ptr = str;
+    int ret = 0;
+
+    while (*ptr)
+        {
+            if (!isdigit(*ptr))
+                {
+                    throw(std::bad_cast());
+                }
+        }
+
+    ret = atoi(str);
+    return ret;
+}
 
 inline BOOL IsAlpha(const char* const character)
 {
@@ -27,6 +45,7 @@ inline BOOL IsAlpha(const char* const character)
         }
     return false;
 }
+
 BOOL FileExists(const std::string &name)
 {
     struct stat info;
