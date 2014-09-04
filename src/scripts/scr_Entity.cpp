@@ -3,6 +3,7 @@
 #include "../conf.h"
 #include "../entity.h"
 #include "script.h"
+#include "scr_Entity.h"
 #include "scr_BaseObject.h"
 
 void RegisterEntityMethods(const char* obj)

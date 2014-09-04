@@ -4,6 +4,7 @@
 #include "../conf.h"
 #include "../baseObject.h"
 #include "script.h"
+#include "scr_BaseObject.h"
 
 void RegisterBaseObjectMethods(const char* obj)
 {

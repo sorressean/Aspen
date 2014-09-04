@@ -4,6 +4,7 @@
 */
 #include "world.h"
 #include "component.h"
+#include "components.h"
 
 void CreateComponents()
 {
