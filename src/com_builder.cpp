@@ -37,7 +37,7 @@ CMDZlist::CMDZlist()
     SetAccess(RANK_BUILDER);
     SetName("zlist");
 }
-void CMDZlist::Syntax(Player* mobile, int subcmd)
+void CMDZlist::Syntax(Player* mobile, int subcmd) const
 {
     mobile->Message(MSG_INFO, "Syntax: zlist.");
     mobile->Message(MSG_INFO, "Shows a list of all zones.");
@@ -71,7 +71,7 @@ CMDRlist::CMDRlist()
     SetName("rlist");
     SetAccess(RANK_BUILDER);
 }
-void CMDRlist::Syntax(Player* mobile, int subcmd)
+void CMDRlist::Syntax(Player* mobile, int subcmd) const
 {
     std::stringstream st;
     st << "Syntax: rlist [zone]>" << std::endl;
@@ -115,7 +115,7 @@ CMDDig::CMDDig()
     SetName("dig");
     SetAccess(RANK_BUILDER);
 }
-void CMDDig::Syntax(Player* mobile, int subcmd)
+void CMDDig::Syntax(Player* mobile, int subcmd) const
 {
     std::stringstream st;
     st << "Syntax: dig <direction> [to <vnum]" << std::endl;

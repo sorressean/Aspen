@@ -269,11 +269,11 @@ void CMDCommands::GetCommands(Player*mobile, std::vector<std::string>& names, Co
     world->commands.ListCommands(&commands,mobile, filter);
     std::copy(commands.begin(), commands.end(), std::back_inserter(names));
 }
-void CMDCommands::Syntax(Player* mobile, const std::string& verb) const
+void CMDCommands::Syntax(Player* mobile, int subcmd) const
 {
     std::stringstream st;
 
-    st << "Syntax: " << verb << "[";
+    st << "Syntax: commands [";
     if (mobile->HasAccess(RANK_BUILDER))
         {
             st << "builder|";
@@ -298,7 +298,7 @@ BOOL CMDCommands::Execute(const std::string &verb, Player* mobile,std::vector<st
 
     if (!args.size())
         {
-            Syntax(mobile, verb);
+            Syntax(mobile, subcmd);
             return false;
         }
 
@@ -306,7 +306,7 @@ BOOL CMDCommands::Execute(const std::string &verb, Player* mobile,std::vector<st
         {
             if (!mobile->HasAccess(RANK_GOD))
                 {
-                    Syntax(mobile, verb);
+                    Syntax(mobile, subcmd);
                     return false;
                 }
             else
@@ -318,7 +318,7 @@ BOOL CMDCommands::Execute(const std::string &verb, Player* mobile,std::vector<st
         {
             if (!mobile->HasAccess(RANK_ADMIN))
                 {
-                    Syntax(mobile, verb);
+                    Syntax(mobile, subcmd);
                     return false;
                 }
             else
@@ -330,7 +330,7 @@ BOOL CMDCommands::Execute(const std::string &verb, Player* mobile,std::vector<st
         {
             if (!mobile->HasAccess(RANK_BUILDER))
                 {
-                    Syntax(mobile, verb);
+                    Syntax(mobile, subcmd);
                     return false;
                 }
             else
@@ -369,7 +369,7 @@ BOOL CMDCommands::Execute(const std::string &verb, Player* mobile,std::vector<st
         }
     else
         {
-            Syntax(mobile, verb);
+            Syntax(mobile, subcmd);
             return false;
         }
 

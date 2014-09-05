@@ -111,7 +111,9 @@ BOOL Command::CanExecute(Player* mobile, int subcmd)
 {
     return true;
 }
-
+void Command::Syntax(Player* mobile, int subcmd) const
+{
+}
 //hook operations.
 bool Command::AddHook(CommandHook* hook, std::list<CommandHook*>* _hooks)
 {

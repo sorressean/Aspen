@@ -535,10 +535,8 @@ BOOL World::DoCommand(Player* mobile,std::string args)
     int i = 0; // counter
     std::vector<std::string> params; // the parameters being passed to the command
     //std::list<Command*>* externals; //external commands
-    std::vector <Command*>::iterator it; //an iterator for iterating through the command list
-    std::vector <Command*>::iterator itEnd; //an iterator to point to the end of the commands list.
-
 //handle special commands.
+
     if (args[0] == '\"' || args[0] == '\'')
         {
             cmd="say";
@@ -567,17 +565,16 @@ BOOL World::DoCommand(Player* mobile,std::string args)
                 {
                     if (line[i] == ' ') continue;
                     // is it a quoated argument
-                    /*
-                                if ((line[i] == '\'') || (line[i] == '"')) {
-                                    char match = line[i];
-                                    int arg_start = i + 1;
-                                    i++;
-                                    // loop until we reach the closing character
-                                    for (; i < len; i++) if (line[i] == match) break;
-                                    int arg_end = i;
-                                    params.push_back(args.substr(arg_start, arg_end - arg_start));
-                                }
-                    */
+                    if ((line[i] == '\'') || (line[i] == '"'))
+                        {
+                            char match = line[i];
+                            int arg_start = i + 1;
+                            i++;
+                            // loop until we reach the closing character
+                            for (; i < len; i++) if (line[i] == match) break;
+                            int arg_end = i;
+                            params.push_back(args.substr(arg_start, arg_end - arg_start));
+                        }
                     if (isprint(line[i]))
                         {
                             int arg_start = i;
@@ -839,7 +836,8 @@ BOOL World::LoadState()
             name = root->Attribute("name");
             if (!StateExists(name))
                 {
-                    WriteLog(std::string("Could not find a matching registered state for "+name+" in the state register. This state will not be deserialized."), WARN);
+                    WriteLog(std::string("Could not find a matching registered state for "+name+" in the state register. This state will not be deserialized."),
+                             WARN);
                     continue;
                 }
             else

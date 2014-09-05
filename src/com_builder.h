@@ -11,7 +11,7 @@ class CMDZlist:public Command
 {
 public:
     CMDZlist();
-    void Syntax(Player* mobile, int subcmd=0);
+    void Syntax(Player* mobile, int subcmd=0) const;
     BOOL Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args,int subcmd);
 };
 
@@ -19,7 +19,7 @@ class CMDRlist:public Command
 {
 public:
     CMDRlist();
-    void Syntax(Player* mobile, int subcmd=0);
+    void Syntax(Player* mobile, int subcmd=0) const;
     BOOL Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args,int subcmd);
 };
 
@@ -27,7 +27,7 @@ class CMDDig:public Command
 {
 public:
     CMDDig();
-    void Syntax(Player* mobile, int subcmd=0);
+    void Syntax(Player* mobile, int subcmd=0) const;
     BOOL Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args,int subcmd);
 };
 

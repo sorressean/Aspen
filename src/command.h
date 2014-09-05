@@ -64,7 +64,7 @@ public:
     POSITION GetPosition() const;
     virtual BOOL Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args,int subcmd) = 0;
     virtual BOOL CanExecute(Player* mobile, int subcmd);
-    virtual void Syntax(Player* mobile, int subcmd) {}
+    virtual void Syntax(Player* mobile, int subcmd) const;
     bool AddPrehook(CommandHook* hook);
     bool RemovePrehook(int id);
     bool ExecutePrehooks(const std::string &verb, Player* mobile,std::vector<std::string> &args,int subcmd);
