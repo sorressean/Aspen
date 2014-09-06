@@ -44,7 +44,7 @@ void Socials::Save()
         {
             sdata = it.second;
             social = new TiXmlElement("social");
-            social->SetAttribute("id", (int)sdata->id);
+            social->SetAttribute("id", sdata->id);
             social->SetAttribute("name", sdata->name.c_str());
             social->SetAttribute("ynotarg", sdata->ynotarg.c_str());
             social->SetAttribute("rnotarg", sdata->rnotarg.c_str());

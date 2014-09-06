@@ -181,6 +181,8 @@ std::string Channel::_Patternize(const std::string &message,Player* caller)
                         case '%':
                             format << "%";
                             break;
+default:
+break;
                         }
                 }
             else

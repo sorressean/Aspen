@@ -15,8 +15,8 @@ CFLAGS	= -g -std=c++11 -O1 -march=native
 #release:
 #CFLAGS = -s -O3 -std=c++11 -DNDEBUG -flto -march=native
 #warning flags
-CFLAGS += -Werror -pedantic -Wall -Wextra -Wno-unused-parameter -Wno-maybe-uninitialized -Wdisabled-optimization -Wcast-qual -Wctor-dtor-privacy -Winit-self -Wlogical-op -Wmissing-declarations -Wmissing-include-dirs -Wnoexcept -Woverloaded-virtual -Wredundant-decls -Wshadow
-#CFLAGS += -Wformat=2 -Wsign-conversion -Wsign-promo -Wstrict-null-sentinel -Wstrict-overflow=5 -Wswitch-default -Wundef -Wno-unused -Wuseless-cast
+CFLAGS += -Werror -pedantic -Wall -Wextra -Wno-unused-parameter -Wno-maybe-uninitialized -Wdisabled-optimization -Wcast-qual -Wctor-dtor-privacy -Winit-self -Wlogical-op -Wmissing-declarations -Wmissing-include-dirs -Wnoexcept -Woverloaded-virtual -Wredundant-decls -Wshadow -Wsign-promo -Wstrict-null-sentinel -Wstrict-overflow=5 -Wswitch-default -Wundef -Wno-unused -Wuseless-cast
+#CFLAGS += -Wformat=2 
 
 LDFLAGS= -Xlinker -Map=../bin/output.map
 
@@ -25,7 +25,7 @@ CFLAGS += -isystem ../include
 CFLAGS += -L../lib
 
 #required libraries
-LDFLAGS	+= -lz -lcrypto -langelscript -levent -lpthread
+LDFLAGS	+= -lz -lcrypto -langelscript -ltinyxml -lpthread
 
 #formatting specific flags
 FORMATTER = astyle
@@ -52,7 +52,6 @@ property.cpp uuid.cpp olcGroup.cpp olcManager.cpp\
 match.cpp calloutManager.cpp optionManager.cpp flag.cpp door.cpp\
 optionMeta.cpp bitfield.cpp attribute.cpp affect.cpp objectManager.cpp
 S_FILES += modules/modules.cpp
-S_FILES += xml/tinystr.cpp  xml/tinyxml.cpp  xml/tinyxmlerror.cpp  xml/tinyxmlparser.cpp  
 
 ###
 ###YOU SHOULD NOT MODIFY ANYTHING PAST THIS POINT.
@@ -64,7 +63,7 @@ include $(patsubst %,%/include.mod, $(COREMODULES))
 include modules/include.mod
 O_FILES += $(patsubst %.cpp,%.o, $(filter %.cpp, $(S_FILES)))
 
-all: $(O_FILES) ../lib/libangelscript.a
+all: $(O_FILES) ../lib/libangelscript.a ../lib/libtinyxml.a
 	@$(RM) $(OUTPUT)
 	@$(ECHO) Linking.
 	@$(CC) $(CFLAGS) -o $(OUTPUT) $(O_FILES) $(LDFLAGS)

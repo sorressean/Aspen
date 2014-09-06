@@ -366,11 +366,7 @@ BOOL World::InitializeFiles()
         }
 
     _banner=new char[fs.st_size+1];
-    if (!_banner)
-        {
-            return false;
-        }
-    _banner[fs.st_size] = '\0';;
+    _banner[fs.st_size] = '\0';
 
 //open and load the banner:
     FILE* banner_fd=fopen(LOGIN_FILE,"r");
@@ -381,7 +377,7 @@ BOOL World::InitializeFiles()
             _banner = NULL;
             return false;
         }
-    if ((int)fread(_banner,1, (size_t)fs.st_size,banner_fd)!=(int)fs.st_size)
+    if (fread(_banner,1, static_cast<size_t>(fs.st_size), banner_fd) != static_cast<size_t>(fs.st_size))
         {
             WriteLog("Error loading banner.", CRIT);
             delete []_banner;
@@ -414,12 +410,11 @@ BOOL World::InitializeFiles()
             return false;
         }
 
-    if ((int)fread(_motd,1,fs.st_size,motd_fd)!=(int)fs.st_size)
+    if (fread(_motd,1,static_cast<size_t>(fs.st_size), motd_fd) != static_cast<size_t>(fs.st_size))
         {
             WriteLog("Error loading MOTD.", CRIT);
-            delete [] _banner;
             delete [] _motd;
-            _motd = _banner = NULL;
+_banner = NULL;
             fclose(motd_fd);
             return false;
         }
@@ -836,7 +831,7 @@ BOOL World::LoadState()
             name = root->Attribute("name");
             if (!StateExists(name))
                 {
-                    WriteLog(std::string("Could not find a matching registered state for "+name+" in the state register. This state will not be deserialized."),
+                    WriteLog("Could not find a matching registered state for "+name+" in the state register. This state will not be deserialized.",
                              WARN);
                     continue;
                 }

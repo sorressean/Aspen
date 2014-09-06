@@ -791,6 +791,8 @@ BOOL Socket::HandleCommand()
             return HandleVerpassInput();
         case ConnectionType::Gender:
             return HandleGenderInput();
+default:
+return false;
         }
 
     return true;

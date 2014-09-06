@@ -539,7 +539,7 @@ BOOL CMDMLoad::Execute(const std::string &verb, Player* mobile,std::vector<std::
                 }
         }
 
-    npc = zone->CreateNpc((VNUM)atoi(onum.c_str()), (Room*)location);
+    npc = zone->CreateNpc(atoi(onum.c_str()), (Room*)location);
     if (!npc)
         {
             mobile->Message(MSG_ERROR, "That NPC doesn't exist in the specified zone.");
@@ -604,11 +604,11 @@ BOOL CMDAddComponent::Execute(const std::string &verb, Player* mobile,std::vecto
 
     if (args[0] == "-m")
         {
-            obj = zone->GetNpc((VNUM)atoi(args[1].c_str()));
+            obj = zone->GetNpc(atoi(args[1].c_str()));
         }
     else
         {
-            obj = zone->GetVirtual((VNUM)atoi(args[1].c_str()));
+            obj = zone->GetVirtual(atoi(args[1].c_str()));
         }
 
     comp = world->CreateComponent(component);

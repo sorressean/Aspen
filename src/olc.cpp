@@ -123,7 +123,7 @@ bool ParseVnum(Player* mobile, std::string& arg, VNUM & num, std::string& comp, 
 //this has to be a vnum:
             try
                 {
-                    num = (VNUM)tonum(arg.c_str());
+                    num = tonum(arg.c_str());
                     return true;
                 }
             catch (std::bad_cast e)
@@ -145,7 +145,7 @@ bool ParseVnum(Player* mobile, std::string& arg, VNUM & num, std::string& comp, 
 //no here, convert the vnum:
     try
         {
-            num = (VNUM)tonum(arg.c_str());
+            num = tonum(arg.c_str());
             return true;
         }
     catch (std::bad_cast e)
@@ -167,6 +167,8 @@ static inline bool DoEdit(Player* mobile, BaseObject* obj, IOlcEntry* entry, con
             return entry->HandleInput(mobile, (Living*)obj, input);
         case OlcEditType::Object:
             return entry->HandleInput(mobile, (StaticObject*)obj, input);
+default:
+return false;
         }
 
     return false;

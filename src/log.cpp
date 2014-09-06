@@ -118,6 +118,6 @@ void Log::CycleFiles()
             rename(st.str().c_str(), st2.str().c_str());
         }
 
-    rename(_name.c_str(), std::string(_name+".log.1").c_str());
+    rename(_name.c_str(), (_name+".log.1").c_str());
     _out = fopen(_name.c_str(), "w");
 }

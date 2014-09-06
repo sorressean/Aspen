@@ -243,7 +243,7 @@ BOOL CMDChan::Execute(const std::string &verb, Player* mobile,std::vector<std::s
 {
     World* world = World::GetPtr();
 
-    Channel* chan=(Channel*)world->FindChannel(subcmd);
+    Channel* chan = world->FindChannel(subcmd);
     std::string message=Explode(args);
 
     if (chan==NULL)
@@ -252,7 +252,7 @@ BOOL CMDChan::Execute(const std::string &verb, Player* mobile,std::vector<std::s
             return false;
         }
 
-    chan->Broadcast((Player*)mobile,message,true);
+    chan->Broadcast(mobile,message,true);
     return true;
 }
 
@@ -382,6 +382,8 @@ BOOL CMDCommands::Execute(const std::string &verb, Player* mobile,std::vector<st
 
     switch(count)
         {
+default:
+break;
         case 4:
             headers.push_back("command");
         case 3:
