@@ -74,6 +74,8 @@ all: $(O_FILES) ../lib/libangelscript.a ../lib/libtinyxml.a
 
 ../lib/libangelscript.a:
 	@cd ../angelscript && make
+../lib/libtinyxml.a:
+	@cd ../xml && make
 
 clean:
 	@$(ECHO) Cleaning
