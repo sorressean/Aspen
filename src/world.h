@@ -47,6 +47,8 @@ class World
     unsigned long long int _updates;
     unsigned long long int _totalUpdateTime;
     unsigned long long int _totalSleepTime;
+    unsigned long long int _commands;
+    unsigned long long int _commandElapsed;
     time_t _ruptime; //real uptime.
     time_t _cuptime; //uptime since last copyover.
     BOOL _running;
@@ -356,6 +358,8 @@ public:
     unsigned long long int GetUpdates() const;
     unsigned long long int GetUpdateTime() const;
     unsigned long long int GetSleepTime() const;
+    unsigned long long int GetCommands() const;
+    unsigned long long int GetCommandTime() const;
     ObjectManager* GetObjectManager();
 };
 #endif

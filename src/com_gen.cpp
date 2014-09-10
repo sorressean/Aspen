@@ -382,8 +382,8 @@ BOOL CMDCommands::Execute(const std::string &verb, Player* mobile,std::vector<st
 
     switch(count)
         {
-default:
-break;
+        default:
+            break;
         case 4:
             headers.push_back("command");
         case 3:

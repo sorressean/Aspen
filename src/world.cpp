@@ -51,7 +51,8 @@ World::World()
     _updates = 0;
     _totalUpdateTime = 0;
     _totalSleepTime = 0;
-
+    _commands = 0;
+    _commandElapsed = 0;
     RegisterLog(EVENT_FILE, EVENT_NAME);
 //events
     events.RegisterEvent("LivingPulse",new DelayedEvent(LIVING_PULSE,0));
@@ -414,7 +415,7 @@ BOOL World::InitializeFiles()
         {
             WriteLog("Error loading MOTD.", CRIT);
             delete [] _motd;
-_banner = NULL;
+            _banner = NULL;
             fclose(motd_fd);
             return false;
         }
@@ -522,6 +523,7 @@ BOOL World::RemoveProperty(const std::string &name)
 
 BOOL World::DoCommand(Player* mobile,std::string args)
 {
+    timeval start, end; //measure execution time
     Room* location = NULL;
     std::vector<Command*>* cptr = commands.GetPtr();
     std::string cmd = ""; // the parsed command name
@@ -530,8 +532,10 @@ BOOL World::DoCommand(Player* mobile,std::string args)
     int i = 0; // counter
     std::vector<std::string> params; // the parameters being passed to the command
     //std::list<Command*>* externals; //external commands
-//handle special commands.
 
+    gettimeofday(&start, NULL);
+
+//handle special commands.
     if (args[0] == '\"' || args[0] == '\'')
         {
             cmd="say";
@@ -596,6 +600,10 @@ BOOL World::DoCommand(Player* mobile,std::string args)
 //execute command.
                     /*todo: add script command handling here.*/
                     it->Execute(it->GetName(), mobile, params, it->GetSubcmd());
+                    gettimeofday(&end, NULL);
+                    _commandElapsed += ((end.tv_sec - start.tv_sec) * 1000000);
+                    _commands ++;
+                    return true;
                 }
         }
 //todo: check inventory and room commands here.
@@ -612,6 +620,10 @@ BOOL World::DoCommand(Player* mobile,std::string args)
                                     return false;
                                 }
                             it->Execute(it->GetName(), mobile, params, it->GetSubcmd());
+                            gettimeofday(&end, NULL);
+                            _commandElapsed += ((end.tv_sec - start.tv_sec) * 1000000);
+                            _commands ++;
+                            return true;
                         }
                 }
         }
@@ -856,6 +868,15 @@ unsigned long long int World::GetUpdateTime() const
 unsigned long long int World::GetSleepTime() const
 {
     return _totalSleepTime;
+}
+
+unsigned long long int World::GetCommands() const
+{
+    return _commands;
+}
+unsigned long long int World::GetCommandTime() const
+{
+    return _commandElapsed;
 }
 
 ObjectManager* World::GetObjectManager()

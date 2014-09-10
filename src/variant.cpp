@@ -256,9 +256,9 @@ void Variant::Serialize(TiXmlElement* root)
         case VAR_EMPTY:
             var->SetAttribute("value", 0);
             break;
-default:
+        default:
 //should we error here?
-break;
+            break;
         }
     root->LinkEndChild(var);
 }
@@ -286,9 +286,9 @@ void Variant::Deserialize(TiXmlElement* var)
             break;
         case VAR_EMPTY:
             break;
-default:
+        default:
 //should we error again?
-break;
+            break;
         }
 }
 

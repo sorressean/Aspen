@@ -167,8 +167,8 @@ static inline bool DoEdit(Player* mobile, BaseObject* obj, IOlcEntry* entry, con
             return entry->HandleInput(mobile, (Living*)obj, input);
         case OlcEditType::Object:
             return entry->HandleInput(mobile, (StaticObject*)obj, input);
-default:
-return false;
+        default:
+            return false;
         }
 
     return false;

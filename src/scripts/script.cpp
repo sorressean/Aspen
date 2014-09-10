@@ -26,9 +26,9 @@ static void MessageCallback(const asSMessageInfo *msg, void *param)
             break;
         case asMSGTYPE_INFORMATION:
             st << "[INFORMATION]";
-break;
-default:
-st << "[UNKNOWN]";
+            break;
+        default:
+            st << "[UNKNOWN]";
         }
 
     st << " @" << msg->section << ":";
