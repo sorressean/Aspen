@@ -9,7 +9,7 @@
 #define RDNS
 #define DEFAULT_PORT 6666 //our default port: The mud will use this, if the port isn't provided as an argument.
 #define LISTEN_BACKLOG 5 //the backlog for the listening socket.
-#define PULSES_PER_SECOND 25 //how many game loop itterations will be ran each second
+#define PULSES_PER_SECOND 10 //how many game loop itterations will be ran each second
 #define MS_PER_PULSE 1000/PULSES_PER_SECOND
 #define LOG_CONSOLE //will tell the logger to write to console. Comment out if you do not wish this.
 #define LOG_MAXSIZE 1024*1024 //1mb

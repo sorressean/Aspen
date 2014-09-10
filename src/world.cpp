@@ -602,6 +602,7 @@ BOOL World::DoCommand(Player* mobile,std::string args)
                     it->Execute(it->GetName(), mobile, params, it->GetSubcmd());
                     gettimeofday(&end, NULL);
                     _commandElapsed += ((end.tv_sec - start.tv_sec) * 1000000);
+                    _commandElapsed += (end.tv_usec-start.tv_usec);
                     _commands ++;
                     return true;
                 }
@@ -622,6 +623,7 @@ BOOL World::DoCommand(Player* mobile,std::string args)
                             it->Execute(it->GetName(), mobile, params, it->GetSubcmd());
                             gettimeofday(&end, NULL);
                             _commandElapsed += ((end.tv_sec - start.tv_sec) * 1000000);
+                            _commandElapsed += (float)(end.tv_usec-start.tv_usec);
                             _commands ++;
                             return true;
                         }

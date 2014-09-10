@@ -352,6 +352,8 @@ BOOL CMDSstatus::Execute(const std::string &verb, Player* mobile,std::vector<std
     unsigned long long int updates = 0;
     unsigned long long int tu = 0; //total update time
     unsigned long long int ts = 0; //total sleep time.
+    unsigned long long int commands = 0;
+    unsigned long long int commandTime = 0;
     using std::setw;
     struct rusage usage;
 
@@ -372,6 +374,10 @@ BOOL CMDSstatus::Execute(const std::string &verb, Player* mobile,std::vector<std
     st << "Average sleep time: " << ((double)ts / (double)updates) / 1000.0F << "MS." << std::endl;
     st << "Spent ~" << ((double)tu / (double)ts) * 100.0F  << "% time working." << std::endl;
     st << CalloutManager::GetInstance()->Profile() << std::endl;
+    commands = world->GetCommands();
+    commandTime = world->GetCommandTime();
+    st << "Total commands executed (that succeeded): " << commands << std::endl;
+    st << "Average command time: " << ((double)commandTime/commands)/1000 << " MS." << std::endl;
     mobile->Message(MSG_INFO, st.str());
     return true;
 }
