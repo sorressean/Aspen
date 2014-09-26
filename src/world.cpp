@@ -107,27 +107,15 @@ void World::InitializeServer()
 
 void World::Shutdown()
 {
-    std::list <Player*>::iterator it, itEnd;
-    std::list<Player*> players(_users.begin(), _users.end());
-
-    Player* person = NULL;
-
-    itEnd = players.end();
-    for (it = players.begin(); it != itEnd; ++it)
-        {
-            person = (*it);
-            person->Message(MSG_CRITICAL,"The mud is shutting down now. Your Character will be autosaved.");
-            person->Save(true);
-            person->GetSocket()->Kill();
-        }
-
-    _running = false;
+    _pmanager.Shutdown();
     SaveState();
     events.CallEvent("Shutdown", NULL, static_cast<void*>(this));
+    _running = false;
 }
 
 void World::Copyover(Player* mobile)
 {
+    std::list<Player*>* _users;
     int cuptime = (int)time(NULL);
     int ruptime = (int)GetRealUptime();
 
@@ -144,8 +132,8 @@ void World::Copyover(Player* mobile)
     fprintf(copyover, "%d %d\n", cuptime, ruptime);
     sockaddr_in* addr=NULL;
 //itterate through the players and write info to their copyover file:
-
-    for (Player* person: _users)
+    _users = _pmanager.GetPlayers();
+    for (Player* person: *_users)
         {
             if (person->GetSocket()->GetConnectionType() != ConnectionType::Game)
                 {
@@ -190,6 +178,11 @@ ComponentFactory* World::GetComponentFactory()
     return &_cfactory;
 }
 
+PlayerManager& World::GetPlayerManager()
+{
+    return _pmanager;
+}
+
 Log* World::GetLog(const std::string &name)
 {
     if (LogExists(name))
@@ -204,66 +197,6 @@ Log* World::GetLog(const std::string &name)
 OptionManager* World::GetOptionManager()
 {
     return &_options;
-}
-std::list <Player*> *World::GetPlayers()
-{
-    return &_users;
-}
-
-BOOL World::AddPlayer(Player* player)
-{
-    if (!player)
-        {
-            return false;
-        }
-    if (player->GetSocket()->GetConnectionType() != ConnectionType::Game)
-        {
-            return false;
-        }
-
-    _users.push_back(player);
-    return true;
-}
-BOOL World::RemovePlayer(Player* player)
-{
-    std::list<Player*>::iterator it, itEnd;
-
-    itEnd = _users.end();
-    for (it = _users.begin(); it != itEnd; ++it)
-        {
-            if ((*it) == player)
-                {
-                    _users.erase(it);
-                    return true;
-                }
-        }
-
-    return false;
-}
-Player* World::FindPlayer(const std::string &name) const
-{
-    for (auto it: _users)
-        {
-            if (it->GetName()==name)
-                {
-                    return it;
-                }
-        }
-
-    return NULL;
-}
-Player* World::LoadPlayer(const std::string &name) const
-{
-
-    if (PlayerExists(name))
-        {
-            Player* p=new Player();
-            p->SetName(name);
-            p->Load();
-            return p;
-        }
-
-    return NULL;
 }
 
 void World::GetChannelNames(std::list <std::string>* out)
@@ -443,11 +376,7 @@ void World::Update()
 //flushes the output buffers of all sockets.
     _server->FlushSockets();
 //update living objects:
-    for (auto pit: _users)
-        {
-            pit->Update();
-        }
-
+    _pmanager.Update();
     for (auto zone: _zones)
         {
             zone->Update();
@@ -524,7 +453,7 @@ BOOL World::RemoveProperty(const std::string &name)
 BOOL World::DoCommand(Player* mobile,std::string args)
 {
     timeval start, end; //measure execution time
-    Room* location = NULL;
+    Room* location = nullptr;
     std::vector<Command*>* cptr = commands.GetPtr();
     std::string cmd = ""; // the parsed command name
     const char *line = args.c_str(); // the command line
@@ -533,6 +462,7 @@ BOOL World::DoCommand(Player* mobile,std::string args)
     std::vector<std::string> params; // the parameters being passed to the command
     //std::list<Command*>* externals; //external commands
 
+//start measuring elapsed time.
     gettimeofday(&start, NULL);
 
 //handle special commands.

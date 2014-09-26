@@ -47,7 +47,7 @@ modules.cpp component.cpp npc.cpp editor.cpp exit.cpp\
 room.cpp zone.cpp com_builder.cpp com_movement.cpp ComponentFactory.cpp\
 components.cpp olc.cpp socials.cpp olcs.cpp callout.cpp\
 option.cpp baseSocket.cpp banList.cpp listener.cpp inputHandlers.cpp\
-property.cpp uuid.cpp olcGroup.cpp olcManager.cpp\
+property.cpp uuid.cpp olcGroup.cpp olcManager.cpp playerManager.cpp\
 match.cpp calloutManager.cpp optionManager.cpp flag.cpp door.cpp\
 optionMeta.cpp bitfield.cpp attribute.cpp affect.cpp objectManager.cpp
 S_FILES += modules/modules.cpp

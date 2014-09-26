@@ -783,7 +783,7 @@ BOOL Socket::HandleCommand()
 //login new username
         case ConnectionType::Newname:
             return HandleNewnameInput();
-            //login new password
+        //login new password
         case ConnectionType::Newpass:
             return HandleNewpassInput();
 //login verify password

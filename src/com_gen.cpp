@@ -111,16 +111,16 @@ CMDWho::CMDWho()
 BOOL CMDWho::Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args,int subcmd)
 {
     World* world = World::GetPtr();
-
-    std::list <Player*>::iterator it;
-    std::list <Player*>::iterator itEnd;
+    std::list<Player*>* players = nullptr;
+    std::list <Player*>::iterator it, itEnd;
     std::stringstream st;
 
     mobile->Write(Center(Capitalize(MUD_NAME),80)+"\n");
     mobile->Write(Repete("-",80));
 
-    itEnd=world->GetPlayers()->end();
-    for (it = world->GetPlayers()->begin(); it != itEnd; ++it)
+    players = world->GetPlayerManager().GetPlayers();
+    itEnd=players->end();
+    for (it = players->begin(); it != itEnd; ++it)
         {
             st << "[" << std::left << std::setw(4) << (*it)->GetLevel() << "] ";
             if ((*it)->HasAccess(RANK_GOD))
@@ -132,7 +132,7 @@ BOOL CMDWho::Execute(const std::string &verb, Player* mobile,std::vector<std::st
             st.str("");
         }
     mobile->Write(Repete("-",80));
-    st << MUD_NAME << " currently has " << (int)world->GetPlayers()->size() << ((int)world->GetPlayers()->size()==1?"user ":"users ") << "online.\n";
+    st << MUD_NAME << " currently has " << players->size() << (players->size()==1?"user ":"users ") << "online.\n";
     mobile->Write(st.str());
     return true;
 }
@@ -487,11 +487,11 @@ BOOL CMDWhois::Execute(const std::string &verb, Player* mobile,std::vector<std::
             return false;
         }
 //check to see if the player is online:
-    targ=world->FindPlayer(args[0]);
+    targ=world->GetPlayerManager().FindPlayer(args[0]);
     if (!targ)
         {
 //check to see if the player can be loaded
-            targ=world->LoadPlayer(args[0]);
+            targ=world->GetPlayerManager().LoadPlayer(args[0]);
             load=true;
         }
 //check to see if the load succeeded.

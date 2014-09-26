@@ -319,7 +319,7 @@ void Player::EnterGame(BOOL quiet)
 
     Living::EnterGame();
 //add the player to the users list:
-    world->AddPlayer(this);
+    world->GetPlayerManager().AddPlayer(this);
 //move the player if it doesn't already have a location
     if (GetLocation()==NULL)
         {
@@ -356,7 +356,7 @@ void Player::LeaveGame()
     Save(true);
     Living::LeaveGame();
 //take the player from the users list:
-    world->RemovePlayer(this);
+    world->GetPlayerManager().RemovePlayer(this);
     world->events.CallEvent("PlayerDisconnect", NULL, this);
     events.CallEvent("LeaveGame", NULL,this);
 }
@@ -567,7 +567,7 @@ void InitializePlayer()
 {
     CalloutManager* manager = CalloutManager::GetInstance();
     World* world = World::GetPtr();
-    std::list<Player*>* players = world->GetPlayers();
+    std::list<Player*>* players = world->GetPlayerManager().GetPlayers();
 
     manager->RegisterCallout(60*30, 0, [players] (Callout* foo)
     {

@@ -12,7 +12,6 @@
 #include "log.h"
 #include "command.h"
 #include "channel.h"
-#include "event.h"
 #include "eventManager.h"
 #include "player.h"
 #include "component.h"
@@ -23,6 +22,7 @@
 #include "olcManager.h"
 #include "optionManager.h"
 #include "objectManager.h"
+#include "playerManager.h"
 
 typedef std::function<std::string (Player*)> PROMPTCB;
 /**
@@ -34,7 +34,6 @@ class World
     static World* _ptr;
     Server* _server; //our main server object.
     ComponentFactory _cfactory;
-    std::list <Player*> _users; //a list of the currently connected players.
     std::unordered_map<char, PROMPTCB> _prompts;
     std::map <int,Channel*> _channels;
     std::map<std::string, Log*> _logs;
@@ -43,6 +42,7 @@ class World
     std::vector<Zone*> _zones;
     OlcManager _olcs;
     ObjectManager _objectManager;
+    PlayerManager _pmanager;
     int _chanid;
     unsigned long long int _updates;
     unsigned long long int _totalUpdateTime;
@@ -90,33 +90,7 @@ public:
     Returns a pointer to the component factory object.
     */
     ComponentFactory* GetComponentFactory();
-    /**
-    Returns: a pointer to a list of pointers to player objects.
-    */
-    std::list <Player*> *GetPlayers();
-    /**
-    Adds the player to the players list.
-    Only connected players should be added. Inactive players shouldn't be in this list.
-    \param: [in] a pointer to the player object to add.
-    */
-    BOOL AddPlayer(Player* player);
-    /**
-    Removes the specified player from the list of active players.
-    \param: [in] A pointer to the player object
-    */
-    BOOL RemovePlayer(Player* player);
-    /*
-    *Locates the specified player:
-    *Param: [in] The name of the player.
-    *Return: A pointer to the player's object, NULL if the player wasn't found.
-    */
-    Player* FindPlayer(const std::string &name) const;
-    /*
-    *Loads the specified player and returns a pointer to the object.
-    *Param: [in] the name of the player to load.
-    *Return: a pointer to the player's object, if the player could be loaded.
-    */
-    Player* LoadPlayer(const std::string &name) const;
+    PlayerManager& GetPlayerManager();
     /*
     *Adds a channel to the worlds channel lookup table.
     *Param: [in] A pointer to the object to add.
