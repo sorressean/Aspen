@@ -7,6 +7,7 @@
 #include "world.h"
 #include "utils.h"
 #include "olc.h"
+#include "olcManager.h"
 #include "editor.h"
 #include "component.h"
 
@@ -358,4 +359,21 @@ std::string BaseObject::Identify(Player*mobile)
     st << "Persistent: " << (GetPersistent()? "yes." : "no.") << std::endl;
     st << "Origenating zone: " << GetZone()->GetName() << "." << std::endl;
     return st.str();
+}
+
+bool InitializeBaseObjectOlcs()
+{
+    World* world = World::GetPtr();
+    OlcManager* omanager = world->GetOlcManager();
+    OlcGroup* group = new OlcGroup();
+
+    group->AddEntry(new OlcStringEntry<BaseObject>("name", "Sets the name of the object", OF_NORMAL, OLCDT::STRING,
+                    std::bind(&BaseObject::GetName, std::placeholders::_1),
+                    std::bind(&BaseObject::SetName, std::placeholders::_1, std::placeholders::_2)));
+    group->AddEntry(new OlcEditorEntry<BaseObject>("description", "sets the description of the object", OF_NORMAL, OLCDT::EDITOR,
+                    std::bind(&BaseObject::GetDescription, std::placeholders::_1),
+                    std::bind(&BaseObject::SetDescription, std::placeholders::_1, std::placeholders::_2)));
+
+    omanager->AddGroup(OLCGROUP::BaseObject, group);
+    return true;
 }

@@ -92,4 +92,6 @@ public:
     */
     virtual std::string Identify(Player* mob);
 };
+
+bool InitializeEntityOlcs();
 #endif

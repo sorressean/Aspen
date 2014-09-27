@@ -8,6 +8,7 @@
 OlcGroup::OlcGroup(const std::string& comp)
 {
     _compname = comp;
+    _inherit = nullptr;
 }
 OlcGroup::~OlcGroup()
 {
@@ -41,6 +42,11 @@ IOlcEntry* OlcGroup::GetEntry(const std::string& name)
 }
 void OlcGroup::ListEntries(std::vector<IOlcEntry*>* entries)
 {
+    if (_inherit)
+        {
+            _inherit->ListEntries(entries);
+        }
+
     std::vector<IOlcEntry*>::iterator it, itEnd;
 
     itEnd = _entries.end();
@@ -57,4 +63,13 @@ void OlcGroup::SetComponentName(const std::string& comp)
 std::string OlcGroup::GetComponentName() const
 {
     return _compname;
+}
+
+OlcGroup* OlcGroup::GetInheritance()
+{
+    return _inherit;
+}
+void OlcGroup::SetInheritance(OlcGroup* inherit)
+{
+    _inherit = inherit;
 }

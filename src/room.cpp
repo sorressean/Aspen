@@ -432,12 +432,6 @@ bool InitializeRoomOlcs()
     World* world = World::GetPtr();
     OlcManager* omanager = world->GetOlcManager();
     OlcGroup* group = new OlcGroup();
-    group->AddEntry(new OlcStringEntry<Room>("name", "Sets the name of the room", OF_NORMAL, OLCDT::STRING,
-                    std::bind(&Room::GetName, std::placeholders::_1),
-                    std::bind(&Room::SetName, std::placeholders::_1, std::placeholders::_2)));
-    group->AddEntry(new OlcEditorEntry<Room>("description", "sets the description of the room", OF_NORMAL, OLCDT::EDITOR,
-                    std::bind(&Room::GetDescription, std::placeholders::_1),
-                    std::bind(&Room::SetDescription, std::placeholders::_1, std::placeholders::_2)));
     {
         std::map<std::string, TERRAIN> vals=
         {
@@ -460,6 +454,8 @@ bool InitializeRoomOlcs()
                         std::bind(&Room::SetTerrain, std::placeholders::_1, std::placeholders::_2),
                         vals));
     }
+
+    group->SetInheritance(omanager->GetGroup(OLCGROUP::Entity));
     omanager->AddGroup(OLCGROUP::ROOM, group);
     return true;
 }

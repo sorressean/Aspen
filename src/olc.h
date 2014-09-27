@@ -28,6 +28,8 @@ enum class OLCGROUP
 {
     NONE,
     STATIC,
+    BaseObject,
+    Entity,
     ROOM,
     NPC,
     COMPONENT

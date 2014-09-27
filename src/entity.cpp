@@ -219,3 +219,12 @@ std::string Entity::Identify(Player* mob)
     return st.str();
 }
 
+bool InitializeEntityOlcs()
+{
+    World* world = World::GetPtr();
+    OlcManager* omanager = world->GetOlcManager();
+    OlcGroup* group = new OlcGroup();
+    group->SetInheritance(omanager->GetGroup(OLCGROUP::BaseObject));
+    omanager->AddGroup(OLCGROUP::BaseObject, group);
+    return true;
+}

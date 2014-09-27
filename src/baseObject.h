@@ -115,4 +115,6 @@ public:
     virtual void Deserialize(TiXmlElement* root);
     virtual void Copy(BaseObject* obj) const;
 };
+
+bool InitializeBaseObjectOlcs();
 #endif
