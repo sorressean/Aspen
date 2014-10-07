@@ -34,7 +34,7 @@ FORMAT_FLAGS = --style=gnu
 #modules
 #core modules: modules that ship with the mud--do not add anything here without good reason.
 COREMODULES = scripts syslog help
-#external modules: modules found in the mod directory. Just list the name of the module.
+#external modules: modules found in the modules directory. Just list the name of the module.
 #e.g: MODULES = quest board
 MODULES =
 
@@ -72,9 +72,9 @@ all: $(O_FILES) ../lib/libangelscript.a ../lib/libtinyxml.a
 	@$(CC) $(PROF) -c $(CFLAGS) -o $(patsubst %.cpp,%.o, $<) $<
 
 ../lib/libangelscript.a:
-	@cd ../angelscript && make
+	@cd ../angelscript && $(MAKE)
 ../lib/libtinyxml.a:
-	@cd ../xml && make
+	@cd ../xml && $(MAKE)
 
 clean:
 	@$(ECHO) Cleaning
