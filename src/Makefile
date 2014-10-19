@@ -50,7 +50,6 @@ option.cpp baseSocket.cpp banList.cpp listener.cpp inputHandlers.cpp\
 property.cpp uuid.cpp olcGroup.cpp olcManager.cpp playerManager.cpp\
 match.cpp calloutManager.cpp optionManager.cpp flag.cpp door.cpp\
 optionMeta.cpp bitfield.cpp attribute.cpp affect.cpp objectManager.cpp
-S_FILES += modules/modules.cpp
 
 ###
 ###YOU SHOULD NOT MODIFY ANYTHING PAST THIS POINT.
@@ -60,6 +59,7 @@ S_FILES += modules/modules.cpp
 #include the external modules into the makefile:
 include $(patsubst %,%/include.mod, $(COREMODULES))
 include modules/include.mod
+include mods/include.mod
 O_FILES += $(patsubst %.cpp,%.o, $(filter %.cpp, $(S_FILES)))
 
 all: $(O_FILES) ../lib/libangelscript.a ../lib/libtinyxml.a

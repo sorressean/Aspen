@@ -217,6 +217,12 @@ Handles an OLC entry after we've found component/vnum etc.
 */
 bool HandleEntry(Player* mobile, BaseObject* obj, OlcGroup* group, std::vector<std::string> &args, OlcEditType type);
 
+class CMDPEdit:public Command
+{
+public:
+    CMDPEdit();
+    BOOL Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args, int subcmd);
+};
 class CMDREdit:public Command
 {
 public:

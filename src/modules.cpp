@@ -1,17 +1,13 @@
 #include "modules.h"
 #include "player.h"
 #include "socials.h"
-#ifdef MODULE_SYSLOG
 #include "syslog/syslog.h"
-#endif
-#ifdef MODULE_HELP
 #include "help/help.h"
-#endif
 #include "scripts/script.h"
-#ifdef OLC
 #include "olc.h"
 #include "olcs.h"
-#endif
+#include "modules/modules.h"
+#include "mods/mods.h"
 
 BOOL InitializeModules()
 {
@@ -20,21 +16,16 @@ BOOL InitializeModules()
             return false;
         }
 
-#ifdef MODULE_SYSLOG
     if(!InitializeSyslog())
         {
             return false;
         }
-#endif
 
-#ifdef MODULE_HELP
     if(!InitializeHelp())
         {
             return false;
         }
-#endif
 
-#ifdef OLC
     if (!InitializeOlc())
         {
             return false;
@@ -43,7 +34,6 @@ BOOL InitializeModules()
         {
             return false;
         }
-#endif
 
     if (!InitializeSocials())
         {
@@ -51,6 +41,15 @@ BOOL InitializeModules()
         }
 
     InitializePlayer();
+
+    if (!InitializeExternalModules())
+        {
+            return false;
+        }
+    if (!InitializeExternalExtensions())
+        {
+            return false;
+        }
 
     return true;
 }

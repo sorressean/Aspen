@@ -373,12 +373,12 @@ bool InitializeBaseObjectOlcs()
     group->AddEntry(new OlcEditorEntry<BaseObject>("description", "the description of the object", OF_NORMAL, OLCDT::EDITOR,
                     std::bind(&BaseObject::GetDescription, std::placeholders::_1),
                     std::bind(&BaseObject::SetDescription, std::placeholders::_1, std::placeholders::_2)));
-group->AddEntry(new OlcStringEntry<BaseObject>("short", "the title of the object seen in rooms", OF_NORMAL, OLCDT::STRING,
-std::bind(&BaseObject::GetShort, std::placeholders::_1),
-std::bind(&BaseObject::SetShort, std::placeholders::_1, std::placeholders::_2)));
-group->AddEntry(new OlcStringEntry<BaseObject>("plural", "the plural of multiple objects", OF_NORMAL, OLCDT::STRING,
-std::bind(&BaseObject::GetPlural, std::placeholders::_1),
-std::bind(&BaseObject::SetPlural, std::placeholders::_1, std::placeholders::_2)));
+    group->AddEntry(new OlcStringEntry<BaseObject>("short", "the title of the object seen in rooms", OF_NORMAL, OLCDT::STRING,
+                    std::bind(&BaseObject::GetShort, std::placeholders::_1),
+                    std::bind(&BaseObject::SetShort, std::placeholders::_1, std::placeholders::_2)));
+    group->AddEntry(new OlcStringEntry<BaseObject>("plural", "the plural of multiple objects", OF_NORMAL, OLCDT::STRING,
+                    std::bind(&BaseObject::GetPlural, std::placeholders::_1),
+                    std::bind(&BaseObject::SetPlural, std::placeholders::_1, std::placeholders::_2)));
 
     omanager->AddGroup(OLCGROUP::BaseObject, group);
     return true;
