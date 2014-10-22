@@ -6,4 +6,5 @@
 #S_FILES += foo/foo.cpp foo/bar.cpp foobar/foo.cpp etc.
 
 S_FILES += modules/modules.cpp
-BASEPATH=modules
+MODULESPATH=modules
+include $(MODULESPATH)/board/include.mod
