@@ -6,6 +6,7 @@
 #include "boardManager.h"
 #include "boardPost.h"
 #include "board.h"
+#include "../modules.h"
 #include "../../mud.h"
 #include "../../conf.h"
 #include "../../property.h"
@@ -14,6 +15,8 @@
 #include "../../world.h"
 #include "../../utils.h"
 #include "../../editor.h"
+
+#ifdef MODULE_BOARD
 
 using std::right;
 using std::endl;
@@ -348,8 +351,21 @@ BOOL CMDABoard::Execute(const std::string &verb, Player* mobile,std::vector<std:
     return  false;
 }
 
+EVENT(CleanupBoards)
+{
+    World* world = World::GetPtr();
+    BoardManager* bmanager = (BoardManager*)world->GetProperty("boards");
+    if (bmanager)
+        {
+            world->RemoveProperty("boards");
+        }
+}
+
+#endif
+
 bool InitializeBoards()
 {
+#ifdef MODULE_BOARD
     World* world = World::GetPtr();
     BoardManager* bmanager = new BoardManager();
 
@@ -359,15 +375,6 @@ bool InitializeBoards()
     world->commands.AddCommand(new CMDABoard());
     world->AddProperty("boards", (void*)bmanager);
     world->events.AddCallback("Shutdown", CleanupBoards);
+#endif
     return true;
-}
-
-EVENT(CleanupBoards)
-{
-    World* world = World::GetPtr();
-    BoardManager* bmanager = (BoardManager*)world->GetProperty("boards");
-    if (bmanager)
-        {
-            world->RemoveProperty("boards");
-        }
 }

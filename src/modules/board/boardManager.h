@@ -2,9 +2,12 @@
 #include <tinyxml.h>
 #include <vector>
 #include "board.h"
+#include "../modules.h"
 #include "../../mud.h"
 #include "../../conf.h"
 #include "../../serializer.h"
+
+#ifdef MODULE_BOARD
 
 class BoardManager:public ISerializable
 {
@@ -18,3 +21,5 @@ public:
     void Serialize(TiXmlElement* root);
     void Deserialize(TiXmlElement* root);
 };
+
+#endif

@@ -7,8 +7,11 @@
 #include <vector>
 #include <string>
 #include "boardPost.h"
+#include "../modules.h"
 #include "../../mud.h"
 #include "../../mud.h"
+
+#ifdef MODULE_BOARD
 
 class Board
 {
@@ -28,3 +31,5 @@ public:
     void Serialize(TiXmlElement* root);
     void Deserialize(TiXmlElement* root);
 };
+
+#endif

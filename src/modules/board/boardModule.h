@@ -1,11 +1,14 @@
 #pragma once
 #include <vector>
 #include <string>
+#include "../modules.h"
 #include "../../mud.h"
 #include "../../conf.h"
 #include "../../event.h"
 #include "../../command.h"
 #include "../../eventargs.h"
+
+#ifdef MODULE_BOARD
 
 class CMDBoard:public Command
 {
@@ -31,4 +34,8 @@ public:
 };
 
 EVENT(CleanupBoards);
+
+#endif
+
 bool InitializeBoards();
+

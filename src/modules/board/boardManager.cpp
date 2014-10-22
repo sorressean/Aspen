@@ -2,9 +2,12 @@
 #include <vector>
 #include "board.h"
 #include "boardManager.h"
+#include "../modules.h"
 #include "../../mud.h"
 #include "../../conf.h"
 #include "../../serializationHelpers.hpp"
+
+#ifdef MODULE_BOARD
 
 BoardManager::BoardManager()
 {
@@ -52,3 +55,5 @@ void BoardManager::Deserialize(TiXmlElement* root)
 {
     DeserializeList<Board, std::vector<Board*> >(root, "boards", _boards);
 }
+
+#endif

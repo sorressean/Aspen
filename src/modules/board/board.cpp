@@ -7,6 +7,7 @@
 #include "../../conf.h"
 #include "../../serializationHelpers.hpp"
 
+#ifdef MODULE_BOARD
 Board::Board()
 {
 }
@@ -73,3 +74,4 @@ void Board::Deserialize(TiXmlElement* board)
 
     DeserializeList<BoardPost, std::vector<BoardPost*> >(board, "posts", _posts);
 }
+#endif

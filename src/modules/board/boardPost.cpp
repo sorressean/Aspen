@@ -1,8 +1,12 @@
+#include <string>
+#include "../modules.h"
 #include "../../mud.h"
 #include "../../conf.h"
 #include "../../uuid.h"
 #include "../../player.h"
 #include "boardPost.h"
+
+#ifdef MODULE_BOARD
 
 BoardPost::BoardPost()
 {
@@ -63,3 +67,5 @@ void BoardPost::Deserialize(TiXmlElement* root)
     _message = root->Attribute("message");
     _poster = root->Attribute("poster");
 }
+
+#endif

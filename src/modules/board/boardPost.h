@@ -1,10 +1,13 @@
 #pragma once
 #include <tinyxml.h>
 #include <string>
+#include "../modules.h"
 #include "../../mud.h"
 #include "../../conf.h"
 #include "../../uuid.h"
 #include "../../player.h"
+
+#ifdef MODULE_BOARD
 
 class BoardPost
 {
@@ -26,3 +29,5 @@ public:
     void Serialize(TiXmlElement* root);
     void Deserialize(TiXmlElement* root);
 };
+
+#endif
