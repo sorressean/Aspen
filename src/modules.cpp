@@ -7,7 +7,7 @@
 #include "olc.h"
 #include "olcs.h"
 #include "modules/modules.h"
-#include "mods/mods.h"
+#include "extensions/extensions.h"
 
 BOOL InitializeModules()
 {
