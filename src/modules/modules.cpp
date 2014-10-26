@@ -5,10 +5,10 @@
 
 bool InitializeExternalModules()
 {
-if (!InitializeBoards())
-{
-return false;
-}
+    if (!InitializeBoards())
+        {
+            return false;
+        }
 
     return true;
 }
