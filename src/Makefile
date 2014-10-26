@@ -58,8 +58,10 @@ optionMeta.cpp bitfield.cpp attribute.cpp affect.cpp objectManager.cpp
 
 #include the external modules into the makefile:
 include $(patsubst %,%/include.mod, $(COREMODULES))
+#external modules that ship with Aspen:
 include modules/include.mod
-include mods/include.mod
+#user-defined modules:
+include extensions/include.mod
 O_FILES += $(patsubst %.cpp,%.o, $(filter %.cpp, $(S_FILES)))
 
 all: $(O_FILES) ../lib/libangelscript.a ../lib/libtinyxml.a
