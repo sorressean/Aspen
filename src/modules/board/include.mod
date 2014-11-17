@@ -1,4 +1,2 @@
-MODULEPATH=board
-FULLPATH=$(MODULESPATH)/$(MODULEPATH)/
-FILES += boardPost.cpp board.cpp boardManager.cpp boardModule.cpp
-S_FILES += $(patsubst %.cpp, $(FULLPATH)%.cpp, $(FILES))
+BOARDFILES = board/boardPost.cpp board/board.cpp board/boardManager.cpp board/boardModule.cpp
+S_FILES += $(patsubst %.cpp, $(MODULESPATH)/%.cpp, $(BOARDFILES))
