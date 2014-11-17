@@ -194,6 +194,7 @@ public:
     *[in] A string with the arguments passed to the command.
     *Returns: true on success, false on failure.
     */
+void ParseArguments(const std::string& args, int start, std::vector<std::string>& params);
     BOOL DoCommand(Player* mobile, std::string args);
 
     /*
