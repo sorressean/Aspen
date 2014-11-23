@@ -183,19 +183,13 @@ bool Command::ExecutePosthooks(const std::string &verb, Player* mobile,std::vect
 
 Commandable::Commandable()
 {
-    _commands=new std::vector <Command*>();
 }
 Commandable::~Commandable()
 {
-    std::vector <Command*>::iterator comit;
-    std::vector <Command*>::iterator comitEnd;
-
-    comitEnd = _commands->end();
-    for (comit = _commands->begin(); comit != comitEnd; ++comit)
+    for (auto it: _commands)
         {
-            delete (*comit);
+            delete it;
         }
-    delete _commands;
 }
 
 BOOL Commandable::AddCommand(Command* com)
@@ -205,39 +199,35 @@ BOOL Commandable::AddCommand(Command* com)
             return false;;
         }
 
-    _commands->push_back(com);
+    _commands.push_back(com);
     return true;
 }
 BOOL Commandable::RemoveCommand(const std::string &name)
 {
+std::vector<Command*>::iterator it, itEnd;
+
     if (!CommandExists(name))
         {
             return false;
         }
 
-    std::vector <Command*>::iterator it; //an iterator for iterating through the command list
-    std::vector <Command*>::iterator itEnd;
-
-    itEnd = _commands->end();
-    for (it = _commands->begin(); it != itEnd; ++it)
+itEnd = _commands.end();
+for (it = _commands.begin(); it != itEnd; ++it)
         {
             if ((*it)->GetName() == name)
                 {
-                    _commands->erase(it);
+                    _commands.erase(it);
                     return true;
                 }
         }
+
     return false;
 }
 BOOL Commandable::CommandExists(const std::string &name)
 {
-    std::vector <Command*>::iterator it; //an iterator for iterating through the command list
-    std::vector <Command*>::iterator itEnd;
-
-    itEnd = _commands->end();
-    for (it = _commands->begin(); it != itEnd; ++it)
+for (auto it: _commands)
         {
-            if ((*it)->GetName() == name)
+            if (it->GetName() == name)
                 {
                     return true;
                 }
@@ -247,7 +237,7 @@ BOOL Commandable::CommandExists(const std::string &name)
 }
 void Commandable::ListCommands(std::vector <std::string>* list, Player* mobile, CommandType filter)
 {
-    for (auto it: *_commands)
+    for (auto it: _commands)
         {
             if (mobile->HasAccess(it->GetAccess()))
                 {
@@ -261,7 +251,7 @@ void Commandable::ListCommands(std::vector <std::string>* list, Player* mobile, 
 
 std::vector <Command*> *Commandable::GetPtr()
 {
-    return _commands;
+    return &_commands;
 }
 
 

@@ -452,47 +452,47 @@ BOOL World::RemoveProperty(const std::string &name)
 
 void World::ParseArguments(const std::string& args, int start, std::vector<std::string>& params)
 {
-int i = start;
-const char* line = args.c_str();
-int len = strlen(line);
+    int i = start;
+    const char* line = args.c_str();
+    int len = strlen(line);
 
-            // parse arguments
-            for (; i < len; i++)
+    // parse arguments
+    for (; i < len; i++)
+        {
+            if (line[i] == ' ') continue;
+            // is it a quoated argument
+            if ((line[i] == '\'') || (line[i] == '"'))
                 {
-                    if (line[i] == ' ') continue;
-                    // is it a quoated argument
-                    if ((line[i] == '\'') || (line[i] == '"'))
+                    char match = line[i];
+                    i++;
+                    int arg_start = i;
+                    // loop until we reach the closing character
+                    for (; i < len; i++)
                         {
-                            char match = line[i];
-i++;
-                            int arg_start = i;
-                            // loop until we reach the closing character
-                            for (; i < len; i++)
-{
-if (line[i] == match)
-{
- break;
-}
-}
-//push the quoted string.
-                            params.push_back(args.substr(arg_start, i - arg_start));
+                            if (line[i] == match)
+                                {
+                                    break;
+                                }
                         }
+//push the quoted string.
+                    params.push_back(args.substr(arg_start, i - arg_start));
+                }
 
 //no quoted string, get the entire argument until we see a space.
-                    if (isprint(line[i]))
+            if (isprint(line[i]))
+                {
+                    int arg_start = i;
+                    for (; i < len; i++)
                         {
-                            int arg_start = i;
-                            for (; i < len; i++)
-{
-                                if ((line[i] == ' '))
-{
+                            if ((line[i] == ' '))
+                                {
                                     break;
-}
-}
-                            params.push_back(args.substr(arg_start, i - arg_start));
+                                }
                         }
+                    params.push_back(args.substr(arg_start, i - arg_start));
                 }
         }
+}
 BOOL World::DoCommand(Player* mobile,std::string args)
 {
     timeval start, end; //measure execution time
@@ -533,8 +533,8 @@ BOOL World::DoCommand(Player* mobile,std::string args)
     // are there any arguments to parse?
     if (i != len)
         {
-ParseArguments(args, i, params);
-}
+            ParseArguments(args, i, params);
+        }
 
 //locate and execute the command:
 //check the built-in commands first, then contents, then location.

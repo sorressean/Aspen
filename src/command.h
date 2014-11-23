@@ -80,7 +80,7 @@ public:
 class Commandable
 {
 protected:
-    std::vector <Command*> *_commands;
+    std::vector <Command*> _commands;
 public:
     Commandable();
     virtual ~Commandable();
