@@ -6,21 +6,18 @@
 #include <vector>
 
 #ifdef MODULE_HELP
-HelpEntry::HelpEntry(const std::string &name, const std::string &data, FLAG access, HELP_ENTRY_TYPE type):_name(name), _data(data), _access(access), _type(type)
+HelpEntry::HelpEntry(const std::string &name, const std::string &data, FLAG access, HelpType type):_name(name), _data(data), _access(access), _type(type)
 {
     _lastModified = time(NULL);
     _id = 0;
-    _seeAlso = new std::vector<HelpEntry*>();
 }
 HelpEntry::HelpEntry()
 {
     _lastModified = time(NULL);
     _id = 0;
-    _seeAlso = new std::vector<HelpEntry*>();
 }
 HelpEntry::~HelpEntry()
 {
-    delete _seeAlso;
 }
 
 std::string HelpEntry::GetName() const
@@ -41,11 +38,11 @@ void HelpEntry::SetData(const std::string &data)
     _data = data;
 }
 
-HELP_ENTRY_TYPE HelpEntry::GetType() const
+HelpType HelpEntry::GetType() const
 {
     return _type;
 }
-void HelpEntry::SetType(HELP_ENTRY_TYPE type)
+void HelpEntry::SetType(HelpType type)
 {
     _type = type;
 }
@@ -70,29 +67,24 @@ void HelpEntry::SetAccess(FLAG access)
 
 std::string HelpEntry::SeealsoToList()
 {
-    if (_seeAlso->size() == 0)
+    if (_seeAlso.size() == 0)
         {
             return "none";
         }
 
     std::vector<std::string> names;
-    std::vector<HelpEntry*>::iterator it, itEnd;
 
-    itEnd = _seeAlso->end();
-    for (it = _seeAlso->begin(); it != itEnd; ++it)
+    for (auto it: _seeAlso)
         {
-            names.push_back((*it)->GetName());
+            names.push_back(it->GetName());
         }
     return EnglishList(&names);
 }
 BOOL HelpEntry::SeeAlsoExists(HelpEntry* entry)
 {
-    std::vector<HelpEntry*>::iterator it, itEnd;
-
-    itEnd = _seeAlso->end();
-    for (it = _seeAlso->begin(); it != itEnd; ++it)
+    for (auto it: _seeAlso)
         {
-            if ((*it) == entry)
+            if (it == entry)
                 {
                     return true;
                 }
@@ -102,12 +94,9 @@ BOOL HelpEntry::SeeAlsoExists(HelpEntry* entry)
 }
 BOOL HelpEntry::SeeAlsoExists(const std::string &name)
 {
-    std::vector<HelpEntry*>::iterator it, itEnd;
-
-    itEnd = _seeAlso->end();
-    for (it = _seeAlso->begin(); it != itEnd; ++it)
+    for (auto it: _seeAlso)
         {
-            if ((*it)->GetName() == name)
+            if (it->GetName() == name)
                 {
                     return true;
                 }
@@ -122,19 +111,19 @@ BOOL HelpEntry::AddSeeAlso(HelpEntry* entry)
             return false;
         }
 
-    _seeAlso->push_back(entry);
+    _seeAlso.push_back(entry);
     return true;
 }
 BOOL HelpEntry::RemoveSeeAlso(const std::string &name)
 {
     std::vector<HelpEntry*>::iterator it, itEnd;
 
-    itEnd = _seeAlso->end();
-    for (it = _seeAlso->begin(); it != itEnd; ++it)
+    itEnd = _seeAlso.end();
+    for (it = _seeAlso.begin(); it != itEnd; ++it)
         {
             if ((*it)->GetName() == name)
                 {
-                    _seeAlso->erase(it);
+                    _seeAlso.erase(it);
                     return true;
                 }
         }
@@ -147,27 +136,24 @@ BOOL HelpEntry::SeeAlsoToList(std::vector<std::string>* entries)
             return false;
         }
 
-    std::vector<HelpEntry*>::iterator it, itEnd;
-    itEnd = _seeAlso->end();
-    for (it = _seeAlso->begin(); it != itEnd; ++it)
+    for (auto it: _seeAlso)
         {
-            entries->push_back((*it)->GetName());
+            entries->push_back(it->GetName());
         }
     return true;
 }
 HelpEntry* HelpEntry::GetSeeAlsoByIndex(unsigned int index)
 {
-    if (index == 0 || index > _seeAlso->size()-1)
+    if (index == 0 || index > _seeAlso.size()-1)
         {
             return NULL;
         }
 
-    return _seeAlso->at(index);
+    return _seeAlso.at(index);
 }
 
 void HelpEntry::UpdateAccess(FLAG access)
 {
-    _lastModified = time(NULL);
     SetAccess(access);
 }
 
@@ -176,7 +162,7 @@ void HelpEntry::Serialize(TiXmlElement* root)
     TiXmlElement* entry = new TiXmlElement("entry");
     entry->SetAttribute("name", _name.c_str());
     entry->SetAttribute("data", _data.c_str());
-    entry->SetAttribute("type", _type);
+    entry->SetAttribute("type", (int)_type);
     entry->SetAttribute("access", _access);
     entry->SetAttribute("lastModified", _lastModified);
     entry->SetAttribute("id", _id);
@@ -189,8 +175,8 @@ void HelpEntry::Deserialize(TiXmlElement* entry)
     _name = entry->Attribute("name");
     _data = entry->Attribute("data");
     entry->Attribute("access", &_access);
-    tmp = (int)_type;
     entry->Attribute("type", &tmp);
+    _type = (HelpType)tmp;
     tmp = (int)_lastModified;
     entry->Attribute("lastModified", &tmp);
     entry->Attribute("id", (int*)&_id);

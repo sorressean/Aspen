@@ -11,19 +11,13 @@
 #ifdef MODULE_HELP
 HelpTable::HelpTable()
 {
-    _entries = new std::vector<HelpEntry*>();
 }
 HelpTable::~HelpTable()
 {
-    std::vector<HelpEntry*>::iterator it, itEnd;
-
-    itEnd = _entries->end();
-    for (it = _entries->begin(); it != itEnd; ++it)
+    for (auto it: _entries)
         {
-            delete (*it);
+            delete it;
         }
-
-    delete _entries;
 }
 
 void HelpTable::Load()
@@ -58,7 +52,7 @@ void HelpTable::Load()
         {
             entry = new HelpEntry();
             entry->Deserialize(element);
-            _entries->push_back(entry);
+            _entries.push_back(entry);
         }
 }
 
@@ -68,12 +62,10 @@ void HelpTable::Save()
     TiXmlDeclaration *decl = new TiXmlDeclaration("1.0", "", "");
     doc.LinkEndChild(decl);
     TiXmlElement* root = new TiXmlElement("help");
-    std::vector<HelpEntry*>::iterator it, itEnd;
 
-    itEnd = _entries->end();
-    for (it = _entries->begin(); it != itEnd; ++it)
+    for (auto it: _entries)
         {
-            (*it)->Serialize(root);
+            it->Serialize(root);
         }
 
     doc.SaveFile(HELP_FILE);
@@ -88,8 +80,8 @@ BOOL HelpTable::AddEntry(HelpEntry* entry)
 
     std::vector<HelpEntry*>::iterator it, itEnd;
 
-    itEnd = _entries->end();
-    for (it = _entries->begin(); it != itEnd; ++it)
+    itEnd = _entries.end();
+    for (it = _entries.begin(); it != itEnd; ++it)
         {
             if ((*it)->GetName() == entry->GetName())
                 {
@@ -97,19 +89,19 @@ BOOL HelpTable::AddEntry(HelpEntry* entry)
                 }
         }
 
-    _entries->push_back(entry);
+    _entries.push_back(entry);
     return true;
 }
 BOOL HelpTable::RemoveEntry(const std::string &name)
 {
-    std::vector<HelpEntry*>::iterator it, itEnd, it2, it2End;;
+    std::vector<HelpEntry*>::iterator it, itEnd, it2, it2End;
 
-    itEnd = it2End = _entries->end();
-    for (it = _entries->begin(); it != itEnd; ++it)
+    itEnd = it2End = _entries.end();
+    for (it = _entries.begin(); it != itEnd; ++it)
         {
             if ((*it)->GetName() == name)
                 {
-                    for (it2 = _entries->begin(); it2 != it2End; ++it2)
+                    for (it2 = _entries.begin(); it2 != it2End; ++it2)
                         {
                             if ((*it2) == (*it))
                                 {
@@ -120,7 +112,7 @@ BOOL HelpTable::RemoveEntry(const std::string &name)
                                     (*it2)->RemoveSeeAlso((*it)->GetName());
                                 }
                         }
-                    _entries->erase(it);
+                    _entries.erase(it);
                     delete (*it);
                     return true;
                 }
@@ -132,8 +124,8 @@ BOOL HelpTable::EntryExists(const std::string &name)
 {
     std::vector<HelpEntry*>::iterator it, itEnd;
 
-    itEnd = _entries->end();
-    for (it = _entries->begin(); it != itEnd; ++it)
+    itEnd = _entries.end();
+    for (it = _entries.begin(); it != itEnd; ++it)
         {
             if ((*it)->GetName() == name)
                 {
@@ -152,8 +144,8 @@ HelpEntry* HelpTable::GetEntry(const std::string &name)
             return NULL;
         }
 
-    itEnd = _entries->end();
-    for (it = _entries->begin(); it != itEnd; ++it)
+    itEnd = _entries.end();
+    for (it = _entries.begin(); it != itEnd; ++it)
         {
             if ((*it)->GetName() == name)
                 {
@@ -167,8 +159,8 @@ BOOL HelpTable::ShowEntry(const std::string &name, Player* mobile)
 {
     std::vector<HelpEntry*>::iterator it, itEnd;
 
-    itEnd = _entries->end();
-    for (it = _entries->begin(); it != itEnd; ++it)
+    itEnd = _entries.end();
+    for (it = _entries.begin(); it != itEnd; ++it)
         {
             if ((*it)->GetName() == name)
                 {

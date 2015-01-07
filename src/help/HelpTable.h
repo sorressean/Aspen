@@ -11,7 +11,7 @@
 #ifdef MODULE_HELP
 class HelpTable
 {
-    std::vector<HelpEntry*> *_entries;
+    std::vector<HelpEntry*> _entries;
 public:
     HelpTable();
     ~HelpTable();

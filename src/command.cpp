@@ -204,15 +204,15 @@ BOOL Commandable::AddCommand(Command* com)
 }
 BOOL Commandable::RemoveCommand(const std::string &name)
 {
-std::vector<Command*>::iterator it, itEnd;
+    std::vector<Command*>::iterator it, itEnd;
 
     if (!CommandExists(name))
         {
             return false;
         }
 
-itEnd = _commands.end();
-for (it = _commands.begin(); it != itEnd; ++it)
+    itEnd = _commands.end();
+    for (it = _commands.begin(); it != itEnd; ++it)
         {
             if ((*it)->GetName() == name)
                 {
@@ -225,7 +225,7 @@ for (it = _commands.begin(); it != itEnd; ++it)
 }
 BOOL Commandable::CommandExists(const std::string &name)
 {
-for (auto it: _commands)
+    for (auto it: _commands)
         {
             if (it->GetName() == name)
                 {

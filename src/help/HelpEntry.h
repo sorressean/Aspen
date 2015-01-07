@@ -7,7 +7,10 @@
 #include <tinyxml.h>
 
 #ifdef MODULE_HELP
-enum HELP_ENTRY_TYPE {h_general, h_combat, h_movement, h_communication};
+enum class HelpType
+{
+    General, Builder, Administration
+};
 
 //the basic help node.
 class HelpEntry
@@ -16,11 +19,11 @@ class HelpEntry
     std::string _name;
     std::string _data;
     FLAG _access;
-    HELP_ENTRY_TYPE _type;
+    HelpType _type;
     UINT _id;
-    std::vector<HelpEntry*> *_seeAlso;
+    std::vector<HelpEntry*> _seeAlso;
 public:
-    HelpEntry(const std::string &name, const std::string &data, FLAG access, HELP_ENTRY_TYPE type);
+    HelpEntry(const std::string &name, const std::string &data, FLAG access, HelpType type);
     HelpEntry();
     ~HelpEntry();
     /*
@@ -44,12 +47,12 @@ public:
     /*
     *Return: The type of the help entry.
     */
-    HELP_ENTRY_TYPE GetType() const;
+    HelpType GetType() const;
     /*
     *Sets the type of the help entry.
     *Param: [in] the type for the entry.
     */
-    void SetType(HELP_ENTRY_TYPE type);
+    void SetType(HelpType type);
     /*
     *Returns the ID of the help file.
     */

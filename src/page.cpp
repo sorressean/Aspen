@@ -1,6 +1,7 @@
 #include <string>
 #include <vector>
 #include <algorithm>
+#include <functional>
 #include "mud.h"
 #include "conf.h"
 #include "page.h"
@@ -23,10 +24,36 @@ void Pager::AddLines(const std::string& text)
 Pager::Pager(const std::vector<std::string>& lines, int plen)
 {
     _pagelen = plen;
+    _pagepos = 0;
+    _mobile = nullptr;
+
     AddLines(lines);
 }
 Pager::Pager(const std::string& text, int plen)
 {
     _pagelen = plen;
+    _mobile = nullptr;
+
     AddLines(text);
+}
+
+bool Pager::EnterPager(Player* mobile)
+{
+    _mobile = mobile;
+    LineHandler::CreateHandler(_mobile->GetSocket(), std::bind(&Pager::Input, this, std::placeholders::_1, std::placeholders::_2));
+    return true;
+}
+void Pager::Input(void* arg, const std::string& input)
+{
+}
+int Pager::PageCount() const
+{
+    return Min((int)(_lines.size()/(_pagelen-3)), 1);
+}
+void Pager::PrintPage()
+{
+    if (_mobile == nullptr)
+        {
+            return;
+        }
 }
