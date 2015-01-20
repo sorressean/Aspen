@@ -54,7 +54,7 @@ public:
 
     /*
     *Functions to load and retrieve player data from their file
-    *param: [in] a boost archive to use for output.
+    *param: [in] the TiXml document.
     */
     void SerializeDoc(TiXmlDocument* doc);
     virtual void Serialize(TiXmlElement* root);
