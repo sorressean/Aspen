@@ -31,7 +31,7 @@ virtual     void GetDependencies(std::vector<std::string>* out) const = 0;
 };
 
 template <class T>
-class ComponentMeta
+class ComponentMeta:public IComponentMeta
 {
     std::string _name;
     std::vector <std::string> _dependencies; //component dependencies.
