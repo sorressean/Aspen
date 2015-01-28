@@ -39,7 +39,6 @@ public:
     ComponentMeta(const std::string &name)
     {
         _name = name;
-        events.RegisterEvent("OnInitialize", new Event());
     }
     ~ComponentMeta()
     {

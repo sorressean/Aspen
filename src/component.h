@@ -14,6 +14,7 @@
 
 class Component
 {
+protected:
     BaseObject* _object; //The object associated with the component (it's parent).
     IComponentMeta* _parent;
     BOOL _attached; //set if the component is attached to an object.
@@ -47,7 +48,7 @@ public:
     */
     void Detach();
 
-    virtual void _Init();
+    virtual void Initialize();
 };
 
 /*

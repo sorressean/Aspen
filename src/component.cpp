@@ -5,7 +5,7 @@
 #include "eventargs.h"
 #include "world.h"
 
-void Component::_Init()
+void Component::Initialize()
 {
     _attached = false;
 
@@ -18,12 +18,12 @@ void Component::_Init()
 
 Component::Component(IComponentMeta* parent):_parent(parent)
 {
-    _Init();
+    Initialize();
 }
 Component::Component()
 {
     _parent = NULL;
-    _Init();
+    Initialize();
 }
 
 Component::~Component()
