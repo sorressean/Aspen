@@ -116,7 +116,6 @@ void World::Shutdown()
 void World::Copyover(Player* mobile)
 {
     std::list<Player*>* _users;
-    int cuptime = (int)time(NULL);
     int ruptime = (int)GetRealUptime();
 
     FILE* copyover = NULL;
@@ -129,7 +128,7 @@ void World::Copyover(Player* mobile)
             return;
         }
 
-    fprintf(copyover, "%d %d\n", cuptime, ruptime);
+    fprintf(copyover, "%d\n", ruptime);
     sockaddr_in* addr=NULL;
 //itterate through the players and write info to their copyover file:
     _users = _pmanager.GetPlayers();
