@@ -1,14 +1,13 @@
-#include <unistd.h>
-#include <signal.h>
-#include <sys/stat.h>
-#include <sys/types.h>
+#include <sstream>
 #include <iostream>
 #include <cstdlib>
 #include <cstring>
 #include <ctime>
 #include <cstdio>
-#include <sstream>
-#include <iostream>
+#include <unistd.h>
+#include <signal.h>
+#include <sys/stat.h>
+#include <sys/types.h>
 #include "mud.h"
 #include "conf.h"
 #include "socket.h"
@@ -23,7 +22,7 @@
 
 //prototypes:
 //recovers from a copyover
-static void CopyoverRecover();
+static bool CopyoverRecover();
 //the main game loop function
 static void GameLoop();
 //our signal callback
@@ -46,15 +45,6 @@ int main(int argc, const char** argv)
 
 //this needs to be done before world is forcefully created.
     CalloutManager::Initialize();
-
-#ifdef ELAPSED_STARTUP
-    timeval start, end;
-    std::stringstream st;
-    float elapsed;
-
-//we start the counter for elapsed here:
-    gettimeofday(&start, NULL);
-#endif
 
 //we check to see if dirs exist.
 //if we can create them, we do so. Otherwise we just fail when they don't exist.
@@ -118,7 +108,7 @@ int main(int argc, const char** argv)
 
     CreateComponents();
     world->SetRealUptime(time(NULL));
-    world->SetCopyoverUptime(time(NULL));
+    world->SetCopyoverUptime(0);
     srand(time(NULL));
 
 //make the server listen:
@@ -128,7 +118,10 @@ int main(int argc, const char** argv)
 //set the listening socket to the descripter specified
             world->GetServer()->Recover(listener);
 //load all saved connections
-            CopyoverRecover();
+            if (!CopyoverRecover())
+                {
+                    return EXIT_FAILURE;
+                }
         }
     else
         {
@@ -148,56 +141,43 @@ int main(int argc, const char** argv)
 //load state:
     world->LoadState();
 
-#ifdef ELAPSED_STARTUP
-//and we're finished
-    gettimeofday(&end, NULL);
-    elapsed = (end.tv_sec - start.tv_sec) *1000;
-    elapsed += (float)(end.tv_usec-start.tv_usec)/1000;
-    st << "Startup elapsed time: " << elapsed << " ms." << std::endl;
-    world->WriteLog(st.str());
-#endif
 //start the game loop:
     world->WriteLog("Entering game loop.");
     GameLoop();
     CalloutManager::Release();
     world->WriteLog("Game loop finished, exiting.");
     delete world;
-    return 0;
+    return EXIT_SUCCESS;
 }
 
-static void CopyoverRecover()
+static bool CopyoverRecover()
 {
     World* world = World::GetPtr();
-
-    Player* person = NULL;
-    sockaddr_in* saddr = NULL;
-    FILE* recover = NULL;
-    const short family = PF_INET;
+    Player* person = nullptr;
+    sockaddr_in* saddr = nullptr;
+    FILE* recover = nullptr;
     unsigned short port = 0;
     unsigned long addr = 0;
     char *name=new char[15];
     char* host=new char[256];
     int desc = 0;
-    int cuptime = 0;
     int ruptime = 0;
 
     world->WriteLog("Starting copyover recovery");
     recover=fopen(COPYOVER_FILE,"rb");
-    if (recover==NULL)
+    if (recover == nullptr)
         {
             world->WriteLog("There was an error opening the copyover recovery file, now exiting.", ERR);
-            exit(EXIT_FAILURE);
+            return false;
         }
 
-    fscanf(recover, "%d %d\n", &cuptime, &ruptime);
+    fscanf(recover, "%d\n", &ruptime);
 
     world->SetRealUptime((time_t)ruptime);
-    world->SetCopyoverUptime((time_t)cuptime);
+    world->SetCopyoverUptime(time(NULL));
 
     while (1)
         {
-            memset(name, 0, 15);
-            memset(host, 0, 256);
             fscanf(recover,"%d %s %hu %lu %s\n",
                    &desc,name, &port,&addr, host);
             if (desc==-1)
@@ -206,7 +186,7 @@ static void CopyoverRecover()
                 }
             Socket* sock=new Socket(desc);
             saddr = sock->GetAddr();
-            saddr->sin_family=family;
+            saddr->sin_family = PF_INET;
             saddr->sin_port=port;
             saddr->sin_addr.s_addr=addr;
             sock->SetHost(host);
@@ -227,6 +207,7 @@ static void CopyoverRecover()
     fclose(recover);
     remove(COPYOVER_FILE);
     world->WriteLog("Copyover completed.");
+    return true;
 }
 
 static void GameLoop()
