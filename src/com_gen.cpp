@@ -451,12 +451,11 @@ CMDUptime::CMDUptime()
 BOOL CMDUptime::Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args,int subcmd)
 {
     World* world = World::GetPtr();
-
     TimeInfo ruptime(time(NULL)-world->GetRealUptime());
     TimeInfo cuptime(time(NULL)-world->GetCopyoverUptime());
 
     mobile->Message(MSG_INFO,Capitalize(MUD_NAME)+" has been up for "+ruptime.ToString()+".");
-    if (world->GetCopyoverUptime()==world->GetRealUptime())
+    if (world->GetCopyoverUptime() == 0)
         {
             mobile->Message(MSG_INFO,"There hasn't been a copyover this reboot.");
         }
