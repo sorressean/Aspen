@@ -18,12 +18,10 @@ void Component::Initialize()
 
 Component::Component(IComponentMeta* parent):_parent(parent)
 {
-    Initialize();
 }
 Component::Component()
 {
     _parent = NULL;
-    Initialize();
 }
 
 Component::~Component()

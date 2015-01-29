@@ -102,7 +102,9 @@ public:
     */
     virtual T* Create()
     {
-        return new T(this);
+        T* ret = new T();
+        ret->Initialize();
+        return ret;
     }
 
     /*
