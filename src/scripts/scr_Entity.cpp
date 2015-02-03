@@ -42,6 +42,9 @@ void RegisterEntityMethods(const char* obj)
     assert(r);
     r = engine->RegisterMethod(obj, "array<Entity@>@ GetContents() const", asFUNCTION(GetEntityContents), asCALL_CDECL_OBJLAST);
     assert(r);
+#warning todo: add get and set parent.
+    r = engine->RegisterMethod(obj, "bool CanReceive(Entity@ obj) const", asMETHOD(Entity, CanReceive));
+    assert(r);
 }
 
 void InitializeEntity()

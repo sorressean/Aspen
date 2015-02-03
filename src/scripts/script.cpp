@@ -1,5 +1,6 @@
 #include <angelscript.h>
 #include <scriptstdstring.h>
+#include <scriptarray.h>
 #include <sstream>
 #include <cassert>
 #include "../mud.h"
@@ -41,7 +42,9 @@ ScriptEngine* ScriptEngine::_ptr;
 ScriptEngine::ScriptEngine()
 {
     _engine = asCreateScriptEngine(ANGELSCRIPT_VERSION);
+    RegisterScriptArray(_engine, true);
     RegisterStdString(_engine);
+    RegisterStdStringUtils(_engine);
     _engine->SetMessageCallback(asFUNCTION(MessageCallback), NULL, asCALL_CDECL);
 }
 ScriptEngine::~ScriptEngine()
