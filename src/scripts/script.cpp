@@ -76,6 +76,12 @@ bool ScriptEngine::RegisterMethod(const char* obj, const char* decl, asSFuncPtr 
     ret = _engine->RegisterObjectMethod(obj, decl, ptr, asCALL_THISCALL);
     return (ret >= 0? true : false);
 }
+bool ScriptEngine::RegisterMethod(const char* obj, const char* decl, asSFuncPtr ptr, asDWORD callConv)
+{
+    int ret = 0;
+    ret = _engine->RegisterObjectMethod(obj, decl, ptr, callConv);
+    return (ret >= 0? true : false);
+}
 bool ScriptEngine::RegisterObject(const char* obj)
 {
     int r = 0;
