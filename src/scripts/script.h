@@ -1,5 +1,8 @@
 #pragma once
 #include <angelscript.h>
+#include <scriptarray.h>
+#include <list>
+#include <vector>
 #include "../mud.h"
 #include "../conf.h"
 #include "../event.h"

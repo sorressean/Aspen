@@ -11,6 +11,7 @@
 #include "scr_BaseObject.h"
 #include "scr_Entity.h"
 
+
 static void MessageCallback(const asSMessageInfo *msg, void *param)
 {
     World* world = World::GetPtr();

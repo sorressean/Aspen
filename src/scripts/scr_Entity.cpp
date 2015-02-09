@@ -6,31 +6,16 @@
 #include "script.h"
 #include "scr_Entity.h"
 #include "scr_BaseObject.h"
+#include "helper.h"
 
-static CScriptArray* GetEntityContents(Entity* obj)
+CScriptArray* GetEntityContents(Entity* obj)
 {
-    ScriptEngine* engine = ScriptEngine::GetPtr();
-    unsigned int size;
-    unsigned int i;
-    void* ptr = nullptr;
+if (obj == nullptr)
+{
+return nullptr;
+}
 
-    if (obj == nullptr)
-        {
-            return nullptr;
-        }
-
-    std::list<Entity*>* contents = obj->GetContents();
-    size = contents->size();
-    asIObjectType* objtype = engine->GetBaseEngine()->GetObjectTypeByDecl("array<Entity@>");
-    CScriptArray* ret = CScriptArray::Create(objtype, size);
-
-    for (i = 0; i < size; ++i)
-        {
-            ptr = &contents[i];
-            ret->SetValue(i, ptr);
-        }
-
-    return ret;
+    return ContainerToScriptArray<std::list<Entity*>>("array<Entity@>", *(obj->GetContents()));
 }
 
 void RegisterEntityMethods(const char* obj)
@@ -44,6 +29,8 @@ void RegisterEntityMethods(const char* obj)
     assert(r);
 #warning todo: add get and set parent.
     r = engine->RegisterMethod(obj, "bool CanReceive(Entity@ obj) const", asMETHOD(Entity, CanReceive));
+    assert(r);
+    r = engine->RegisterMethod(obj, "bool MoveTo(Entity@ obj)", asMETHOD(Entity, CanReceive));
     assert(r);
 }
 
