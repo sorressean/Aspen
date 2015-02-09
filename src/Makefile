@@ -86,7 +86,7 @@ clean:
 	@$(RM) $(OUTPUT)
 
 format:
-	@$(ECHO) `date '+%H:%M:%S:'` Formatting
+	@$(ECHO) Formatting
 	@$(FORMATTER) $(FORMAT_FLAGS) $(S_FILES)
 	@$(FORMATTER) $(FORMAT_FLAGS) *.h
 	@$(RM) -f *.orig
