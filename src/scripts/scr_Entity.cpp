@@ -10,10 +10,10 @@
 
 CScriptArray* GetEntityContents(Entity* obj)
 {
-if (obj == nullptr)
-{
-return nullptr;
-}
+    if (obj == nullptr)
+        {
+            return nullptr;
+        }
 
     return ContainerToScriptArray<std::list<Entity*>>("array<Entity@>", *(obj->GetContents()));
 }
