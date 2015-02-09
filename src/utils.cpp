@@ -90,7 +90,6 @@ UINT GetFileSize(const std::string &path)
     return GetFileSize(path.c_str());
 }
 
-
 void Tokenize(const std::string &str, std::vector<std::string> &tokens, const std::string &del)
 {
     std::string::size_type lpos=str.find_first_not_of(del,0);
@@ -287,7 +286,7 @@ std::string Capitalize(const std::string &str)
     return ret;
 }
 
-std::string Repete(const std::string &filler,const int count)
+std::string Repeat(const std::string &filler,const int count)
 {
     std::string ret;
     int i;
@@ -297,12 +296,13 @@ std::string Repete(const std::string &filler,const int count)
         }
     return ret;
 }
-std::string Repete(char filler, const int count)
+std::string Repeat(const char filler, const int count)
 {
     std::string temp;
     temp += filler;
-    return Repete(temp, count);
+    return Repeat(temp, count);
 }
+
 
 std::string Center(const std::string &str,const int width)
 {
@@ -323,9 +323,9 @@ std::string Center(const std::string &str,const int width)
     right = result;
     left = (result /2? result+1 : result);
 //remainder of 1.
-    temp=Repete(" ", left);
+    temp=Repeat(" ", left);
     temp += str;
-    temp += Repete(" ", right);
+    temp += Repeat(" ", right);
 
     return temp;
 }
@@ -415,7 +415,7 @@ std::string Columnize(std::vector<std::string> *data, int cols, std::vector<std:
                         }
                 }
         }
-    st << "\n" << Repete("-", width) << "\n";
+    st << "\n" << Repeat("-", width) << "\n";
 
     itEnd = data->end();
     for (it = data->begin(), i = 1; it != itEnd; ++it, ++i)
@@ -438,15 +438,6 @@ std::string Columnize(std::vector<std::string> *data, int cols, std::vector<std:
     return (st.str());
 }
 
-std::string BuildBar(int blocks, int filled, char start, char finish, char filler, char empty)
-{
-    std::string ret;
-    ret += start;
-    ret += Repete(filler, filled);
-    ret += Repete(empty, (blocks-filled));
-    ret += finish;
-    return ret;
-}
 int Percentage(int total, int count, int round)
 {
     float temp = (float)total/(float)count;

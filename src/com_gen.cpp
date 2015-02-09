@@ -116,7 +116,7 @@ BOOL CMDWho::Execute(const std::string &verb, Player* mobile,std::vector<std::st
     std::stringstream st;
 
     mobile->Write(Center(Capitalize(MUD_NAME),80)+"\n");
-    mobile->Write(Repete("-",80));
+    mobile->Write(Repeat("-",80));
 
     players = world->GetPlayerManager().GetPlayers();
     itEnd=players->end();
@@ -131,7 +131,7 @@ BOOL CMDWho::Execute(const std::string &verb, Player* mobile,std::vector<std::st
             mobile->Message(MSG_LIST, st.str());
             st.str("");
         }
-    mobile->Write(Repete("-",80));
+    mobile->Write(Repeat("-",80));
     st << MUD_NAME << " currently has " << players->size() << (players->size()==1?"user ":"users ") << "online.\n";
     mobile->Write(st.str());
     return true;
@@ -222,11 +222,11 @@ BOOL CMDScore::Execute(const std::string &verb, Player* mobile,std::vector<std::
     std::stringstream st;
 
     st << Center(Capitalize(mobile->GetName()), 80) << endl;
-    st << Repete("-", 80) << endl << endl;
+    st << Repeat("-", 80) << endl << endl;
 
     TimeInfo tm(mobile->GetOnlineTime());
     mobile->Write("Online time:\t"+tm.ToString()+"\n");
-    mobile->Write(Repete("-",80)+"\n");
+    mobile->Write(Repeat("-",80)+"\n");
 
     st << left << setw(20) << "level: " << mobile->GetLevel() << std::endl;
     mobile->Write(st.str());
@@ -514,9 +514,9 @@ BOOL CMDWhois::Execute(const std::string &verb, Player* mobile,std::vector<std::
 
     tm.Calculate(targ->GetOnlineTime());
     mobile->Message(MSG_LIST,Capitalize(targ->GetName()+" "+targ->GetTitle()));
-    mobile->Message(MSG_LIST,Repete("-",80));
+    mobile->Message(MSG_LIST,Repeat("-",80));
     mobile->Message(MSG_LIST,Capitalize(targ->GetName())+" has spent "+tm.ToString()+" online.");
-    mobile->Message(MSG_LIST,Repete("-",80));
+    mobile->Message(MSG_LIST,Repeat("-",80));
     if (load)
         {
             delete targ;
@@ -667,7 +667,7 @@ BOOL CMDSockstats::Execute(const std::string &verb, Player* mobile,std::vector<s
 
     std::stringstream st;
     st << "Socket stats" << std::endl;
-    st << Repete('-', 80) << std::endl;
+    st << Repeat('-', 80) << std::endl;
     st << "Window size: " << sock->GetWindowWidth() << "X" << sock->GetWindowHeight() << std::endl;
     st << "Terminal type: " << sock->GetTermtype() << "." << std::endl;
     st <<  "Connecting from: " << sock->GetHost() << "." << std::endl;

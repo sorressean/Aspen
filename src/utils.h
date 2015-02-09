@@ -62,8 +62,8 @@ BOOL IsFirstUser();
 //string functions:
 void Lower(std::string &str);
 std::string Capitalize(const std::string &str);
-std::string Repete(const std::string &filler,const int count);
-std::string Repete(char filler, const int count);
+std::string Repeat(const std::string &filler,const int count);
+std::string Repeat(const char filler, const int count);
 std::string Center(const std::string &str,const int width);
 std::string Explode(std::vector <std::string> &parts, const std::string &del = " ");
 std::string Explode(const std::vector<std::string>& parts, std::vector<std::string>::const_iterator it, const std::string &del = " ");
@@ -133,17 +133,6 @@ ExitDirection GetDirectionByName(const std::string &name);
 *Return: A string with the columnized data.
 */
 std::string Columnize(std::vector<std::string> *data, int cols, std::vector<std::string>* headers = NULL, int width = 80);
-/*
-*Builds a graphical representation of a bar.
-*param: [in] the number of blocks in the bar.
-*note: the total length of the string returned is always blocks+2 for the beginning and end char.
-*[in] the number of the blocks that are actually filled.
-*[in] the character that signifies the beginning of the bar.
-*[in] the character that signifies the end of the bar.
-*[in] the character that is the "filler", which shows how much is taken up.
-*[in] the character to use to signify empty blocks.
-*/
-std::string BuildBar(int blocks, int filled, char start = '[', char finish = ']', char filler = '=', char empty = ' ');
 /*
 *Does the math required to calculate a percentage.
 *Param: the total value used.

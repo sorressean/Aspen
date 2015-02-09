@@ -91,7 +91,7 @@ void ShowGroup(Player* mobile, OlcGroup* group)
     std::stringstream st;
     std::vector<IOlcEntry*>* entries = new std::vector<IOlcEntry*>();
 
-    st << Repete('-', 80)  << std::endl;
+    st << Repeat('-', 80)  << std::endl;
     group->ListEntries(entries);
     for (IOlcEntry* entry: *entries)
         {

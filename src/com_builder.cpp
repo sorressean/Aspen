@@ -302,7 +302,7 @@ std::string CMDAStats::Stats(Player* mobile, Zone* area)
 {
     std::stringstream st;
     st << area->GetName() << std::endl;
-    st << Repete('-', 80) << std::endl;
+    st << Repeat('-', 80) << std::endl;
     return st.str();
 }
 
@@ -391,12 +391,12 @@ BOOL CMDVList::Execute(const std::string &verb, Player* mobile,std::vector<std::
 
     itEnd = objects.end();
     st << left << setw(10) << "vnum" << right << "name" << endl;
-    st << Repete('-', 80) << endl;
+    st << Repeat('-', 80) << endl;
     for (it = objects.begin(); it != itEnd; ++it)
         {
             st << left << setw(10) << (*it)->GetOnum() << right << (*it)->GetName() << endl;
         }
-    st << Repete('-', 80) << endl;
+    st << Repeat('-', 80) << endl;
     st << count << (count == 1? "object" : "objects") << " found." << endl;
     mobile->Message(MSG_LIST, st.str());
     return true;
@@ -486,12 +486,12 @@ BOOL CMDMList::Execute(const std::string &verb, Player* mobile,std::vector<std::
         }
     itEnd = npcs.end();
     st << left << setw(10) << "vnum" << right << "name" << endl;
-    st << Repete('-', 80) << endl;
+    st << Repeat('-', 80) << endl;
     for (it = npcs.begin(); it != itEnd; ++it)
         {
             st << left << setw(10) << (*it)->GetOnum() << right << (*it)->GetName() << endl;
         }
-    st << Repete('-', 80) << endl;
+    st << Repeat('-', 80) << endl;
     st << count << (count == 1? "npc" : "npcs") << " found." << endl;
     mobile->Message(MSG_LIST, st.str());
     return true;

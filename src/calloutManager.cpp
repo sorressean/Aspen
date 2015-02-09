@@ -114,7 +114,7 @@ std::string CalloutManager::Profile() const
     double maxd;
     double avg;
 
-    st << Repete("-", 80) << std::endl;
+    st << Repeat("-", 80) << std::endl;
     st << "Callout profile." << std::endl;
     if (_fired == 0)
         {

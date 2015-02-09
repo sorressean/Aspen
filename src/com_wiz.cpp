@@ -369,7 +369,7 @@ BOOL CMDSstatus::Execute(const std::string &verb, Player* mobile,std::vector<std
     st << "Kernel cpu usage: " << TimevalToString(&(usage.ru_stime)) << "." << std::endl;
 //memory:
     st << "Max rss: " << usage.ru_maxrss << "KB (" << (usage.ru_maxrss/1024.0F) << "mb)." << std::endl;
-    st << Repete("-", 80) << std::endl;
+    st << Repeat("-", 80) << std::endl;
 //timing information
     updates = world->GetUpdates();
     tu = world->GetUpdateTime();
