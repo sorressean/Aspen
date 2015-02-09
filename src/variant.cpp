@@ -171,7 +171,7 @@ BOOL Variant::Compare(const Variant &var) const
                 case VAR_INT:
                     return ((int)d == var.GetInt()?1:0);
                 case VAR_DOUBLE:
-                    return FEqual(d, var.GetDouble());
+                    return d==var.GetDouble();
                 case VAR_BYTE:
                     return ((char)d == var.GetByte()?1:0);
                 default:

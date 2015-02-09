@@ -474,14 +474,6 @@ std::string GenerateUuid()
     return to_string(uuid);
 }
 
-BOOL FEqual(const double a, const double b)
-{
-    const double FLT_EPSILON = .0000001192092896F;
-    double difference = fabs(b-a);
-    double max = Max<float>(fabs(a), fabs(b));
-    return (difference <= max * FLT_EPSILON ? true : false);
-}
-
 std::string EnglishList(std::vector<std::string> *in)
 {
     std::vector <std::string>::iterator it;
@@ -692,15 +684,6 @@ point& point::operator =(point& p)
     y = p.y;
     z = p.z;
     return *this;
-}
-
-int Interpolate(int top, int level, float factor)
-{
-    float ret = 0;
-    ret = ((float)level* 1.25F) * factor;
-    ret *= (float) top;
-    ret /= 2.0F;
-    return (int)floor(ret);
 }
 
 int RandomPercent()

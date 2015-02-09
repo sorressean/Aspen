@@ -74,7 +74,6 @@ FLAG BitSet(FLAG flag,int pos);
 FLAG BitClear(FLAG flag,int pos);
 BOOL BitIsSet(FLAG flag,int pos);
 std::string GenerateUuid();
-BOOL FEqual(const double a, const double b);
 //minmax
 template <typename T>
 inline T Min(const T a,const T b)
@@ -169,7 +168,6 @@ public:
     point& operator =(point &p);
 };
 
-int Interpolate(int top, int level, float factor);
 int RandomPercent();
 int RandomRange(int bottom, int top);
 #endif
