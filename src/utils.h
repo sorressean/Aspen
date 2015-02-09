@@ -11,7 +11,6 @@
 
 //misc
 int tonum(const char* str);
-inline BOOL IsAlpha(const char* const character);
 BOOL FileExists(const std::string &name);
 /*
 *Checks to see if a directory exists.

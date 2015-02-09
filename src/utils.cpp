@@ -5,6 +5,7 @@
 #include <map>
 #include <vector>
 #include <ctime>
+#include <ctype.h>
 #include <cstdlib>
 #include <cmath>
 #include <sstream>
@@ -34,16 +35,6 @@ int tonum(const char* str)
 
     ret = atoi(str);
     return ret;
-}
-
-inline BOOL IsAlpha(const char* const character)
-{
-    int asc=(int)*character;
-    if (((asc>=65)&&(asc<=90))||((asc>=97)&&(asc<=122)))
-        {
-            return true;
-        }
-    return false;
 }
 
 BOOL FileExists(const std::string &name)
@@ -210,7 +201,7 @@ BOOL IsValidUserName(const std::string &input)
         }
     while (*ptr)
         {
-            if (!IsAlpha(ptr))
+            if (!isalpha(*ptr))
                 {
                     return false;
                 }
