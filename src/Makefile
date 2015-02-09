@@ -89,7 +89,8 @@ format:
 	@$(ECHO) Formatting
 	@$(FORMATTER) $(FORMAT_FLAGS) $(S_FILES)
 	@$(FORMATTER) $(FORMAT_FLAGS) *.h
+	@$(FORMATTER) $(FORMAT_FLAGS) *.hpp
 	@$(RM) -f *.orig
 	@for d in $(MODULES);do cd $$d;$(FORMATTER) $(FORMAT_FLAGS) *.h;$(FORMATTER) $(FORMAT_FLAGS) *.cpp;$(RM) *.orig;cd $(CURDIR);done
-	@for d in $(COREMODULES);do cd $$d;$(FORMATTER) $(FORMAT_FLAGS) *.h;$(FORMATTER) $(FORMAT_FLAGS) *.cpp;$(RM) *.orig;cd $(CURDIR);done
+	@for d in $(COREMODULES);do cd $$d;$(FORMATTER) $(FORMAT_FLAGS) *.h;$(FORMATTER) $(FORMAT_FLAGS) *.hpp;$(FORMATTER) $(FORMAT_FLAGS) *.cpp;$(RM) *.orig;cd $(CURDIR);done
 	@$(ECHO) Done.
