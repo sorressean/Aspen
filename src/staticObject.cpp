@@ -65,7 +65,7 @@ Entity* StaticObject::Create()
 {
     Entity* obj = new Entity();
     obj->SetParent(this);
-    obj->InitializeUuid();
+    obj->Initialize();
     Copy((BaseObject*)obj);
     _totalCount ++;
     descendants.push_back(obj);

@@ -14,7 +14,7 @@
 #include "staticObject.h"
 #include "event.h"
 #include "utils.h"
-#include "serializationHelpers.hpp"
+#include "serializationHelpers.h"
 
 static int zone_saves;
 
@@ -313,7 +313,7 @@ Npc* Zone::CreateNpc(VNUM num, Room* origin)
     templ->Copy(ret);
     ret->SetOrigin(origin);
     ret->EnterGame();
-    ret->InitializeUuid();
+    ret->Initialize();
     if (!ret->MoveTo(origin))
         {
             delete ret;

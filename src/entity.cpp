@@ -56,7 +56,7 @@ void Entity::Serialize(TiXmlElement* root)
 {
     TiXmlElement* ent = new TiXmlElement("entity");
     BaseObject::Serialize(ent);
-    Uuid::Serialize(ent);
+    _uuid.Serialize(ent);
     TiXmlElement* contents = new TiXmlElement("contents");
 
     std::list<Entity*>::iterator cit, citEnd;
@@ -105,7 +105,7 @@ void Entity::Deserialize(TiXmlElement* root)
         }
 
     root->Attribute("location", &loc);
-    Uuid::Deserialize(root);
+    _uuid.Deserialize(root);
     if (!loc)
         {
             _location=NULL;
@@ -210,12 +210,20 @@ BOOL Entity::IsRoom() const
 {
     return false;
 }
+void Entity::Initialize()
+{
+_uuid.Initialize();
+}
+Uuid& Entity::GetUuid()
+{
+return _uuid;
+}
 
 std::string Entity::Identify(Player* mob)
 {
     std::stringstream st;
     st << BaseObject::Identify(mob);
-    st << "UUID: " << GetUuid() << std::endl;
+    st << "UUID: " << _uuid.ToString() << std::endl;
     return st.str();
 }
 

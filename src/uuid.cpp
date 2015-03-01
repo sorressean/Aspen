@@ -1,50 +1,68 @@
+#include <random>
+#include <chrono>
 #include "uuid.h"
-#include "utils.h"
 #include <string>
+#include <sstream>
+#include <iomanip>
 #include <tinyxml.h>
+#include "serializationHelpers.h"
 
 Uuid::Uuid()
 {
+    _id = 0;
 }
 Uuid::Uuid(const Uuid& u)
 {
-    _uuid = u._uuid;
+    _id = u._id;
 }
 Uuid::~Uuid()
 {
 }
-void Uuid::InitializeUuid()
+void Uuid::Initialize()
 {
-    _uuid = GenerateUuid();
+    unsigned int seed = std::chrono::system_clock::now().time_since_epoch().count();
+    std::mt19937 generator(seed);
+    _id = generator();
+    _id <<= 32;
+    _id |= (0xFFFF&time(NULL));
 }
-std::string Uuid::GetUuid() const
+std::string Uuid::ToString() const
 {
-    return _uuid;
+    std::stringstream st;
+    st << std::setw(16) << std::setbase(16);
+    st << _id;
+    return st.str();
 }
-Uuid& Uuid::GetRealUuid()
+unsigned long long int Uuid::GetValue() const
 {
-    return *this;
+return _id;
 }
+
 void Uuid::Serialize(TiXmlElement* root)
 {
-    root->SetAttribute("uuid", _uuid.c_str());
+TiXmlElement* node = new TiXmlElement("uuid");
+    SerializeLong(node, _id);
+root->LinkEndChild(node);
 }
 void Uuid::Deserialize(TiXmlElement* root)
 {
-    _uuid = root->Attribute("uuid");
+TiXmlNode* node = NULL;
+TiXmlElement* element = NULL;
+
+node = root->FirstChild("uuid");
+if (node)
+{
+element = node->ToElement();
+    _id = DeserializeLong(root);
+}
 }
 
 Uuid& Uuid::operator =(Uuid& u)
 {
-    _uuid = u._uuid;
-    return *this;
-}
-Uuid& Uuid::operator =(const std::string &uuid)
-{
-    _uuid = uuid;
+    _id = u._id;
     return *this;
 }
 bool Uuid::operator ==(Uuid& u)
 {
-    return (u._uuid == _uuid);
+    return (u._id == _id);
 }

@@ -750,7 +750,7 @@ void Socket::InitializeNewPlayer()
     Player* mob = GetPlayer();
     World* world = World::GetPtr();
 
-    mob->InitializeUuid();
+    mob->Initialize();
 //passwords matched, see if the player is the first user. If so, make it a god.
     if (IsFirstUser())
         {

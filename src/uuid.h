@@ -1,21 +1,20 @@
 #pragma once
-#include <string>
 #include <tinyxml.h>
+#include <string>
 
 class Uuid
 {
 protected:
-    std::string _uuid;
+    unsigned long long int _id;
 public:
     Uuid();
     Uuid(const Uuid &u);
     ~Uuid();
-    void InitializeUuid();
-    std::string GetUuid() const;
-    Uuid& GetRealUuid();
+    void Initialize();
+    std::string ToString() const;
+unsigned long long int GetValue() const;
     void Serialize(TiXmlElement* root);
     void Deserialize(TiXmlElement* root);
     Uuid& operator =(Uuid& u);
-    Uuid& operator =(const std::string &uuid);
     bool operator ==(Uuid& u);
 };

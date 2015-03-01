@@ -1,11 +1,11 @@
 #pragma once
 #include <tinyxml.h>
 #include <string>
-#include "../modules.h"
 #include "../../mud.h"
 #include "../../conf.h"
 #include "../../uuid.h"
 #include "../../player.h"
+#include "../modules.h"
 
 #ifdef MODULE_BOARD
 

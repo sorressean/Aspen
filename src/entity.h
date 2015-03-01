@@ -20,12 +20,13 @@
 #include "uuid.h"
 
 class Room;
-class Entity:public BaseObject, public Uuid
+class Entity:public BaseObject
 {
 protected:
     std::list <Entity*> _contents;
     Entity* _location;
     StaticObject* _parent;
+Uuid _uuid;
 public:
     Entity();
     virtual ~Entity();
@@ -86,6 +87,8 @@ public:
     virtual BOOL IsPlayer() const;
     virtual BOOL IsLiving() const;
     virtual BOOL IsRoom() const;
+virtual void Initialize();
+Uuid& GetUuid();
     /*
     *GetStats is used for ostat and other commands.
     *Param: [in] the mobile requesting the stats.

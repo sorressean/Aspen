@@ -1,8 +1,9 @@
 #pragma once
 #include <tinyxml.h>
+#include <string>
 
 template <class O, class C, class I>
-BOOL SerializeList(const std::string& parent, const std::string& nodename, TiXmlElement* root, C& container)
+bool SerializeList(const std::string& parent, const std::string& nodename, TiXmlElement* root, C& container)
 {
     I it, itEnd;
     TiXmlElement* pnode = new TiXmlElement(parent.c_str());
@@ -17,7 +18,7 @@ BOOL SerializeList(const std::string& parent, const std::string& nodename, TiXml
 }
 
 template <class O, class C>
-BOOL DeserializeList(TiXmlElement* root, const std::string &parent, C& objects)
+bool DeserializeList(TiXmlElement* root, const std::string &parent, C& objects)
 {
     TiXmlNode* node = NULL;
     TiXmlElement* element = NULL;

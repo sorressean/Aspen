@@ -6,10 +6,10 @@
 #include <tinyxml.h>
 #include <vector>
 #include <string>
-#include "boardPost.h"
+#include "../../mud.h"
+#include "../../mud.h"
 #include "../modules.h"
-#include "../../mud.h"
-#include "../../mud.h"
+#include "boardPost.h"
 
 #ifdef MODULE_BOARD
 
