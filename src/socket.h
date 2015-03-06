@@ -52,8 +52,8 @@ struct in_data
 
 struct Window
 {
-unsigned short width;
-unsigned short height;
+    unsigned short width;
+    unsigned short height;
 };
 
 class Socket:public BaseSocket

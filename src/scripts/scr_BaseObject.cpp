@@ -34,7 +34,7 @@ void RegisterBaseObjectMethods(const char* obj)
 //add get/set Zone
     r = engine->RegisterMethod(obj, "int GetOnum() const", asMETHOD(BaseObject, GetOnum));
     assert(r);
-    r = engine->RegisterMethod(obj, "bool AddAlias(string& alias)", asMETHOD(BaseObject, AddAlias));
+    r = engine->RegisterMethod(obj, "bool AddAlias(string alias)", asMETHOD(BaseObject, AddAlias));
     assert(r);
     r = engine->RegisterMethod(obj, "bool AliasExists(string& alias) const", asMETHOD(BaseObject, AliasExists));
 

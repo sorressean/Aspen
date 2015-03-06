@@ -156,7 +156,7 @@ bool Socket::Read()
                                                 }
                                         } //finding the end of subneg.
                                     char *subneg = new char[buflen];
-                                    memcpy(subneg, temp+(k-2-buflen), buflen);
+                                    memcpy(subneg, &temp+(k-buflen-2), buflen);
                                     OnNegotiation(option, subneg, buflen);
                                     delete []subneg;
                                     continue;
@@ -232,14 +232,18 @@ void Socket::OnNegotiation(char option, const char* buf, int length)
 //naws
     if (option == TELNET_NAWS)
         {
+            unsigned short s = 0;
+            char* ptr = (char*)buf;
             if (length != 5)
                 {
                     return;
                 }
 
-            memcpy((void*)&_winsize, buf, (sizeof(short)*2));
-            _winsize.width = ntohs(_winsize.width);
-            _winsize.height = ntohs(_winsize.height);
+            s = *(unsigned short*)ptr;
+            _winsize.width=ntohs(s);
+            s += 2;
+            s = *(unsigned short*)ptr;
+            _winsize.height = ntohs(s);
             return;
         }
 

@@ -12,7 +12,7 @@ public:
     ~Uuid();
     void Initialize();
     std::string ToString() const;
-unsigned long long int GetValue() const;
+    unsigned long long int GetValue() const;
     void Serialize(TiXmlElement* root);
     void Deserialize(TiXmlElement* root);
     Uuid& operator =(Uuid& u);

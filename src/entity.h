@@ -26,7 +26,7 @@ protected:
     std::list <Entity*> _contents;
     Entity* _location;
     StaticObject* _parent;
-Uuid _uuid;
+    Uuid _uuid;
 public:
     Entity();
     virtual ~Entity();
@@ -87,8 +87,8 @@ public:
     virtual BOOL IsPlayer() const;
     virtual BOOL IsLiving() const;
     virtual BOOL IsRoom() const;
-virtual void Initialize();
-Uuid& GetUuid();
+    virtual void Initialize();
+    Uuid& GetUuid();
     /*
     *GetStats is used for ostat and other commands.
     *Param: [in] the mobile requesting the stats.

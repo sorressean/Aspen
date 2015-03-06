@@ -35,26 +35,26 @@ std::string Uuid::ToString() const
 }
 unsigned long long int Uuid::GetValue() const
 {
-return _id;
+    return _id;
 }
 
 void Uuid::Serialize(TiXmlElement* root)
 {
-TiXmlElement* node = new TiXmlElement("uuid");
+    TiXmlElement* node = new TiXmlElement("uuid");
     SerializeLong(node, _id);
-root->LinkEndChild(node);
+    root->LinkEndChild(node);
 }
 void Uuid::Deserialize(TiXmlElement* root)
 {
-TiXmlNode* node = NULL;
-TiXmlElement* element = NULL;
+    TiXmlNode* node = NULL;
+    TiXmlElement* element = NULL;
 
-node = root->FirstChild("uuid");
-if (node)
-{
-element = node->ToElement();
-    _id = DeserializeLong(root);
-}
+    node = root->FirstChild("uuid");
+    if (node)
+        {
+            element = node->ToElement();
+            _id = DeserializeLong(root);
+        }
 }
 
 Uuid& Uuid::operator =(Uuid& u)

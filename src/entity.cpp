@@ -212,11 +212,11 @@ BOOL Entity::IsRoom() const
 }
 void Entity::Initialize()
 {
-_uuid.Initialize();
+    _uuid.Initialize();
 }
 Uuid& Entity::GetUuid()
 {
-return _uuid;
+    return _uuid;
 }
 
 std::string Entity::Identify(Player* mob)
