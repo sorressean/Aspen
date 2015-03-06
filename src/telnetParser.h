@@ -7,7 +7,7 @@ class TelnetParser
 {
     unsigned char _state;
     unsigned char* _buff;
-    unsigned char* _newbuf;
+    unsigned char* _newbuff;
 public:
     EventManager events;
     TelnetParser();
@@ -16,4 +16,5 @@ public:
     unsigned char* GetFinalBuffer() const;
     void Parse();
     void Reset();
+    void Initialize(unsigned int size);
 };

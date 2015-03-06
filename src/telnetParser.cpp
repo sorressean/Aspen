@@ -10,13 +10,12 @@
 TelnetParser::TelnetParser()
 {
     Reset();
-    _newbuf = new unsigned char[4096];
     events.RegisterEvent("OnNegotiation", new Event());
     events.RegisterEvent("OnOption", new Event());
 }
 TelnetParser::~TelnetParser()
 {
-    if (_newbuf != nullptr)
+    if (_newbuff != nullptr)
         {
             delete []_newbuf;
         }
@@ -28,7 +27,7 @@ void TelnetParser::SetBuffer(unsigned char* buff)
 }
 unsigned char* TelnetParser::GetFinalBuffer() const
 {
-    return _newbuf;
+    return _newbuff;
 }
 void TelnetParser::Parse()
 {
@@ -38,7 +37,7 @@ void TelnetParser::Parse()
         }
 
     unsigned char* r = _buff;
-    unsigned char* w = _newbuf;
+    unsigned char* w = _newbuff;
     unsigned char cur;
     unsigned char option = 0;
     unsigned char* start = nullptr;
@@ -125,4 +124,17 @@ void TelnetParser::Reset()
 {
     _state = 0;
     _buff = nullptr;
+    if (_newbuff)
+        {
+            delete []_newbuff;
+            _newbuff = nullptr;
+        }
+}
+void TelnetParser::Initialize(unsigned int size)
+{
+    if (_newbuff)
+        {
+            delete []_newbuff;
+        }
+    _newbuff = new unsigned char[size];
 }

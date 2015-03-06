@@ -16,6 +16,7 @@
 #include "conf.h"
 #include "player.h"
 #include "baseSocket.h"
+#include "telnetParser.h"
 
 /*
 *This is the connection type that each player has, it is used to hold the state of their current connection.
@@ -73,6 +74,7 @@ class Socket:public BaseSocket
     BOOL _compressing;
     time_t _lastInput;
     z_stream zstream;
+    TelnetParser _parser;
 public:
     /*
     *Constructer
