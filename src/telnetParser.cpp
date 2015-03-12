@@ -9,7 +9,7 @@
 
 TelnetParser::TelnetParser()
 {
-    Reset();
+Reset();
     events.RegisterEvent("OnNegotiation", new Event());
     events.RegisterEvent("OnOption", new Event());
 }
@@ -17,7 +17,7 @@ TelnetParser::~TelnetParser()
 {
     if (_newbuff != nullptr)
         {
-            delete []_newbuf;
+            delete []_newbuff;
         }
 }
 
@@ -91,7 +91,7 @@ void TelnetParser::Parse()
                     start = r;
                     for (end = start; *end; ++end)
                         {
-                            if (*end == TELNET_SE)
+                            if (*end == TELNET_IAC)
                                 {
                                     _state = TELNET_SE;
                                     break;

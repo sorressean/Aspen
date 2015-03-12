@@ -39,6 +39,7 @@ public:
     *Param: [in] the data to append to the output buffer.
     */
     virtual void                 Write(const std::string &txt );
+virtual size_t Write(const unsigned char* data);
     /*
     *Flushes the current buffer and writes len bytes, stored in buffer.
     *Param: [in] a pointer to the buffer to write.

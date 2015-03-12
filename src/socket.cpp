@@ -86,9 +86,8 @@ bool Socket::Read()
     char temp[4096 + 2];
     int size = 0;
     int k = 0;
-    int buflen = 0;
+char* newbuff = nullptr;
     size_t nlpos = 0;
-    char option = '\0';
     std::string line;
 
     while (true)
@@ -121,64 +120,13 @@ bool Socket::Read()
 //we have something to read
             _totalReceived += size; //add the number of bytes received to the counter.
             temp[size] = '\0'; //sets the last byte we received to null.
-//iterate through the list and add each command to the input string.
-//also parse out telnet sequences.
+_parser.Initialize(size);
+_parser.SetBuffer((unsigned char*)temp);
+_parser.Parse();
+newbuff = (char*)_parser.GetFinalBuffer();
+
             for (k=0; k<size; k++)
                 {
-                    if (temp[k] == TELNET_IAC)
-                        {
-                            //handle telnet sequence
-                            k++; //move k to the option/command
-                            if (k < size && temp[k] == TELNET_IAC)
-                                {
-                                    //check for iac iac
-                                    _inBuffer += temp[k];
-                                    continue;
-                                }
-                            if (temp[k] == TELNET_SB)
-                                {
-                                    //subnegotiation
-                                    k++;
-                                    if (k+1 >= size) //malformed sequence
-                                        {
-//bail out of read.
-                                            return true;
-                                        }
-                                    option = temp[k];
-                                    buflen = 0;
-                                    k++;
-                                    for (; k<size; ++k, ++buflen)
-                                        {
-                                            if (temp[k] == TELNET_SE)
-                                                {
-//                                                    k += 2; //move it past the sb, iac and to the char after.
-                                                    break;
-                                                }
-                                        } //finding the end of subneg.
-                                    char *subneg = new char[buflen];
-                                    memcpy(subneg, &temp+(k-buflen-2), buflen);
-                                    OnNegotiation(option, subneg, buflen);
-                                    delete []subneg;
-                                    continue;
-                                }
-                            if (temp[k] == TELNET_DO || temp[k] == TELNET_DONT || temp[k] == TELNET_WILL || temp[k] == TELNET_WONT)
-                                {
-                                    //check for options
-                                    k++;
-                                    if (k >= size) //make sure the buffer actually has the right amount of data
-                                        {
-                                            return true;
-                                        }
-                                    OnOption(temp[k-1], temp[k]);
-                                    continue;
-                                } //option
-                            else
-                                {
-                                    //command provided
-                                    OnCommand(temp[k]);
-                                    continue;
-                                } //command
-                        } //check for IAC
                     _inBuffer+=temp[k];
                 } //end iteration of buffer
 //check for a newline character.
@@ -195,6 +143,7 @@ bool Socket::Read()
                     break;
                 }
         }
+_parser.Reset();
     return true;
 }
 
@@ -300,7 +249,7 @@ bool Socket::Flush()
     _totalSent += _outBuffer.length();
     if ((_mobile!=NULL)&&(_con==ConnectionType::Game))
         {
-            _outBuffer+="\r\n"+world->BuildPrompt(_mobile->GetPrompt(), _mobile)+TELNET_IAC+TELNET_GA;
+            _outBuffer+="\r\n"+world->BuildPrompt(_mobile->GetPrompt(), _mobile)+(char)TELNET_IAC+(char)TELNET_GA;
         }
 
     if (!_compressing)
