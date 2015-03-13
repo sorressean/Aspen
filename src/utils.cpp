@@ -11,14 +11,12 @@
 #include <sstream>
 #include <iomanip>
 #include <typeinfo>
-#include <boost/uuid/uuid.hpp>
-#include <boost/uuid/random_generator.hpp>
-#include <boost/uuid/uuid_io.hpp>
 #include <sys/stat.h>
 #include <dirent.h>
 #include <sys/time.h>
 #include "utils.h"
 #include "editor.h"
+#include "uuid.h"
 
 int tonum(const char* str)
 {
@@ -454,7 +452,6 @@ int Percentage(int total, int count, int round)
 
     return (int)temp;
 }
-
 FLAG BitSet(FLAG flag,int pos)
 {
     return flag|=pos;
@@ -470,8 +467,9 @@ BOOL BitIsSet(FLAG flag,int pos)
 
 std::string GenerateUuid()
 {
-    boost::uuids::uuid uuid = boost::uuids::random_generator()();
-    return to_string(uuid);
+  Uuid id;
+  id.Initialize();
+  return id.ToString();
 }
 
 std::string EnglishList(std::vector<std::string> *in)

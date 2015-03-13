@@ -3,9 +3,9 @@
 OUTPUT=../lib/libtinyxml.a
 AR = ar
 RANLIB = ranlib
-CC	= g++
+CC=c++
 #general build.
-CFLAGS	= -fpic -O2 -s -march=native -I../include
+CFLAGS = -I../include -O2 -march=native -s
 #release:
 #CFLAGS	= -fpic -O3 -s -march=native -I../include -flto
 

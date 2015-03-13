@@ -3,7 +3,7 @@
 OUTPUT=../lib/libangelscript.a
 AR = ar
 RANLIB = ranlib
-CC	= g++
+CC=c++
 #general build.
 CFLAGS	= -fpic -O2 -g -march=native -I../include
 #release:
