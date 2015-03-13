@@ -5,7 +5,7 @@ AR = ar
 RANLIB = ranlib
 CC=c++
 #general build.
-CFLAGS	= -fpic -O2 -g -march=native -I../include
+CFLAGS = -O2 -march=native -s -I../include
 #release:
 #CFLAGS	= -fpic -O3 -s -march=native -I../include -flto
 
