@@ -9,7 +9,7 @@
 
 TelnetParser::TelnetParser()
 {
-Reset();
+    Reset();
     events.RegisterEvent("OnNegotiation", new Event());
     events.RegisterEvent("OnOption", new Event());
 }

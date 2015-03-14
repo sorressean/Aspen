@@ -1,4 +1,3 @@
-#include <boost/algorithm/string.hpp>
 #include <string>
 #include <vector>
 #include <list>
@@ -10,6 +9,7 @@
 #include "baseObject.h"
 #include "player.h"
 #include "npc.h"
+#include "utils.h"
 
 bool FullMatch(const std::string& a, const std::string& b, bool icase)
 {
@@ -19,7 +19,7 @@ bool FullMatch(const std::string& a, const std::string& b, bool icase)
         }
     else
         {
-            return boost::iequals(a, b) ? true : false;
+            return iequals(a,b);
         }
 }
 

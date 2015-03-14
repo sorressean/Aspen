@@ -86,7 +86,7 @@ bool Socket::Read()
     char temp[4096 + 2];
     int size = 0;
     int k = 0;
-char* newbuff = nullptr;
+    char* newbuff = nullptr;
     size_t nlpos = 0;
     std::string line;
 
@@ -120,10 +120,10 @@ char* newbuff = nullptr;
 //we have something to read
             _totalReceived += size; //add the number of bytes received to the counter.
             temp[size] = '\0'; //sets the last byte we received to null.
-_parser.Initialize(size);
-_parser.SetBuffer((unsigned char*)temp);
-_parser.Parse();
-newbuff = (char*)_parser.GetFinalBuffer();
+            _parser.Initialize(size);
+            _parser.SetBuffer((unsigned char*)temp);
+            _parser.Parse();
+            newbuff = (char*)_parser.GetFinalBuffer();
 
             for (k=0; k<size; k++)
                 {
@@ -143,7 +143,7 @@ newbuff = (char*)_parser.GetFinalBuffer();
                     break;
                 }
         }
-_parser.Reset();
+    _parser.Reset();
     return true;
 }
 

@@ -336,9 +336,9 @@ Variant Variant::operator +(Variant var)
                 case VAR_BYTE:
                     return Variant(str+var.GetByte());
                 case VAR_INT:
-		  return Variant(str+std::to_string(var.GetInt()));
-		                case VAR_DOUBLE:
-				  return Variant(str + std::to_string(var.GetDouble()));
+                    return Variant(str+std::to_string(var.GetInt()));
+                case VAR_DOUBLE:
+                    return Variant(str + std::to_string(var.GetDouble()));
                 default:
                     throw(VariableEmptyException("Tried to add an empty variant to another variant."));
                 }

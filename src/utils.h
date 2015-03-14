@@ -170,4 +170,5 @@ public:
 
 int RandomPercent();
 int RandomRange(int bottom, int top);
+bool iequals(const std::string& a, const std::string& b);
 #endif

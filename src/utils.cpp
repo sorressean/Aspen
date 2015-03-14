@@ -8,6 +8,7 @@
 #include <ctype.h>
 #include <cstdlib>
 #include <cmath>
+#include <strings.h>
 #include <sstream>
 #include <iomanip>
 #include <typeinfo>
@@ -467,9 +468,9 @@ BOOL BitIsSet(FLAG flag,int pos)
 
 std::string GenerateUuid()
 {
-  Uuid id;
-  id.Initialize();
-  return id.ToString();
+    Uuid id;
+    id.Initialize();
+    return id.ToString();
 }
 
 std::string EnglishList(std::vector<std::string> *in)
@@ -699,4 +700,9 @@ int RandomRange(int bottom, int top)
     std::uniform_int_distribution<int> dist(bottom, top);
     auto generator = std::bind(dist, rgen);
     return generator();
+}
+
+bool iequals(const std::string& a, const std::string& b)
+{
+    return (strcasecmp(a.c_str(), b.c_str()) == 0? true:false);
 }
