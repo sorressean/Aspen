@@ -17,6 +17,7 @@
 #include "player.h"
 #include "baseSocket.h"
 #include "telnetParser.h"
+#include "telnetParserEvents.hpp"
 
 /*
 *This is the connection type that each player has, it is used to hold the state of their current connection.
@@ -97,15 +98,11 @@ public:
     /*
     *on_option: sent with an iac <will/wont/etc> <option>
     */
-    void OnOption(char option, char command);
-    /*
-    *Sent for a command (like AYT).
-    */
-    void OnCommand(char command);
+    void OnOption(EventArgs* args);
     /*
     *On sub negotiation (like termtype reply).
     */
-    void OnNegotiation(char option, const char* buf, int length);
+    void OnNegotiation(EventArgs* args);
     /*
     *Initializes the zlib internal stuff for mccp.
     */

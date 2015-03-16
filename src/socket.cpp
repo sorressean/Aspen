@@ -14,6 +14,8 @@
 #include "player.h"
 #include "world.h"
 #include "telnet.h"
+#include "telnetParser.h"
+#include "telnetParserEvents.hpp"
 
 InputHandle::InputHandle()
 {
@@ -48,6 +50,10 @@ Socket::Socket(const int desc):
     _compressedSent = 0;
     _winsize.width = 80;
     _winsize.height = 23;
+
+//parser events.
+    _parser.events.AddCallback("OnNegotiation", std::bind(&Socket::OnNegotiation, this, std::placeholders::_1));
+    _parser.events.AddCallback("OnOption", std::bind(&Socket::OnOption, this, std::placeholders::_1));
 }
 Socket::~Socket()
 {
@@ -153,8 +159,11 @@ bool Socket::Read()
 }
 
 //telnet handler functions
-void Socket::OnOption(char option, char command)
+void Socket::OnOption(EventArgs* args)
 {
+    OptionEventArgs* eargs = (OptionEventArgs*)args;
+    unsigned char option = eargs->GetOption();
+    unsigned char command = eargs->GetCommand();
 //mccp2
     if (option == TELNET_WILL && command == TELNET_COMPRESS2)
         {
@@ -177,44 +186,47 @@ void Socket::OnOption(char option, char command)
 
     return;
 }
-void Socket::OnCommand(char command)
+void Socket::OnNegotiation(EventArgs* args)
 {
-    return;
-}
-void Socket::OnNegotiation(char option, const char* buf, int length)
-{
+    NegotiationEventArgs* eargs = (NegotiationEventArgs*)args;
+    unsigned char option = eargs->GetOption();
+    unsigned char* buff = eargs->GetData();
+    unsigned int length = eargs->GetSize();
+
 //naws
     if (option == TELNET_NAWS)
         {
-            unsigned short s = 0;
-            char* ptr = (char*)buf;
-            if (length != 5)
+            unsigned char temp = 0;
+            if (length != 4)
                 {
                     return;
                 }
+            temp = buff[0];
+            buff[0] = buff[1];
+            buff[1] = temp;
+            temp = buff[2];
+            buff[2] = buff[3];
+            buff[3] = temp;
 
-            s = *(unsigned short*)ptr;
-            _winsize.width=ntohs(s);
-            s += 2;
-            s = *(unsigned short*)ptr;
-            _winsize.height = ntohs(s);
+            _winsize.width=(*(unsigned short*)buff);
+            _winsize.height = (*(unsigned short*)(buff+2));
             return;
         }
 
 //termtype
-    if (option == TELNET_TERMTYPE && length >2 && buf[0] == TELNET_IS)
+    if (option == TELNET_TERMTYPE && length >2 && buff[0] == TELNET_IS)
         {
             int i = 1;
             int curlength = length - 1;
             _termtype.clear();
             for (i = 1; i < curlength; ++i)
                 {
-                    if (!isprint(buf[i]))
+                    if (!isprint(buff[i]))
                         {
                             _termtype = "unknown";
                             return;
                         }
-                    _termtype += buf[i];
+                    _termtype += buff[i];
                 }
             return;
         }

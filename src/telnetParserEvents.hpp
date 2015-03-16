@@ -7,13 +7,18 @@
 class OptionEventArgs:public EventArgs
 {
     unsigned char _option;
+    unsigned char _command;
 public:
-    OptionEventArgs(unsigned char option) : _option(option)
+    OptionEventArgs(unsigned char option, unsigned char command) : _option(option), _command(command)
     {
     }
     unsigned char GetOption() const
     {
         return _option;
+    }
+    unsigned char GetCommand() const
+    {
+        return _command;
     }
 };
 

@@ -54,69 +54,70 @@ void TelnetParser::Parse()
 //possible: iac iac or iac option.
             if (cur == TELNET_IAC)
                 {
-//iac escape (iac iac)
-                    if (_state == TELNET_IAC)
-                        {
-                            *r = TELNET_IAC;
-                            continue;
-                        }
 //beginning of sequence or end of negotiation
-                    if (_state == 0 || _state == TELNET_SB)
+                    if (_state == 0)
                         {
                             _state = TELNET_IAC;
+                            continue;
+                        }
+                    if (_state == TELNET_IAC)
+                        {
+                            *w = TELNET_IAC;
+                            ++w;
+                            continue;
                         }
                 }
 //option negotiation
-            else if ((cur == TELNET_DO || cur == TELNET_DONT || cur == TELNET_WILL || cur == TELNET_WONT) && _state == TELNET_IAC)
+            else if (_state == TELNET_IAC)
                 {
-                    _state = cur;
-                    continue;
-                }
-//option
-//we've already seen will|wont|do|dont.
-            else if (_state == TELNET_WILL || _state == TELNET_WONT || _state == TELNET_DO || _state == TELNET_DONT)
-                {
-                    OptionEventArgs args(cur);
-                    events.CallEvent("OnOption", &args, static_cast<void*>(this));
-                    _state = 0;
-                    continue;
-                }
-//sequence begin
-            else if(cur == TELNET_SB && _state == TELNET_IAC)
-                {
-                    _state = TELNET_SB;
-                    continue;
-                }
-            else if (_state == TELNET_SB && !option)
-                {
-                    option = cur;
-                    start = r;
-                    end = r;
-                    for (; counter < _size; ++ counter, ++end)
+                    if (cur == TELNET_DO || cur == TELNET_DONT || cur == TELNET_WILL || cur == TELNET_WONT)
                         {
-                            cur = _buff[counter];
-                            if (cur == TELNET_IAC)
-                                {
-                                    _state = TELNET_SE;
-                                    break;
-                                }
+                            _state = cur;
+                            continue;
                         }
-                    start+=2; //move it past option.
-                    end-=2; //move it to the last bite of the sequence.
-                    continue;
-                }
-//sequence end.
-            else if(_state == TELNET_SE)
-                {
-                    if (start != end && option)
+//sequence begin
+                    else if(cur == TELNET_SB && _state == TELNET_IAC)
                         {
-                            NegotiationEventArgs args(option, start, (unsigned int)(end-start));
+                            _state = TELNET_SB;
+                            continue;
+                        }
+//sequence end
+                    else if(cur == TELNET_SE && start != end && option)
+                        {
+                            NegotiationEventArgs args(option, start, (unsigned int)(end-start)+1);
                             events.CallEvent("OnNegotiation", &args, static_cast<void*>(this));
                             _state = 0;
                             option = 0;
                             start = end = nullptr;
                             continue;
                         }
+                }
+//option
+//we've already seen will|wont|do|dont.
+            else if (_state == TELNET_WILL || _state == TELNET_WONT || _state == TELNET_DO || _state == TELNET_DONT)
+                {
+                    OptionEventArgs args(cur, _state);
+                    events.CallEvent("OnOption", &args, static_cast<void*>(this));
+                    _state = 0;
+                    continue;
+                }
+            else if (_state == TELNET_SB && !option)
+                {
+                    option = cur;
+                    start = r+counter;
+                    end = start;
+                    for (; counter < _size; ++ counter, ++end)
+                        {
+                            cur = _buff[counter];
+                            if (cur == TELNET_IAC)
+                                {
+                                    _state = TELNET_IAC;
+                                    break;
+                                }
+                        }
+                    start++; //move it past option.
+                    end--; //move it to the last bite of the sequence.
+                    continue;
                 }
             else
                 {
