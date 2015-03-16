@@ -170,17 +170,18 @@ void Socket::OnOption(EventArgs* args)
     unsigned char option = eargs->GetOption();
     unsigned char command = eargs->GetCommand();
 //mccp2
-    if (command == TELNET_WILL && option == TELNET_COMPRESS2)
-        {
-            Write(TELNET_COMPRESS2_STR);
-            Flush();
-            if (!InitCompression())
-                {
-                    Kill();
-                }
-            return;
-        }
-
+    /*
+        if (command == TELNET_WILL && option == TELNET_COMPRESS2)
+            {
+                Write(TELNET_COMPRESS2_STR);
+                Flush();
+                if (!InitCompression())
+                    {
+                        Kill();
+                    }
+                return;
+            }
+    */
 //termtype
     if (command == TELNET_WILL && option == TELNET_TERMTYPE)
         {
