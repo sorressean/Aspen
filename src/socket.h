@@ -76,6 +76,7 @@ class Socket:public BaseSocket
     time_t _lastInput;
     z_stream zstream;
     TelnetParser _parser;
+    unsigned char* cbuff;
 public:
     /*
     *Constructer
@@ -107,6 +108,9 @@ public:
     *Initializes the zlib internal stuff for mccp.
     */
     BOOL InitCompression();
+    virtual size_t Write(const unsigned char* data);
+    virtual size_t Write(const void* buffer, size_t count);
+    virtual void                 Write(const std::string &txt );
     /*
     *Flushes the sockets output buffer to the client.
     *Return: true on success, false on failure.

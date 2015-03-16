@@ -9,6 +9,8 @@
 
 TelnetParser::TelnetParser()
 {
+    _buff = nullptr;
+    _newbuff = nullptr;
     Reset();
     events.RegisterEvent("OnNegotiation", new Event());
     events.RegisterEvent("OnOption", new Event());
@@ -137,8 +139,8 @@ void TelnetParser::Reset()
     if (_newbuff)
         {
             delete []_newbuff;
-            _newbuff = nullptr;
         }
+    _newbuff = nullptr;
 }
 void TelnetParser::Initialize(unsigned int size)
 {

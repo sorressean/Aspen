@@ -81,6 +81,7 @@ void BaseSocket::Write(const std::string &txt)
 }
 size_t BaseSocket::Write(const unsigned char* data)
 {
+    Flush();
     size_t length = strlen((const char*)data);
     return Write((void*)const_cast<unsigned char*>(data), length);
 }

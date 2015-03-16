@@ -185,4 +185,5 @@ enum ExitDirection {nowhere, north, south, east, west, northeast, northwest, sou
 #define VERSION_STR "Sapphire Mud v0.1.1"
 #define MAX_LEVEL 251
 #define MAX_MOB_LEVEL 301
+#define MCCP_BUFFER_SIZE 4096
 #endif
