@@ -124,10 +124,15 @@ bool Socket::Read()
             _parser.SetBuffer((unsigned char*)temp);
             _parser.Parse();
             newbuff = (char*)_parser.GetFinalBuffer();
+            size = _parser.GetFinalSize();
+            if (size == 0)
+                {
+                    return true;
+                }
 
             for (k=0; k<size; k++)
                 {
-                    _inBuffer+=temp[k];
+                    _inBuffer+=newbuff[k];
                 } //end iteration of buffer
 //check for a newline character.
             nlpos = _inBuffer.find_first_of("\r\n");

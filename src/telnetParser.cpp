@@ -29,6 +29,10 @@ unsigned char* TelnetParser::GetFinalBuffer() const
 {
     return _newbuff;
 }
+unsigned int TelnetParser::GetFinalSize() const
+{
+    return _newsize;
+}
 void TelnetParser::Parse()
 {
     if (_buff == nullptr)
@@ -42,10 +46,11 @@ void TelnetParser::Parse()
     unsigned char option = 0;
     unsigned char* start = nullptr;
     unsigned char* end = nullptr;
+    unsigned int counter = 0;
 
-    for (; *r; ++r)
+    for (counter = 0; counter < _size; ++counter)
         {
-            cur = *r;
+            cur = _buff[counter];
 //possible: iac iac or iac option.
             if (cur == TELNET_IAC)
                 {
@@ -53,7 +58,7 @@ void TelnetParser::Parse()
                     if (_state == TELNET_IAC)
                         {
                             *r = TELNET_IAC;
-                            r++;
+                            continue;
                         }
 //beginning of sequence or end of negotiation
                     if (_state == 0 || _state == TELNET_SB)
@@ -62,12 +67,10 @@ void TelnetParser::Parse()
                         }
                 }
 //option negotiation
-            else if (cur == TELNET_DO || cur == TELNET_DONT || cur == TELNET_WILL || cur == TELNET_WONT)
+            else if ((cur == TELNET_DO || cur == TELNET_DONT || cur == TELNET_WILL || cur == TELNET_WONT) && _state == TELNET_IAC)
                 {
-                    if (_state == TELNET_IAC)
-                        {
-                            _state = cur;
-                        }
+                    _state = cur;
+                    continue;
                 }
 //option
 //we've already seen will|wont|do|dont.
@@ -76,40 +79,43 @@ void TelnetParser::Parse()
                     OptionEventArgs args(cur);
                     events.CallEvent("OnOption", &args, static_cast<void*>(this));
                     _state = 0;
+                    continue;
                 }
 //sequence begin
-            else if(cur == TELNET_SB)
+            else if(cur == TELNET_SB && _state == TELNET_IAC)
                 {
-                    if (_state == TELNET_IAC)
-                        {
-                            _state = TELNET_SB;
-                        }
+                    _state = TELNET_SB;
+                    continue;
                 }
             else if (_state == TELNET_SB && !option)
                 {
                     option = cur;
                     start = r;
-                    for (end = start; *end; ++end)
+                    end = r;
+                    for (; counter < _size; ++ counter, ++end)
                         {
-                            if (*end == TELNET_IAC)
+                            cur = _buff[counter];
+                            if (cur == TELNET_IAC)
                                 {
                                     _state = TELNET_SE;
                                     break;
                                 }
                         }
-                    start++; //move it past option.
-                    end--; //move it to the last bite of the sequence.
+                    start+=2; //move it past option.
+                    end-=2; //move it to the last bite of the sequence.
+                    continue;
                 }
 //sequence end.
-            else if(cur == TELNET_SE)
+            else if(_state == TELNET_SE)
                 {
-                    if (_state == TELNET_IAC && start != end && option)
+                    if (start != end && option)
                         {
                             NegotiationEventArgs args(option, start, (unsigned int)(end-start));
                             events.CallEvent("OnNegotiation", &args, static_cast<void*>(this));
                             _state = 0;
                             option = 0;
                             start = end = nullptr;
+                            continue;
                         }
                 }
             else
@@ -118,11 +124,14 @@ void TelnetParser::Parse()
                     w++;
                 }
         }
+    _newsize = (unsigned int)(w-_newbuff);
 }
 
 void TelnetParser::Reset()
 {
     _state = 0;
+    _size = 0;
+    _newsize = 0;
     _buff = nullptr;
     if (_newbuff)
         {
@@ -137,4 +146,5 @@ void TelnetParser::Initialize(unsigned int size)
             delete []_newbuff;
         }
     _newbuff = new unsigned char[size];
+    _size = size;
 }
