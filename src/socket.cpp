@@ -170,18 +170,16 @@ void Socket::OnOption(EventArgs* args)
     unsigned char option = eargs->GetOption();
     unsigned char command = eargs->GetCommand();
 //mccp2
-    /*
-        if (command == TELNET_WILL && option == TELNET_COMPRESS2)
-            {
-                Write(TELNET_COMPRESS2_STR);
-                Flush();
-                if (!InitCompression())
-                    {
-                        Kill();
-                    }
-                return;
-            }
-    */
+    if (command == TELNET_WILL && option == TELNET_COMPRESS2)
+        {
+            Write(TELNET_COMPRESS2_STR);
+            Flush();
+            if (!InitCompression())
+                {
+                    Kill();
+                }
+            return;
+        }
 //termtype
     if (command == TELNET_WILL && option == TELNET_TERMTYPE)
         {
@@ -278,10 +276,13 @@ size_t Socket::Write(const void* buffer, size_t count)
         {
             zstream.avail_in = count;
             zstream.next_in = (unsigned char*)const_cast<void*>(buffer);
+            zstream.avail_out = 4096;
+            zstream.next_out = cbuff;
 
             while (zstream.avail_in)
                 {
-                    zstream.avail_out = 4096 -(zstream.next_out-cbuff);
+                    zstream.avail_out = 4096-(zstream.next_out - cbuff);
+
                     if (zstream.avail_out)
                         {
                             status = deflate(&zstream, Z_SYNC_FLUSH);
@@ -289,34 +290,25 @@ size_t Socket::Write(const void* buffer, size_t count)
                                 {
                                     return 0;
                                 }
-
-                            length = (zstream.next_out-cbuff);
-                            if (length > 0)
-                                {
-                                    _compressedSent += length;
-                                    b = 0;
-                                    for (i = 0; i < length; i +=b)
-                                        {
-                                            w = Min<int>(length-i, 4096);
-                                            b = write(_control, (cbuff+i), w);
-                                            if (b < 0)
-                                                {
-                                                    return 0;
-                                                }
-                                        }
-                                }
-                            if (i <= 0)
-                                {
-                                    break;
-                                }
-                            if (i > 0 && i < length)
-                                {
-                                    memmove(cbuff, cbuff + i, length - i);
-                                }
-                            zstream.next_out = ((cbuff + length) - i);
-                            return b;
                         }
                 }
+
+            length = (zstream.next_out-cbuff);
+            if (length > 0)
+                {
+                    _compressedSent += length;
+                    b = 0;
+                    for (i = 0; i < length; i +=b)
+                        {
+                            w = Min<int>(length-i, 4096);
+                            b = write(_control, (cbuff+i), w);
+                            if (b < 0)
+                                {
+                                    return 0;
+                                }
+                        }
+                }
+            return b;
         }
     else
         {
@@ -372,10 +364,13 @@ bool Socket::Flush()
             //we are compressing, wheee!
             zstream.avail_in = _outBuffer.length();
             zstream.next_in = (unsigned char*)const_cast<char*>(_outBuffer.c_str());
+            zstream.avail_out = 4096;
+            zstream.next_out = cbuff;
 
             while (zstream.avail_in)
                 {
-                    zstream.avail_out = 4096 -(zstream.next_out-cbuff);
+                    zstream.avail_out = 4096-(zstream.next_out - cbuff);
+
                     if (zstream.avail_out)
                         {
                             status = deflate(&zstream, Z_SYNC_FLUSH);
@@ -383,35 +378,26 @@ bool Socket::Flush()
                                 {
                                     return 0;
                                 }
-
-                            length = (zstream.next_out-cbuff);
-                            if (length > 0)
-                                {
-                                    _compressedSent += length;
-                                    for (i = 0; i < length; i +=b)
-                                        {
-                                            w = Min<int>(length-i, 4096);
-                                            b = write(_control, (cbuff+i), w);
-                                            if (b < 0)
-                                                {
-                                                    return false;
-                                                }
-                                        }
-                                }
-                            if (i <= 0)
-                                {
-                                    break;
-                                }
-                            if (i > 0 && i < length)
-                                {
-                                    memmove(cbuff, cbuff + i, length - i);
-                                }
-                            zstream.next_out = ((cbuff + length) - i);
                         }
                 }
-            _outBuffer.clear();
+
+            length = (zstream.next_out-cbuff);
+            if (length > 0)
+                {
+                    _compressedSent += length;
+                    for (i = 0; i < length; i +=b)
+                        {
+                            w = Min<int>(length-i, 4096);
+                            b = write(_control, (cbuff+i), w);
+                            if (b < 0)
+                                {
+                                    return false;
+                                }
+                        }
+                }
         }
 
+    _outBuffer.clear();
     return true;
 }
 std::string Socket::GetInBuffer()
