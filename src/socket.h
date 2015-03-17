@@ -17,7 +17,6 @@
 #include "player.h"
 #include "baseSocket.h"
 #include "telnetParser.h"
-#include "telnetParserEvents.hpp"
 
 /*
 *This is the connection type that each player has, it is used to hold the state of their current connection.
@@ -26,14 +25,16 @@ enum class ConnectionType
 {
     Disconnected, Name, Password, Newname, Newpass, Verpass, Gender, Game
 };
+
+//forward declarations
 class Socket;
+struct in_data;
 
 /*
 *The input handler is used to allow for another function to receive input.
 *This is particularly useful when you want to request input from a user, and you can't stop the game. In order to request input, you
 *create a handler, set the args field to the object that will receive the notification and push it to the input stack.
 */
-struct in_data;
 class InputHandle
 {
 protected:
