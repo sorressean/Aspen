@@ -130,7 +130,6 @@ void Player::Serialize(TiXmlElement* root)
     root->SetAttribute("title", _title.c_str());
     root->SetAttribute("prompt", _prompt.c_str());
     root->SetAttribute("rank", _rank);
-    root->SetAttribute("experience", _experience);
     root->SetAttribute("pflag", _pflag);
     Living::Serialize(root);
 }
@@ -199,7 +198,6 @@ void Player::Deserialize(TiXmlElement* root)
     _title = root->Attribute("title");
     _prompt = root->Attribute("prompt");
     root->Attribute("rank", &_rank);
-    root->Attribute("experience", &_experience);
     root->Attribute("pflag", &_pflag);
     Living::Deserialize(root->FirstChild("living")->ToElement());
 }
@@ -393,19 +391,6 @@ FLAG Player::GetRank() const
 void Player::SetRank(const FLAG s)
 {
     _rank=s;
-}
-
-int Player::GetExperience() const
-{
-    return _experience;
-}
-void Player::SetExperience(int experience)
-{
-    _experience = experience;
-}
-void Player::GainExperience(int exp)
-{
-    _experience += exp;
 }
 FLAG Player::GetPflag() const
 {

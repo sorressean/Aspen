@@ -29,8 +29,6 @@ class Player:public Living
     int _invalidPassword;
     std::string _title;
     std::string _prompt;
-    int _experience;
-    int _trains;
     FLAG _rank;
     FLAG _pflag;
     time_t _firstLogin;
@@ -80,9 +78,6 @@ public:
     void SetTitle(const std::string &s);
     FLAG GetRank() const;
     void SetRank(const FLAG s);
-    int GetExperience() const;
-    void SetExperience(int experience);
-    void GainExperience(int exp);
     FLAG GetPflag() const;
     void SetPflag(FLAG flag);
     UINT GetOnlineTime() const;
