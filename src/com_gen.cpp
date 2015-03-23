@@ -40,7 +40,6 @@ void InitializeGenCommands()
     world->commands.AddCommand(new CMDPrompt());
     world->commands.AddCommand(new CMDSockstats());
     world->commands.AddCommand(new CMDExits());
-    world->commands.AddCommand(new CMDExperience());
 }
 
 //quit
@@ -704,19 +703,5 @@ BOOL CMDExits::Execute(const std::string &verb, Player* mobile,std::vector<std::
         }
 
     mobile->Message(MSG_INFO, location->TellObviousExits());
-    return true;
-}
-
-CMDExperience::CMDExperience()
-{
-    SetName("experience");
-    AddAlias("exp");
-}
-BOOL CMDExperience::Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args, int subcmd)
-{
-    std::stringstream st;
-    int level = mobile->GetLevel();
-    st << "You are level " << level << std::endl;
-    mobile->Message(MSG_INFO, st.str());
     return true;
 }

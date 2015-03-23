@@ -132,11 +132,4 @@ public:
     CMDExits();
     BOOL Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args, int subcmd);
 };
-
-class CMDExperience:public Command
-{
-public:
-    CMDExperience();
-    BOOL Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args, int subcmd);
-};
 #endif
