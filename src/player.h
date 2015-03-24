@@ -3,9 +3,10 @@
 *Contains the main player object prototypes.
 */
 #pragma once
+#include <string>
+#include <map>
 #ifndef PLAYER_H
 #define PLAYER_H
-#include "ext.h"
 #include "mud.h"
 #include "conf.h"
 #include "living.h"
