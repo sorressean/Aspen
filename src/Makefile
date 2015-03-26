@@ -9,21 +9,11 @@ ECHO = echo
 #compiler flags:
 #enable if you want to profile.
 PROF =
-CC	=clang++
-#debugging code (should always be used except for special cases).
-CFLAGS	= -g -std=c++11 -O1 -march=native
-#CFlags debugging
-#release:
-#CFLAGS = -s -O3 -std=c++11 -DNDEBUG -flto -march=native
-
-LDFLAGS=
-
-#makes the compiler use our includes.
-CFLAGS += -isystem ../include
-CFLAGS += -L../lib
-
+CC	=c++
+LDFLAGS= -L../lib
+CFLAGS	= -g -std=c++11 -O1 -march=native -Wall -pedantic -I../include
 #required libraries
-LDFLAGS	+= -lz -lcrypto -langelscript -ltinyxml -lpthread
+LDFLAGS	= -L../lib -lz -lcrypto -langelscript -ltinyxml -lpthread
 
 #formatting specific flags
 FORMATTER = astyle
