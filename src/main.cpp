@@ -37,6 +37,7 @@ int main(int argc, const char** argv)
     int listener=0; //the socket to listen on when recovering from copyover
     int port = 0;
 
+//are we running as root?
     if (getuid() == 0)
         {
             std::cerr << "You should not be running as root, exiting." << std::endl;
