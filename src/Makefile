@@ -9,7 +9,6 @@ ECHO = echo
 #compiler flags:
 #enable if you want to profile.
 PROF =
-CC	=c++
 LDFLAGS= -L../lib
 CFLAGS	= -g -std=c++11 -O1 -march=native -Wall -pedantic -I../include
 #required libraries
@@ -57,11 +56,11 @@ O_FILES += $(patsubst %.cpp,%.o, $(filter %.cpp, $(S_FILES)))
 all: $(O_FILES) ../lib/libangelscript.a ../lib/libtinyxml.a
 	@$(RM) $(OUTPUT)
 	@$(ECHO) Linking.
-	@$(CC) $(CFLAGS) -o $(OUTPUT) $(O_FILES) $(LDFLAGS)
+	@$(CXX) $(CFLAGS) -o $(OUTPUT) $(O_FILES) $(LDFLAGS)
 
 %.o: %.cpp
 	@$(ECHO) Compiling $<.
-	@$(CC) $(PROF) -c $(CFLAGS) -o $(patsubst %.cpp,%.o, $<) $<
+	@$(CXX) $(PROF) -c $(CFLAGS) -o $(patsubst %.cpp,%.o, $<) $<
 
 ../lib/libangelscript.a:
 	@cd ../angelscript && $(MAKE)
