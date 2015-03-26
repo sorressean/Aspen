@@ -38,10 +38,10 @@ Entity* ObjectManager::CreateObject(VNUM obj)
     object = virt->Create();
     return object;
 }
-BOOL ObjectManager::RecycleObject(Entity* obj)
+BOOL ObjectManager::RecycleObject(ObjectContainer* obj)
 {
     World* world = World::GetPtr();
-    Entity* location = NULL;
+    ObjectContainer* location = NULL;
     StaticObject* vobj = NULL;
 
     if(!obj)
@@ -61,19 +61,23 @@ BOOL ObjectManager::RecycleObject(Entity* obj)
         }
 
 //check to see if this object is stored in another. If so, we need to remove it.
-    location = obj->GetLocation();
-    if (location)
+
+    if (obj->IsObject())
         {
-            location->ObjectLeave(obj);
-        }
+            location = ((Entity*)obj)->GetLocation();
+            if (location)
+                {
+                    location->ObjectLeave((Entity*)obj);
+                }
 
 //recycle this instance with it's virtual object, if there is one.
-    if (obj->GetOnum())
-        {
-            vobj = GetVirtual(obj->GetOnum());
-            if (vobj)
+            if (obj->GetOnum())
                 {
-                    vobj->Recycle(obj);
+                    vobj = GetVirtual(((Entity*)obj)->GetOnum());
+                    if (vobj)
+                        {
+                            vobj->Recycle((Entity*)obj);
+                        }
                 }
         }
 

@@ -10,9 +10,16 @@
 #include "olcManager.h"
 #include "editor.h"
 #include "component.h"
+#include "eventargs.h"
 
 BaseObject::BaseObject()
 {
+    events.RegisterEvent("PreLook", new Event());
+    events.RegisterEvent("PostLook", new Event());
+    events.RegisterEvent("OnEnter", new Event());
+    events.RegisterEvent("OnExit", new Event());
+    events.RegisterEvent("OnLook", new Event());
+
     _name="A blank object";
     _desc="You see nothing special.";
     _short = "A generic object lies here.";
@@ -359,6 +366,44 @@ std::string BaseObject::Identify(Player*mobile)
     st << "Persistent: " << (GetPersistent()? "yes." : "no.") << std::endl;
     st << "Origenating zone: " << GetZone()->GetName() << "." << std::endl;
     return st.str();
+}
+std::string BaseObject::DoLook(Player* mobile)
+{
+    std::string str;
+
+    LookArgs* args=new LookArgs(mobile,this,str);
+    events.CallEvent("PreLook", args, (void*)mobile);
+    str+=Capitalize(this->GetName())+"\n";
+    str+=this->GetDescription()+"\n";
+    events.CallEvent("PostLook", args, (void*)mobile);
+    delete args;
+    return str;
+}
+
+BOOL BaseObject::IsNpc() const
+{
+    return false;
+}
+BOOL BaseObject::IsPlayer() const
+{
+    return false;
+}
+BOOL BaseObject::IsLiving() const
+{
+    if (IsPlayer() || IsNpc())
+        {
+            return true;
+        }
+
+    return false;
+}
+BOOL BaseObject::IsRoom() const
+{
+    return false;
+}
+BOOL BaseObject::IsObject() const
+{
+    return false;
 }
 
 bool InitializeBaseObjectOlcs()

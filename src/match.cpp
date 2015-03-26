@@ -27,17 +27,12 @@ Entity* World::MatchKeyword(const std::string &name, Player* caller)
 {
     if ((name=="me")||(name==caller->GetName()))
         {
-            return (Entity*)caller;
+            return caller;
         }
     if (name.length() < caller->GetName().length() && caller->GetName().substr(name.length()) == name)
         {
-            return (Entity*)caller;
+            return caller;
         }
-    if (name == "here")
-        {
-            return (caller->GetLocation());
-        }
-
     return NULL;
 }
 

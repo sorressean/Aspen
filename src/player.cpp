@@ -314,18 +314,20 @@ void Player::EnterGame(BOOL quiet)
 {
     World* world = World::GetPtr();
     ObjectManager* omanager = world->GetObjectManager();
+    ObjectContainer* location = nullptr;
 
     Living::EnterGame();
 //add the player to the users list:
     world->GetPlayerManager().AddPlayer(this);
 //move the player if it doesn't already have a location
-    if (GetLocation()==NULL)
+    location = GetLocation();
+    if (location == nullptr)
         {
             MoveTo(omanager->GetRoom(ROOM_START));
         }
     else
         {
-            GetLocation()->ObjectEnter(this);
+            location->ObjectEnter(this);
         }
 //if there were password attempts, tell the player.
     if (_invalidPassword)
@@ -345,7 +347,10 @@ void Player::EnterGame(BOOL quiet)
     Attach();
     Save();
 
-    Message(MSG_INFO, GetLocation()->DoLook(this));
+    if (location->IsRoom())
+        {
+            Message(MSG_INFO, ((Room*)location)->DoLook(this));
+        }
 }
 void Player::LeaveGame()
 {

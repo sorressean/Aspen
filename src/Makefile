@@ -9,7 +9,7 @@ ECHO = echo
 #compiler flags:
 #enable if you want to profile.
 PROF =
-CC	=c++
+CC	=clang++
 #debugging code (should always be used except for special cases).
 CFLAGS	= -g -std=c++11 -O1 -march=native
 #CFlags debugging
@@ -49,7 +49,7 @@ option.cpp baseSocket.cpp banList.cpp listener.cpp inputHandlers.cpp\
 property.cpp uuid.cpp olcGroup.cpp olcManager.cpp playerManager.cpp\
 match.cpp calloutManager.cpp optionManager.cpp flag.cpp door.cpp\
 optionMeta.cpp bitfield.cpp attribute.cpp affect.cpp objectManager.cpp\
-page.cpp serializationHelpers.cpp telnetParser.cpp
+page.cpp serializationHelpers.cpp telnetParser.cpp objectContainer.cpp
 
 ###
 ###YOU SHOULD NOT MODIFY ANYTHING PAST THIS POINT.

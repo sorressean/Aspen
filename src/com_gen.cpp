@@ -533,12 +533,17 @@ CMDLook::CMDLook()
 BOOL CMDLook::Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args,int subcmd)
 {
     World* world = World::GetPtr();
-    Entity* obj = NULL;
+    BaseObject* obj = NULL;
+    ObjectContainer* location = mobile->GetLocation();
 
+//look at environment:
     if (!args.size())
         {
-            mobile->Message(MSG_INFO,mobile->GetLocation()->DoLook(mobile));
-            return true;
+            if (location->IsRoom())
+                {
+                    mobile->Message(MSG_INFO, ((Room*)mobile->GetLocation())->DoLook(mobile));
+                    return true;
+                }
         }
     obj =world->MatchObject(args[0],mobile);
     if (obj==NULL)

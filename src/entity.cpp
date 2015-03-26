@@ -29,18 +29,13 @@ Entity::~Entity()
 {
 }
 
-Entity* Entity::GetLocation() const
+ObjectContainer* Entity::GetLocation() const
 {
     return _location;
 }
-void Entity::SetLocation(Entity* location)
+void Entity::SetLocation(ObjectContainer* location)
 {
     _location=location;
-}
-
-std::list<Entity*>* Entity::GetContents()
-{
-    return &_contents;
 }
 
 StaticObject* Entity::GetParent() const
@@ -55,54 +50,17 @@ void Entity::SetParent(StaticObject* parent)
 void Entity::Serialize(TiXmlElement* root)
 {
     TiXmlElement* ent = new TiXmlElement("entity");
-    BaseObject::Serialize(ent);
+    ObjectContainer::Serialize(ent);
     _uuid.Serialize(ent);
-    TiXmlElement* contents = new TiXmlElement("contents");
-
-    std::list<Entity*>::iterator cit, citEnd;
-    citEnd=_contents.end();
-
-    if (_contents.size())
-        {
-            if (_persistent)
-                {
-                    for (cit = _contents.begin(); cit != citEnd; ++cit)
-                        {
-                            if (!(*cit)->IsLiving())
-                                {
-                                    (*cit)->Serialize(ent);
-                                }
-                        }
-                }
-        }
-    ent->LinkEndChild(contents);
 
     ent->SetAttribute("location", (_location?_location->GetOnum():0));
     root->LinkEndChild(ent);
 }
 void Entity::Deserialize(TiXmlElement* root)
 {
-    TiXmlElement* contents = NULL;
-    TiXmlNode* node = NULL;
-    TiXmlElement* obj = NULL;
     World* world = World::GetPtr();
     ObjectManager* omanager = world->GetObjectManager();
     int loc;
-
-//contents
-    node = root->FirstChild("contents");
-    if (node)
-        {
-            contents = node->ToElement();
-            for (node = contents->FirstChild(); node; node = node->NextSibling())
-                {
-                    obj = node->ToElement();
-                    Entity* object = new Entity();
-                    object->Deserialize(obj);
-                    object->SetLocation(this);
-                    _contents.push_back(object);
-                }
-        }
 
     root->Attribute("location", &loc);
     _uuid.Deserialize(root);
@@ -117,7 +75,7 @@ void Entity::Deserialize(TiXmlElement* root)
 
 //and now we notify everything that an object was loaded:
     world->events.CallEvent("ObjectLoaded", NULL, this);
-    BaseObject::Deserialize(root->FirstChild("BaseObject")->ToElement());
+    ObjectContainer::Deserialize(root->FirstChild("objc")->ToElement());
 #ifdef MODULE_SCRIPTING
     /*
         Script* script = (Script*)world->GetProperty("script");
@@ -126,25 +84,7 @@ void Entity::Deserialize(TiXmlElement* root)
 #endif
 }
 
-std::string Entity::DoLook(Player* mobile)
-{
-    std::string str;
-
-    LookArgs* args=new LookArgs(mobile,this,str);
-    events.CallEvent("PreLook", args, (void*)mobile);
-    str+=Capitalize(this->GetName())+"\n";
-    str+=this->GetDescription()+"\n";
-    events.CallEvent("PostLook", args, (void*)mobile);
-    delete args;
-    return str;
-}
-
-BOOL Entity::CanReceive(Entity* obj) const
-{
-    return true;
-}
-
-BOOL Entity::MoveTo(Entity* targ)
+BOOL Entity::MoveTo(ObjectContainer* targ)
 {
     if (targ->CanReceive(this))
         {
@@ -158,25 +98,6 @@ BOOL Entity::MoveTo(Entity* targ)
         }
     return false;
 }
-void Entity::ObjectEnter(Entity* obj)
-{
-    _contents.push_back(obj);
-}
-void Entity::ObjectLeave(Entity* obj)
-{
-    std::list<Entity*>::iterator it, itEnd;
-
-    itEnd = _contents.end();
-    for (it = _contents.begin(); it != itEnd; ++it)
-        {
-            if ((*it) == obj)
-                {
-                    it = _contents.erase(it);
-                    break;
-                }
-        }
-}
-
 BOOL Entity::FromRoom()
 {
     Room* loc = (Room*)_location;
@@ -184,32 +105,12 @@ BOOL Entity::FromRoom()
         {
             return false;
         }
-    ObjectLeave(loc);
+    loc->ObjectLeave(this);
     loc->events.CallEvent("OnExit", NULL, (void*)this);
 
     return true;
 }
-BOOL Entity::IsNpc() const
-{
-    return false;
-}
-BOOL Entity::IsPlayer() const
-{
-    return false;
-}
-BOOL Entity::IsLiving() const
-{
-    if (IsPlayer() || IsNpc())
-        {
-            return true;
-        }
 
-    return false;
-}
-BOOL Entity::IsRoom() const
-{
-    return false;
-}
 void Entity::Initialize()
 {
     _uuid.Initialize();
@@ -225,6 +126,11 @@ std::string Entity::Identify(Player* mob)
     st << BaseObject::Identify(mob);
     st << "UUID: " << _uuid.ToString() << std::endl;
     return st.str();
+}
+
+BOOL Entity::IsObject() const
+{
+    return true;
 }
 
 bool InitializeEntityOlcs()

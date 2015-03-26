@@ -3,6 +3,7 @@
 #include "mud.h"
 #include "conf.h"
 #include "option.h"
+#include "baseObject.h"
 
 /*
 *LookArgs
@@ -12,11 +13,11 @@
 class LookArgs:public EventArgs
 {
 public:
-    LookArgs(Player* caller, Entity* targ,std::string &desc):_caller(caller),_targ(targ),_desc(desc) {}
+    LookArgs(Player* caller, BaseObject* targ,std::string &desc):_caller(caller),_targ(targ),_desc(desc) {}
     ~LookArgs() {}
 
     Player* _caller;
-    Entity* _targ;
+    BaseObject* _targ;
     std::string &_desc;
 };
 class ComponentAttachedArgs:public EventArgs

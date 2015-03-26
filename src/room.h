@@ -15,18 +15,18 @@
 #include "event.h"
 #include "zone.h"
 #include "utils.h"
+#include "objectContainer.h"
 
 EVENT(ROOM_POST_LOOK);
 
 class Zone;
 
-class Room:public Entity
+class Room:public ObjectContainer
 {
     std::list <Living*> _mobiles;
     std::vector<Exit*> *_exits;
     FLAG _rflag;
     point _coord;
-    TERRAIN _terrain;
 public:
     Commandable commands;
     Room();
@@ -90,18 +90,15 @@ public:
     *Param: [in] the coord structure to copy.
     */
     void SetCoord(point& coord);
-    TERRAIN GetTerrain() const;
-    void SetTerrain(TERRAIN t);
     BOOL IsRoom() const;
 //serialization
     virtual void Serialize(TiXmlElement* root);
     virtual void Deserialize(TiXmlElement* node);
-    virtual void ObjectEnter(Entity* obj);
-    virtual void ObjectLeave(Entity* obj);
+    void ObjectEnter(Entity* obj);
+    void ObjectLeave(Entity* obj);
     std::string TellObviousExits();
     EVENT(PostLook);
 };
 
-std::string TerrainToString(TERRAIN t);
 bool InitializeRoomOlcs();
 #endif

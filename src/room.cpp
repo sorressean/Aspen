@@ -17,13 +17,8 @@
 
 Room::Room()
 {
-    events.RegisterEvent("PostLook", new Event());
-    events.RegisterEvent("OnEnter", new Event());
-    events.RegisterEvent("OnExit", new Event());
-    events.RegisterEvent("OnLook", new Event());
     _exits = new std::vector<Exit*>();
     _rflag = 0;
-    _terrain = TERRAIN::CITY;
     SetOnum(ROOM_NOWHERE);
     SetPersistent(false);
     events.AddCallback("PostLook", std::bind(&Room::PostLook, this, std::placeholders::_1, std::placeholders::_2));
@@ -196,15 +191,6 @@ void Room::SetCoord(point& coord)
     _coord = coord;
 }
 
-TERRAIN Room::GetTerrain() const
-{
-    return _terrain;
-}
-void Room::SetTerrain(TERRAIN t)
-{
-    _terrain = t;
-}
-
 BOOL Room::IsRoom() const
 {
     return true;
@@ -215,12 +201,12 @@ void Room::Serialize(TiXmlElement* root)
     TiXmlElement* room = new TiXmlElement("room");
     TiXmlElement* exits = new TiXmlElement("exits");
     std::vector<Exit*>::iterator it, itEnd;
+    ObjectContainer::Serialize(room);
 
     room->SetAttribute("rflag", _rflag);
     room->SetAttribute("x", _coord.x);
     room->SetAttribute("y", _coord.y);
     room->SetAttribute("z", _coord.z);
-    room->SetAttribute("terrain", (int)_terrain);
 
     if (_exits->size())
         {
@@ -232,7 +218,6 @@ void Room::Serialize(TiXmlElement* root)
         }
     room->LinkEndChild(exits);
 
-    Entity::Serialize(room);
     root->LinkEndChild(room);
 }
 void Room::Deserialize(TiXmlElement* room)
@@ -247,8 +232,6 @@ void Room::Deserialize(TiXmlElement* room)
     room->Attribute("x", &_coord.x);
     room->Attribute("y", &_coord.y);
     room->Attribute("z", &_coord.z);
-    room->Attribute("terrain", &val);
-    _terrain = (TERRAIN)val;
     exits = room->FirstChild("exits")->ToElement();
     for (node = exits->FirstChild(); node; node = node->NextSibling())
         {
@@ -259,7 +242,7 @@ void Room::Deserialize(TiXmlElement* room)
             ex = NULL;
         }
 
-    Entity::Deserialize(room->FirstChild("entity")->ToElement());
+    ObjectContainer::Deserialize(room->FirstChild("objc")->ToElement());
 }
 
 void Room::ObjectEnter(Entity* obj)
@@ -270,12 +253,11 @@ void Room::ObjectEnter(Entity* obj)
         }
     else
         {
-            _contents.push_back(obj);
+            ObjectContainer::ObjectEnter(obj);
         }
 }
 void Room::ObjectLeave(Entity* obj)
 {
-
     if (obj->IsLiving())
         {
             std::list<Living*>::iterator it, itEnd;
@@ -288,20 +270,10 @@ void Room::ObjectLeave(Entity* obj)
                             break;
                         }
                 }
-            return;
         }
     else
         {
-            std::list<Entity*>::iterator it, itEnd;
-            itEnd = _contents.end();
-            for (it = _contents.begin(); it != itEnd; ++it)
-                {
-                    if ((*it) == obj)
-                        {
-                            _contents.erase(it);
-                            break;
-                        }
-                }
+            ObjectContainer::ObjectLeave(obj);
         }
 }
 
@@ -335,16 +307,17 @@ CEVENT(Room, PostLook)
 //we need to try to combine the objects. First, we go through the list of everything and see how many of x there are.
 //after that, we can add (x) foobars to the string.
 //this is a slightly slow process...
-            itEnd = _contents.end();
-            for (it = _contents.begin(); it != itEnd; ++it)
+            std::list<Entity*>::iterator cit, citEnd;
+            citEnd = _contents.end();
+            for (cit = _contents.begin(); cit != itEnd; ++cit)
                 {
-                    if (counts.count((*it)->GetShort()))
+                    if (counts.count((*cit)->GetShort()))
                         {
-                            counts[(*it)->GetShort()]++;
+                            counts[(*cit)->GetShort()]++;
                         }
                     else
                         {
-                            counts[(*it)->GetShort()] = 1;
+                            counts[(*cit)->GetShort()] = 1;
                         }
                 }
 
@@ -392,69 +365,11 @@ std::string Room::TellObviousExits()
     return st.str();
 }
 
-std::string TerrainToString(TERRAIN t)
-{
-    switch(t)
-        {
-        case TERRAIN::OCEAN:
-            return "ocean";
-        case TERRAIN::UNDERWATER:
-            return "underwater";
-        case TERRAIN::AIR:
-            return "air";
-        case TERRAIN::PLANE:
-            return "plane";
-        case TERRAIN::DESERT:
-            return "desert";
-        case TERRAIN::UNDERGROUND:
-            return "underground";
-        case TERRAIN::SWAMP:
-            return "swamp";
-        case TERRAIN::HILLS:
-            return "hills";
-        case TERRAIN::MOUNTAIN:
-            return "mountain";
-        case TERRAIN::FOREST:
-            return "forest";
-        case TERRAIN::LIGHTFOREST:
-            return "light forest";
-        case TERRAIN::CITY:
-            return "city";
-        case TERRAIN::INSIDE:
-            return "indoors";
-        default:
-            return "unknown";
-        }
-}
-
 bool InitializeRoomOlcs()
 {
     World* world = World::GetPtr();
     OlcManager* omanager = world->GetOlcManager();
     OlcGroup* group = new OlcGroup();
-    {
-        std::map<std::string, TERRAIN> vals=
-        {
-            {"ocean", TERRAIN::OCEAN},
-            {"underwater", TERRAIN::UNDERWATER},
-            {"air", TERRAIN::AIR},
-            {"plane", TERRAIN::PLANE},
-            {"desert", TERRAIN::DESERT},
-            {"underground", TERRAIN::UNDERGROUND},
-            {"swamp", TERRAIN::SWAMP},
-            {"hills", TERRAIN::HILLS},
-            {"mountain", TERRAIN::MOUNTAIN},
-            {"forest", TERRAIN::FOREST},
-            {"lforest", TERRAIN::LIGHTFOREST},
-            {"city", TERRAIN::CITY},
-            {"inside", TERRAIN::INSIDE}
-        };
-        group->AddEntry(new OlcEnumEntry<Room, TERRAIN>("terrain", "The terrain of the room", OF_NORMAL, OLCDT::ENUM,
-                        std::bind(&Room::GetTerrain, std::placeholders::_1),
-                        std::bind(&Room::SetTerrain, std::placeholders::_1, std::placeholders::_2),
-                        vals));
-    }
-
     group->SetInheritance(omanager->GetGroup(OLCGROUP::Entity));
     omanager->AddGroup(OLCGROUP::ROOM, group);
     return true;

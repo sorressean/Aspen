@@ -36,7 +36,7 @@ public:
     Recycles the specified  object, as well as removes it from the virtual obj statistics.
     Also cleans up the object and the contents of that object.
     */
-    BOOL RecycleObject(Entity* obj);
+    BOOL RecycleObject(ObjectContainer* obj);
     /*
     *Adds the specified virtual object to the list.
     *Param: [in] a pointer to the static object to add.

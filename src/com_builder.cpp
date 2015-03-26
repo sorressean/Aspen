@@ -12,6 +12,7 @@
 #include "room.h"
 #include "utils.h"
 #include "baseObject.h"
+#include "objectContainer.h"
 
 void InitializeBuilderCommands()
 {
@@ -314,7 +315,7 @@ CMDVCreate::CMDVCreate()
 BOOL CMDVCreate::Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args,int subcmd)
 {
     Zone* zone = NULL;
-    Entity* location = NULL;
+    ObjectContainer* location = NULL;
     StaticObject* vobj = NULL;
     std::stringstream st;
 
@@ -360,7 +361,7 @@ BOOL CMDVList::Execute(const std::string &verb, Player* mobile,std::vector<std::
     using std::right;
 
     Zone* zone = NULL;
-    Entity* location = NULL;
+    BaseObject* location = NULL;
     std::vector<StaticObject*> objects;
     std::vector<StaticObject*>::iterator it, itEnd;
     size_t count = 0;
@@ -410,7 +411,7 @@ CMDMCreate::CMDMCreate()
 BOOL CMDMCreate::Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args,int subcmd)
 {
     Zone* zone = NULL;
-    Entity* location = NULL;
+    ObjectContainer* location = NULL;
     Npc* npc = NULL;
     std::stringstream st;
 
@@ -456,7 +457,7 @@ BOOL CMDMList::Execute(const std::string &verb, Player* mobile,std::vector<std::
     using std::right;
 
     Zone* zone = NULL;
-    Entity* location = NULL;
+    ObjectContainer* location = NULL;
     std::vector<Npc*> npcs;
     std::vector<Npc*>::iterator it, itEnd;
     size_t count = 0;
@@ -505,7 +506,7 @@ CMDMLoad::CMDMLoad()
 BOOL CMDMLoad::Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args,int subcmd)
 {
     Zone* zone = NULL;
-    Entity* location = NULL;
+    ObjectContainer* location = NULL;
     Npc* npc = NULL;
     std::string onum;
 
@@ -560,7 +561,7 @@ BOOL CMDAddComponent::Execute(const std::string &verb, Player* mobile,std::vecto
 {
     World* world = World::GetPtr();
     Zone* zone = NULL;
-    Entity* location = NULL;
+    ObjectContainer* location = NULL;
     BaseObject* obj = nullptr;
     std::string onum;
     std::string component;

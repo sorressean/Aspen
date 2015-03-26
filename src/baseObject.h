@@ -114,6 +114,12 @@ public:
     virtual void Serialize(TiXmlElement* root);
     virtual void Deserialize(TiXmlElement* root);
     virtual void Copy(BaseObject* obj) const;
+    virtual std::string DoLook(Player* mobile);
+    virtual BOOL IsPlayer() const;
+    virtual BOOL IsLiving() const;
+    virtual BOOL IsRoom() const;
+    virtual BOOL IsNpc() const;
+    virtual BOOL IsObject() const;
 };
 
 bool InitializeBaseObjectOlcs();
