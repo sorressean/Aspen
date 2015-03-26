@@ -30,6 +30,7 @@ int tonum(const char* str)
                 {
                     throw(std::bad_cast());
                 }
+++ptr;
         }
 
     ret = atoi(str);
