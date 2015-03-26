@@ -17,4 +17,4 @@ install:
   - sudo apt-get install -qq libssl-dev zlib1g-dev
 
 script:
-  - cd src && make
+  - cd src && make -j
