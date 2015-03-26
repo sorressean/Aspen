@@ -185,4 +185,5 @@ enum ExitDirection {nowhere, north, south, east, west, northeast, northwest, sou
 #define MAX_LEVEL 251
 #define MAX_MOB_LEVEL 301
 #define MCCP_BUFFER_SIZE 4096
+#include "extensions/conf.h"
 #endif
