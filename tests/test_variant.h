@@ -7,7 +7,7 @@ namespace FriskTests
     DEF_TEST(VariableEmptyException_VariableEmptyException_Constructor_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for VariableEmptyException::VariableEmptyException::Constructor! */
     }
 
@@ -15,7 +15,7 @@ namespace FriskTests
     DEF_TEST(Variant_Variant_Constructor_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Variant::Variant::Constructor! */
     }
 
@@ -23,7 +23,7 @@ namespace FriskTests
     DEF_TEST(Variant_Variant_Constructor2_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Variant::Variant::Constructor2! */
     }
 
@@ -31,7 +31,7 @@ namespace FriskTests
     DEF_TEST(Variant_Variant_Constructor3_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Variant::Variant::Constructor3! */
     }
 
@@ -39,7 +39,7 @@ namespace FriskTests
     DEF_TEST(Variant_Variant_Constructor4_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Variant::Variant::Constructor4! */
     }
 
@@ -47,7 +47,7 @@ namespace FriskTests
     DEF_TEST(Variant_Variant_Constructor5_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Variant::Variant::Constructor5! */
     }
 
@@ -55,7 +55,7 @@ namespace FriskTests
     DEF_TEST(Variant_Variant_Constructor6_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Variant::Variant::Constructor6! */
     }
 
@@ -63,7 +63,7 @@ namespace FriskTests
     DEF_TEST(Variant_Variant_Constructor7_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Variant::Variant::Constructor7! */
     }
 
@@ -71,7 +71,7 @@ namespace FriskTests
     DEF_TEST(Variant_Typeof_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Variant::Typeof! */
     }
 
@@ -79,7 +79,7 @@ namespace FriskTests
     DEF_TEST(Variant_GetInt_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Variant::GetInt! */
     }
 
@@ -87,7 +87,7 @@ namespace FriskTests
     DEF_TEST(Variant_GetByte_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Variant::GetByte! */
     }
 
@@ -95,7 +95,7 @@ namespace FriskTests
     DEF_TEST(Variant_GetStr_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Variant::GetStr! */
     }
 
@@ -103,7 +103,7 @@ namespace FriskTests
     DEF_TEST(Variant_GetDouble_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Variant::GetDouble! */
     }
 
@@ -111,7 +111,7 @@ namespace FriskTests
     DEF_TEST(Variant_SetInt_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Variant::SetInt! */
     }
 
@@ -119,7 +119,7 @@ namespace FriskTests
     DEF_TEST(Variant_SetByte_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Variant::SetByte! */
     }
 
@@ -127,7 +127,7 @@ namespace FriskTests
     DEF_TEST(Variant_SetDouble_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Variant::SetDouble! */
     }
 
@@ -135,7 +135,7 @@ namespace FriskTests
     DEF_TEST(Variant_SetStr_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Variant::SetStr! */
     }
 
@@ -143,7 +143,7 @@ namespace FriskTests
     DEF_TEST(Variant_SetStr2_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Variant::SetStr2! */
     }
 
@@ -151,7 +151,7 @@ namespace FriskTests
     DEF_TEST(Variant_IsEmpty_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Variant::IsEmpty! */
     }
 
@@ -159,7 +159,7 @@ namespace FriskTests
     DEF_TEST(Variant_IsInt_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Variant::IsInt! */
     }
 
@@ -167,7 +167,7 @@ namespace FriskTests
     DEF_TEST(Variant_IsByte_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Variant::IsByte! */
     }
 
@@ -175,7 +175,7 @@ namespace FriskTests
     DEF_TEST(Variant_IsDouble_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Variant::IsDouble! */
     }
 
@@ -183,7 +183,7 @@ namespace FriskTests
     DEF_TEST(Variant_IsNumber_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Variant::IsNumber! */
     }
 
@@ -191,7 +191,7 @@ namespace FriskTests
     DEF_TEST(Variant_IsChar_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Variant::IsChar! */
     }
 
@@ -199,7 +199,7 @@ namespace FriskTests
     DEF_TEST(Variant_IsString_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Variant::IsString! */
     }
 
@@ -207,7 +207,7 @@ namespace FriskTests
     DEF_TEST(Variant_Get_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Variant::Get! */
     }
 
@@ -215,7 +215,7 @@ namespace FriskTests
     DEF_TEST(Variant_Compare_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Variant::Compare! */
     }
 
@@ -223,7 +223,7 @@ namespace FriskTests
     DEF_TEST(Variant_SetType_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Variant::SetType! */
     }
 
@@ -231,7 +231,7 @@ namespace FriskTests
     DEF_TEST(Variant_Serialize_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Variant::Serialize! */
     }
 
@@ -239,7 +239,7 @@ namespace FriskTests
     DEF_TEST(Variant_Deserialize_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Variant::Deserialize! */
     }
 
@@ -247,7 +247,7 @@ namespace FriskTests
     DEF_TEST(InvalidVariableTypeException_InvalidVariableTypeException_Constructor_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for InvalidVariableTypeException::InvalidVariableTypeException::Constructor! */
     }
 

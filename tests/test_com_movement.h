@@ -7,7 +7,7 @@ namespace FriskTests
     DEF_TEST(InitializeMovementCommands_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for InitializeMovementCommands! */
     }
 
@@ -15,7 +15,7 @@ namespace FriskTests
     DEF_TEST(DoMove_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for DoMove! */
     }
 
@@ -23,7 +23,7 @@ namespace FriskTests
     DEF_TEST(CMDEast_CMDEast_Constructor_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for CMDEast::CMDEast::Constructor! */
     }
 
@@ -31,7 +31,7 @@ namespace FriskTests
     DEF_TEST(CMDEast_Execute_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for CMDEast::Execute! */
     }
 
@@ -39,7 +39,7 @@ namespace FriskTests
     DEF_TEST(CMDNorth_CMDNorth_Constructor_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for CMDNorth::CMDNorth::Constructor! */
     }
 
@@ -47,7 +47,7 @@ namespace FriskTests
     DEF_TEST(CMDNorth_Execute_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for CMDNorth::Execute! */
     }
 
@@ -55,7 +55,7 @@ namespace FriskTests
     DEF_TEST(CMDSouthwest_CMDSouthwest_Constructor_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for CMDSouthwest::CMDSouthwest::Constructor! */
     }
 
@@ -63,7 +63,7 @@ namespace FriskTests
     DEF_TEST(CMDSouthwest_Execute_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for CMDSouthwest::Execute! */
     }
 
@@ -71,7 +71,7 @@ namespace FriskTests
     DEF_TEST(CMDDown_CMDDown_Constructor_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for CMDDown::CMDDown::Constructor! */
     }
 
@@ -79,7 +79,7 @@ namespace FriskTests
     DEF_TEST(CMDDown_Execute_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for CMDDown::Execute! */
     }
 
@@ -87,7 +87,7 @@ namespace FriskTests
     DEF_TEST(CMDNorthwest_CMDNorthwest_Constructor_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for CMDNorthwest::CMDNorthwest::Constructor! */
     }
 
@@ -95,7 +95,7 @@ namespace FriskTests
     DEF_TEST(CMDNorthwest_Execute_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for CMDNorthwest::Execute! */
     }
 
@@ -103,7 +103,7 @@ namespace FriskTests
     DEF_TEST(CMDUp_CMDUp_Constructor_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for CMDUp::CMDUp::Constructor! */
     }
 
@@ -111,7 +111,7 @@ namespace FriskTests
     DEF_TEST(CMDUp_Execute_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for CMDUp::Execute! */
     }
 
@@ -119,7 +119,7 @@ namespace FriskTests
     DEF_TEST(CMDWest_CMDWest_Constructor_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for CMDWest::CMDWest::Constructor! */
     }
 
@@ -127,7 +127,7 @@ namespace FriskTests
     DEF_TEST(CMDWest_Execute_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for CMDWest::Execute! */
     }
 
@@ -135,7 +135,7 @@ namespace FriskTests
     DEF_TEST(CMDSouth_CMDSouth_Constructor_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for CMDSouth::CMDSouth::Constructor! */
     }
 
@@ -143,7 +143,7 @@ namespace FriskTests
     DEF_TEST(CMDSouth_Execute_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for CMDSouth::Execute! */
     }
 
@@ -151,7 +151,7 @@ namespace FriskTests
     DEF_TEST(CMDSoutheast_CMDSoutheast_Constructor_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for CMDSoutheast::CMDSoutheast::Constructor! */
     }
 
@@ -159,7 +159,7 @@ namespace FriskTests
     DEF_TEST(CMDSoutheast_Execute_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for CMDSoutheast::Execute! */
     }
 
@@ -167,7 +167,7 @@ namespace FriskTests
     DEF_TEST(CMDNortheast_CMDNortheast_Constructor_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for CMDNortheast::CMDNortheast::Constructor! */
     }
 
@@ -175,7 +175,7 @@ namespace FriskTests
     DEF_TEST(CMDNortheast_Execute_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for CMDNortheast::Execute! */
     }
 

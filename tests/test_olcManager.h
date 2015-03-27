@@ -7,7 +7,7 @@ namespace FriskTests
     DEF_TEST(OlcManager_OlcManager_Constructor_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for OlcManager::OlcManager::Constructor! */
     }
 
@@ -15,7 +15,7 @@ namespace FriskTests
     DEF_TEST(OlcManager_OlcManager_Destructor_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for OlcManager::OlcManager::Destructor! */
     }
 
@@ -23,7 +23,7 @@ namespace FriskTests
     DEF_TEST(OlcManager_HasGroup_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for OlcManager::HasGroup! */
     }
 
@@ -31,7 +31,7 @@ namespace FriskTests
     DEF_TEST(OlcManager_AddGroup_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for OlcManager::AddGroup! */
     }
 
@@ -39,7 +39,7 @@ namespace FriskTests
     DEF_TEST(OlcManager_GetGroup_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for OlcManager::GetGroup! */
     }
 

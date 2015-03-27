@@ -7,7 +7,7 @@ namespace FriskTests
     DEF_TEST(Pager_Pager_Constructor_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Pager::Pager::Constructor! */
     }
 
@@ -15,7 +15,7 @@ namespace FriskTests
     DEF_TEST(Pager_Pager_Constructor2_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Pager::Pager::Constructor2! */
     }
 
@@ -23,7 +23,7 @@ namespace FriskTests
     DEF_TEST(Pager_EnterPager_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Pager::EnterPager! */
     }
 
@@ -31,7 +31,7 @@ namespace FriskTests
     DEF_TEST(Pager_Input_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Pager::Input! */
     }
 
@@ -39,7 +39,7 @@ namespace FriskTests
     DEF_TEST(Pager_PageCount_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Pager::PageCount! */
     }
 
@@ -47,7 +47,7 @@ namespace FriskTests
     DEF_TEST(Pager_PrintPage_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Pager::PrintPage! */
     }
 
@@ -55,7 +55,7 @@ namespace FriskTests
     DEF_TEST(Pager_AddLines_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Pager::AddLines! */
     }
 
@@ -63,7 +63,7 @@ namespace FriskTests
     DEF_TEST(Pager_AddLines2_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Pager::AddLines2! */
     }
 

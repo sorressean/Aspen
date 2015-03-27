@@ -7,7 +7,7 @@ namespace FriskTests
     DEF_TEST(InitializeZones_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for InitializeZones! */
     }
 
@@ -15,7 +15,7 @@ namespace FriskTests
     DEF_TEST(Zone_Zone_Constructor_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Zone::Zone::Constructor! */
     }
 
@@ -23,7 +23,7 @@ namespace FriskTests
     DEF_TEST(Zone_Zone_Destructor_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Zone::Zone::Destructor! */
     }
 
@@ -31,7 +31,7 @@ namespace FriskTests
     DEF_TEST(Zone_GetName_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Zone::GetName! */
     }
 
@@ -39,7 +39,7 @@ namespace FriskTests
     DEF_TEST(Zone_SetName_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Zone::SetName! */
     }
 
@@ -47,7 +47,7 @@ namespace FriskTests
     DEF_TEST(Zone_SetRange_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Zone::SetRange! */
     }
 
@@ -55,7 +55,7 @@ namespace FriskTests
     DEF_TEST(Zone_GetMinVnum_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Zone::GetMinVnum! */
     }
 
@@ -63,7 +63,7 @@ namespace FriskTests
     DEF_TEST(Zone_GetMaxVnum_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Zone::GetMaxVnum! */
     }
 
@@ -71,7 +71,7 @@ namespace FriskTests
     DEF_TEST(Zone_AddRoom_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Zone::AddRoom! */
     }
 
@@ -79,7 +79,7 @@ namespace FriskTests
     DEF_TEST(Zone_AddRoom2_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Zone::AddRoom2! */
     }
 
@@ -87,7 +87,7 @@ namespace FriskTests
     DEF_TEST(Zone_RemoveRoom_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Zone::RemoveRoom! */
     }
 
@@ -95,7 +95,7 @@ namespace FriskTests
     DEF_TEST(Zone_GetRooms_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Zone::GetRooms! */
     }
 
@@ -103,7 +103,7 @@ namespace FriskTests
     DEF_TEST(Zone_RoomExists_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Zone::RoomExists! */
     }
 
@@ -111,7 +111,7 @@ namespace FriskTests
     DEF_TEST(Zone_AddVirtual_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Zone::AddVirtual! */
     }
 
@@ -119,7 +119,7 @@ namespace FriskTests
     DEF_TEST(Zone_RemoveVirtual_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Zone::RemoveVirtual! */
     }
 
@@ -127,7 +127,7 @@ namespace FriskTests
     DEF_TEST(Zone_GetVirtual_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Zone::GetVirtual! */
     }
 
@@ -135,7 +135,7 @@ namespace FriskTests
     DEF_TEST(Zone_GetVirtuals_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Zone::GetVirtuals! */
     }
 
@@ -143,7 +143,7 @@ namespace FriskTests
     DEF_TEST(Zone_VirtualExists_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Zone::VirtualExists! */
     }
 
@@ -151,7 +151,7 @@ namespace FriskTests
     DEF_TEST(Zone_AddNpc_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Zone::AddNpc! */
     }
 
@@ -159,7 +159,7 @@ namespace FriskTests
     DEF_TEST(Zone_RemoveNpc_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Zone::RemoveNpc! */
     }
 
@@ -167,7 +167,7 @@ namespace FriskTests
     DEF_TEST(Zone_GetNpc_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Zone::GetNpc! */
     }
 
@@ -175,7 +175,7 @@ namespace FriskTests
     DEF_TEST(Zone_NpcExists_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Zone::NpcExists! */
     }
 
@@ -183,7 +183,7 @@ namespace FriskTests
     DEF_TEST(Zone_GetNpcs_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Zone::GetNpcs! */
     }
 
@@ -191,7 +191,7 @@ namespace FriskTests
     DEF_TEST(Zone_CreateNpc_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Zone::CreateNpc! */
     }
 
@@ -199,7 +199,7 @@ namespace FriskTests
     DEF_TEST(Zone_CalculateVnumRanges_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Zone::CalculateVnumRanges! */
     }
 
@@ -207,7 +207,7 @@ namespace FriskTests
     DEF_TEST(Zone_Update_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Zone::Update! */
     }
 
@@ -215,7 +215,7 @@ namespace FriskTests
     DEF_TEST(Zone_Serialize_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Zone::Serialize! */
     }
 
@@ -223,7 +223,7 @@ namespace FriskTests
     DEF_TEST(Zone_Deserialize_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Zone::Deserialize! */
     }
 
@@ -231,7 +231,7 @@ namespace FriskTests
     DEF_TEST(Zone_SaveZones_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Zone::SaveZones! */
     }
 
@@ -239,7 +239,7 @@ namespace FriskTests
     DEF_TEST(Zone_LoadZones_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Zone::LoadZones! */
     }
 
@@ -247,7 +247,7 @@ namespace FriskTests
     DEF_TEST(Zone_EVENT_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Zone::EVENT! */
     }
 
@@ -255,7 +255,7 @@ namespace FriskTests
     DEF_TEST(Zone_EVENT2_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Zone::EVENT2! */
     }
 

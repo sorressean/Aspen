@@ -7,7 +7,7 @@ namespace FriskTests
     DEF_TEST(InitializeScript_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for InitializeScript! */
     }
 
@@ -15,7 +15,7 @@ namespace FriskTests
     DEF_TEST(ScriptEngine_Initialize_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for ScriptEngine::Initialize! */
     }
 
@@ -23,7 +23,7 @@ namespace FriskTests
     DEF_TEST(ScriptEngine_Release_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for ScriptEngine::Release! */
     }
 
@@ -31,7 +31,7 @@ namespace FriskTests
     DEF_TEST(ScriptEngine_GetPtr_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for ScriptEngine::GetPtr! */
     }
 
@@ -39,7 +39,7 @@ namespace FriskTests
     DEF_TEST(ScriptEngine_GetBaseEngine_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for ScriptEngine::GetBaseEngine! */
     }
 
@@ -47,7 +47,7 @@ namespace FriskTests
     DEF_TEST(ScriptEngine_RegisterMethod_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for ScriptEngine::RegisterMethod! */
     }
 
@@ -55,7 +55,7 @@ namespace FriskTests
     DEF_TEST(ScriptEngine_RegisterMethod2_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for ScriptEngine::RegisterMethod2! */
     }
 
@@ -63,7 +63,7 @@ namespace FriskTests
     DEF_TEST(ScriptEngine_RegisterObject_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for ScriptEngine::RegisterObject! */
     }
 
@@ -71,7 +71,7 @@ namespace FriskTests
     DEF_TEST(ScriptEngine_EVENT_Constructor_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for ScriptEngine::EVENT::Constructor! */
     }
 
@@ -79,7 +79,7 @@ namespace FriskTests
     DEF_TEST(ScriptEngine_ScriptEngine_Constructor_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for ScriptEngine::ScriptEngine::Constructor! */
     }
 
@@ -87,7 +87,7 @@ namespace FriskTests
     DEF_TEST(ScriptEngine_ScriptEngine_Destructor_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for ScriptEngine::ScriptEngine::Destructor! */
     }
 

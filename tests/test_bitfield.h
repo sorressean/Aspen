@@ -7,7 +7,7 @@ namespace FriskTests
     DEF_TEST(Bitfield_Bitfield_Constructor_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Bitfield::Bitfield::Constructor! */
     }
 
@@ -15,7 +15,7 @@ namespace FriskTests
     DEF_TEST(Bitfield_Bitfield_Constructor2_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Bitfield::Bitfield::Constructor2! */
     }
 
@@ -23,7 +23,7 @@ namespace FriskTests
     DEF_TEST(Bitfield_Bitfield_Destructor_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Bitfield::Bitfield::Destructor! */
     }
 
@@ -31,7 +31,7 @@ namespace FriskTests
     DEF_TEST(Bitfield_GetField_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Bitfield::GetField! */
     }
 

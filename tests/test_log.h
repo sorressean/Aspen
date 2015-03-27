@@ -7,7 +7,7 @@ namespace FriskTests
     DEF_TEST(Log_Log_Constructor_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Log::Log::Constructor! */
     }
 
@@ -15,7 +15,7 @@ namespace FriskTests
     DEF_TEST(Log_Log_Destructor_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Log::Log::Destructor! */
     }
 
@@ -23,7 +23,7 @@ namespace FriskTests
     DEF_TEST(Log_Write_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Log::Write! */
     }
 
@@ -31,7 +31,7 @@ namespace FriskTests
     DEF_TEST(Log_CheckSize_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Log::CheckSize! */
     }
 
@@ -39,7 +39,7 @@ namespace FriskTests
     DEF_TEST(Log_CycleFiles_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Log::CycleFiles! */
     }
 

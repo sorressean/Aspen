@@ -7,7 +7,7 @@ namespace FriskTests
     DEF_TEST(InitializeStaticObjectOlcs_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for InitializeStaticObjectOlcs! */
     }
 
@@ -15,7 +15,7 @@ namespace FriskTests
     DEF_TEST(StaticObject_StaticObject_Constructor_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for StaticObject::StaticObject::Constructor! */
     }
 
@@ -23,7 +23,7 @@ namespace FriskTests
     DEF_TEST(StaticObject_StaticObject_Destructor_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for StaticObject::StaticObject::Destructor! */
     }
 
@@ -31,7 +31,7 @@ namespace FriskTests
     DEF_TEST(StaticObject_GetTotalCount_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for StaticObject::GetTotalCount! */
     }
 
@@ -39,7 +39,7 @@ namespace FriskTests
     DEF_TEST(StaticObject_CountDescendants_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for StaticObject::CountDescendants! */
     }
 
@@ -47,7 +47,7 @@ namespace FriskTests
     DEF_TEST(StaticObject_IsDescendant_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for StaticObject::IsDescendant! */
     }
 
@@ -55,7 +55,7 @@ namespace FriskTests
     DEF_TEST(StaticObject_RemoveDescendant_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for StaticObject::RemoveDescendant! */
     }
 
@@ -63,7 +63,7 @@ namespace FriskTests
     DEF_TEST(StaticObject_Create_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for StaticObject::Create! */
     }
 
@@ -71,7 +71,7 @@ namespace FriskTests
     DEF_TEST(StaticObject_Recycle_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for StaticObject::Recycle! */
     }
 
@@ -79,7 +79,7 @@ namespace FriskTests
     DEF_TEST(StaticObject_RecycleContents_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for StaticObject::RecycleContents! */
     }
 
@@ -87,7 +87,7 @@ namespace FriskTests
     DEF_TEST(StaticObject_Serialize_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for StaticObject::Serialize! */
     }
 
@@ -95,7 +95,7 @@ namespace FriskTests
     DEF_TEST(StaticObject_Deserialize_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for StaticObject::Deserialize! */
     }
 

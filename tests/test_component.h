@@ -7,7 +7,7 @@ namespace FriskTests
     DEF_TEST(Component_Component_Constructor_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Component::Component::Constructor! */
     }
 
@@ -15,7 +15,7 @@ namespace FriskTests
     DEF_TEST(Component_Component_Constructor2_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Component::Component::Constructor2! */
     }
 
@@ -23,7 +23,7 @@ namespace FriskTests
     DEF_TEST(Component_Component_Destructor_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Component::Component::Destructor! */
     }
 
@@ -31,7 +31,7 @@ namespace FriskTests
     DEF_TEST(Component_Serialize_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Component::Serialize! */
     }
 
@@ -39,7 +39,7 @@ namespace FriskTests
     DEF_TEST(Component_Deserialize_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Component::Deserialize! */
     }
 
@@ -47,7 +47,7 @@ namespace FriskTests
     DEF_TEST(Component_SetObject_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Component::SetObject! */
     }
 
@@ -55,7 +55,7 @@ namespace FriskTests
     DEF_TEST(Component_GetObject_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Component::GetObject! */
     }
 
@@ -63,7 +63,7 @@ namespace FriskTests
     DEF_TEST(Component_GetMeta_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Component::GetMeta! */
     }
 
@@ -71,7 +71,7 @@ namespace FriskTests
     DEF_TEST(Component_Attach_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Component::Attach! */
     }
 
@@ -79,7 +79,7 @@ namespace FriskTests
     DEF_TEST(Component_Detach_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Component::Detach! */
     }
 
@@ -87,7 +87,7 @@ namespace FriskTests
     DEF_TEST(Component_Initialize_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Component::Initialize! */
     }
 

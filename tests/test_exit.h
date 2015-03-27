@@ -7,7 +7,7 @@ namespace FriskTests
     DEF_TEST(Exit_Exit_Constructor_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Exit::Exit::Constructor! */
     }
 
@@ -15,7 +15,7 @@ namespace FriskTests
     DEF_TEST(Exit_Exit_Constructor2_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Exit::Exit::Constructor2! */
     }
 
@@ -23,7 +23,7 @@ namespace FriskTests
     DEF_TEST(Exit_Exit_Destructor_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Exit::Exit::Destructor! */
     }
 
@@ -31,7 +31,7 @@ namespace FriskTests
     DEF_TEST(Exit_GetTo_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Exit::GetTo! */
     }
 
@@ -39,7 +39,7 @@ namespace FriskTests
     DEF_TEST(Exit_SetTo_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Exit::SetTo! */
     }
 
@@ -47,7 +47,7 @@ namespace FriskTests
     DEF_TEST(Exit_GetDirection_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Exit::GetDirection! */
     }
 
@@ -55,7 +55,7 @@ namespace FriskTests
     DEF_TEST(Exit_SetDirection_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Exit::SetDirection! */
     }
 
@@ -63,7 +63,7 @@ namespace FriskTests
     DEF_TEST(Exit_GetName_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Exit::GetName! */
     }
 
@@ -71,7 +71,7 @@ namespace FriskTests
     DEF_TEST(Exit_CanEnter_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Exit::CanEnter! */
     }
 
@@ -79,7 +79,7 @@ namespace FriskTests
     DEF_TEST(Exit_Serialize_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Exit::Serialize! */
     }
 
@@ -87,7 +87,7 @@ namespace FriskTests
     DEF_TEST(Exit_Deserialize_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Exit::Deserialize! */
     }
 

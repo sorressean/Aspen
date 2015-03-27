@@ -7,7 +7,7 @@ namespace FriskTests
     DEF_TEST(OptionEventArgs_OptionEventArgs_Constructor_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for OptionEventArgs::OptionEventArgs::Constructor! */
     }
 
@@ -15,7 +15,7 @@ namespace FriskTests
     DEF_TEST(OptionEventArgs_GetOption_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for OptionEventArgs::GetOption! */
     }
 
@@ -23,7 +23,7 @@ namespace FriskTests
     DEF_TEST(OptionEventArgs_GetCommand_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for OptionEventArgs::GetCommand! */
     }
 
@@ -31,7 +31,7 @@ namespace FriskTests
     DEF_TEST(NegotiationEventArgs_NegotiationEventArgs_Constructor_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for NegotiationEventArgs::NegotiationEventArgs::Constructor! */
     }
 
@@ -39,7 +39,7 @@ namespace FriskTests
     DEF_TEST(NegotiationEventArgs_GetOption_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for NegotiationEventArgs::GetOption! */
     }
 
@@ -47,7 +47,7 @@ namespace FriskTests
     DEF_TEST(NegotiationEventArgs_GetData_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for NegotiationEventArgs::GetData! */
     }
 
@@ -55,7 +55,7 @@ namespace FriskTests
     DEF_TEST(NegotiationEventArgs_GetSize_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for NegotiationEventArgs::GetSize! */
     }
 

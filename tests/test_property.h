@@ -7,7 +7,7 @@ namespace FriskTests
     DEF_TEST(Property_Property_Constructor_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Property::Property::Constructor! */
     }
 
@@ -15,7 +15,7 @@ namespace FriskTests
     DEF_TEST(Property_Property_Constructor2_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Property::Property::Constructor2! */
     }
 
@@ -23,7 +23,7 @@ namespace FriskTests
     DEF_TEST(Property_Property_Destructor_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Property::Property::Destructor! */
     }
 
@@ -31,7 +31,7 @@ namespace FriskTests
     DEF_TEST(Property_GetValue_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Property::GetValue! */
     }
 
@@ -39,7 +39,7 @@ namespace FriskTests
     DEF_TEST(Property_GetPropertyRef_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Property::GetPropertyRef! */
     }
 
@@ -47,7 +47,7 @@ namespace FriskTests
     DEF_TEST(Property_SetValue_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Property::SetValue! */
     }
 
@@ -55,7 +55,7 @@ namespace FriskTests
     DEF_TEST(Property_SetObject_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Property::SetObject! */
     }
 
@@ -63,7 +63,7 @@ namespace FriskTests
     DEF_TEST(Property_GetOwner_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Property::GetOwner! */
     }
 
@@ -71,7 +71,7 @@ namespace FriskTests
     DEF_TEST(Property_GetParent_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Property::GetParent! */
     }
 
@@ -79,7 +79,7 @@ namespace FriskTests
     DEF_TEST(Property_SetParent_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Property::SetParent! */
     }
 
@@ -87,7 +87,7 @@ namespace FriskTests
     DEF_TEST(Property_AddProperty_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Property::AddProperty! */
     }
 
@@ -95,7 +95,7 @@ namespace FriskTests
     DEF_TEST(Property_AddProperty2_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Property::AddProperty2! */
     }
 
@@ -103,7 +103,7 @@ namespace FriskTests
     DEF_TEST(Property_RemoveSelf_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Property::RemoveSelf! */
     }
 
@@ -111,7 +111,7 @@ namespace FriskTests
     DEF_TEST(Property_RemoveProperty_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Property::RemoveProperty! */
     }
 
@@ -119,7 +119,7 @@ namespace FriskTests
     DEF_TEST(Property_RemoveProperty2_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Property::RemoveProperty2! */
     }
 
@@ -127,7 +127,7 @@ namespace FriskTests
     DEF_TEST(Property_FindProperty_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Property::FindProperty! */
     }
 
@@ -135,7 +135,7 @@ namespace FriskTests
     DEF_TEST(Property_Serialize_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Property::Serialize! */
     }
 
@@ -143,7 +143,7 @@ namespace FriskTests
     DEF_TEST(Property_Deserialize_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Property::Deserialize! */
     }
 

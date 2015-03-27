@@ -7,7 +7,7 @@ namespace FriskTests
     DEF_TEST(BoardManager_BoardManager_Constructor_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for BoardManager::BoardManager::Constructor! */
     }
 
@@ -15,7 +15,7 @@ namespace FriskTests
     DEF_TEST(BoardManager_BoardManager_Destructor_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for BoardManager::BoardManager::Destructor! */
     }
 
@@ -23,7 +23,7 @@ namespace FriskTests
     DEF_TEST(BoardManager_AddBoard_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for BoardManager::AddBoard! */
     }
 
@@ -31,7 +31,7 @@ namespace FriskTests
     DEF_TEST(BoardManager_GetBoards_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for BoardManager::GetBoards! */
     }
 
@@ -39,7 +39,7 @@ namespace FriskTests
     DEF_TEST(BoardManager_GetBoardByIndex_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for BoardManager::GetBoardByIndex! */
     }
 
@@ -47,7 +47,7 @@ namespace FriskTests
     DEF_TEST(BoardManager_Serialize_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for BoardManager::Serialize! */
     }
 
@@ -55,7 +55,7 @@ namespace FriskTests
     DEF_TEST(BoardManager_Deserialize_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for BoardManager::Deserialize! */
     }
 

@@ -7,7 +7,7 @@ namespace FriskTests
     DEF_TEST(CalloutManager_Initialize_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for CalloutManager::Initialize! */
     }
 
@@ -15,7 +15,7 @@ namespace FriskTests
     DEF_TEST(CalloutManager_Release_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for CalloutManager::Release! */
     }
 
@@ -23,7 +23,7 @@ namespace FriskTests
     DEF_TEST(CalloutManager_GetInstance_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for CalloutManager::GetInstance! */
     }
 
@@ -31,7 +31,7 @@ namespace FriskTests
     DEF_TEST(CalloutManager_Update_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for CalloutManager::Update! */
     }
 
@@ -39,7 +39,7 @@ namespace FriskTests
     DEF_TEST(CalloutManager_RegisterCallout_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for CalloutManager::RegisterCallout! */
     }
 
@@ -47,7 +47,7 @@ namespace FriskTests
     DEF_TEST(CalloutManager_Profile_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for CalloutManager::Profile! */
     }
 
@@ -55,7 +55,7 @@ namespace FriskTests
     DEF_TEST(CalloutManager_CalloutManager_Constructor_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for CalloutManager::CalloutManager::Constructor! */
     }
 
@@ -63,7 +63,7 @@ namespace FriskTests
     DEF_TEST(CalloutManager_CalloutManager_Constructor2_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for CalloutManager::CalloutManager::Constructor2! */
     }
 
@@ -71,7 +71,7 @@ namespace FriskTests
     DEF_TEST(CalloutManager_CalloutManager_Destructor_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for CalloutManager::CalloutManager::Destructor! */
     }
 

@@ -7,7 +7,7 @@ namespace FriskTests
     DEF_TEST(OptionChangedArgs_OptionChangedArgs_Constructor_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for OptionChangedArgs::OptionChangedArgs::Constructor! */
     }
 
@@ -15,7 +15,7 @@ namespace FriskTests
     DEF_TEST(LookArgs_LookArgs_Constructor_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for LookArgs::LookArgs::Constructor! */
     }
 
@@ -23,7 +23,7 @@ namespace FriskTests
     DEF_TEST(LookArgs_LookArgs_Destructor_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for LookArgs::LookArgs::Destructor! */
     }
 
@@ -31,7 +31,7 @@ namespace FriskTests
     DEF_TEST(EditorLoadedArgs_EditorLoadedArgs_Constructor_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for EditorLoadedArgs::EditorLoadedArgs::Constructor! */
     }
 
@@ -39,7 +39,7 @@ namespace FriskTests
     DEF_TEST(EditorLoadedArgs_EditorLoadedArgs_Constructor2_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for EditorLoadedArgs::EditorLoadedArgs::Constructor2! */
     }
 
@@ -47,7 +47,7 @@ namespace FriskTests
     DEF_TEST(EditorExitedArgs_EditorExitedArgs_Constructor_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for EditorExitedArgs::EditorExitedArgs::Constructor! */
     }
 
@@ -55,7 +55,7 @@ namespace FriskTests
     DEF_TEST(EditorExitedArgs_EditorExitedArgs_Constructor2_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for EditorExitedArgs::EditorExitedArgs::Constructor2! */
     }
 
@@ -63,7 +63,7 @@ namespace FriskTests
     DEF_TEST(EditorSavedArgs_EditorSavedArgs_Constructor_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for EditorSavedArgs::EditorSavedArgs::Constructor! */
     }
 
@@ -71,7 +71,7 @@ namespace FriskTests
     DEF_TEST(EditorSavedArgs_EditorSavedArgs_Constructor2_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for EditorSavedArgs::EditorSavedArgs::Constructor2! */
     }
 
@@ -79,7 +79,7 @@ namespace FriskTests
     DEF_TEST(EditorAbortedArgs_EditorAbortedArgs_Constructor_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for EditorAbortedArgs::EditorAbortedArgs::Constructor! */
     }
 
@@ -87,7 +87,7 @@ namespace FriskTests
     DEF_TEST(EditorAbortedArgs_EditorAbortedArgs_Constructor2_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for EditorAbortedArgs::EditorAbortedArgs::Constructor2! */
     }
 
@@ -95,7 +95,7 @@ namespace FriskTests
     DEF_TEST(EditorAbortedArgs_EditorAbortedArgs_Destructor_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for EditorAbortedArgs::EditorAbortedArgs::Destructor! */
     }
 
@@ -103,7 +103,7 @@ namespace FriskTests
     DEF_TEST(ComponentAttachedArgs_ComponentAttachedArgs_Constructor_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for ComponentAttachedArgs::ComponentAttachedArgs::Constructor! */
     }
 

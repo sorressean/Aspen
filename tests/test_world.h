@@ -7,7 +7,7 @@ namespace FriskTests
     DEF_TEST(World_GetPtr_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for World::GetPtr! */
     }
 
@@ -15,7 +15,7 @@ namespace FriskTests
     DEF_TEST(World_World_Constructor_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for World::World::Constructor! */
     }
 
@@ -23,7 +23,7 @@ namespace FriskTests
     DEF_TEST(World_World_Destructor_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for World::World::Destructor! */
     }
 
@@ -31,7 +31,7 @@ namespace FriskTests
     DEF_TEST(World_InitializeServer_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for World::InitializeServer! */
     }
 
@@ -39,7 +39,7 @@ namespace FriskTests
     DEF_TEST(World_Shutdown_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for World::Shutdown! */
     }
 
@@ -47,7 +47,7 @@ namespace FriskTests
     DEF_TEST(World_Copyover_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for World::Copyover! */
     }
 
@@ -55,7 +55,7 @@ namespace FriskTests
     DEF_TEST(World_GetServer_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for World::GetServer! */
     }
 
@@ -63,7 +63,7 @@ namespace FriskTests
     DEF_TEST(World_GetOlcManager_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for World::GetOlcManager! */
     }
 
@@ -71,7 +71,7 @@ namespace FriskTests
     DEF_TEST(World_GetComponentFactory_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for World::GetComponentFactory! */
     }
 
@@ -79,7 +79,7 @@ namespace FriskTests
     DEF_TEST(World_GetPlayerManager_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for World::GetPlayerManager! */
     }
 
@@ -87,7 +87,7 @@ namespace FriskTests
     DEF_TEST(World_AddChannel_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for World::AddChannel! */
     }
 
@@ -95,7 +95,7 @@ namespace FriskTests
     DEF_TEST(World_FindChannel_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for World::FindChannel! */
     }
 
@@ -103,7 +103,7 @@ namespace FriskTests
     DEF_TEST(World_FindChannel2_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for World::FindChannel2! */
     }
 
@@ -111,7 +111,7 @@ namespace FriskTests
     DEF_TEST(World_GetChannelNames_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for World::GetChannelNames! */
     }
 
@@ -119,7 +119,7 @@ namespace FriskTests
     DEF_TEST(World_ChannelExists_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for World::ChannelExists! */
     }
 
@@ -127,7 +127,7 @@ namespace FriskTests
     DEF_TEST(World_RegisterComponent_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for World::RegisterComponent! */
     }
 
@@ -135,7 +135,7 @@ namespace FriskTests
     DEF_TEST(World_CreateComponent_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for World::CreateComponent! */
     }
 
@@ -143,7 +143,7 @@ namespace FriskTests
     DEF_TEST(World_GetRealUptime_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for World::GetRealUptime! */
     }
 
@@ -151,7 +151,7 @@ namespace FriskTests
     DEF_TEST(World_SetRealUptime_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for World::SetRealUptime! */
     }
 
@@ -159,7 +159,7 @@ namespace FriskTests
     DEF_TEST(World_GetCopyoverUptime_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for World::GetCopyoverUptime! */
     }
 
@@ -167,7 +167,7 @@ namespace FriskTests
     DEF_TEST(World_SetCopyoverUptime_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for World::SetCopyoverUptime! */
     }
 
@@ -175,7 +175,7 @@ namespace FriskTests
     DEF_TEST(World_AddProperty_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for World::AddProperty! */
     }
 
@@ -183,7 +183,7 @@ namespace FriskTests
     DEF_TEST(World_GetProperty_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for World::GetProperty! */
     }
 
@@ -191,7 +191,7 @@ namespace FriskTests
     DEF_TEST(World_RemoveProperty_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for World::RemoveProperty! */
     }
 
@@ -199,7 +199,7 @@ namespace FriskTests
     DEF_TEST(World_InitializeFiles_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for World::InitializeFiles! */
     }
 
@@ -207,7 +207,7 @@ namespace FriskTests
     DEF_TEST(World_GetBanner_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for World::GetBanner! */
     }
 
@@ -215,7 +215,7 @@ namespace FriskTests
     DEF_TEST(World_GetMotd_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for World::GetMotd! */
     }
 
@@ -223,7 +223,7 @@ namespace FriskTests
     DEF_TEST(World_Update_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for World::Update! */
     }
 
@@ -231,7 +231,7 @@ namespace FriskTests
     DEF_TEST(World_ParseArguments_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for World::ParseArguments! */
     }
 
@@ -239,7 +239,7 @@ namespace FriskTests
     DEF_TEST(World_DoCommand_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for World::DoCommand! */
     }
 
@@ -247,7 +247,7 @@ namespace FriskTests
     DEF_TEST(World_MatchKeyword_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for World::MatchKeyword! */
     }
 
@@ -255,7 +255,7 @@ namespace FriskTests
     DEF_TEST(World_MatchObject_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for World::MatchObject! */
     }
 
@@ -263,7 +263,7 @@ namespace FriskTests
     DEF_TEST(World_MatchObjectInList_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for World::MatchObjectInList! */
     }
 
@@ -271,7 +271,7 @@ namespace FriskTests
     DEF_TEST(World_MatchObjectInVector_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for World::MatchObjectInVector! */
     }
 
@@ -279,7 +279,7 @@ namespace FriskTests
     DEF_TEST(World_AddZone_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for World::AddZone! */
     }
 
@@ -287,7 +287,7 @@ namespace FriskTests
     DEF_TEST(World_RemoveZone_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for World::RemoveZone! */
     }
 
@@ -295,7 +295,7 @@ namespace FriskTests
     DEF_TEST(World_GetZone_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for World::GetZone! */
     }
 
@@ -303,7 +303,7 @@ namespace FriskTests
     DEF_TEST(World_GetZones_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for World::GetZones! */
     }
 
@@ -311,7 +311,7 @@ namespace FriskTests
     DEF_TEST(World_LogExists_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for World::LogExists! */
     }
 
@@ -319,7 +319,7 @@ namespace FriskTests
     DEF_TEST(World_RegisterLog_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for World::RegisterLog! */
     }
 
@@ -327,7 +327,7 @@ namespace FriskTests
     DEF_TEST(World_WriteLog_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for World::WriteLog! */
     }
 
@@ -335,7 +335,7 @@ namespace FriskTests
     DEF_TEST(World_GetLog_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for World::GetLog! */
     }
 
@@ -343,7 +343,7 @@ namespace FriskTests
     DEF_TEST(World_GetOptionManager_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for World::GetOptionManager! */
     }
 
@@ -351,7 +351,7 @@ namespace FriskTests
     DEF_TEST(World_IsRunning_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for World::IsRunning! */
     }
 
@@ -359,7 +359,7 @@ namespace FriskTests
     DEF_TEST(World_SetRunning_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for World::SetRunning! */
     }
 
@@ -367,7 +367,7 @@ namespace FriskTests
     DEF_TEST(World_PromptExists_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for World::PromptExists! */
     }
 
@@ -375,7 +375,7 @@ namespace FriskTests
     DEF_TEST(World_RegisterPrompt_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for World::RegisterPrompt! */
     }
 
@@ -383,7 +383,7 @@ namespace FriskTests
     DEF_TEST(World_BuildPrompt_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for World::BuildPrompt! */
     }
 
@@ -391,7 +391,7 @@ namespace FriskTests
     DEF_TEST(World_AddState_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for World::AddState! */
     }
 
@@ -399,7 +399,7 @@ namespace FriskTests
     DEF_TEST(World_RemoveState_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for World::RemoveState! */
     }
 
@@ -407,7 +407,7 @@ namespace FriskTests
     DEF_TEST(World_StateExists_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for World::StateExists! */
     }
 
@@ -415,7 +415,7 @@ namespace FriskTests
     DEF_TEST(World_SaveState_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for World::SaveState! */
     }
 
@@ -423,7 +423,7 @@ namespace FriskTests
     DEF_TEST(World_LoadState_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for World::LoadState! */
     }
 
@@ -431,7 +431,7 @@ namespace FriskTests
     DEF_TEST(World_GetUpdates_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for World::GetUpdates! */
     }
 
@@ -439,7 +439,7 @@ namespace FriskTests
     DEF_TEST(World_GetUpdateTime_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for World::GetUpdateTime! */
     }
 
@@ -447,7 +447,7 @@ namespace FriskTests
     DEF_TEST(World_GetSleepTime_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for World::GetSleepTime! */
     }
 
@@ -455,7 +455,7 @@ namespace FriskTests
     DEF_TEST(World_GetCommands_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for World::GetCommands! */
     }
 
@@ -463,7 +463,7 @@ namespace FriskTests
     DEF_TEST(World_GetCommandTime_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for World::GetCommandTime! */
     }
 
@@ -471,7 +471,7 @@ namespace FriskTests
     DEF_TEST(World_GetObjectManager_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for World::GetObjectManager! */
     }
 

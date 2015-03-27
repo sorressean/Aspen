@@ -7,7 +7,7 @@ namespace FriskTests
     DEF_TEST(RegisterBaseObjectMethods_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for RegisterBaseObjectMethods! */
     }
 
@@ -15,7 +15,7 @@ namespace FriskTests
     DEF_TEST(InitializeBaseObject_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for InitializeBaseObject! */
     }
 

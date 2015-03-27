@@ -7,7 +7,7 @@ namespace FriskTests
     DEF_TEST(InitializePlayer_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for InitializePlayer! */
     }
 
@@ -15,7 +15,7 @@ namespace FriskTests
     DEF_TEST(Player_Player_Constructor_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Player::Player::Constructor! */
     }
 
@@ -23,7 +23,7 @@ namespace FriskTests
     DEF_TEST(Player_Player_Destructor_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Player::Player::Destructor! */
     }
 
@@ -31,7 +31,7 @@ namespace FriskTests
     DEF_TEST(Player_IsPlayer_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Player::IsPlayer! */
     }
 
@@ -39,7 +39,7 @@ namespace FriskTests
     DEF_TEST(Player_SerializeDoc_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Player::SerializeDoc! */
     }
 
@@ -47,7 +47,7 @@ namespace FriskTests
     DEF_TEST(Player_Serialize_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Player::Serialize! */
     }
 
@@ -55,7 +55,7 @@ namespace FriskTests
     DEF_TEST(Player_Deserialize_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Player::Deserialize! */
     }
 
@@ -63,7 +63,7 @@ namespace FriskTests
     DEF_TEST(Player_SetSocket_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Player::SetSocket! */
     }
 
@@ -71,7 +71,7 @@ namespace FriskTests
     DEF_TEST(Player_GetShort_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Player::GetShort! */
     }
 
@@ -79,7 +79,7 @@ namespace FriskTests
     DEF_TEST(Player_GetPassword_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Player::GetPassword! */
     }
 
@@ -87,7 +87,7 @@ namespace FriskTests
     DEF_TEST(Player_SetPassword_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Player::SetPassword! */
     }
 
@@ -95,7 +95,7 @@ namespace FriskTests
     DEF_TEST(Player_GetTempPassword_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Player::GetTempPassword! */
     }
 
@@ -103,7 +103,7 @@ namespace FriskTests
     DEF_TEST(Player_SetTempPassword_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Player::SetTempPassword! */
     }
 
@@ -111,7 +111,7 @@ namespace FriskTests
     DEF_TEST(Player_IncInvalidPassword_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Player::IncInvalidPassword! */
     }
 
@@ -119,7 +119,7 @@ namespace FriskTests
     DEF_TEST(Player_GetSocket_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Player::GetSocket! */
     }
 
@@ -127,7 +127,7 @@ namespace FriskTests
     DEF_TEST(Player_GetTitle_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Player::GetTitle! */
     }
 
@@ -135,7 +135,7 @@ namespace FriskTests
     DEF_TEST(Player_SetTitle_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Player::SetTitle! */
     }
 
@@ -143,7 +143,7 @@ namespace FriskTests
     DEF_TEST(Player_GetRank_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Player::GetRank! */
     }
 
@@ -151,7 +151,7 @@ namespace FriskTests
     DEF_TEST(Player_SetRank_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Player::SetRank! */
     }
 
@@ -159,7 +159,7 @@ namespace FriskTests
     DEF_TEST(Player_GetPflag_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Player::GetPflag! */
     }
 
@@ -167,7 +167,7 @@ namespace FriskTests
     DEF_TEST(Player_SetPflag_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Player::SetPflag! */
     }
 
@@ -175,7 +175,7 @@ namespace FriskTests
     DEF_TEST(Player_GetOnlineTime_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Player::GetOnlineTime! */
     }
 
@@ -183,7 +183,7 @@ namespace FriskTests
     DEF_TEST(Player_SetOnlineTime_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Player::SetOnlineTime! */
     }
 
@@ -191,7 +191,7 @@ namespace FriskTests
     DEF_TEST(Player_GetFirstLogin_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Player::GetFirstLogin! */
     }
 
@@ -199,7 +199,7 @@ namespace FriskTests
     DEF_TEST(Player_SetFirstLogin_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Player::SetFirstLogin! */
     }
 
@@ -207,7 +207,7 @@ namespace FriskTests
     DEF_TEST(Player_GetLastLogin_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Player::GetLastLogin! */
     }
 
@@ -215,7 +215,7 @@ namespace FriskTests
     DEF_TEST(Player_SetLastLogin_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Player::SetLastLogin! */
     }
 
@@ -223,7 +223,7 @@ namespace FriskTests
     DEF_TEST(Player_GetPrompt_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Player::GetPrompt! */
     }
 
@@ -231,7 +231,7 @@ namespace FriskTests
     DEF_TEST(Player_SetPrompt_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Player::SetPrompt! */
     }
 
@@ -239,7 +239,7 @@ namespace FriskTests
     DEF_TEST(Player_ClearTempPassword_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Player::ClearTempPassword! */
     }
 
@@ -247,7 +247,7 @@ namespace FriskTests
     DEF_TEST(Player_ComparePassword_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Player::ComparePassword! */
     }
 
@@ -255,7 +255,7 @@ namespace FriskTests
     DEF_TEST(Player_Save_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Player::Save! */
     }
 
@@ -263,7 +263,7 @@ namespace FriskTests
     DEF_TEST(Player_Backup_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Player::Backup! */
     }
 
@@ -271,7 +271,7 @@ namespace FriskTests
     DEF_TEST(Player_Load_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Player::Load! */
     }
 
@@ -279,7 +279,7 @@ namespace FriskTests
     DEF_TEST(Player_EnterGame_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Player::EnterGame! */
     }
 
@@ -287,7 +287,7 @@ namespace FriskTests
     DEF_TEST(Player_EnterGame2_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Player::EnterGame2! */
     }
 
@@ -295,7 +295,7 @@ namespace FriskTests
     DEF_TEST(Player_LeaveGame_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Player::LeaveGame! */
     }
 
@@ -303,7 +303,7 @@ namespace FriskTests
     DEF_TEST(Player_Quit_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Player::Quit! */
     }
 
@@ -311,7 +311,7 @@ namespace FriskTests
     DEF_TEST(Player_Write_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Player::Write! */
     }
 
@@ -319,7 +319,7 @@ namespace FriskTests
     DEF_TEST(Player_Message_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Player::Message! */
     }
 
@@ -327,7 +327,7 @@ namespace FriskTests
     DEF_TEST(Player_SetOption_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Player::SetOption! */
     }
 
@@ -335,7 +335,7 @@ namespace FriskTests
     DEF_TEST(Player_GetOption_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Player::GetOption! */
     }
 
@@ -343,7 +343,7 @@ namespace FriskTests
     DEF_TEST(Player_OptionExists_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Player::OptionExists! */
     }
 
@@ -351,7 +351,7 @@ namespace FriskTests
     DEF_TEST(Player_ToggleOption_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Player::ToggleOption! */
     }
 
@@ -359,7 +359,7 @@ namespace FriskTests
     DEF_TEST(Player_GetOptions_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Player::GetOptions! */
     }
 
@@ -367,7 +367,7 @@ namespace FriskTests
     DEF_TEST(Player_HasAccess_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Player::HasAccess! */
     }
 
@@ -375,7 +375,7 @@ namespace FriskTests
     DEF_TEST(Player_AddMessage_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Player::AddMessage! */
     }
 
@@ -383,7 +383,7 @@ namespace FriskTests
     DEF_TEST(FileLoadException_FileLoadException_Constructor_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for FileLoadException::FileLoadException::Constructor! */
     }
 

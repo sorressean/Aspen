@@ -7,7 +7,7 @@ namespace FriskTests
     DEF_TEST(TelnetParser_TelnetParser_Constructor_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for TelnetParser::TelnetParser::Constructor! */
     }
 
@@ -15,7 +15,7 @@ namespace FriskTests
     DEF_TEST(TelnetParser_TelnetParser_Destructor_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for TelnetParser::TelnetParser::Destructor! */
     }
 
@@ -23,7 +23,7 @@ namespace FriskTests
     DEF_TEST(TelnetParser_SetBuffer_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for TelnetParser::SetBuffer! */
     }
 
@@ -31,7 +31,7 @@ namespace FriskTests
     DEF_TEST(TelnetParser_GetFinalBuffer_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for TelnetParser::GetFinalBuffer! */
     }
 
@@ -39,7 +39,7 @@ namespace FriskTests
     DEF_TEST(TelnetParser_GetFinalSize_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for TelnetParser::GetFinalSize! */
     }
 
@@ -47,7 +47,7 @@ namespace FriskTests
     DEF_TEST(TelnetParser_Parse_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for TelnetParser::Parse! */
     }
 
@@ -55,7 +55,7 @@ namespace FriskTests
     DEF_TEST(TelnetParser_Reset_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for TelnetParser::Reset! */
     }
 
@@ -63,7 +63,7 @@ namespace FriskTests
     DEF_TEST(TelnetParser_Initialize_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for TelnetParser::Initialize! */
     }
 

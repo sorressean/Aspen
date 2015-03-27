@@ -7,7 +7,7 @@ namespace FriskTests
     DEF_TEST(BaseSocket_BaseSocket_Constructor_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for BaseSocket::BaseSocket::Constructor! */
     }
 
@@ -15,7 +15,7 @@ namespace FriskTests
     DEF_TEST(BaseSocket_BaseSocket_Constructor2_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for BaseSocket::BaseSocket::Constructor2! */
     }
 
@@ -23,7 +23,7 @@ namespace FriskTests
     DEF_TEST(BaseSocket_BaseSocket_Destructor_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for BaseSocket::BaseSocket::Destructor! */
     }
 
@@ -31,7 +31,7 @@ namespace FriskTests
     DEF_TEST(BaseSocket_GetControl_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for BaseSocket::GetControl! */
     }
 
@@ -39,7 +39,7 @@ namespace FriskTests
     DEF_TEST(BaseSocket_Read_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for BaseSocket::Read! */
     }
 
@@ -47,7 +47,7 @@ namespace FriskTests
     DEF_TEST(BaseSocket_Write_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for BaseSocket::Write! */
     }
 
@@ -55,7 +55,7 @@ namespace FriskTests
     DEF_TEST(BaseSocket_Write2_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for BaseSocket::Write2! */
     }
 
@@ -63,7 +63,7 @@ namespace FriskTests
     DEF_TEST(BaseSocket_Write3_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for BaseSocket::Write3! */
     }
 
@@ -71,7 +71,7 @@ namespace FriskTests
     DEF_TEST(BaseSocket_Flush_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for BaseSocket::Flush! */
     }
 
@@ -79,7 +79,7 @@ namespace FriskTests
     DEF_TEST(BaseSocket_GetInBuffer_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for BaseSocket::GetInBuffer! */
     }
 
@@ -87,7 +87,7 @@ namespace FriskTests
     DEF_TEST(BaseSocket_ClrInBuffer_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for BaseSocket::ClrInBuffer! */
     }
 
@@ -95,7 +95,7 @@ namespace FriskTests
     DEF_TEST(BaseSocket_InputPending_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for BaseSocket::InputPending! */
     }
 
@@ -103,7 +103,7 @@ namespace FriskTests
     DEF_TEST(BaseSocket_GetAddr_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for BaseSocket::GetAddr! */
     }
 
@@ -111,7 +111,7 @@ namespace FriskTests
     DEF_TEST(BaseSocket_SetAddr_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for BaseSocket::SetAddr! */
     }
 
@@ -119,7 +119,7 @@ namespace FriskTests
     DEF_TEST(BaseSocket_Close_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for BaseSocket::Close! */
     }
 
@@ -127,7 +127,7 @@ namespace FriskTests
     DEF_TEST(BaseSocket_Connect_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for BaseSocket::Connect! */
     }
 

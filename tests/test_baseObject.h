@@ -7,7 +7,7 @@ namespace FriskTests
     DEF_TEST(InitializeBaseObjectOlcs_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for InitializeBaseObjectOlcs! */
     }
 
@@ -15,7 +15,7 @@ namespace FriskTests
     DEF_TEST(BaseObject_BaseObject_Constructor_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for BaseObject::BaseObject::Constructor! */
     }
 
@@ -23,7 +23,7 @@ namespace FriskTests
     DEF_TEST(BaseObject_BaseObject_Destructor_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for BaseObject::BaseObject::Destructor! */
     }
 
@@ -31,7 +31,7 @@ namespace FriskTests
     DEF_TEST(BaseObject_GetName_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for BaseObject::GetName! */
     }
 
@@ -39,7 +39,7 @@ namespace FriskTests
     DEF_TEST(BaseObject_SetName_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for BaseObject::SetName! */
     }
 
@@ -47,7 +47,7 @@ namespace FriskTests
     DEF_TEST(BaseObject_GetShort_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for BaseObject::GetShort! */
     }
 
@@ -55,7 +55,7 @@ namespace FriskTests
     DEF_TEST(BaseObject_SetShort_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for BaseObject::SetShort! */
     }
 
@@ -63,7 +63,7 @@ namespace FriskTests
     DEF_TEST(BaseObject_GetDescription_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for BaseObject::GetDescription! */
     }
 
@@ -71,7 +71,7 @@ namespace FriskTests
     DEF_TEST(BaseObject_SetDescription_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for BaseObject::SetDescription! */
     }
 
@@ -79,7 +79,7 @@ namespace FriskTests
     DEF_TEST(BaseObject_GetPlural_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for BaseObject::GetPlural! */
     }
 
@@ -87,7 +87,7 @@ namespace FriskTests
     DEF_TEST(BaseObject_SetPlural_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for BaseObject::SetPlural! */
     }
 
@@ -95,7 +95,7 @@ namespace FriskTests
     DEF_TEST(BaseObject_GetScript_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for BaseObject::GetScript! */
     }
 
@@ -103,7 +103,7 @@ namespace FriskTests
     DEF_TEST(BaseObject_SetScript_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for BaseObject::SetScript! */
     }
 
@@ -111,7 +111,7 @@ namespace FriskTests
     DEF_TEST(BaseObject_GetPersistent_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for BaseObject::GetPersistent! */
     }
 
@@ -119,7 +119,7 @@ namespace FriskTests
     DEF_TEST(BaseObject_SetPersistent_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for BaseObject::SetPersistent! */
     }
 
@@ -127,7 +127,7 @@ namespace FriskTests
     DEF_TEST(BaseObject_GetZone_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for BaseObject::GetZone! */
     }
 
@@ -135,7 +135,7 @@ namespace FriskTests
     DEF_TEST(BaseObject_SetZone_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for BaseObject::SetZone! */
     }
 
@@ -143,7 +143,7 @@ namespace FriskTests
     DEF_TEST(BaseObject_GetOnum_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for BaseObject::GetOnum! */
     }
 
@@ -151,7 +151,7 @@ namespace FriskTests
     DEF_TEST(BaseObject_SetOnum_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for BaseObject::SetOnum! */
     }
 
@@ -159,7 +159,7 @@ namespace FriskTests
     DEF_TEST(BaseObject_AddComponent_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for BaseObject::AddComponent! */
     }
 
@@ -167,7 +167,7 @@ namespace FriskTests
     DEF_TEST(BaseObject_RemoveComponent_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for BaseObject::RemoveComponent! */
     }
 
@@ -175,7 +175,7 @@ namespace FriskTests
     DEF_TEST(BaseObject_HasComponent_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for BaseObject::HasComponent! */
     }
 
@@ -183,7 +183,7 @@ namespace FriskTests
     DEF_TEST(BaseObject_GetComponent_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for BaseObject::GetComponent! */
     }
 
@@ -191,7 +191,7 @@ namespace FriskTests
     DEF_TEST(BaseObject_Attach_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for BaseObject::Attach! */
     }
 
@@ -199,7 +199,7 @@ namespace FriskTests
     DEF_TEST(BaseObject_Attach2_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for BaseObject::Attach2! */
     }
 
@@ -207,7 +207,7 @@ namespace FriskTests
     DEF_TEST(BaseObject_AddAlias_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for BaseObject::AddAlias! */
     }
 
@@ -215,7 +215,7 @@ namespace FriskTests
     DEF_TEST(BaseObject_AliasExists_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for BaseObject::AliasExists! */
     }
 
@@ -223,7 +223,7 @@ namespace FriskTests
     DEF_TEST(BaseObject_GetAliases_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for BaseObject::GetAliases! */
     }
 
@@ -231,7 +231,7 @@ namespace FriskTests
     DEF_TEST(BaseObject_Identify_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for BaseObject::Identify! */
     }
 
@@ -239,7 +239,7 @@ namespace FriskTests
     DEF_TEST(BaseObject_Serialize_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for BaseObject::Serialize! */
     }
 
@@ -247,7 +247,7 @@ namespace FriskTests
     DEF_TEST(BaseObject_Deserialize_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for BaseObject::Deserialize! */
     }
 
@@ -255,7 +255,7 @@ namespace FriskTests
     DEF_TEST(BaseObject_Copy_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for BaseObject::Copy! */
     }
 

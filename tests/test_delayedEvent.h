@@ -7,7 +7,7 @@ namespace FriskTests
     DEF_TEST(DelayedEvent_DelayedEvent_Constructor_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for DelayedEvent::DelayedEvent::Constructor! */
     }
 
@@ -15,7 +15,7 @@ namespace FriskTests
     DEF_TEST(DelayedEvent_DelayedEvent_Constructor2_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for DelayedEvent::DelayedEvent::Constructor2! */
     }
 
@@ -23,7 +23,7 @@ namespace FriskTests
     DEF_TEST(DelayedEvent_SetDelay_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for DelayedEvent::SetDelay! */
     }
 
@@ -31,7 +31,7 @@ namespace FriskTests
     DEF_TEST(DelayedEvent_Invoke_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for DelayedEvent::Invoke! */
     }
 

@@ -7,7 +7,7 @@ namespace FriskTests
     DEF_TEST(EVENT2_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for EVENT2! */
     }
 
@@ -15,7 +15,7 @@ namespace FriskTests
     DEF_TEST(InitializeSocials_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for InitializeSocials! */
     }
 
@@ -23,7 +23,7 @@ namespace FriskTests
     DEF_TEST(CMDSocials_CMDSocials_Constructor_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for CMDSocials::CMDSocials::Constructor! */
     }
 
@@ -31,7 +31,7 @@ namespace FriskTests
     DEF_TEST(CMDSocials_Execute_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for CMDSocials::Execute! */
     }
 
@@ -39,7 +39,7 @@ namespace FriskTests
     DEF_TEST(Socials_GetPtr_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Socials::GetPtr! */
     }
 
@@ -47,7 +47,7 @@ namespace FriskTests
     DEF_TEST(Socials_Initialize_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Socials::Initialize! */
     }
 
@@ -55,7 +55,7 @@ namespace FriskTests
     DEF_TEST(Socials_Socials_Destructor_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Socials::Socials::Destructor! */
     }
 
@@ -63,7 +63,7 @@ namespace FriskTests
     DEF_TEST(Socials_Save_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Socials::Save! */
     }
 
@@ -71,7 +71,7 @@ namespace FriskTests
     DEF_TEST(Socials_Load_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Socials::Load! */
     }
 
@@ -79,7 +79,7 @@ namespace FriskTests
     DEF_TEST(Socials_SocialExists_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Socials::SocialExists! */
     }
 
@@ -87,7 +87,7 @@ namespace FriskTests
     DEF_TEST(Socials_AddSocial_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Socials::AddSocial! */
     }
 
@@ -95,7 +95,7 @@ namespace FriskTests
     DEF_TEST(Socials_GetSocial_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Socials::GetSocial! */
     }
 
@@ -103,7 +103,7 @@ namespace FriskTests
     DEF_TEST(Socials_InitializeDefaultSocials_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Socials::InitializeDefaultSocials! */
     }
 
@@ -111,7 +111,7 @@ namespace FriskTests
     DEF_TEST(Socials_AddCommands_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Socials::AddCommands! */
     }
 

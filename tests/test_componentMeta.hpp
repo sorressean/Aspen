@@ -7,7 +7,7 @@ namespace FriskTests
     DEF_TEST(ComponentMeta_ComponentMeta_Constructor_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for ComponentMeta::ComponentMeta::Constructor! */
     }
 
@@ -15,7 +15,7 @@ namespace FriskTests
     DEF_TEST(ComponentMeta_ComponentMeta_Destructor_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for ComponentMeta::ComponentMeta::Destructor! */
     }
 
@@ -23,7 +23,7 @@ namespace FriskTests
     DEF_TEST(ComponentMeta_SetName_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for ComponentMeta::SetName! */
     }
 
@@ -31,7 +31,7 @@ namespace FriskTests
     DEF_TEST(ComponentMeta_GetName_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for ComponentMeta::GetName! */
     }
 
@@ -39,7 +39,7 @@ namespace FriskTests
     DEF_TEST(ComponentMeta_DependencyExists_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for ComponentMeta::DependencyExists! */
     }
 
@@ -47,7 +47,7 @@ namespace FriskTests
     DEF_TEST(ComponentMeta_AddDependency_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for ComponentMeta::AddDependency! */
     }
 
@@ -55,7 +55,7 @@ namespace FriskTests
     DEF_TEST(ComponentMeta_GetDependencies_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for ComponentMeta::GetDependencies! */
     }
 
@@ -63,7 +63,7 @@ namespace FriskTests
     DEF_TEST(ComponentMeta_Create_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for ComponentMeta::Create! */
     }
 
@@ -71,7 +71,7 @@ namespace FriskTests
     DEF_TEST(ComponentMeta_Initialize_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for ComponentMeta::Initialize! */
     }
 
@@ -79,7 +79,7 @@ namespace FriskTests
     DEF_TEST(ComponentMeta_GetOlcGroup_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for ComponentMeta::GetOlcGroup! */
     }
 
@@ -87,7 +87,7 @@ namespace FriskTests
     DEF_TEST(ComponentMeta_Serialize_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for ComponentMeta::Serialize! */
     }
 
@@ -95,7 +95,7 @@ namespace FriskTests
     DEF_TEST(ComponentMeta_Deserialize_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for ComponentMeta::Deserialize! */
     }
 
@@ -103,7 +103,7 @@ namespace FriskTests
     DEF_TEST(IComponentMeta_IComponentMeta_Destructor_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for IComponentMeta::IComponentMeta::Destructor! */
     }
 
@@ -111,7 +111,7 @@ namespace FriskTests
     DEF_TEST(IComponentMeta_Create_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for IComponentMeta::Create! */
     }
 
@@ -119,7 +119,7 @@ namespace FriskTests
     DEF_TEST(IComponentMeta_Initialize_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for IComponentMeta::Initialize! */
     }
 
@@ -127,7 +127,7 @@ namespace FriskTests
     DEF_TEST(IComponentMeta_GetName_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for IComponentMeta::GetName! */
     }
 
@@ -135,7 +135,7 @@ namespace FriskTests
     DEF_TEST(IComponentMeta_AddDependency_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for IComponentMeta::AddDependency! */
     }
 
@@ -143,7 +143,7 @@ namespace FriskTests
     DEF_TEST(IComponentMeta_GetDependencies_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for IComponentMeta::GetDependencies! */
     }
 
@@ -151,7 +151,7 @@ namespace FriskTests
     DEF_TEST(IComponentMeta_GetOlcGroup_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for IComponentMeta::GetOlcGroup! */
     }
 
@@ -159,7 +159,7 @@ namespace FriskTests
     DEF_TEST(IComponentMeta_Serialize_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for IComponentMeta::Serialize! */
     }
 
@@ -167,7 +167,7 @@ namespace FriskTests
     DEF_TEST(IComponentMeta_Deserialize_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for IComponentMeta::Deserialize! */
     }
 

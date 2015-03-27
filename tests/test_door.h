@@ -7,7 +7,7 @@ namespace FriskTests
     DEF_TEST(Door_Door_Constructor_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Door::Door::Constructor! */
     }
 
@@ -15,7 +15,7 @@ namespace FriskTests
     DEF_TEST(Door_Door_Destructor_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Door::Door::Destructor! */
     }
 
@@ -23,7 +23,7 @@ namespace FriskTests
     DEF_TEST(Door_GetAutocloseDelay_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Door::GetAutocloseDelay! */
     }
 
@@ -31,7 +31,7 @@ namespace FriskTests
     DEF_TEST(Door_SetAutocloseDelay_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Door::SetAutocloseDelay! */
     }
 
@@ -39,7 +39,7 @@ namespace FriskTests
     DEF_TEST(Door_GetKey_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Door::GetKey! */
     }
 
@@ -47,7 +47,7 @@ namespace FriskTests
     DEF_TEST(Door_SetKey_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Door::SetKey! */
     }
 
@@ -55,7 +55,7 @@ namespace FriskTests
     DEF_TEST(Door_GetAutoClose_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Door::GetAutoClose! */
     }
 
@@ -63,7 +63,7 @@ namespace FriskTests
     DEF_TEST(Door_SetAutoClose_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Door::SetAutoClose! */
     }
 

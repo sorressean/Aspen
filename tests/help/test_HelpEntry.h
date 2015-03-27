@@ -7,7 +7,7 @@ namespace FriskTests
     DEF_TEST(HelpEntry_HelpEntry_Constructor_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for HelpEntry::HelpEntry::Constructor! */
     }
 
@@ -15,7 +15,7 @@ namespace FriskTests
     DEF_TEST(HelpEntry_HelpEntry_Constructor2_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for HelpEntry::HelpEntry::Constructor2! */
     }
 
@@ -23,7 +23,7 @@ namespace FriskTests
     DEF_TEST(HelpEntry_HelpEntry_Destructor_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for HelpEntry::HelpEntry::Destructor! */
     }
 
@@ -31,7 +31,7 @@ namespace FriskTests
     DEF_TEST(HelpEntry_GetName_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for HelpEntry::GetName! */
     }
 
@@ -39,7 +39,7 @@ namespace FriskTests
     DEF_TEST(HelpEntry_SetName_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for HelpEntry::SetName! */
     }
 
@@ -47,7 +47,7 @@ namespace FriskTests
     DEF_TEST(HelpEntry_GetData_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for HelpEntry::GetData! */
     }
 
@@ -55,7 +55,7 @@ namespace FriskTests
     DEF_TEST(HelpEntry_SetData_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for HelpEntry::SetData! */
     }
 
@@ -63,7 +63,7 @@ namespace FriskTests
     DEF_TEST(HelpEntry_GetType_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for HelpEntry::GetType! */
     }
 
@@ -71,7 +71,7 @@ namespace FriskTests
     DEF_TEST(HelpEntry_SetType_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for HelpEntry::SetType! */
     }
 
@@ -79,7 +79,7 @@ namespace FriskTests
     DEF_TEST(HelpEntry_GetId_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for HelpEntry::GetId! */
     }
 
@@ -87,7 +87,7 @@ namespace FriskTests
     DEF_TEST(HelpEntry_SetId_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for HelpEntry::SetId! */
     }
 
@@ -95,7 +95,7 @@ namespace FriskTests
     DEF_TEST(HelpEntry_GetAccess_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for HelpEntry::GetAccess! */
     }
 
@@ -103,7 +103,7 @@ namespace FriskTests
     DEF_TEST(HelpEntry_SetAccess_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for HelpEntry::SetAccess! */
     }
 
@@ -111,7 +111,7 @@ namespace FriskTests
     DEF_TEST(HelpEntry_SeealsoToList_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for HelpEntry::SeealsoToList! */
     }
 
@@ -119,7 +119,7 @@ namespace FriskTests
     DEF_TEST(HelpEntry_SeeAlsoExists_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for HelpEntry::SeeAlsoExists! */
     }
 
@@ -127,7 +127,7 @@ namespace FriskTests
     DEF_TEST(HelpEntry_SeeAlsoExists2_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for HelpEntry::SeeAlsoExists2! */
     }
 
@@ -135,7 +135,7 @@ namespace FriskTests
     DEF_TEST(HelpEntry_AddSeeAlso_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for HelpEntry::AddSeeAlso! */
     }
 
@@ -143,7 +143,7 @@ namespace FriskTests
     DEF_TEST(HelpEntry_RemoveSeeAlso_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for HelpEntry::RemoveSeeAlso! */
     }
 
@@ -151,7 +151,7 @@ namespace FriskTests
     DEF_TEST(HelpEntry_SeeAlsoToList_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for HelpEntry::SeeAlsoToList! */
     }
 
@@ -159,7 +159,7 @@ namespace FriskTests
     DEF_TEST(HelpEntry_GetSeeAlsoByIndex_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for HelpEntry::GetSeeAlsoByIndex! */
     }
 
@@ -167,7 +167,7 @@ namespace FriskTests
     DEF_TEST(HelpEntry_UpdateAccess_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for HelpEntry::UpdateAccess! */
     }
 
@@ -175,7 +175,7 @@ namespace FriskTests
     DEF_TEST(HelpEntry_Serialize_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for HelpEntry::Serialize! */
     }
 
@@ -183,7 +183,7 @@ namespace FriskTests
     DEF_TEST(HelpEntry_Deserialize_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for HelpEntry::Deserialize! */
     }
 

@@ -7,7 +7,7 @@ namespace FriskTests
     DEF_TEST(tonum_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for tonum! */
     }
 
@@ -15,7 +15,7 @@ namespace FriskTests
     DEF_TEST(FileExists_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for FileExists! */
     }
 
@@ -23,7 +23,7 @@ namespace FriskTests
     DEF_TEST(DirectoryExists_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for DirectoryExists! */
     }
 
@@ -31,7 +31,7 @@ namespace FriskTests
     DEF_TEST(GetFileSize_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for GetFileSize! */
     }
 
@@ -39,7 +39,7 @@ namespace FriskTests
     DEF_TEST(GetFileSize2_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for GetFileSize2! */
     }
 
@@ -47,7 +47,7 @@ namespace FriskTests
     DEF_TEST(GetFileSize3_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for GetFileSize3! */
     }
 
@@ -55,7 +55,7 @@ namespace FriskTests
     DEF_TEST(Tokenize_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Tokenize! */
     }
 
@@ -63,7 +63,7 @@ namespace FriskTests
     DEF_TEST(SplitToVector_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for SplitToVector! */
     }
 
@@ -71,7 +71,7 @@ namespace FriskTests
     DEF_TEST(TimevalToString_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for TimevalToString! */
     }
 
@@ -79,7 +79,7 @@ namespace FriskTests
     DEF_TEST(IsValidUserName_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for IsValidUserName! */
     }
 
@@ -87,7 +87,7 @@ namespace FriskTests
     DEF_TEST(IsValidPassword_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for IsValidPassword! */
     }
 
@@ -95,7 +95,7 @@ namespace FriskTests
     DEF_TEST(PlayerExists_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for PlayerExists! */
     }
 
@@ -103,7 +103,7 @@ namespace FriskTests
     DEF_TEST(IsFirstUser_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for IsFirstUser! */
     }
 
@@ -111,7 +111,7 @@ namespace FriskTests
     DEF_TEST(Lower_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Lower! */
     }
 
@@ -119,7 +119,7 @@ namespace FriskTests
     DEF_TEST(Capitalize_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Capitalize! */
     }
 
@@ -127,7 +127,7 @@ namespace FriskTests
     DEF_TEST(Repeat_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Repeat! */
     }
 
@@ -135,7 +135,7 @@ namespace FriskTests
     DEF_TEST(Repeat2_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Repeat2! */
     }
 
@@ -143,7 +143,7 @@ namespace FriskTests
     DEF_TEST(Center_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Center! */
     }
 
@@ -151,7 +151,7 @@ namespace FriskTests
     DEF_TEST(Explode_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Explode! */
     }
 
@@ -159,7 +159,7 @@ namespace FriskTests
     DEF_TEST(Explode2_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Explode2! */
     }
 
@@ -167,7 +167,7 @@ namespace FriskTests
     DEF_TEST(StripWhitespace_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for StripWhitespace! */
     }
 
@@ -175,7 +175,7 @@ namespace FriskTests
     DEF_TEST(NumberToString_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for NumberToString! */
     }
 
@@ -183,7 +183,7 @@ namespace FriskTests
     DEF_TEST(BitSet_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for BitSet! */
     }
 
@@ -191,7 +191,7 @@ namespace FriskTests
     DEF_TEST(BitClear_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for BitClear! */
     }
 
@@ -199,7 +199,7 @@ namespace FriskTests
     DEF_TEST(BitIsSet_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for BitIsSet! */
     }
 
@@ -207,7 +207,7 @@ namespace FriskTests
     DEF_TEST(GenerateUuid_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for GenerateUuid! */
     }
 
@@ -215,7 +215,7 @@ namespace FriskTests
     DEF_TEST(Min_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Min! */
     }
 
@@ -223,7 +223,7 @@ namespace FriskTests
     DEF_TEST(Max_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Max! */
     }
 
@@ -231,7 +231,7 @@ namespace FriskTests
     DEF_TEST(EnglishList_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for EnglishList! */
     }
 
@@ -239,7 +239,7 @@ namespace FriskTests
     DEF_TEST(Roll_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Roll! */
     }
 
@@ -247,7 +247,7 @@ namespace FriskTests
     DEF_TEST(Roll2_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Roll2! */
     }
 
@@ -255,7 +255,7 @@ namespace FriskTests
     DEF_TEST(SwapExit_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for SwapExit! */
     }
 
@@ -263,7 +263,7 @@ namespace FriskTests
     DEF_TEST(IsValidExit_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for IsValidExit! */
     }
 
@@ -271,7 +271,7 @@ namespace FriskTests
     DEF_TEST(GetDirectionByName_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for GetDirectionByName! */
     }
 
@@ -279,7 +279,7 @@ namespace FriskTests
     DEF_TEST(Columnize_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Columnize! */
     }
 
@@ -287,7 +287,7 @@ namespace FriskTests
     DEF_TEST(Percentage_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Percentage! */
     }
 
@@ -295,7 +295,7 @@ namespace FriskTests
     DEF_TEST(RandomPercent_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for RandomPercent! */
     }
 
@@ -303,7 +303,7 @@ namespace FriskTests
     DEF_TEST(RandomRange_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for RandomRange! */
     }
 
@@ -311,7 +311,7 @@ namespace FriskTests
     DEF_TEST(iequals_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for iequals! */
     }
 
@@ -319,7 +319,7 @@ namespace FriskTests
     DEF_TEST(TimeInfo_TimeInfo_Constructor_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for TimeInfo::TimeInfo::Constructor! */
     }
 
@@ -327,7 +327,7 @@ namespace FriskTests
     DEF_TEST(TimeInfo_TimeInfo_Constructor2_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for TimeInfo::TimeInfo::Constructor2! */
     }
 
@@ -335,7 +335,7 @@ namespace FriskTests
     DEF_TEST(TimeInfo_TimeInfo_Constructor3_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for TimeInfo::TimeInfo::Constructor3! */
     }
 
@@ -343,7 +343,7 @@ namespace FriskTests
     DEF_TEST(TimeInfo_Calculate_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for TimeInfo::Calculate! */
     }
 
@@ -351,7 +351,7 @@ namespace FriskTests
     DEF_TEST(TimeInfo_ToString_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for TimeInfo::ToString! */
     }
 
@@ -359,7 +359,7 @@ namespace FriskTests
     DEF_TEST(TimeInfo_Initialize_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for TimeInfo::Initialize! */
     }
 
@@ -367,7 +367,7 @@ namespace FriskTests
     DEF_TEST(point_point_Constructor_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for point::point::Constructor! */
     }
 
@@ -375,7 +375,7 @@ namespace FriskTests
     DEF_TEST(point_point_Constructor2_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for point::point::Constructor2! */
     }
 

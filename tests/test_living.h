@@ -7,7 +7,7 @@ namespace FriskTests
     DEF_TEST(Living_Living_Constructor_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Living::Living::Constructor! */
     }
 
@@ -15,7 +15,7 @@ namespace FriskTests
     DEF_TEST(Living_Living_Destructor_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Living::Living::Destructor! */
     }
 
@@ -23,7 +23,7 @@ namespace FriskTests
     DEF_TEST(Living_EnterGame_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Living::EnterGame! */
     }
 
@@ -31,7 +31,7 @@ namespace FriskTests
     DEF_TEST(Living_LeaveGame_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Living::LeaveGame! */
     }
 
@@ -39,7 +39,7 @@ namespace FriskTests
     DEF_TEST(Living_Update_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Living::Update! */
     }
 
@@ -47,7 +47,7 @@ namespace FriskTests
     DEF_TEST(Living_IsLiving_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Living::IsLiving! */
     }
 
@@ -55,7 +55,7 @@ namespace FriskTests
     DEF_TEST(Living_GetGender_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Living::GetGender! */
     }
 
@@ -63,7 +63,7 @@ namespace FriskTests
     DEF_TEST(Living_SetGender_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Living::SetGender! */
     }
 
@@ -71,7 +71,7 @@ namespace FriskTests
     DEF_TEST(Living_GetLevel_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Living::GetLevel! */
     }
 
@@ -79,7 +79,7 @@ namespace FriskTests
     DEF_TEST(Living_SetLevel_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Living::SetLevel! */
     }
 
@@ -87,7 +87,7 @@ namespace FriskTests
     DEF_TEST(Living_AddAttribute_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Living::AddAttribute! */
     }
 
@@ -95,7 +95,7 @@ namespace FriskTests
     DEF_TEST(Living_FindAttribute_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Living::FindAttribute! */
     }
 
@@ -103,7 +103,7 @@ namespace FriskTests
     DEF_TEST(Living_FindAttribute2_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Living::FindAttribute2! */
     }
 
@@ -111,7 +111,7 @@ namespace FriskTests
     DEF_TEST(Living_RemoveAttribute_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Living::RemoveAttribute! */
     }
 
@@ -119,7 +119,7 @@ namespace FriskTests
     DEF_TEST(Living_Serialize_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Living::Serialize! */
     }
 
@@ -127,7 +127,7 @@ namespace FriskTests
     DEF_TEST(Living_Deserialize_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Living::Deserialize! */
     }
 

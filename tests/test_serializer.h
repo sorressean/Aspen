@@ -7,7 +7,7 @@ namespace FriskTests
     DEF_TEST(ISerializable_ISerializable_Destructor_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for ISerializable::ISerializable::Destructor! */
     }
 
@@ -15,7 +15,7 @@ namespace FriskTests
     DEF_TEST(ISerializable_Serialize_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for ISerializable::Serialize! */
     }
 
@@ -23,7 +23,7 @@ namespace FriskTests
     DEF_TEST(ISerializable_Deserialize_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for ISerializable::Deserialize! */
     }
 

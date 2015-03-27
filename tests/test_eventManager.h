@@ -7,7 +7,7 @@ namespace FriskTests
     DEF_TEST(EventManager_EventManager_Constructor_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for EventManager::EventManager::Constructor! */
     }
 
@@ -15,7 +15,7 @@ namespace FriskTests
     DEF_TEST(EventManager_EventManager_Destructor_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for EventManager::EventManager::Destructor! */
     }
 
@@ -23,7 +23,7 @@ namespace FriskTests
     DEF_TEST(EventManager_IsEventRegistered_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for EventManager::IsEventRegistered! */
     }
 
@@ -31,7 +31,7 @@ namespace FriskTests
     DEF_TEST(EventManager_GetEvent_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for EventManager::GetEvent! */
     }
 
@@ -39,7 +39,7 @@ namespace FriskTests
     DEF_TEST(EventManager_RegisterEvent_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for EventManager::RegisterEvent! */
     }
 
@@ -47,7 +47,7 @@ namespace FriskTests
     DEF_TEST(EventManager_RemoveEvent_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for EventManager::RemoveEvent! */
     }
 
@@ -55,7 +55,7 @@ namespace FriskTests
     DEF_TEST(EventManager_CallEvent_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for EventManager::CallEvent! */
     }
 
@@ -63,7 +63,7 @@ namespace FriskTests
     DEF_TEST(EventManager_AddCallback_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for EventManager::AddCallback! */
     }
 
@@ -71,7 +71,7 @@ namespace FriskTests
     DEF_TEST(EventManager_AddScriptCallback_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for EventManager::AddScriptCallback! */
     }
 

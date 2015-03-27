@@ -7,7 +7,7 @@ namespace FriskTests
     DEF_TEST(OptionSectionToString_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for OptionSectionToString! */
     }
 
@@ -15,7 +15,7 @@ namespace FriskTests
     DEF_TEST(OptionMeta_OptionMeta_Constructor_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for OptionMeta::OptionMeta::Constructor! */
     }
 
@@ -23,7 +23,7 @@ namespace FriskTests
     DEF_TEST(OptionMeta_OptionMeta_Destructor_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for OptionMeta::OptionMeta::Destructor! */
     }
 
@@ -31,7 +31,7 @@ namespace FriskTests
     DEF_TEST(OptionMeta_GetName_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for OptionMeta::GetName! */
     }
 
@@ -39,7 +39,7 @@ namespace FriskTests
     DEF_TEST(OptionMeta_SetName_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for OptionMeta::SetName! */
     }
 
@@ -47,7 +47,7 @@ namespace FriskTests
     DEF_TEST(OptionMeta_GetHelp_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for OptionMeta::GetHelp! */
     }
 
@@ -55,7 +55,7 @@ namespace FriskTests
     DEF_TEST(OptionMeta_SetHelp_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for OptionMeta::SetHelp! */
     }
 
@@ -63,7 +63,7 @@ namespace FriskTests
     DEF_TEST(OptionMeta_GetSection_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for OptionMeta::GetSection! */
     }
 
@@ -71,7 +71,7 @@ namespace FriskTests
     DEF_TEST(OptionMeta_SetSection_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for OptionMeta::SetSection! */
     }
 
@@ -79,7 +79,7 @@ namespace FriskTests
     DEF_TEST(OptionMeta_GetAccess_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for OptionMeta::GetAccess! */
     }
 
@@ -87,7 +87,7 @@ namespace FriskTests
     DEF_TEST(OptionMeta_SetAccess_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for OptionMeta::SetAccess! */
     }
 
@@ -95,7 +95,7 @@ namespace FriskTests
     DEF_TEST(OptionMeta_GetValue_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for OptionMeta::GetValue! */
     }
 
@@ -103,7 +103,7 @@ namespace FriskTests
     DEF_TEST(OptionMeta_SetValue_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for OptionMeta::SetValue! */
     }
 
@@ -111,7 +111,7 @@ namespace FriskTests
     DEF_TEST(OptionMeta_GetExpected_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for OptionMeta::GetExpected! */
     }
 
@@ -119,7 +119,7 @@ namespace FriskTests
     DEF_TEST(OptionMeta_SetExpected_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for OptionMeta::SetExpected! */
     }
 
@@ -127,7 +127,7 @@ namespace FriskTests
     DEF_TEST(OptionMeta_CanToggle_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for OptionMeta::CanToggle! */
     }
 
@@ -135,7 +135,7 @@ namespace FriskTests
     DEF_TEST(OptionMeta_SetToggle_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for OptionMeta::SetToggle! */
     }
 
@@ -143,7 +143,7 @@ namespace FriskTests
     DEF_TEST(OptionMeta_GetFullName_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for OptionMeta::GetFullName! */
     }
 

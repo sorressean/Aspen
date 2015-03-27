@@ -7,7 +7,7 @@ namespace FriskTests
     DEF_TEST(Flag_Flag_Constructor_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Flag::Flag::Constructor! */
     }
 
@@ -15,7 +15,7 @@ namespace FriskTests
     DEF_TEST(Flag_Flag_Destructor_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Flag::Flag::Destructor! */
     }
 
@@ -23,7 +23,7 @@ namespace FriskTests
     DEF_TEST(Flag_Set_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Flag::Set! */
     }
 
@@ -31,7 +31,7 @@ namespace FriskTests
     DEF_TEST(Flag_IsSet_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Flag::IsSet! */
     }
 
@@ -39,7 +39,7 @@ namespace FriskTests
     DEF_TEST(Flag_Clear_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Flag::Clear! */
     }
 
@@ -47,7 +47,7 @@ namespace FriskTests
     DEF_TEST(Flag_Toggle_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Flag::Toggle! */
     }
 
@@ -55,7 +55,7 @@ namespace FriskTests
     DEF_TEST(Flag_Set2_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Flag::Set2! */
     }
 
@@ -63,7 +63,7 @@ namespace FriskTests
     DEF_TEST(Flag_Print_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Flag::Print! */
     }
 

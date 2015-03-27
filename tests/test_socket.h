@@ -7,7 +7,7 @@ namespace FriskTests
     DEF_TEST(Socket_Socket_Constructor_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Socket::Socket::Constructor! */
     }
 
@@ -15,7 +15,7 @@ namespace FriskTests
     DEF_TEST(Socket_Socket_Destructor_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Socket::Socket::Destructor! */
     }
 
@@ -23,7 +23,7 @@ namespace FriskTests
     DEF_TEST(Socket_Linkdeath_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Socket::Linkdeath! */
     }
 
@@ -31,7 +31,7 @@ namespace FriskTests
     DEF_TEST(Socket_Read_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Socket::Read! */
     }
 
@@ -39,7 +39,7 @@ namespace FriskTests
     DEF_TEST(Socket_OnOption_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Socket::OnOption! */
     }
 
@@ -47,7 +47,7 @@ namespace FriskTests
     DEF_TEST(Socket_OnNegotiation_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Socket::OnNegotiation! */
     }
 
@@ -55,7 +55,7 @@ namespace FriskTests
     DEF_TEST(Socket_InitCompression_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Socket::InitCompression! */
     }
 
@@ -63,7 +63,7 @@ namespace FriskTests
     DEF_TEST(Socket_Write_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Socket::Write! */
     }
 
@@ -71,7 +71,7 @@ namespace FriskTests
     DEF_TEST(Socket_Write2_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Socket::Write2! */
     }
 
@@ -79,7 +79,7 @@ namespace FriskTests
     DEF_TEST(Socket_Write3_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Socket::Write3! */
     }
 
@@ -87,7 +87,7 @@ namespace FriskTests
     DEF_TEST(Socket_Flush_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Socket::Flush! */
     }
 
@@ -95,7 +95,7 @@ namespace FriskTests
     DEF_TEST(Socket_GetInBuffer_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Socket::GetInBuffer! */
     }
 
@@ -103,7 +103,7 @@ namespace FriskTests
     DEF_TEST(Socket_GetConnectionType_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Socket::GetConnectionType! */
     }
 
@@ -111,7 +111,7 @@ namespace FriskTests
     DEF_TEST(Socket_SetConnectionType_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Socket::SetConnectionType! */
     }
 
@@ -119,7 +119,7 @@ namespace FriskTests
     DEF_TEST(Socket_GetHost_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Socket::GetHost! */
     }
 
@@ -127,7 +127,7 @@ namespace FriskTests
     DEF_TEST(Socket_SetHost_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Socket::SetHost! */
     }
 
@@ -135,7 +135,7 @@ namespace FriskTests
     DEF_TEST(Socket_AllocatePlayer_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Socket::AllocatePlayer! */
     }
 
@@ -143,7 +143,7 @@ namespace FriskTests
     DEF_TEST(Socket_GetPlayer_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Socket::GetPlayer! */
     }
 
@@ -151,7 +151,7 @@ namespace FriskTests
     DEF_TEST(Socket_Kill_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Socket::Kill! */
     }
 
@@ -159,7 +159,7 @@ namespace FriskTests
     DEF_TEST(Socket_GetPort_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Socket::GetPort! */
     }
 
@@ -167,7 +167,7 @@ namespace FriskTests
     DEF_TEST(Socket_SetPort_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Socket::SetPort! */
     }
 
@@ -175,7 +175,7 @@ namespace FriskTests
     DEF_TEST(Socket_GetTotalReceived_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Socket::GetTotalReceived! */
     }
 
@@ -183,7 +183,7 @@ namespace FriskTests
     DEF_TEST(Socket_GetTotalSent_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Socket::GetTotalSent! */
     }
 
@@ -191,7 +191,7 @@ namespace FriskTests
     DEF_TEST(Socket_GetTotalCompressedSent_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Socket::GetTotalCompressedSent! */
     }
 
@@ -199,7 +199,7 @@ namespace FriskTests
     DEF_TEST(Socket_GetWindowWidth_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Socket::GetWindowWidth! */
     }
 
@@ -207,7 +207,7 @@ namespace FriskTests
     DEF_TEST(Socket_GetWindowHeight_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Socket::GetWindowHeight! */
     }
 
@@ -215,7 +215,7 @@ namespace FriskTests
     DEF_TEST(Socket_GetTermtype_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Socket::GetTermtype! */
     }
 
@@ -223,7 +223,7 @@ namespace FriskTests
     DEF_TEST(Socket_IsCompressing_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Socket::IsCompressing! */
     }
 
@@ -231,7 +231,7 @@ namespace FriskTests
     DEF_TEST(Socket_ShouldClose_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Socket::ShouldClose! */
     }
 
@@ -239,7 +239,7 @@ namespace FriskTests
     DEF_TEST(Socket_HasHandle_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Socket::HasHandle! */
     }
 
@@ -247,7 +247,7 @@ namespace FriskTests
     DEF_TEST(Socket_HandleInput_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Socket::HandleInput! */
     }
 
@@ -255,7 +255,7 @@ namespace FriskTests
     DEF_TEST(Socket_ClearInput_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Socket::ClearInput! */
     }
 
@@ -263,7 +263,7 @@ namespace FriskTests
     DEF_TEST(Socket_SetInput_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Socket::SetInput! */
     }
 
@@ -271,7 +271,7 @@ namespace FriskTests
     DEF_TEST(Socket_UpdateLastCommand_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Socket::UpdateLastCommand! */
     }
 
@@ -279,7 +279,7 @@ namespace FriskTests
     DEF_TEST(Socket_GetLastCommand_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Socket::GetLastCommand! */
     }
 
@@ -287,7 +287,7 @@ namespace FriskTests
     DEF_TEST(Socket_GetMobile_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Socket::GetMobile! */
     }
 
@@ -295,7 +295,7 @@ namespace FriskTests
     DEF_TEST(Socket_CommandPending_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Socket::CommandPending! */
     }
 
@@ -303,7 +303,7 @@ namespace FriskTests
     DEF_TEST(Socket_PopCommand_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Socket::PopCommand! */
     }
 
@@ -311,7 +311,7 @@ namespace FriskTests
     DEF_TEST(Socket_AddCommand_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Socket::AddCommand! */
     }
 
@@ -319,7 +319,7 @@ namespace FriskTests
     DEF_TEST(Socket_HandleGameInput_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Socket::HandleGameInput! */
     }
 
@@ -327,7 +327,7 @@ namespace FriskTests
     DEF_TEST(Socket_HandleNameInput_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Socket::HandleNameInput! */
     }
 
@@ -335,7 +335,7 @@ namespace FriskTests
     DEF_TEST(Socket_HandlePasswordInput_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Socket::HandlePasswordInput! */
     }
 
@@ -343,7 +343,7 @@ namespace FriskTests
     DEF_TEST(Socket_HandleNewnameInput_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Socket::HandleNewnameInput! */
     }
 
@@ -351,7 +351,7 @@ namespace FriskTests
     DEF_TEST(Socket_HandleNewpassInput_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Socket::HandleNewpassInput! */
     }
 
@@ -359,7 +359,7 @@ namespace FriskTests
     DEF_TEST(Socket_HandleVerpassInput_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Socket::HandleVerpassInput! */
     }
 
@@ -367,7 +367,7 @@ namespace FriskTests
     DEF_TEST(Socket_HandleGenderInput_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Socket::HandleGenderInput! */
     }
 
@@ -375,7 +375,7 @@ namespace FriskTests
     DEF_TEST(Socket_InitializeNewPlayer_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Socket::InitializeNewPlayer! */
     }
 
@@ -383,7 +383,7 @@ namespace FriskTests
     DEF_TEST(Socket_HandleCommand_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Socket::HandleCommand! */
     }
 
@@ -391,7 +391,7 @@ namespace FriskTests
     DEF_TEST(InputHandle_InputHandle_Constructor_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for InputHandle::InputHandle::Constructor! */
     }
 
@@ -399,7 +399,7 @@ namespace FriskTests
     DEF_TEST(InputHandle_InputHandle_Destructor_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for InputHandle::InputHandle::Destructor! */
     }
 
@@ -407,7 +407,7 @@ namespace FriskTests
     DEF_TEST(InputHandle_Attach_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for InputHandle::Attach! */
     }
 
@@ -415,7 +415,7 @@ namespace FriskTests
     DEF_TEST(InputHandle_Active_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for InputHandle::Active! */
     }
 
@@ -423,7 +423,7 @@ namespace FriskTests
     DEF_TEST(InputHandle_Input_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for InputHandle::Input! */
     }
 

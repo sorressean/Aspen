@@ -7,7 +7,7 @@ namespace FriskTests
     DEF_TEST(InitializeExternalExtensions_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for InitializeExternalExtensions! */
     }
 

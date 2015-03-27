@@ -7,7 +7,7 @@ namespace FriskTests
     DEF_TEST(YesNoHandler_YesNoHandler_Constructor_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for YesNoHandler::YesNoHandler::Constructor! */
     }
 
@@ -15,7 +15,7 @@ namespace FriskTests
     DEF_TEST(YesNoHandler_Input_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for YesNoHandler::Input! */
     }
 
@@ -23,7 +23,7 @@ namespace FriskTests
     DEF_TEST(YesNoHandler_CreateHandler_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for YesNoHandler::CreateHandler! */
     }
 
@@ -31,7 +31,7 @@ namespace FriskTests
     DEF_TEST(TextBlockHandler_TextBlockHandler_Constructor_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for TextBlockHandler::TextBlockHandler::Constructor! */
     }
 
@@ -39,7 +39,7 @@ namespace FriskTests
     DEF_TEST(TextBlockHandler_Input_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for TextBlockHandler::Input! */
     }
 
@@ -47,7 +47,7 @@ namespace FriskTests
     DEF_TEST(TextBlockHandler_CreateHandler_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for TextBlockHandler::CreateHandler! */
     }
 
@@ -55,7 +55,7 @@ namespace FriskTests
     DEF_TEST(LineHandler_LineHandler_Constructor_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for LineHandler::LineHandler::Constructor! */
     }
 
@@ -63,7 +63,7 @@ namespace FriskTests
     DEF_TEST(LineHandler_Input_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for LineHandler::Input! */
     }
 
@@ -71,7 +71,7 @@ namespace FriskTests
     DEF_TEST(LineHandler_CreateHandler_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for LineHandler::CreateHandler! */
     }
 

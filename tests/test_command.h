@@ -7,7 +7,7 @@ namespace FriskTests
     DEF_TEST(InitializeCommands_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for InitializeCommands! */
     }
 
@@ -15,7 +15,7 @@ namespace FriskTests
     DEF_TEST(Commandable_Commandable_Constructor_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Commandable::Commandable::Constructor! */
     }
 
@@ -23,7 +23,7 @@ namespace FriskTests
     DEF_TEST(Commandable_Commandable_Destructor_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Commandable::Commandable::Destructor! */
     }
 
@@ -31,7 +31,7 @@ namespace FriskTests
     DEF_TEST(Commandable_AddCommand_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Commandable::AddCommand! */
     }
 
@@ -39,7 +39,7 @@ namespace FriskTests
     DEF_TEST(Commandable_RemoveCommand_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Commandable::RemoveCommand! */
     }
 
@@ -47,7 +47,7 @@ namespace FriskTests
     DEF_TEST(Commandable_CommandExists_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Commandable::CommandExists! */
     }
 
@@ -55,7 +55,7 @@ namespace FriskTests
     DEF_TEST(Commandable_ListCommands_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Commandable::ListCommands! */
     }
 
@@ -63,7 +63,7 @@ namespace FriskTests
     DEF_TEST(Commandable_GetPtr_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Commandable::GetPtr! */
     }
 
@@ -71,7 +71,7 @@ namespace FriskTests
     DEF_TEST(Command_Command_Constructor_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Command::Command::Constructor! */
     }
 
@@ -79,7 +79,7 @@ namespace FriskTests
     DEF_TEST(Command_Command_Destructor_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Command::Command::Destructor! */
     }
 
@@ -87,7 +87,7 @@ namespace FriskTests
     DEF_TEST(Command_SetName_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Command::SetName! */
     }
 
@@ -95,7 +95,7 @@ namespace FriskTests
     DEF_TEST(Command_GetName_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Command::GetName! */
     }
 
@@ -103,7 +103,7 @@ namespace FriskTests
     DEF_TEST(Command_HasAlias_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Command::HasAlias! */
     }
 
@@ -111,7 +111,7 @@ namespace FriskTests
     DEF_TEST(Command_AddAlias_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Command::AddAlias! */
     }
 
@@ -119,7 +119,7 @@ namespace FriskTests
     DEF_TEST(Command_RemoveAlias_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Command::RemoveAlias! */
     }
 
@@ -127,7 +127,7 @@ namespace FriskTests
     DEF_TEST(Command_SetSubcmd_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Command::SetSubcmd! */
     }
 
@@ -135,7 +135,7 @@ namespace FriskTests
     DEF_TEST(Command_GetSubcmd_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Command::GetSubcmd! */
     }
 
@@ -143,7 +143,7 @@ namespace FriskTests
     DEF_TEST(Command_SetType_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Command::SetType! */
     }
 
@@ -151,7 +151,7 @@ namespace FriskTests
     DEF_TEST(Command_GetType_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Command::GetType! */
     }
 
@@ -159,7 +159,7 @@ namespace FriskTests
     DEF_TEST(Command_SetAccess_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Command::SetAccess! */
     }
 
@@ -167,7 +167,7 @@ namespace FriskTests
     DEF_TEST(Command_GetAccess_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Command::GetAccess! */
     }
 
@@ -175,7 +175,7 @@ namespace FriskTests
     DEF_TEST(Command_SetPosition_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Command::SetPosition! */
     }
 
@@ -183,7 +183,7 @@ namespace FriskTests
     DEF_TEST(Command_GetPosition_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Command::GetPosition! */
     }
 
@@ -191,7 +191,7 @@ namespace FriskTests
     DEF_TEST(Command_Execute_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Command::Execute! */
     }
 
@@ -199,7 +199,7 @@ namespace FriskTests
     DEF_TEST(Command_CanExecute_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Command::CanExecute! */
     }
 
@@ -207,7 +207,7 @@ namespace FriskTests
     DEF_TEST(Command_Syntax_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Command::Syntax! */
     }
 
@@ -215,7 +215,7 @@ namespace FriskTests
     DEF_TEST(Command_AddPrehook_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Command::AddPrehook! */
     }
 
@@ -223,7 +223,7 @@ namespace FriskTests
     DEF_TEST(Command_RemovePrehook_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Command::RemovePrehook! */
     }
 
@@ -231,7 +231,7 @@ namespace FriskTests
     DEF_TEST(Command_ExecutePrehooks_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Command::ExecutePrehooks! */
     }
 
@@ -239,7 +239,7 @@ namespace FriskTests
     DEF_TEST(Command_AddPosthook_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Command::AddPosthook! */
     }
 
@@ -247,7 +247,7 @@ namespace FriskTests
     DEF_TEST(Command_RemovePosthook_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Command::RemovePosthook! */
     }
 
@@ -255,7 +255,7 @@ namespace FriskTests
     DEF_TEST(Command_ExecutePosthooks_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Command::ExecutePosthooks! */
     }
 
@@ -263,7 +263,7 @@ namespace FriskTests
     DEF_TEST(Command_AddHook_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Command::AddHook! */
     }
 
@@ -271,7 +271,7 @@ namespace FriskTests
     DEF_TEST(Command_RemoveHook_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Command::RemoveHook! */
     }
 
@@ -279,7 +279,7 @@ namespace FriskTests
     DEF_TEST(Command_ExecuteHooks_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Command::ExecuteHooks! */
     }
 

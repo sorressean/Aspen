@@ -7,7 +7,7 @@ namespace FriskTests
     DEF_TEST(ObjectManager_ObjectManager_Constructor_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for ObjectManager::ObjectManager::Constructor! */
     }
 
@@ -15,7 +15,7 @@ namespace FriskTests
     DEF_TEST(ObjectManager_ObjectManager_Destructor_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for ObjectManager::ObjectManager::Destructor! */
     }
 
@@ -23,7 +23,7 @@ namespace FriskTests
     DEF_TEST(ObjectManager_Update_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for ObjectManager::Update! */
     }
 
@@ -31,7 +31,7 @@ namespace FriskTests
     DEF_TEST(ObjectManager_CreateObject_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for ObjectManager::CreateObject! */
     }
 
@@ -39,7 +39,7 @@ namespace FriskTests
     DEF_TEST(ObjectManager_RecycleObject_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for ObjectManager::RecycleObject! */
     }
 
@@ -47,7 +47,7 @@ namespace FriskTests
     DEF_TEST(ObjectManager_AddVirtual_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for ObjectManager::AddVirtual! */
     }
 
@@ -55,7 +55,7 @@ namespace FriskTests
     DEF_TEST(ObjectManager_VirtualExists_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for ObjectManager::VirtualExists! */
     }
 
@@ -63,7 +63,7 @@ namespace FriskTests
     DEF_TEST(ObjectManager_GetVirtual_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for ObjectManager::GetVirtual! */
     }
 
@@ -71,7 +71,7 @@ namespace FriskTests
     DEF_TEST(ObjectManager_RemoveVirtual_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for ObjectManager::RemoveVirtual! */
     }
 
@@ -79,7 +79,7 @@ namespace FriskTests
     DEF_TEST(ObjectManager_AddRoom_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for ObjectManager::AddRoom! */
     }
 
@@ -87,7 +87,7 @@ namespace FriskTests
     DEF_TEST(ObjectManager_RemoveRoom_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for ObjectManager::RemoveRoom! */
     }
 
@@ -95,7 +95,7 @@ namespace FriskTests
     DEF_TEST(ObjectManager_RoomExists_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for ObjectManager::RoomExists! */
     }
 
@@ -103,7 +103,7 @@ namespace FriskTests
     DEF_TEST(ObjectManager_GetRoom_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for ObjectManager::GetRoom! */
     }
 
@@ -111,7 +111,7 @@ namespace FriskTests
     DEF_TEST(ObjectManager_AddNpc_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for ObjectManager::AddNpc! */
     }
 
@@ -119,7 +119,7 @@ namespace FriskTests
     DEF_TEST(ObjectManager_RemoveNpc_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for ObjectManager::RemoveNpc! */
     }
 
@@ -127,7 +127,7 @@ namespace FriskTests
     DEF_TEST(ObjectManager_NpcExists_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for ObjectManager::NpcExists! */
     }
 
@@ -135,7 +135,7 @@ namespace FriskTests
     DEF_TEST(ObjectManager_GetNpc_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for ObjectManager::GetNpc! */
     }
 

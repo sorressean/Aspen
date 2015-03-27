@@ -7,7 +7,7 @@ namespace FriskTests
     DEF_TEST(InitializeBuilderCommands_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for InitializeBuilderCommands! */
     }
 
@@ -15,7 +15,7 @@ namespace FriskTests
     DEF_TEST(CMDVCreate_CMDVCreate_Constructor_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for CMDVCreate::CMDVCreate::Constructor! */
     }
 
@@ -23,7 +23,7 @@ namespace FriskTests
     DEF_TEST(CMDVCreate_Execute_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for CMDVCreate::Execute! */
     }
 
@@ -31,7 +31,7 @@ namespace FriskTests
     DEF_TEST(CMDRlist_CMDRlist_Constructor_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for CMDRlist::CMDRlist::Constructor! */
     }
 
@@ -39,7 +39,7 @@ namespace FriskTests
     DEF_TEST(CMDRlist_Syntax_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for CMDRlist::Syntax! */
     }
 
@@ -47,7 +47,7 @@ namespace FriskTests
     DEF_TEST(CMDRlist_Execute_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for CMDRlist::Execute! */
     }
 
@@ -55,7 +55,7 @@ namespace FriskTests
     DEF_TEST(CMDMCreate_CMDMCreate_Constructor_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for CMDMCreate::CMDMCreate::Constructor! */
     }
 
@@ -63,7 +63,7 @@ namespace FriskTests
     DEF_TEST(CMDMCreate_Execute_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for CMDMCreate::Execute! */
     }
 
@@ -71,7 +71,7 @@ namespace FriskTests
     DEF_TEST(CMDAddComponent_CMDAddComponent_Constructor_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for CMDAddComponent::CMDAddComponent::Constructor! */
     }
 
@@ -79,7 +79,7 @@ namespace FriskTests
     DEF_TEST(CMDAddComponent_Execute_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for CMDAddComponent::Execute! */
     }
 
@@ -87,7 +87,7 @@ namespace FriskTests
     DEF_TEST(CMDGoto_CMDGoto_Constructor_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for CMDGoto::CMDGoto::Constructor! */
     }
 
@@ -95,7 +95,7 @@ namespace FriskTests
     DEF_TEST(CMDGoto_Execute_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for CMDGoto::Execute! */
     }
 
@@ -103,7 +103,7 @@ namespace FriskTests
     DEF_TEST(CMDMList_CMDMList_Constructor_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for CMDMList::CMDMList::Constructor! */
     }
 
@@ -111,7 +111,7 @@ namespace FriskTests
     DEF_TEST(CMDMList_Execute_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for CMDMList::Execute! */
     }
 
@@ -119,7 +119,7 @@ namespace FriskTests
     DEF_TEST(CMDDig_CMDDig_Constructor_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for CMDDig::CMDDig::Constructor! */
     }
 
@@ -127,7 +127,7 @@ namespace FriskTests
     DEF_TEST(CMDDig_Syntax_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for CMDDig::Syntax! */
     }
 
@@ -135,7 +135,7 @@ namespace FriskTests
     DEF_TEST(CMDDig_Execute_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for CMDDig::Execute! */
     }
 
@@ -143,7 +143,7 @@ namespace FriskTests
     DEF_TEST(CMDVList_CMDVList_Constructor_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for CMDVList::CMDVList::Constructor! */
     }
 
@@ -151,7 +151,7 @@ namespace FriskTests
     DEF_TEST(CMDVList_Execute_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for CMDVList::Execute! */
     }
 
@@ -159,7 +159,7 @@ namespace FriskTests
     DEF_TEST(CMDAStats_CMDAStats_Constructor_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for CMDAStats::CMDAStats::Constructor! */
     }
 
@@ -167,7 +167,7 @@ namespace FriskTests
     DEF_TEST(CMDAStats_Execute_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for CMDAStats::Execute! */
     }
 
@@ -175,7 +175,7 @@ namespace FriskTests
     DEF_TEST(CMDAStats_Stats_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for CMDAStats::Stats! */
     }
 
@@ -183,7 +183,7 @@ namespace FriskTests
     DEF_TEST(CMDZcreate_CMDZcreate_Constructor_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for CMDZcreate::CMDZcreate::Constructor! */
     }
 
@@ -191,7 +191,7 @@ namespace FriskTests
     DEF_TEST(CMDZcreate_Execute_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for CMDZcreate::Execute! */
     }
 
@@ -199,7 +199,7 @@ namespace FriskTests
     DEF_TEST(CMDZlist_CMDZlist_Constructor_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for CMDZlist::CMDZlist::Constructor! */
     }
 
@@ -207,7 +207,7 @@ namespace FriskTests
     DEF_TEST(CMDZlist_Syntax_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for CMDZlist::Syntax! */
     }
 
@@ -215,7 +215,7 @@ namespace FriskTests
     DEF_TEST(CMDZlist_Execute_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for CMDZlist::Execute! */
     }
 
@@ -223,7 +223,7 @@ namespace FriskTests
     DEF_TEST(CMDMLoad_CMDMLoad_Constructor_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for CMDMLoad::CMDMLoad::Constructor! */
     }
 
@@ -231,7 +231,7 @@ namespace FriskTests
     DEF_TEST(CMDMLoad_Execute_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for CMDMLoad::Execute! */
     }
 

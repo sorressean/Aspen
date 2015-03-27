@@ -7,7 +7,7 @@ namespace FriskTests
     DEF_TEST(InitializeSyslog_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for InitializeSyslog! */
     }
 
@@ -15,7 +15,7 @@ namespace FriskTests
     DEF_TEST(EVENT4_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for EVENT4! */
     }
 
@@ -23,7 +23,7 @@ namespace FriskTests
     DEF_TEST(EVENT5_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for EVENT5! */
     }
 
@@ -31,7 +31,7 @@ namespace FriskTests
     DEF_TEST(SyslogChannel_SyslogChannel_Constructor_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for SyslogChannel::SyslogChannel::Constructor! */
     }
 
@@ -39,7 +39,7 @@ namespace FriskTests
     DEF_TEST(SyslogChannel_CanBroadcastWithoutListening_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for SyslogChannel::CanBroadcastWithoutListening! */
     }
 

@@ -7,7 +7,7 @@ namespace FriskTests
     DEF_TEST(HelpTable_HelpTable_Constructor_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for HelpTable::HelpTable::Constructor! */
     }
 
@@ -15,7 +15,7 @@ namespace FriskTests
     DEF_TEST(HelpTable_HelpTable_Destructor_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for HelpTable::HelpTable::Destructor! */
     }
 
@@ -23,7 +23,7 @@ namespace FriskTests
     DEF_TEST(HelpTable_Load_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for HelpTable::Load! */
     }
 
@@ -31,7 +31,7 @@ namespace FriskTests
     DEF_TEST(HelpTable_Save_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for HelpTable::Save! */
     }
 
@@ -39,7 +39,7 @@ namespace FriskTests
     DEF_TEST(HelpTable_AddEntry_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for HelpTable::AddEntry! */
     }
 
@@ -47,7 +47,7 @@ namespace FriskTests
     DEF_TEST(HelpTable_RemoveEntry_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for HelpTable::RemoveEntry! */
     }
 
@@ -55,7 +55,7 @@ namespace FriskTests
     DEF_TEST(HelpTable_EntryExists_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for HelpTable::EntryExists! */
     }
 
@@ -63,7 +63,7 @@ namespace FriskTests
     DEF_TEST(HelpTable_GetEntry_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for HelpTable::GetEntry! */
     }
 
@@ -71,7 +71,7 @@ namespace FriskTests
     DEF_TEST(HelpTable_ShowEntry_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for HelpTable::ShowEntry! */
     }
 

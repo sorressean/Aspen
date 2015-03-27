@@ -7,7 +7,7 @@ namespace FriskTests
     DEF_TEST(Server_Server_Constructor_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Server::Server::Constructor! */
     }
 
@@ -15,7 +15,7 @@ namespace FriskTests
     DEF_TEST(Server_Server_Destructor_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Server::Server::Destructor! */
     }
 
@@ -23,7 +23,7 @@ namespace FriskTests
     DEF_TEST(Server_Listen_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Server::Listen! */
     }
 
@@ -31,7 +31,7 @@ namespace FriskTests
     DEF_TEST(Server_GetListener_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Server::GetListener! */
     }
 
@@ -39,7 +39,7 @@ namespace FriskTests
     DEF_TEST(Server_FlushSockets_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Server::FlushSockets! */
     }
 
@@ -47,7 +47,7 @@ namespace FriskTests
     DEF_TEST(Server_PollSockets_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Server::PollSockets! */
     }
 
@@ -55,7 +55,7 @@ namespace FriskTests
     DEF_TEST(Server_Sleep_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Server::Sleep! */
     }
 
@@ -63,7 +63,7 @@ namespace FriskTests
     DEF_TEST(Server_GetSocketList_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Server::GetSocketList! */
     }
 
@@ -71,7 +71,7 @@ namespace FriskTests
     DEF_TEST(Server_Recover_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Server::Recover! */
     }
 
@@ -79,7 +79,7 @@ namespace FriskTests
     DEF_TEST(Server_AddSock_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Server::AddSock! */
     }
 
@@ -87,7 +87,7 @@ namespace FriskTests
     DEF_TEST(Server_GetBanList_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Server::GetBanList! */
     }
 
@@ -95,7 +95,7 @@ namespace FriskTests
     DEF_TEST(Server_CheckLinkdeaths_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Server::CheckLinkdeaths! */
     }
 
@@ -103,7 +103,7 @@ namespace FriskTests
     DEF_TEST(Server_GetLinkdeadUser_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Server::GetLinkdeadUser! */
     }
 
@@ -111,7 +111,7 @@ namespace FriskTests
     DEF_TEST(Server_RemoveLinkdeadUser_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Server::RemoveLinkdeadUser! */
     }
 
@@ -119,7 +119,7 @@ namespace FriskTests
     DEF_TEST(Server_Accept_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Server::Accept! */
     }
 
@@ -127,7 +127,7 @@ namespace FriskTests
     DEF_TEST(Server_CloseSocket_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Server::CloseSocket! */
     }
 

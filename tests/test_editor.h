@@ -7,7 +7,7 @@ namespace FriskTests
     DEF_TEST(Editor_Editor_Constructor_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Editor::Editor::Constructor! */
     }
 
@@ -15,7 +15,7 @@ namespace FriskTests
     DEF_TEST(Editor_Editor_Destructor_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Editor::Editor::Destructor! */
     }
 
@@ -23,7 +23,7 @@ namespace FriskTests
     DEF_TEST(Editor_Load_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Editor::Load! */
     }
 
@@ -31,7 +31,7 @@ namespace FriskTests
     DEF_TEST(Editor_Save_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Editor::Save! */
     }
 
@@ -39,7 +39,7 @@ namespace FriskTests
     DEF_TEST(Editor_Abort_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Editor::Abort! */
     }
 
@@ -47,7 +47,7 @@ namespace FriskTests
     DEF_TEST(Editor_Quit_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Editor::Quit! */
     }
 
@@ -55,7 +55,7 @@ namespace FriskTests
     DEF_TEST(Editor_List_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Editor::List! */
     }
 
@@ -63,7 +63,7 @@ namespace FriskTests
     DEF_TEST(Editor_Add_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Editor::Add! */
     }
 
@@ -71,7 +71,7 @@ namespace FriskTests
     DEF_TEST(Editor_Insert_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Editor::Insert! */
     }
 
@@ -79,7 +79,7 @@ namespace FriskTests
     DEF_TEST(Editor_Delete_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Editor::Delete! */
     }
 
@@ -87,7 +87,7 @@ namespace FriskTests
     DEF_TEST(Editor_Delete2_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Editor::Delete2! */
     }
 
@@ -95,7 +95,7 @@ namespace FriskTests
     DEF_TEST(Editor_Delete3_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Editor::Delete3! */
     }
 
@@ -103,7 +103,7 @@ namespace FriskTests
     DEF_TEST(Editor_EnterEditor_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Editor::EnterEditor! */
     }
 
@@ -111,7 +111,7 @@ namespace FriskTests
     DEF_TEST(Editor_LeaveEditor_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Editor::LeaveEditor! */
     }
 
@@ -119,7 +119,7 @@ namespace FriskTests
     DEF_TEST(Editor_SetArg_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Editor::SetArg! */
     }
 
@@ -127,7 +127,7 @@ namespace FriskTests
     DEF_TEST(Editor_GetArg_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Editor::GetArg! */
     }
 
@@ -135,7 +135,7 @@ namespace FriskTests
     DEF_TEST(Editor_GetLines_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Editor::GetLines! */
     }
 
@@ -143,7 +143,7 @@ namespace FriskTests
     DEF_TEST(Editor_Input_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Editor::Input! */
     }
 
@@ -151,7 +151,7 @@ namespace FriskTests
     DEF_TEST(Editor_TextInput_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Editor::TextInput! */
     }
 

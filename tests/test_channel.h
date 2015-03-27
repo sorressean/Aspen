@@ -7,7 +7,7 @@ namespace FriskTests
     DEF_TEST(InitializeChannels_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for InitializeChannels! */
     }
 
@@ -15,7 +15,7 @@ namespace FriskTests
     DEF_TEST(Channel_Channel_Constructor_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Channel::Channel::Constructor! */
     }
 
@@ -23,7 +23,7 @@ namespace FriskTests
     DEF_TEST(Channel_Channel_Destructor_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Channel::Channel::Destructor! */
     }
 
@@ -31,7 +31,7 @@ namespace FriskTests
     DEF_TEST(Channel_SetName_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Channel::SetName! */
     }
 
@@ -39,7 +39,7 @@ namespace FriskTests
     DEF_TEST(Channel_GetName_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Channel::GetName! */
     }
 
@@ -47,7 +47,7 @@ namespace FriskTests
     DEF_TEST(Channel_SetAlias_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Channel::SetAlias! */
     }
 
@@ -55,7 +55,7 @@ namespace FriskTests
     DEF_TEST(Channel_GetAlias_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Channel::GetAlias! */
     }
 
@@ -63,7 +63,7 @@ namespace FriskTests
     DEF_TEST(Channel_SetPattern_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Channel::SetPattern! */
     }
 
@@ -71,7 +71,7 @@ namespace FriskTests
     DEF_TEST(Channel_GetPattern_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Channel::GetPattern! */
     }
 
@@ -79,7 +79,7 @@ namespace FriskTests
     DEF_TEST(Channel_SetAccess_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Channel::SetAccess! */
     }
 
@@ -87,7 +87,7 @@ namespace FriskTests
     DEF_TEST(Channel_GetAccess_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Channel::GetAccess! */
     }
 
@@ -95,7 +95,7 @@ namespace FriskTests
     DEF_TEST(Channel_GetHistory_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Channel::GetHistory! */
     }
 
@@ -103,7 +103,7 @@ namespace FriskTests
     DEF_TEST(Channel_AddListener_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Channel::AddListener! */
     }
 
@@ -111,7 +111,7 @@ namespace FriskTests
     DEF_TEST(Channel_RemoveListener_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Channel::RemoveListener! */
     }
 
@@ -119,7 +119,7 @@ namespace FriskTests
     DEF_TEST(Channel_HasListener_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Channel::HasListener! */
     }
 
@@ -127,7 +127,7 @@ namespace FriskTests
     DEF_TEST(Channel_CanBroadcastWithoutListening_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Channel::CanBroadcastWithoutListening! */
     }
 
@@ -135,7 +135,7 @@ namespace FriskTests
     DEF_TEST(Channel_Broadcast_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Channel::Broadcast! */
     }
 
@@ -143,7 +143,7 @@ namespace FriskTests
     DEF_TEST(Channel_EVENT_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Channel::EVENT! */
     }
 
@@ -151,7 +151,7 @@ namespace FriskTests
     DEF_TEST(Channel_EVENT2_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Channel::EVENT2! */
     }
 
@@ -159,7 +159,7 @@ namespace FriskTests
     DEF_TEST(Channel_EVENT3_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Channel::EVENT3! */
     }
 
@@ -167,7 +167,7 @@ namespace FriskTests
     DEF_TEST(Channel__AddHistoryEntry_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Channel::::AddHistoryEntry! */
     }
 
@@ -175,7 +175,7 @@ namespace FriskTests
     DEF_TEST(Channel__Patternize_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Channel::::Patternize! */
     }
 

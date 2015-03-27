@@ -26,7 +26,6 @@
 #include "modules/test_modules.h"
 #include "test_telnetParserEvents.hpp"
 #include "test_delayedEvent.h"
-#include "scripts/test_helper.hpp"
 #include "test_utils.h"
 #include "test_playerManager.h"
 #include "test_editor.h"
@@ -46,6 +45,7 @@
 #include "test_serializationHelpers.h"
 #include "test_inputHandlers.h"
 #include "test_objectManager.h"
+#include "scripts/test_script.h"
 #include "help/test_HelpEntry.h"
 #include "extensions/test_extensions.h"
 #include "test_olcManager.h"
@@ -77,7 +77,7 @@
 #include "modules/board/test_boardModule.h"
 #include "test_modules.h"
 #include "test_attribute.h"
-#include "scripts/test_script.h"
+#include "scripts/test_helper.hpp"
 
 
 int main(int argc, char *argv[])

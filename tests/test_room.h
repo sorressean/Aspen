@@ -7,7 +7,7 @@ namespace FriskTests
     DEF_TEST(EVENT_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for EVENT! */
     }
 
@@ -15,7 +15,7 @@ namespace FriskTests
     DEF_TEST(TerrainToString_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for TerrainToString! */
     }
 
@@ -23,7 +23,7 @@ namespace FriskTests
     DEF_TEST(InitializeRoomOlcs_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for InitializeRoomOlcs! */
     }
 
@@ -31,7 +31,7 @@ namespace FriskTests
     DEF_TEST(Room_Room_Constructor_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Room::Room::Constructor! */
     }
 
@@ -39,7 +39,7 @@ namespace FriskTests
     DEF_TEST(Room_Room_Destructor_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Room::Room::Destructor! */
     }
 
@@ -47,7 +47,7 @@ namespace FriskTests
     DEF_TEST(Room_AddExit_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Room::AddExit! */
     }
 
@@ -55,7 +55,7 @@ namespace FriskTests
     DEF_TEST(Room_ExitExists_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Room::ExitExists! */
     }
 
@@ -63,7 +63,7 @@ namespace FriskTests
     DEF_TEST(Room_GetExit_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Room::GetExit! */
     }
 
@@ -71,7 +71,7 @@ namespace FriskTests
     DEF_TEST(Room_GetExits_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Room::GetExits! */
     }
 
@@ -79,7 +79,7 @@ namespace FriskTests
     DEF_TEST(Room_SetRoomFlag_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Room::SetRoomFlag! */
     }
 
@@ -87,7 +87,7 @@ namespace FriskTests
     DEF_TEST(Room_GetRoomFlag_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Room::GetRoomFlag! */
     }
 
@@ -95,7 +95,7 @@ namespace FriskTests
     DEF_TEST(Room_TellAll_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Room::TellAll! */
     }
 
@@ -103,7 +103,7 @@ namespace FriskTests
     DEF_TEST(Room_TellAllBut_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Room::TellAllBut! */
     }
 
@@ -111,7 +111,7 @@ namespace FriskTests
     DEF_TEST(Room_TellAllBut2_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Room::TellAllBut2! */
     }
 
@@ -119,7 +119,7 @@ namespace FriskTests
     DEF_TEST(Room_GetCoord_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Room::GetCoord! */
     }
 
@@ -127,7 +127,7 @@ namespace FriskTests
     DEF_TEST(Room_SetCoord_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Room::SetCoord! */
     }
 
@@ -135,7 +135,7 @@ namespace FriskTests
     DEF_TEST(Room_GetTerrain_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Room::GetTerrain! */
     }
 
@@ -143,7 +143,7 @@ namespace FriskTests
     DEF_TEST(Room_SetTerrain_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Room::SetTerrain! */
     }
 
@@ -151,7 +151,7 @@ namespace FriskTests
     DEF_TEST(Room_IsRoom_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Room::IsRoom! */
     }
 
@@ -159,7 +159,7 @@ namespace FriskTests
     DEF_TEST(Room_Serialize_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Room::Serialize! */
     }
 
@@ -167,7 +167,7 @@ namespace FriskTests
     DEF_TEST(Room_Deserialize_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Room::Deserialize! */
     }
 
@@ -175,7 +175,7 @@ namespace FriskTests
     DEF_TEST(Room_ObjectEnter_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Room::ObjectEnter! */
     }
 
@@ -183,7 +183,7 @@ namespace FriskTests
     DEF_TEST(Room_ObjectLeave_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Room::ObjectLeave! */
     }
 
@@ -191,7 +191,7 @@ namespace FriskTests
     DEF_TEST(Room_TellObviousExits_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Room::TellObviousExits! */
     }
 
@@ -199,7 +199,7 @@ namespace FriskTests
     DEF_TEST(Room_EVENT_Constructor_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Room::EVENT::Constructor! */
     }
 

@@ -7,7 +7,7 @@ namespace FriskTests
     DEF_TEST(OlcGroup_OlcGroup_Constructor_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for OlcGroup::OlcGroup::Constructor! */
     }
 
@@ -15,7 +15,7 @@ namespace FriskTests
     DEF_TEST(OlcGroup_OlcGroup_Destructor_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for OlcGroup::OlcGroup::Destructor! */
     }
 
@@ -23,7 +23,7 @@ namespace FriskTests
     DEF_TEST(OlcGroup_AddEntry_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for OlcGroup::AddEntry! */
     }
 
@@ -31,7 +31,7 @@ namespace FriskTests
     DEF_TEST(OlcGroup_GetEntry_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for OlcGroup::GetEntry! */
     }
 
@@ -39,7 +39,7 @@ namespace FriskTests
     DEF_TEST(OlcGroup_ListEntries_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for OlcGroup::ListEntries! */
     }
 
@@ -47,7 +47,7 @@ namespace FriskTests
     DEF_TEST(OlcGroup_SetComponentName_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for OlcGroup::SetComponentName! */
     }
 
@@ -55,7 +55,7 @@ namespace FriskTests
     DEF_TEST(OlcGroup_GetComponentName_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for OlcGroup::GetComponentName! */
     }
 
@@ -63,7 +63,7 @@ namespace FriskTests
     DEF_TEST(OlcGroup_GetInheritance_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for OlcGroup::GetInheritance! */
     }
 
@@ -71,7 +71,7 @@ namespace FriskTests
     DEF_TEST(OlcGroup_SetInheritance_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for OlcGroup::SetInheritance! */
     }
 

@@ -7,7 +7,7 @@ namespace FriskTests
     DEF_TEST(BoardPost_BoardPost_Constructor_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for BoardPost::BoardPost::Constructor! */
     }
 
@@ -15,7 +15,7 @@ namespace FriskTests
     DEF_TEST(BoardPost_BoardPost_Constructor2_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for BoardPost::BoardPost::Constructor2! */
     }
 
@@ -23,7 +23,7 @@ namespace FriskTests
     DEF_TEST(BoardPost_BoardPost_Destructor_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for BoardPost::BoardPost::Destructor! */
     }
 
@@ -31,7 +31,7 @@ namespace FriskTests
     DEF_TEST(BoardPost_GetSubject_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for BoardPost::GetSubject! */
     }
 
@@ -39,7 +39,7 @@ namespace FriskTests
     DEF_TEST(BoardPost_SetSubject_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for BoardPost::SetSubject! */
     }
 
@@ -47,7 +47,7 @@ namespace FriskTests
     DEF_TEST(BoardPost_GetMessage_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for BoardPost::GetMessage! */
     }
 
@@ -55,7 +55,7 @@ namespace FriskTests
     DEF_TEST(BoardPost_SetMessage_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for BoardPost::SetMessage! */
     }
 
@@ -63,7 +63,7 @@ namespace FriskTests
     DEF_TEST(BoardPost_GetPoster_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for BoardPost::GetPoster! */
     }
 
@@ -71,7 +71,7 @@ namespace FriskTests
     DEF_TEST(BoardPost_IsPoster_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for BoardPost::IsPoster! */
     }
 
@@ -79,7 +79,7 @@ namespace FriskTests
     DEF_TEST(BoardPost_SetPoster_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for BoardPost::SetPoster! */
     }
 
@@ -87,7 +87,7 @@ namespace FriskTests
     DEF_TEST(BoardPost_Serialize_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for BoardPost::Serialize! */
     }
 
@@ -95,7 +95,7 @@ namespace FriskTests
     DEF_TEST(BoardPost_Deserialize_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for BoardPost::Deserialize! */
     }
 

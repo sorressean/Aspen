@@ -7,7 +7,7 @@ namespace FriskTests
     DEF_TEST(BanList_BanList_Constructor_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for BanList::BanList::Constructor! */
     }
 
@@ -15,7 +15,7 @@ namespace FriskTests
     DEF_TEST(BanList_BanList_Destructor_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for BanList::BanList::Destructor! */
     }
 
@@ -23,7 +23,7 @@ namespace FriskTests
     DEF_TEST(BanList_AddAddress_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for BanList::AddAddress! */
     }
 
@@ -31,7 +31,7 @@ namespace FriskTests
     DEF_TEST(BanList_RemoveAddress_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for BanList::RemoveAddress! */
     }
 
@@ -39,7 +39,7 @@ namespace FriskTests
     DEF_TEST(BanList_AddressExists_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for BanList::AddressExists! */
     }
 
@@ -47,7 +47,7 @@ namespace FriskTests
     DEF_TEST(BanList_AddressExists2_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for BanList::AddressExists2! */
     }
 
@@ -55,7 +55,7 @@ namespace FriskTests
     DEF_TEST(BanList_ListAddresses_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for BanList::ListAddresses! */
     }
 
@@ -63,7 +63,7 @@ namespace FriskTests
     DEF_TEST(BanList_Serialize_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for BanList::Serialize! */
     }
 
@@ -71,7 +71,7 @@ namespace FriskTests
     DEF_TEST(BanList_Deserialize_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for BanList::Deserialize! */
     }
 

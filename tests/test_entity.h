@@ -7,7 +7,7 @@ namespace FriskTests
     DEF_TEST(InitializeEntityOlcs_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for InitializeEntityOlcs! */
     }
 
@@ -15,7 +15,7 @@ namespace FriskTests
     DEF_TEST(Entity_Entity_Constructor_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Entity::Entity::Constructor! */
     }
 
@@ -23,7 +23,7 @@ namespace FriskTests
     DEF_TEST(Entity_Entity_Destructor_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Entity::Entity::Destructor! */
     }
 
@@ -31,7 +31,7 @@ namespace FriskTests
     DEF_TEST(Entity_GetLocation_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Entity::GetLocation! */
     }
 
@@ -39,7 +39,7 @@ namespace FriskTests
     DEF_TEST(Entity_SetLocation_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Entity::SetLocation! */
     }
 
@@ -47,7 +47,7 @@ namespace FriskTests
     DEF_TEST(Entity_GetContents_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Entity::GetContents! */
     }
 
@@ -55,7 +55,7 @@ namespace FriskTests
     DEF_TEST(Entity_GetParent_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Entity::GetParent! */
     }
 
@@ -63,7 +63,7 @@ namespace FriskTests
     DEF_TEST(Entity_SetParent_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Entity::SetParent! */
     }
 
@@ -71,7 +71,7 @@ namespace FriskTests
     DEF_TEST(Entity_Serialize_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Entity::Serialize! */
     }
 
@@ -79,7 +79,7 @@ namespace FriskTests
     DEF_TEST(Entity_Deserialize_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Entity::Deserialize! */
     }
 
@@ -87,7 +87,7 @@ namespace FriskTests
     DEF_TEST(Entity_DoLook_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Entity::DoLook! */
     }
 
@@ -95,7 +95,7 @@ namespace FriskTests
     DEF_TEST(Entity_CanReceive_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Entity::CanReceive! */
     }
 
@@ -103,7 +103,7 @@ namespace FriskTests
     DEF_TEST(Entity_MoveTo_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Entity::MoveTo! */
     }
 
@@ -111,7 +111,7 @@ namespace FriskTests
     DEF_TEST(Entity_ObjectEnter_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Entity::ObjectEnter! */
     }
 
@@ -119,7 +119,7 @@ namespace FriskTests
     DEF_TEST(Entity_ObjectLeave_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Entity::ObjectLeave! */
     }
 
@@ -127,7 +127,7 @@ namespace FriskTests
     DEF_TEST(Entity_FromRoom_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Entity::FromRoom! */
     }
 
@@ -135,7 +135,7 @@ namespace FriskTests
     DEF_TEST(Entity_ToRoom_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Entity::ToRoom! */
     }
 
@@ -143,7 +143,7 @@ namespace FriskTests
     DEF_TEST(Entity_IsNpc_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Entity::IsNpc! */
     }
 
@@ -151,7 +151,7 @@ namespace FriskTests
     DEF_TEST(Entity_IsPlayer_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Entity::IsPlayer! */
     }
 
@@ -159,7 +159,7 @@ namespace FriskTests
     DEF_TEST(Entity_IsLiving_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Entity::IsLiving! */
     }
 
@@ -167,7 +167,7 @@ namespace FriskTests
     DEF_TEST(Entity_IsRoom_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Entity::IsRoom! */
     }
 
@@ -175,7 +175,7 @@ namespace FriskTests
     DEF_TEST(Entity_Initialize_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Entity::Initialize! */
     }
 
@@ -183,7 +183,7 @@ namespace FriskTests
     DEF_TEST(Entity_GetUuid_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Entity::GetUuid! */
     }
 
@@ -191,7 +191,7 @@ namespace FriskTests
     DEF_TEST(Entity_Identify_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Entity::Identify! */
     }
 

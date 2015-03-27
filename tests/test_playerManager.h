@@ -7,7 +7,7 @@ namespace FriskTests
     DEF_TEST(PlayerManager_PlayerManager_Constructor_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for PlayerManager::PlayerManager::Constructor! */
     }
 
@@ -15,7 +15,7 @@ namespace FriskTests
     DEF_TEST(PlayerManager_PlayerManager_Destructor_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for PlayerManager::PlayerManager::Destructor! */
     }
 
@@ -23,7 +23,7 @@ namespace FriskTests
     DEF_TEST(PlayerManager_GetPlayers_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for PlayerManager::GetPlayers! */
     }
 
@@ -31,7 +31,7 @@ namespace FriskTests
     DEF_TEST(PlayerManager_AddPlayer_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for PlayerManager::AddPlayer! */
     }
 
@@ -39,7 +39,7 @@ namespace FriskTests
     DEF_TEST(PlayerManager_RemovePlayer_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for PlayerManager::RemovePlayer! */
     }
 
@@ -47,7 +47,7 @@ namespace FriskTests
     DEF_TEST(PlayerManager_FindPlayer_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for PlayerManager::FindPlayer! */
     }
 
@@ -55,7 +55,7 @@ namespace FriskTests
     DEF_TEST(PlayerManager_LoadPlayer_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for PlayerManager::LoadPlayer! */
     }
 
@@ -63,7 +63,7 @@ namespace FriskTests
     DEF_TEST(PlayerManager_Shutdown_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for PlayerManager::Shutdown! */
     }
 
@@ -71,7 +71,7 @@ namespace FriskTests
     DEF_TEST(PlayerManager_Update_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for PlayerManager::Update! */
     }
 

@@ -7,7 +7,7 @@ namespace FriskTests
     DEF_TEST(Callout_Callout_Constructor_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Callout::Callout::Constructor! */
     }
 
@@ -15,7 +15,7 @@ namespace FriskTests
     DEF_TEST(Callout_Callout_Destructor_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Callout::Callout::Destructor! */
     }
 
@@ -23,7 +23,7 @@ namespace FriskTests
     DEF_TEST(Callout_GetId_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Callout::GetId! */
     }
 
@@ -31,7 +31,7 @@ namespace FriskTests
     DEF_TEST(Callout_SetId_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Callout::SetId! */
     }
 
@@ -39,7 +39,7 @@ namespace FriskTests
     DEF_TEST(Callout_GetTime_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Callout::GetTime! */
     }
 
@@ -47,7 +47,7 @@ namespace FriskTests
     DEF_TEST(Callout_GetDelta_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Callout::GetDelta! */
     }
 
@@ -55,7 +55,7 @@ namespace FriskTests
     DEF_TEST(Callout_CanFire_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Callout::CanFire! */
     }
 
@@ -63,7 +63,7 @@ namespace FriskTests
     DEF_TEST(Callout_Fire_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Callout::Fire! */
     }
 
@@ -71,7 +71,7 @@ namespace FriskTests
     DEF_TEST(Callout_IsOneShot_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Callout::IsOneShot! */
     }
 
@@ -79,7 +79,7 @@ namespace FriskTests
     DEF_TEST(Callout_Reset_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Callout::Reset! */
     }
 

@@ -7,7 +7,7 @@ namespace FriskTests
     DEF_TEST(Listener_Listener_Constructor_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Listener::Listener::Constructor! */
     }
 
@@ -15,7 +15,7 @@ namespace FriskTests
     DEF_TEST(Listener_Listener_Destructor_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Listener::Listener::Destructor! */
     }
 
@@ -23,7 +23,7 @@ namespace FriskTests
     DEF_TEST(Listener_Listen_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Listener::Listen! */
     }
 
@@ -31,7 +31,7 @@ namespace FriskTests
     DEF_TEST(Listener_Poll_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Listener::Poll! */
     }
 
@@ -39,7 +39,7 @@ namespace FriskTests
     DEF_TEST(Listener_ReceiveText_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Listener::ReceiveText! */
     }
 
@@ -47,7 +47,7 @@ namespace FriskTests
     DEF_TEST(Listener_Accept_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Listener::Accept! */
     }
 
@@ -55,7 +55,7 @@ namespace FriskTests
     DEF_TEST(Listener_CloseSocket_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for Listener::CloseSocket! */
     }
 

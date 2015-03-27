@@ -7,7 +7,7 @@ namespace FriskTests
     DEF_TEST(OptionManager_OptionManager_Constructor_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for OptionManager::OptionManager::Constructor! */
     }
 
@@ -15,7 +15,7 @@ namespace FriskTests
     DEF_TEST(OptionManager_OptionManager_Destructor_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for OptionManager::OptionManager::Destructor! */
     }
 
@@ -23,7 +23,7 @@ namespace FriskTests
     DEF_TEST(OptionManager_OptionExists_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for OptionManager::OptionExists! */
     }
 
@@ -31,7 +31,7 @@ namespace FriskTests
     DEF_TEST(OptionManager_ListOptions_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for OptionManager::ListOptions! */
     }
 
@@ -39,7 +39,7 @@ namespace FriskTests
     DEF_TEST(OptionManager_AddOption_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for OptionManager::AddOption! */
     }
 
@@ -47,7 +47,7 @@ namespace FriskTests
     DEF_TEST(OptionManager_GetOption_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for OptionManager::GetOption! */
     }
 
@@ -55,7 +55,7 @@ namespace FriskTests
     DEF_TEST(OptionManager_ListOptions2_test)
     {
       BEGIN_TEST(self);
-      self.setOption(FRISK_OPTION_PENDING, true);
+      TEST_OPTION(self, FRISK_OPTION_PENDING, true);
       /* implement your tests for OptionManager::ListOptions2! */
     }
 
