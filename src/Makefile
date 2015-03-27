@@ -19,7 +19,7 @@ CFLAGS	= -g -std=c++11 -O1 -march=native
 LDFLAGS=
 
 #makes the compiler use our includes.
-CFLAGS += -isystem ../include
+CFLAGS += -isystem ../include -I../frisk/inc
 CFLAGS += -L../lib
 
 #required libraries
@@ -51,6 +51,10 @@ match.cpp calloutManager.cpp optionManager.cpp flag.cpp door.cpp\
 optionMeta.cpp bitfield.cpp attribute.cpp affect.cpp objectManager.cpp\
 page.cpp serializationHelpers.cpp telnetParser.cpp
 
+S_TEST_FILES=$(filter-out main.cpp, $(S_FILES))
+S_TEST_FILES+=../tests/test_main.cpp
+
+
 ###
 ###YOU SHOULD NOT MODIFY ANYTHING PAST THIS POINT.
 ###IF YOU HAVE CHANGES, MAKE THEM ABOVE TO THE FLAGS.
@@ -63,11 +67,19 @@ include modules/include.mod
 #user-defined modules:
 include extensions/include.mod
 O_FILES += $(patsubst %.cpp,%.o, $(filter %.cpp, $(S_FILES)))
+O_TEST_FILES = $(patsubst %.cpp,%.o, $(filter %.cpp, $(S_TEST_FILES)))
+
 
 all: $(O_FILES) ../lib/libangelscript.a ../lib/libtinyxml.a
 	@$(RM) $(OUTPUT)
 	@$(ECHO) Linking.
 	@$(CC) $(CFLAGS) -o $(OUTPUT) $(O_FILES) $(LDFLAGS)
+
+test: $(O_TEST_FILES) ../lib/libangelscript.a ../lib/libtinyxml.a ../lib/libfrisk.a
+	@$(RM) $(OUTPUT)
+	@$(ECHO) Linking.
+	@$(CC) $(CFLAGS) -o ../tests/test $(O_TEST_FILES) -lfrisk $(LDFLAGS)
+	cd ../tests && ./test
 
 %.o: %.cpp
 	@$(ECHO) Compiling $<.
@@ -77,6 +89,9 @@ all: $(O_FILES) ../lib/libangelscript.a ../lib/libtinyxml.a
 	@cd ../angelscript && $(MAKE)
 ../lib/libtinyxml.a:
 	@cd ../xml && $(MAKE)
+../lib/libfrisk.a:
+	@cd ../frisk/src && $(MAKE)
+
 
 clean:
 	@$(ECHO) Cleaning
