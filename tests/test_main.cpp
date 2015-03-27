@@ -79,7 +79,6 @@
 #include "test_attribute.h"
 #include "scripts/test_helper.hpp"
 
-
 int main(int argc, char *argv[])
 {
   Frisk::TestCollection testCollection;
@@ -1168,4 +1167,5 @@ int main(int argc, char *argv[])
   testCollection.addTest(FriskTests::Attribute_GetAttributePoints_test, "Attribute::GetAttributePoints");
   testCollection.addTest(FriskTests::Attribute_ToString_test, "Attribute::ToString");
     testCollection.runTests(false, &reporter);
+    return testCollection.getLastFailCount();
 }
