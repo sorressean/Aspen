@@ -117,7 +117,7 @@ BOOL CMDWho::Execute(const std::string &verb, Player* mobile,std::vector<std::st
     mobile->Write(Center(Capitalize(MUD_NAME),80)+"\n");
     mobile->Write(Repeat("-",80));
 
-    players = world->GetPlayerManager().GetPlayers();
+    players = world->GetPlayerManager()->GetPlayers();
     itEnd=players->end();
     for (it = players->begin(); it != itEnd; ++it)
         {
@@ -485,11 +485,11 @@ BOOL CMDWhois::Execute(const std::string &verb, Player* mobile,std::vector<std::
             return false;
         }
 //check to see if the player is online:
-    targ=world->GetPlayerManager().FindPlayer(args[0]);
+    targ=world->GetPlayerManager()->FindPlayer(args[0]);
     if (!targ)
         {
 //check to see if the player can be loaded
-            targ=world->GetPlayerManager().LoadPlayer(args[0]);
+            targ=world->GetPlayerManager()->LoadPlayer(args[0]);
             load=true;
         }
 //check to see if the load succeeded.

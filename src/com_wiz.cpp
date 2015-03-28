@@ -50,7 +50,7 @@ CMDMkgod::CMDMkgod()
 BOOL CMDMkgod::Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args,int subcmd)
 {
     World* world = World::GetPtr();
-    PlayerManager manager = world->GetPlayerManager();
+    PlayerManager* manager = world->GetPlayerManager();
     Player* target = nullptr;
 
     if (!args.size())
@@ -59,7 +59,7 @@ BOOL CMDMkgod::Execute(const std::string &verb, Player* mobile,std::vector<std::
             return false;
         }
 
-    target=manager.FindPlayer(args[0]);
+    target=manager->FindPlayer(args[0]);
     if (target==mobile)
         {
             mobile->Message(MSG_ERROR,"You may not make yourself a god.");
@@ -90,7 +90,7 @@ CMDMkbuilder::CMDMkbuilder()
 BOOL CMDMkbuilder::Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args,int subcmd)
 {
     World* world = World::GetPtr();
-    PlayerManager manager = world->GetPlayerManager();
+    PlayerManager* manager = world->GetPlayerManager();
     Player* target = NULL;
 
     if (!args.size())
@@ -99,7 +99,7 @@ BOOL CMDMkbuilder::Execute(const std::string &verb, Player* mobile,std::vector<s
             return false;
         }
 
-    target=manager.FindPlayer(args[0]);
+    target=manager->FindPlayer(args[0]);
     if (target==NULL)
         {
             mobile->Message(MSG_ERROR,"That person couldn't be found.");
@@ -186,7 +186,7 @@ BOOL CMDSilence::Execute(const std::string &verb, Player* mobile,std::vector<std
 {
     Player* targ = NULL;
     World* world = World::GetPtr();
-    PlayerManager manager = world->GetPlayerManager();
+    PlayerManager* manager = world->GetPlayerManager();
 
     if (!args.size())
         {
@@ -194,7 +194,7 @@ BOOL CMDSilence::Execute(const std::string &verb, Player* mobile,std::vector<std
             return false;
         }
 
-    targ = manager.FindPlayer(args[0]);
+    targ = manager->FindPlayer(args[0]);
     if (!targ)
         {
             mobile->Message(MSG_ERROR, "Could not find the specified player.");
@@ -229,7 +229,7 @@ BOOL CMDUnsilence::Execute(const std::string &verb, Player* mobile,std::vector<s
 {
     Player* targ = NULL;
     World* world = World::GetPtr();
-    PlayerManager manager = world->GetPlayerManager();
+    PlayerManager* manager = world->GetPlayerManager();
 
     if (!args.size())
         {
@@ -237,7 +237,7 @@ BOOL CMDUnsilence::Execute(const std::string &verb, Player* mobile,std::vector<s
             return false;
         }
 
-    targ = manager.FindPlayer(args[0]);
+    targ = manager->FindPlayer(args[0]);
     if (!targ)
         {
             mobile->Message(MSG_ERROR, "Could not find the specified player.");
@@ -267,7 +267,7 @@ BOOL CMDDisconnect::Execute(const std::string &verb, Player* mobile,std::vector<
 {
     World* world = World::GetPtr();
     Player* target = NULL;
-    PlayerManager manager = world->GetPlayerManager();
+    PlayerManager* manager = world->GetPlayerManager();
 
     if (!args.size())
         {
@@ -275,7 +275,7 @@ BOOL CMDDisconnect::Execute(const std::string &verb, Player* mobile,std::vector<
             return false;
         }
 
-    target=manager.FindPlayer(args[0]);
+    target=manager->FindPlayer(args[0]);
     if (!target)
         {
             mobile->Message(MSG_ERROR, "I could not find that player.");
@@ -305,7 +305,7 @@ CMDEcho::CMDEcho()
 BOOL CMDEcho::Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args,int subcmd)
 {
     World* world = World::GetPtr();
-    PlayerManager manager = world->GetPlayerManager();
+    PlayerManager* manager = world->GetPlayerManager();
 
     if (!args.size())
         {
@@ -315,7 +315,7 @@ BOOL CMDEcho::Execute(const std::string &verb, Player* mobile,std::vector<std::s
 
     std::string msg = Explode(args);
     std::list<Player*>::iterator it, itEnd;
-    std::list<Player*>* players = manager.GetPlayers();
+    std::list<Player*>* players = manager->GetPlayers();
 
     itEnd = players->end();
     for (it = players->begin(); it != itEnd; ++it)
@@ -395,7 +395,7 @@ CMDForce::CMDForce()
 BOOL CMDForce::Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args,int subcmd)
 {
     World* world = World::GetPtr();
-    PlayerManager manager = world->GetPlayerManager();
+    PlayerManager* manager = world->GetPlayerManager();
     Player* target = NULL;
     std::string command;
 
@@ -405,7 +405,7 @@ BOOL CMDForce::Execute(const std::string &verb, Player* mobile,std::vector<std::
             return false;
         }
 
-    target=manager.FindPlayer(args[0]);
+    target=manager->FindPlayer(args[0]);
     if (target == mobile)
         {
             mobile->Message(MSG_ERROR, "Why would you need to force yourself to do that?");

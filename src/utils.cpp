@@ -23,8 +23,8 @@ int tonum(const char* str)
 {
     const char*ptr = str;
     int ret = 0;
-
-    while (*ptr)
+ 
+  while (*ptr)
         {
             if (!isdigit(*ptr))
                 {
