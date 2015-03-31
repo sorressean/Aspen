@@ -72,7 +72,7 @@ all: $(O_FILES) ../lib/libangelscript.a ../lib/libtinyxml.a
 test: $(O_TEST_FILES) ../lib/libangelscript.a ../lib/libtinyxml.a ../lib/libfrisk.a
 	@$(RM) $(OUTPUT)
 	@$(ECHO) Linking.
-	@$(CC) $(CFLAGS) -o ../tests/test $(O_TEST_FILES) -lfrisk $(LDFLAGS)
+	@$(CXX) $(CFLAGS) -o ../tests/test $(O_TEST_FILES) -lfrisk $(LDFLAGS)
 	cd ../tests && ./test
 
 %.o: %.cpp
@@ -85,7 +85,6 @@ test: $(O_TEST_FILES) ../lib/libangelscript.a ../lib/libtinyxml.a ../lib/libfris
 	@cd ../xml && $(MAKE)
 ../lib/libfrisk.a:
 	@cd ../frisk/src && $(MAKE)
-
 
 clean:
 	@$(ECHO) Cleaning
