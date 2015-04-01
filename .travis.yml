@@ -18,3 +18,4 @@ install:
 
 script:
   - cd src && make
+  - cd ../src && make test
