@@ -67,7 +67,7 @@ BOOL CMDSave::Execute(const std::string &verb, Player* mobile,std::vector<std::s
         }
     else
         {
-            mobile->Message(MSG_NORMAL, "saved.");
+            mobile->Message(MSG_NORMAL, "Saved.");
         }
     return true;
 }
@@ -131,7 +131,7 @@ BOOL CMDWho::Execute(const std::string &verb, Player* mobile,std::vector<std::st
             st.str("");
         }
     mobile->Write(Repeat("-",80));
-    st << MUD_NAME << " currently has " << players->size() << (players->size()==1?"user ":"users ") << "online.\n";
+    st << MUD_NAME << " currently has " << players->size() << (players->size()==1?" user ":" users ") << "online.\n";
     mobile->Write(st.str());
     return true;
 }
@@ -163,7 +163,7 @@ BOOL CMDToggle::Execute(const std::string &verb, Player* mobile,std::vector<std:
                 {
                     if (pit->GetMeta()->CanToggle())
                         {
-                            cols.push_back(pit->GetMeta()->GetFullName());
+                            cols.push_back(pit->GetMeta()->GetName());
                             cols.push_back(pit->GetValue().GetInt()==0?"off: ":"on ");
                         }
                 }

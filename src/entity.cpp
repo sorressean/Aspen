@@ -29,6 +29,16 @@ Entity::~Entity()
 {
 }
 
+std::string Entity::GetShort() const
+{
+	return _short;
+}
+void Entity::SetShort(const std::string &s)
+{
+	_short = s;
+}
+
+
 ObjectContainer* Entity::GetLocation() const
 {
     return _location;
@@ -54,6 +64,7 @@ void Entity::Serialize(TiXmlElement* root)
     _uuid.Serialize(ent);
 
     ent->SetAttribute("location", (_location?_location->GetOnum():0));
+	ent->SetAttribute("short", _short.c_str());
     root->LinkEndChild(ent);
 }
 void Entity::Deserialize(TiXmlElement* root)
@@ -64,6 +75,7 @@ void Entity::Deserialize(TiXmlElement* root)
 
     root->Attribute("location", &loc);
     _uuid.Deserialize(root);
+	_short = root->Attribute("short");
     if (!loc)
         {
             _location=NULL;
@@ -139,6 +151,10 @@ bool InitializeEntityOlcs()
     OlcManager* omanager = world->GetOlcManager();
     OlcGroup* group = new OlcGroup();
     group->SetInheritance(omanager->GetGroup(OLCGROUP::BaseObject));
-    omanager->AddGroup(OLCGROUP::BaseObject, group);
+	group->AddEntry(new OlcStringEntry<Entity>("short", "the title of the object seen in rooms", OF_NORMAL, OLCDT::STRING,
+		std::bind(&Entity::GetShort, std::placeholders::_1),
+		std::bind(&Entity::SetShort, std::placeholders::_1, std::placeholders::_2)));
+	
+    omanager->AddGroup(OLCGROUP::Entity, group);
     return true;
 }

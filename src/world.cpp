@@ -45,8 +45,8 @@ World::World()
 {
     _running = true;
     _chanid=1;
-    _server = nullptr;
 	_pmanager = new PlayerManager();
+    _server = nullptr;
     _motd = nullptr;
     _banner = nullptr;
     _updates = 0;
@@ -70,9 +70,9 @@ World::World()
 World::~World()
 {
 	if (_pmanager)
-	{
+	    {
 		delete _pmanager;
-	}
+     	}
     if (_motd)
         {
             delete [] _motd;
