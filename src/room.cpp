@@ -17,7 +17,6 @@
 
 Room::Room()
 {
-    _exits = new std::vector<Exit*>();
     _rflag = 0;
     SetOnum(ROOM_NOWHERE);
     SetPersistent(false);
@@ -25,35 +24,24 @@ Room::Room()
 }
 Room::~Room()
 {
-    std::vector<Exit*>::iterator it;
-    std::vector<Exit*>::iterator itEnd = _exits->end();
-
-//delete exits:
-    if (_exits->size())
+    for (auto it: _exits)
         {
-            for (it=_exits->begin(); it != itEnd; ++it)
-                {
-                    delete (*it);
-                }
+            delete it;
         }
-    delete _exits;
-    _exits = NULL;
 }
 
 BOOL Room::AddExit(Exit* exit)
 {
-    std::vector<Exit*>::iterator it;
-    std::vector<Exit*>::iterator itEnd = _exits->end();
-    if (exit==NULL)
+    if (exit==nullptr)
         {
             return false;
         }
 
-    if (_exits->size())
+    if (_exits.size())
         {
-            for (it=_exits->begin(); it != itEnd; ++it)
+            for (auto it: _exits)
                 {
-                    if (exit==(*it))
+                    if (exit == it)
                         {
                             return false;
                         }
@@ -65,20 +53,17 @@ BOOL Room::AddExit(Exit* exit)
             return false;
         }
 
-    _exits->push_back(exit);
+    _exits.push_back(exit);
     return true;
 }
 
 BOOL Room::ExitExists(ExitDirection dir)
 {
-    std::vector<Exit*>::iterator it;
-    std::vector<Exit*>::iterator itEnd = _exits->end();
-
-    if (_exits->size())
+    if (_exits.size())
         {
-            for (it=_exits->begin(); it != itEnd; ++it)
+            for (auto it: _exits)
                 {
-                    if ((*it)->GetDirection() == dir)
+                    if (it->GetDirection() == dir)
                         {
                             return true;
                         }
@@ -90,26 +75,23 @@ BOOL Room::ExitExists(ExitDirection dir)
 
 Exit* Room::GetExit(ExitDirection dir)
 {
-    std::vector<Exit*>::iterator it;
-    std::vector<Exit*>::iterator itEnd = _exits->end();
-
-    if (_exits->size())
+    if (_exits.size())
         {
-            for (it = _exits->begin(); it != itEnd; ++it)
+            for (auto it: _exits)
                 {
-                    if ((*it)->GetDirection() == dir)
+                    if (it->GetDirection() == dir)
                         {
-                            return (*it);
+                            return it;
                         }
                 }
         }
 
-    return NULL;
+    return nullptr;
 }
 
 std::vector<Exit*>* Room::GetExits()
 {
-    return _exits;
+    return &_exits;
 }
 
 void Room::SetRoomFlag(FLAG flag)
@@ -200,7 +182,6 @@ void Room::Serialize(TiXmlElement* root)
 {
     TiXmlElement* room = new TiXmlElement("room");
     TiXmlElement* exits = new TiXmlElement("exits");
-    std::vector<Exit*>::iterator it, itEnd;
     ObjectContainer::Serialize(room);
 
     room->SetAttribute("rflag", _rflag);
@@ -208,12 +189,11 @@ void Room::Serialize(TiXmlElement* root)
     room->SetAttribute("y", _coord.y);
     room->SetAttribute("z", _coord.z);
 
-    if (_exits->size())
+    if (_exits.size())
         {
-            itEnd = _exits->end();
-            for (it=_exits->begin(); it != itEnd; ++it)
+            for (auto it: _exits)
                 {
-                    (*it)->Serialize(exits);
+                    it->Serialize(exits);
                 }
         }
     room->LinkEndChild(exits);
@@ -226,7 +206,6 @@ void Room::Deserialize(TiXmlElement* room)
     TiXmlElement* exits = NULL;
     TiXmlNode* node = NULL;
     Exit* ex = NULL;
-    int val = 0;
 
     room->Attribute("rflag", &_rflag);
     room->Attribute("x", &_coord.x);
@@ -238,7 +217,7 @@ void Room::Deserialize(TiXmlElement* room)
             exit = node->ToElement();
             ex = new Exit();
             ex->Deserialize(exit);
-            _exits->push_back(ex);
+            _exits.push_back(ex);
             ex = NULL;
         }
 

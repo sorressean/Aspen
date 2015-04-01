@@ -24,7 +24,7 @@ class Zone;
 class Room:public ObjectContainer
 {
     std::list <Living*> _mobiles;
-    std::vector<Exit*> *_exits;
+    std::vector<Exit*> _exits;
     FLAG _rflag;
     point _coord;
 public:
