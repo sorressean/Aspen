@@ -21,10 +21,17 @@
 /*
 *This is the connection type that each player has, it is used to hold the state of their current connection.
 */
-enum class ConnectionType
-{
-    Disconnected, Name, Password, Newname, Newpass, Verpass, Gender, Game
-};
+//These are defines so that you can extend them.
+//If you wish to, use CON_Max+1 for your defines.
+#define CON_Disconnected 1
+#define CON_Name 2
+#define CON_Password 3
+#define CON_Newname 4
+#define CON_Newpass 5
+#define CON_Verpass 6
+#define CON_Gender 7
+#define CON_Game 25
+#define CON_Max 100
 
 //forward declarations
 class Socket;
@@ -70,7 +77,7 @@ class Socket:public BaseSocket
     unsigned int _totalSent;
     unsigned int _compressedSent;
     Window _winsize;
-    ConnectionType _con;
+    int _con;
     Player *_mobile;
     BOOL _Close;
     BOOL _compressing;
@@ -126,12 +133,12 @@ public:
     *Returns the connection type
     *Return: the type of connection that is associated with this socket.
     */
-    ConnectionType GetConnectionType() const;
+    int GetConnectionType() const;
     /*
     *Sets the connection type.
     *Param: [in] The type of connection.
     */
-    void SetConnectionType(const ConnectionType &s);
+    void SetConnectionType(const int s);
     /*
     *Returns the host
     *Return: The hostname or IP address associated with the socket.

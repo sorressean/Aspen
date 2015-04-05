@@ -27,7 +27,7 @@ BOOL PlayerManager::AddPlayer(Player* player)
         {
             return false;
         }
-    if (player->GetSocket()->GetConnectionType() != ConnectionType::Game)
+    if (player->GetSocket()->GetConnectionType() != CON_Game)
         {
             return false;
         }

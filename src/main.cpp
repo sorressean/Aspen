@@ -196,7 +196,7 @@ static bool CopyoverRecover()
             person = sock->GetPlayer();
             person->SetName(name);
             person->Load();
-            sock->SetConnectionType(ConnectionType::Game);
+            sock->SetConnectionType(CON_Game);
             world->GetServer()->AddSock(sock);
             person->SetSocket(sock);
             person->EnterGame(true);

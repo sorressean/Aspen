@@ -134,7 +134,7 @@ void World::Copyover(Player* mobile)
     _users = _pmanager.GetPlayers();
     for (Player* person: *_users)
         {
-            if (person->GetSocket()->GetConnectionType() != ConnectionType::Game)
+            if (person->GetSocket()->GetConnectionType() != CON_Game)
                 {
                     person->Write("We're sorry, but we are currently rebooting; please come back again soon.\n");
                     person->GetSocket()->Kill();

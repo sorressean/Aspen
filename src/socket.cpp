@@ -336,7 +336,7 @@ bool Socket::Flush()
 
     _totalSent += _outBuffer.length();
 //prepend buffer to prompt
-    if ((_mobile!=NULL)&&(_con==ConnectionType::Game))
+    if ((_mobile!=NULL)&&(_con==CON_Game))
         {
             _outBuffer+="\r\n"+world->BuildPrompt(_mobile->GetPrompt(), _mobile)+(char)TELNET_IAC+(char)TELNET_GA;
         }
@@ -410,11 +410,11 @@ std::string Socket::GetInBuffer()
     return _inBuffer.substr(0,_inBuffer.find_first_of("\n\r"));
 }
 
-ConnectionType Socket::GetConnectionType() const
+int Socket::GetConnectionType() const
 {
     return _con;
 }
-void Socket::SetConnectionType(const ConnectionType &s)
+void Socket::SetConnectionType(const int s)
 {
     _con=s;
 }
@@ -446,7 +446,7 @@ void Socket::Kill()
         {
             if (_mobile)
                 {
-                    if (GetConnectionType()==ConnectionType::Game)
+                    if (GetConnectionType()==CON_Game)
                         {
                             _mobile->LeaveGame();
                         }
@@ -620,7 +620,7 @@ bool Socket::HandleNameInput()
             Write("Welcome, what name would you like?\n");
             AllocatePlayer();
             mob = GetPlayer();
-            SetConnectionType(ConnectionType::Newname);
+            SetConnectionType(CON_Newname);
             return true;
         }
 
@@ -637,6 +637,7 @@ bool Socket::HandleNameInput()
             Write("That player doesn't exist.\nWhat is your name? Type new for a new character.\n");
             return true;
         }
+
     mob = server->GetLinkdeadUser(input);
     if (mob)
         {
@@ -644,7 +645,7 @@ bool Socket::HandleNameInput()
             Write(TELNET_ECHO_OFF);
             Write("\n");
             Write("Password?\n");
-            SetConnectionType(ConnectionType::Password);
+            SetConnectionType(CON_Password);
             return true;
         }
 
@@ -657,7 +658,7 @@ bool Socket::HandleNameInput()
     Write(TELNET_ECHO_OFF);
     Write("\n");
     Write("Password?\n");
-    SetConnectionType(ConnectionType::Password);
+    SetConnectionType(CON_Password);
     return true;
 }
 bool Socket::HandlePasswordInput()
@@ -678,7 +679,7 @@ bool Socket::HandlePasswordInput()
         }
 
     Write(TELNET_ECHO_ON);
-    SetConnectionType(ConnectionType::Game);
+    SetConnectionType(CON_Game);
     mobile->SetSocket(this);
     if (server->GetLinkdeadUser(mobile->GetName()))
         {
@@ -712,7 +713,7 @@ bool Socket::HandleNewnameInput()
     Write(TELNET_ECHO_OFF);
 //name was valid, set it in the player class.
     mobile->SetName(input);
-    SetConnectionType(ConnectionType::Newpass);
+    SetConnectionType(CON_Newpass);
     return true;
 }
 bool Socket::HandleNewpassInput()
@@ -730,7 +731,7 @@ bool Socket::HandleNewpassInput()
 //transfer control to password verification
     Write("Please re-enter your password for varification.\n");
     mob->SetPassword(input);
-    SetConnectionType(ConnectionType::Verpass);
+    SetConnectionType(CON_Verpass);
 
     return true;
 }
@@ -750,13 +751,13 @@ bool Socket::HandleVerpassInput()
     if (!mob->ComparePassword())
         {
             Write("That password isn't valid, please try again.\n");
-            SetConnectionType(ConnectionType::Newpass);
+            SetConnectionType(CON_Newpass);
             return true;
         }
 
     Write(TELNET_ECHO_OFF);
     Write("What is your gender? Please enter male or female.\n");
-    SetConnectionType(ConnectionType::Gender);
+    SetConnectionType(CON_Gender);
 
     return true;
 }
@@ -804,7 +805,7 @@ void Socket::InitializeNewPlayer()
 
     mob->SetFirstLogin((UINT)time(NULL));
 //Set the connection type to game and enter the player.
-    SetConnectionType(ConnectionType::Game);
+    SetConnectionType(CON_Game);
     mob->SetSocket(this);
 //call the Create event:
     mob->EnterGame(false);
@@ -816,24 +817,24 @@ BOOL Socket::HandleCommand()
     switch (GetConnectionType())
         {
 //handles all in-game connections that aren't handled with a function
-        case ConnectionType::Disconnected:
-        case ConnectionType::Game:
+        case CON_Disconnected:
+        case CON_Game:
             return HandleGameInput();
-        case ConnectionType::Name:
+        case CON_Name:
             return HandleNameInput();
 //login password prompt
-        case ConnectionType::Password:
+        case CON_Password:
             return HandlePasswordInput();
 //login new username
-        case ConnectionType::Newname:
+        case CON_Newname:
             return HandleNewnameInput();
         //login new password
-        case ConnectionType::Newpass:
+        case CON_Newpass:
             return HandleNewpassInput();
 //login verify password
-        case ConnectionType::Verpass:
+        case CON_Verpass:
             return HandleVerpassInput();
-        case ConnectionType::Gender:
+        case CON_Gender:
             return HandleGenderInput();
         default:
             return false;

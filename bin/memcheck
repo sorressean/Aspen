@@ -1,1 +1,1 @@
-valgrind --leak-check=yes --log-file=memcheck.log ./aspen
+valgrind --leak-check=full --leak-resolution=high --track-origins=yes --num-callers=40 --log-file=memcheck.log ./aspen

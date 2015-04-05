@@ -303,7 +303,7 @@ void Server::Accept()
     pSocket->Write("What is your name? Type new for a new character.\n");
 
 //Set the connection state
-    pSocket->SetConnectionType(ConnectionType::Name);
+    pSocket->SetConnectionType(CON_Name);
 
     // attach to socket list
     socketList.push_back(pSocket);
