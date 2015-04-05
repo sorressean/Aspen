@@ -42,10 +42,10 @@ IOlcEntry* OlcGroup::GetEntry(const std::string& name)
 }
 void OlcGroup::ListEntries(std::vector<IOlcEntry*>* entries)
 {
-    if (_inherit)
-        {
-            _inherit->ListEntries(entries);
-        }
+    /* if (_inherit)                  //We check if this OLCgroup is inheriting another. If so, we copy the entries from the inherited group.
+         {
+             _inherit->ListEntries(entries);
+         }*/
 
     std::vector<IOlcEntry*>::iterator it, itEnd;
 
@@ -53,6 +53,7 @@ void OlcGroup::ListEntries(std::vector<IOlcEntry*>* entries)
     for (it = _entries.begin(); it != itEnd; ++it)
         {
             entries->push_back((*it));
+
         }
 }
 
@@ -71,5 +72,8 @@ OlcGroup* OlcGroup::GetInheritance()
 }
 void OlcGroup::SetInheritance(OlcGroup* inherit)
 {
-    _inherit = inherit;
+    // This recursively copies entries from the base OLCGroup (cont'd)
+    _inherit = inherit;                         // and from base OLCGroup's parent and so on until it (cont'd)
+    inherit->ListEntries(&_entries);                     // reaches an OLCGroup with no inheritance.
+
 }

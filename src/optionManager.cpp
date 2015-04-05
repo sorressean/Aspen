@@ -39,19 +39,19 @@ bool OptionManager::ListOptions(OptionSection section, std::vector<OptionMeta*>*
 }
 bool OptionManager::AddOption(OptionMeta* option)
 {
-    std::string fullname;
+    // std::string fullname;
     if (!option)
         {
             return false;
         }
 
-    fullname = OptionSectionToString(option->GetSection()) + "." + option->GetName();
-    if (OptionExists(fullname))
+    //fullname = OptionSectionToString(option->GetSection()) + "." + option->GetName();
+    if (OptionExists(option->GetName()))
         {
             return false;
         }
 
-    _options[fullname] = option;
+    _options[option->GetName()] = option;
     _sections[(int)option->GetSection()].push_back(option);
 
     return true;

@@ -20,6 +20,23 @@ StaticObject::~StaticObject()
 {
 }
 
+std::string StaticObject::GetShort() const
+{
+    return _short;
+}
+void StaticObject::SetShort(const std::string &s)
+{
+    _short = s;
+}
+std::string StaticObject::GetPlural() const
+{
+    return _plural;
+}
+void StaticObject::SetPlural(const std::string &s)
+{
+    _plural = s;
+}
+
 unsigned int StaticObject::GetTotalCount() const
 {
     return _totalCount;
@@ -111,7 +128,8 @@ void StaticObject::Serialize(TiXmlElement* root)
     TiXmlElement* obj = new TiXmlElement("staticobj");
     TiXmlElement* component = NULL;
     BaseObject::Serialize(obj);
-
+    obj->SetAttribute("short", _short.c_str());
+    obj->SetAttribute("plural", _plural.c_str());
     TiXmlElement* components = new TiXmlElement("components");
     itEnd = _components.end();
     for (it = _components.begin(); it != itEnd; ++it)
@@ -133,6 +151,8 @@ void StaticObject::Deserialize(TiXmlElement* root)
     IComponentMeta* com = NULL;
     std::string cname;
 
+    _short = root->Attribute("short");
+    _plural = root->Attribute("plural");
     node = root->FirstChild("components");
     if (node)
         {
@@ -154,10 +174,8 @@ BOOL InitializeStaticObjectOlcs()
     OlcManager* omanager = world->GetOlcManager();
     OlcGroup* sgroup = new OlcGroup();
 
-    sgroup->AddEntry(new OlcStringEntry<StaticObject>("name", "Sets the name of the object", OF_NORMAL, OLCDT::STRING,
-                     std::bind(&StaticObject::GetName, std::placeholders::_1),
-                     std::bind(&StaticObject::SetName, std::placeholders::_1, std::placeholders::_2)));
-    sgroup->AddEntry(new OlcStringEntry<StaticObject>("short", "Sets the short desc of the object", OF_NORMAL, OLCDT::STRING,
+    sgroup->SetInheritance(omanager->GetGroup(OLCGROUP::BaseObject));
+    sgroup->AddEntry(new OlcStringEntry<StaticObject>("short", "the title of the object seen in rooms", OF_NORMAL, OLCDT::STRING,
                      std::bind(&StaticObject::GetShort, std::placeholders::_1),
                      std::bind(&StaticObject::SetShort, std::placeholders::_1, std::placeholders::_2)));
     sgroup->AddEntry(new OlcStringEntry<StaticObject>("plural", "Sets the plural of the object", OF_NORMAL, OLCDT::STRING,

@@ -349,7 +349,7 @@ bool InitializeRoomOlcs()
     World* world = World::GetPtr();
     OlcManager* omanager = world->GetOlcManager();
     OlcGroup* group = new OlcGroup();
-    group->SetInheritance(omanager->GetGroup(OLCGROUP::Entity));
+    group->SetInheritance(omanager->GetGroup(OLCGROUP::BaseObject));
     omanager->AddGroup(OLCGROUP::ROOM, group);
     return true;
 }

@@ -22,7 +22,6 @@ BaseObject::BaseObject()
 
     _name="A blank object";
     _desc="You see nothing special.";
-    _short = "A generic object lies here.";
     _script="";
     _onum=0;
     _components=new std::vector<Component*>();
@@ -54,14 +53,6 @@ void BaseObject::SetName(const std::string &s)
     _name=s;
 }
 
-std::string BaseObject::GetShort() const
-{
-    return _short;
-}
-void BaseObject::SetShort(const std::string &s)
-{
-    _short = s;
-}
 
 std::string BaseObject::GetDescription() const
 {
@@ -70,14 +61,6 @@ std::string BaseObject::GetDescription() const
 void BaseObject::SetDescription(const std::string &s)
 {
     _desc=s;
-}
-std::string BaseObject::GetPlural() const
-{
-    return _plural;
-}
-void BaseObject::SetPlural(const std::string &s)
-{
-    _plural = s;
 }
 
 std::string BaseObject::GetScript() const
@@ -282,7 +265,6 @@ void BaseObject::Serialize(TiXmlElement* root)
     node->SetAttribute("name", _name.c_str());
     node->SetAttribute("desc", _desc.c_str());
     node ->SetAttribute("script", _script.c_str());
-    node->SetAttribute("plural", _plural.c_str());
     node->SetAttribute("onum", _onum);
     root->LinkEndChild(node);
 }
@@ -332,7 +314,6 @@ void BaseObject::Deserialize(TiXmlElement* root)
     _name = root->Attribute("name");
     _desc = root->Attribute("desc");
     _script = root->Attribute("script");
-    _plural = root->Attribute("plural");
     root->Attribute("onum", (unsigned int*)&_onum);
 }
 
@@ -351,10 +332,8 @@ void BaseObject::Copy(BaseObject* obj) const
 
     obj->SetName(_name);
     obj->SetOnum(_onum);
-    obj->SetShort(_short);
     obj->SetDescription(_desc);
     obj->SetScript(_script);
-    obj->SetPlural(_plural);
     obj->SetPersistent(_persistent);
 }
 
@@ -362,9 +341,8 @@ std::string BaseObject::Identify(Player*mobile)
 {
     std::stringstream st;
     st << GetName() << std::endl;
-    st << "Short description: " << GetShort() << std::endl;
     st << "Persistent: " << (GetPersistent()? "yes." : "no.") << std::endl;
-    st << "Origenating zone: " << GetZone()->GetName() << "." << std::endl;
+    st << "Originating zone: " << GetZone()->GetName() << std::endl;
     return st.str();
 }
 std::string BaseObject::DoLook(Player* mobile)
@@ -418,13 +396,6 @@ bool InitializeBaseObjectOlcs()
     group->AddEntry(new OlcEditorEntry<BaseObject>("description", "the description of the object", OF_NORMAL, OLCDT::EDITOR,
                     std::bind(&BaseObject::GetDescription, std::placeholders::_1),
                     std::bind(&BaseObject::SetDescription, std::placeholders::_1, std::placeholders::_2)));
-    group->AddEntry(new OlcStringEntry<BaseObject>("short", "the title of the object seen in rooms", OF_NORMAL, OLCDT::STRING,
-                    std::bind(&BaseObject::GetShort, std::placeholders::_1),
-                    std::bind(&BaseObject::SetShort, std::placeholders::_1, std::placeholders::_2)));
-    group->AddEntry(new OlcStringEntry<BaseObject>("plural", "the plural of multiple objects", OF_NORMAL, OLCDT::STRING,
-                    std::bind(&BaseObject::GetPlural, std::placeholders::_1),
-                    std::bind(&BaseObject::SetPlural, std::placeholders::_1, std::placeholders::_2)));
-
     omanager->AddGroup(OLCGROUP::BaseObject, group);
     return true;
 }

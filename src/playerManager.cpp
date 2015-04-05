@@ -88,6 +88,11 @@ void PlayerManager::Shutdown()
 }
 void PlayerManager::Update()
 {
+    if (_users.empty())
+        {
+            return;
+        }
+
     for (auto pit: _users)
         {
             pit->Update();
