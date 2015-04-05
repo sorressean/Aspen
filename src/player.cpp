@@ -114,10 +114,10 @@ void Player::Serialize(TiXmlElement* root)
             for (Option* opt:*_config)
                 {
                     ometa = opt->GetMeta();
-               /*     if (ometa->GetValue() == opt->GetValue())
-                        {
-                            continue;
-                        }*/
+                    /*     if (ometa->GetValue() == opt->GetValue())
+                             {
+                                 continue;
+                             }*/
                     TiXmlElement* option = new TiXmlElement("option");
                     name =/* OptionSectionToString(ometa->GetSection()) + "." +*/ ometa->GetName();
                     option->SetAttribute("name", name.c_str());
@@ -132,10 +132,10 @@ void Player::Serialize(TiXmlElement* root)
     root->SetAttribute("rank", _rank);
     root->SetAttribute("pflag", _pflag);
     Living::Serialize(root);
-/*	delete option;
-	delete options;
-	delete timeinfo;
-	delete password;*/
+    /*	delete option;
+    	delete options;
+    	delete timeinfo;
+    	delete password;*/
 }
 void Player::Deserialize(TiXmlElement* root)
 {

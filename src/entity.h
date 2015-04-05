@@ -27,14 +27,14 @@ protected:
     ObjectContainer* _location;
     StaticObject* _parent;
     Uuid _uuid;
-	std::string _short;
+    std::string _short;
 public:
     Entity();
-	virtual ~Entity();
-	
-	virtual std::string GetShort() const;
-	virtual void SetShort(const std::string &s);
-	
+    virtual ~Entity();
+
+    virtual std::string GetShort() const;
+    virtual void SetShort(const std::string &s);
+
     /*
     *Returns the location of this object.
     *Return: A pointer to the entity in which this object is located, or NULL if the object does not have  a parent location.

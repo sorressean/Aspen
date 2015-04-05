@@ -9,18 +9,18 @@
 class Npc;
 class StaticObject:public BaseObject
 {
-	std::string _plural;
-	std::string _short; //the description you see in a room.
+    std::string _plural;
+    std::string _short; //the description you see in a room.
     unsigned int _totalCount;
     std::vector<Entity*> descendants;
     std::vector<IComponentMeta*> _components;
 public:
     StaticObject();
     ~StaticObject();
-	virtual std::string GetShort() const;
-	virtual void SetShort(const std::string &s);
-	virtual std::string GetPlural() const;
-	virtual void SetPlural(const std::string &s);
+    virtual std::string GetShort() const;
+    virtual void SetShort(const std::string &s);
+    virtual std::string GetPlural() const;
+    virtual void SetPlural(const std::string &s);
     unsigned int GetTotalCount() const;
     unsigned int CountDescendants() const;
     BOOL IsDescendant(Entity* obj);

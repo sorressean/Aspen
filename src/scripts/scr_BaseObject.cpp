@@ -15,10 +15,10 @@ void RegisterBaseObjectMethods(const char* obj)
     assert(r);
     r=engine->RegisterMethod(obj, "void SetName(string name)", asMETHOD(BaseObject, SetName));
     assert(r);
-  /*  r=engine->RegisterMethod(obj, "string& GetShort()", asMETHOD(BaseObject, GetShort));
-    assert(r);
-    r = engine->RegisterMethod(obj, "void SetShort(string short)", asMETHOD(BaseObject, SetShort));
-    assert(r);*/
+    /*  r=engine->RegisterMethod(obj, "string& GetShort()", asMETHOD(BaseObject, GetShort));
+      assert(r);
+      r = engine->RegisterMethod(obj, "void SetShort(string short)", asMETHOD(BaseObject, SetShort));
+      assert(r);*/
     r = engine->RegisterMethod(obj, "string& GetDescription()", asMETHOD(BaseObject, GetDescription));
     assert(r);
     r = engine->RegisterMethod(obj, "void SetDescription(string description)", asMETHOD(BaseObject, SetDescription));
