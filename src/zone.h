@@ -51,8 +51,6 @@ class Zone
     time_t _lastreset; //when did we last reset?
     std::string _resetmsg;
     unsigned int _resetfreq;
-    int _expbonus; //exp bonus as a percentage.
-    int _goldbonus; //gold bonus as a percentage.
     range _vnumrange;
 public:
     Zone();

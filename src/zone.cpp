@@ -22,8 +22,6 @@ Zone::Zone()
 {
     _vnumrange.min = 0;
     _vnumrange.max = 0;
-    _goldbonus = 0;
-    _expbonus = 0;
     _resetfreq = 240;
     _resetmsg = "With a pop, the area resets around you.";
     _lastreset=time(NULL);
@@ -378,8 +376,6 @@ void Zone::Serialize(TiXmlElement* root)
     root->SetAttribute("opened", _opened);
     root->SetAttribute("resetmsg", _resetmsg.c_str());
     root->SetAttribute("resetfreq", _resetfreq);
-    root->SetAttribute("expbonus", _expbonus);
-    root->SetAttribute("goldbonus", _goldbonus);
     root->SetAttribute("minvnum", _vnumrange.min);
     root->SetAttribute("maxvnum", _vnumrange.max);
 
@@ -401,8 +397,6 @@ void Zone::Deserialize(TiXmlElement* zone)
     _opened = u;
     _resetmsg = zone->Attribute("resetmsg");
     zone->Attribute("resetfreq", &_resetfreq);
-    zone->Attribute("expbonus", &_expbonus);
-    zone->Attribute("goldbonus", &_goldbonus);
     zone->Attribute("minvnum", &(_vnumrange.min));
     zone->Attribute("maxvnum", &(_vnumrange.max));
 
