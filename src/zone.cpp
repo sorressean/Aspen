@@ -323,12 +323,11 @@ Npc* Zone::CreateNpc(VNUM num, Room* origin)
     return ret;
 }
 void Zone::CalculateVnumRanges()
-
 {
     int i = 0; //for counter
 
 //find all empty virtual objects.
-    for (i = _vnumrange.min; i != _vnumrange.max; ++i)
+    for (i = _vnumrange.max; i > _vnumrange.min; i--)
         {
             if (!VirtualExists(i))
                 {
@@ -341,7 +340,7 @@ void Zone::CalculateVnumRanges()
         }
 
 //find all empty room objects.
-    for (i = _vnumrange.min; i != _vnumrange.max; ++i)
+    for (i = _vnumrange.max; i > _vnumrange.min; i--)
         {
             if (!RoomExists(i))
                 {
@@ -354,7 +353,7 @@ void Zone::CalculateVnumRanges()
         }
 
 //find all empty npc objects
-    for (i = _vnumrange.min; i != _vnumrange.max; ++i)
+    for (i = _vnumrange.max; i > _vnumrange.min; i--)
         {
             if (_mnums.size() == VNUMKEEP)
                 {

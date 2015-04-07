@@ -79,11 +79,15 @@ Player* PlayerManager::LoadPlayer(const std::string &name) const
 
 void PlayerManager::Shutdown()
 {
-    for (auto person: _users)
+    std::list<Player*>::iterator it, itEnd;
+
+    it = _users.begin();
+    for (it = _users.begin(); it != itEnd; ++it)
         {
-            person->Message(MSG_CRITICAL,"The mud is shutting down now. Your Character will be autosaved.");
-            person->Save(true);
-            person->GetSocket()->Kill();
+            (*it)->Message(MSG_CRITICAL,"The mud is shutting down now. Your Character will be autosaved.");
+            (*it)->Save(true);
+            (*it)->GetSocket()->Kill();
+            it = _users.begin();
         }
 }
 void PlayerManager::Update()
