@@ -31,6 +31,7 @@ void InitializeBuilderCommands()
     world->commands.AddCommand(new CMDGoto());
     world->commands.AddCommand(new CMDZcreate());
 	world->commands.AddCommand(new CMDAStats());
+	world->commands.AddCommand(new CMDRcreate());
 }
 
 //zlist
@@ -746,4 +747,46 @@ BOOL CMDZcreate::Execute(const std::string &verb, Player* mobile,std::vector<std
     mobile->Message(MSG_INFO, st.str());
 
     return true;
+}
+
+CMDRcreate::CMDRcreate()
+{
+	SetAccess(RANK_BUILDER);
+	SetName("rcreate");
+	SetType(CommandType::Builder);
+}
+BOOL CMDRcreate::Execute(const std::string &verb, Player* mobile, std::vector<std::string> &args, int subcmd)
+{
+	Zone* zone = NULL;
+	ObjectContainer* location = NULL;
+	Room* room = NULL;
+	std::stringstream st;
+
+	location = mobile->GetLocation();
+	if (!location || !location->IsRoom())
+	{
+		mobile->Message(MSG_ERROR, "You are not in a room.");
+		return false;
+	}
+
+	zone = location->GetZone();
+	if (!zone)
+	{
+		mobile->Message(MSG_ERROR, "The room you are in does not have a zone.");
+		return false;
+	}
+
+	try
+	{
+		room = zone->AddRoom();
+	}
+	catch (std::runtime_error e)
+	{
+		mobile->Message(MSG_ERROR, e.what());
+		return false;
+	}
+
+	st << "Created Room " << room->GetOnum() << ".";
+	mobile->Message(MSG_INFO, st.str());
+	return true;
 }

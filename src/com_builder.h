@@ -99,5 +99,11 @@ public:
     BOOL Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args,int subcmd);
 };
 
+class CMDRcreate :public Command
+{
+public:
+	CMDRcreate();
+	BOOL Execute(const std::string &verb, Player* mobile, std::vector<std::string> &args, int subcmd);
+};
 
 #endif
