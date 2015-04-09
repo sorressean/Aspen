@@ -268,7 +268,6 @@ BOOL CMDDig::Execute(const std::string &verb, Player* mobile,std::vector<std::st
         }
 
     mobile->Message(MSG_INFO, st.str());
-    Zone::SaveZones();
     return true;
 }
 
