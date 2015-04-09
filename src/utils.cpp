@@ -6,6 +6,7 @@
 #include <vector>
 #include <ctime>
 #include <ctype.h>
+#include <cctype>
 #include <cstdlib>
 #include <cmath>
 #include <strings.h>
@@ -37,6 +38,19 @@ int tonum(const char* str)
     return ret;
 }
 
+bool isnum(const char* str)
+{
+	int num = 0;
+	try
+	{
+		num = tonum(str);
+	}
+	catch (std::bad_cast e)
+	{
+		return false;
+	}
+	return true;
+}
 BOOL FileExists(const std::string &name)
 {
     struct stat info;
@@ -328,6 +342,43 @@ std::string Center(const std::string &str,const int width)
     temp += Repeat(" ", right);
 
     return temp;
+}
+
+std::string CenterLines(const std::string &str, const int width)
+{
+	const char *blankspace = " ";
+	std::string lines,temp, temp1;
+	int leftfiller;
+	int totalfiller;
+	
+	lines = str;
+	if (str.empty())
+	{
+		return str;
+	}
+
+	if ((int)str.length() < (width - (int)str.length()))
+	{
+		return Center(str, width);
+	}
+	std::string::iterator it = lines.begin() , itEnd = lines.end();
+	for (; it != itEnd; ++it)
+		{
+			temp1 += (*it);
+			if ( ((int)temp1.length()) >= width - ((int)temp1.length()) && (*it) == *blankspace)
+			{
+					temp += Center(temp1, width);
+					totalfiller = ((width - (int)temp1.length()) / 2);
+					leftfiller = (totalfiller / 2 ? totalfiller - 1 : totalfiller);
+					temp1.clear();
+
+					continue;
+		    }
+			
+	    }
+	temp += Repeat(" ", leftfiller);
+	temp += temp1;
+		return temp;
 }
 
 std::string Explode(std::vector <std::string> &parts, const std::string &del)
