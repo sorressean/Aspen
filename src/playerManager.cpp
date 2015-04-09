@@ -27,7 +27,7 @@ BOOL PlayerManager::AddPlayer(Player* player)
         {
             return false;
         }
-    if (player->GetSocket()->GetConnectionType() != ConnectionType::Game)
+    if (player->GetSocket()->GetConnectionType() != CON_Game)
         {
             return false;
         }
@@ -79,19 +79,23 @@ Player* PlayerManager::LoadPlayer(const std::string &name) const
 
 void PlayerManager::Shutdown()
 {
-    for (auto person: _users)
+    std::list<Player*>::iterator it, itEnd;
+
+	itEnd = _users.end();
+    for (it = _users.begin(); it != itEnd; ++it)
         {
-            person->Message(MSG_CRITICAL,"The mud is shutting down now. Your Character will be autosaved.");
-            person->Save(true);
-            person->GetSocket()->Kill();
+            (*it)->Message(MSG_CRITICAL,"The mud is shutting down now. Your Character will be autosaved.");
+            (*it)->Save(true);
+            (*it)->GetSocket()->Kill();
+            it = _users.begin();
         }
 }
 void PlayerManager::Update()
 {
-	if (_users.empty())
-	{
-		return;
-	}
+    if (_users.empty())
+        {
+            return;
+        }
 
     for (auto pit: _users)
         {
