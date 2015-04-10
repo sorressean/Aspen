@@ -353,7 +353,7 @@ BOOL CMDVCreate::Execute(const std::string &verb, Player* mobile,std::vector<std
 
     st << "Created static object " << vobj->GetOnum() << ".";
     mobile->Message(MSG_INFO, st.str());
-    zone->SaveZone();
+    Zone::SaveZones();
     return true;
 }
 
