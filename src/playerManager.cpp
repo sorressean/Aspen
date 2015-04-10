@@ -81,7 +81,7 @@ void PlayerManager::Shutdown()
 {
     std::list<Player*>::iterator it, itEnd;
 
-	itEnd = _users.end();
+    itEnd = _users.end();
     for (it = _users.begin(); it != itEnd; ++it)
         {
             (*it)->Message(MSG_CRITICAL,"The mud is shutting down now. Your Character will be autosaved.");

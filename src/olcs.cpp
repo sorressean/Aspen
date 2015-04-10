@@ -25,9 +25,9 @@ BOOL InitializeOlcs()
         {
             return false;
         }
-	if (!InitializeNPCOlcs())
-	{
-		return false;
-	}
+    if (!InitializeNPCOlcs())
+        {
+            return false;
+        }
     return true;
 }

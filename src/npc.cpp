@@ -3,6 +3,7 @@
 #include "olcGroup.h"
 #include "world.h"
 #include "olcManager.h"
+
 Npc::Npc()
 {
 }
@@ -30,11 +31,11 @@ void Npc::Copy(BaseObject* obj) const
 
 BOOL InitializeNPCOlcs()
 {
-	World* world = World::GetPtr();
-	OlcManager* omanager = world->GetOlcManager();
-	OlcGroup* ngroup = new OlcGroup();
+    World* world = World::GetPtr();
+    OlcManager* omanager = world->GetOlcManager();
+    OlcGroup* ngroup = new OlcGroup();
 
-	ngroup->SetInheritance(omanager->GetGroup(OLCGROUP::Entity));
-	omanager->AddGroup(OLCGROUP::NPC, ngroup);
-	return true;
+    ngroup->SetInheritance(omanager->GetGroup(OLCGROUP::Entity));
+    omanager->AddGroup(OLCGROUP::NPC, ngroup);
+    return true;
 }

@@ -71,7 +71,7 @@ CMDNorth::CMDNorth()
     SetName("north");
     AddAlias("n");
     SetSubcmd(DIR_NORTH);
-	SetType(CommandType::Movement);
+    SetType(CommandType::Movement);
 }
 BOOL CMDNorth::Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args,int subcmd)
 {
@@ -83,7 +83,7 @@ CMDSouth::CMDSouth()
     SetName("south");
     AddAlias("s");
     SetSubcmd(DIR_SOUTH);
-	SetType(CommandType::Movement);
+    SetType(CommandType::Movement);
 }
 BOOL CMDSouth::Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args,int subcmd)
 {
@@ -95,7 +95,7 @@ CMDEast::CMDEast()
     SetName("east");
     AddAlias("e");
     SetSubcmd(DIR_EAST);
-	SetType(CommandType::Movement);
+    SetType(CommandType::Movement);
 }
 BOOL CMDEast::Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args,int subcmd)
 {
@@ -107,7 +107,7 @@ CMDWest::CMDWest()
     SetName("west");
     AddAlias("w");
     SetSubcmd(DIR_WEST);
-	SetType(CommandType::Movement);
+    SetType(CommandType::Movement);
 }
 BOOL CMDWest::Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args,int subcmd)
 {
@@ -119,7 +119,7 @@ CMDNortheast::CMDNortheast()
     SetName("northeast");
     AddAlias("ne");
     SetSubcmd(DIR_NORTHEAST);
-	SetType(CommandType::Movement);
+    SetType(CommandType::Movement);
 }
 BOOL CMDNortheast::Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args,int subcmd)
 {
@@ -131,7 +131,7 @@ CMDSoutheast::CMDSoutheast()
     SetName("southeast");
     AddAlias("se");
     SetSubcmd(DIR_SOUTHEAST);
-	SetType(CommandType::Movement);
+    SetType(CommandType::Movement);
 }
 BOOL CMDSoutheast::Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args,int subcmd)
 {
@@ -143,7 +143,7 @@ CMDSouthwest::CMDSouthwest()
     SetName("southwest");
     AddAlias("sw");
     SetSubcmd(DIR_SOUTHWEST);
-	SetType(CommandType::Movement);
+    SetType(CommandType::Movement);
 }
 BOOL CMDSouthwest::Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args,int subcmd)
 {
@@ -155,7 +155,7 @@ CMDNorthwest::CMDNorthwest()
     SetName("northwest");
     AddAlias("nw");
     SetSubcmd(DIR_NORTHWEST);
-	SetType(CommandType::Movement);
+    SetType(CommandType::Movement);
 }
 BOOL CMDNorthwest::Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args,int subcmd)
 {
@@ -167,7 +167,7 @@ CMDUp::CMDUp()
     SetName("up");
     AddAlias("u");
     SetSubcmd(DIR_UP);
-	SetType(CommandType::Movement);
+    SetType(CommandType::Movement);
 }
 BOOL CMDUp::Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args,int subcmd)
 {
@@ -179,7 +179,7 @@ CMDDown::CMDDown()
     SetName("down");
     AddAlias("d");
     SetSubcmd(DIR_DOWN);
-	SetType(CommandType::Movement);
+    SetType(CommandType::Movement);
 }
 BOOL CMDDown::Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args,int subcmd)
 {

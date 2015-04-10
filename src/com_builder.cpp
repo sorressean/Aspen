@@ -30,8 +30,8 @@ void InitializeBuilderCommands()
     world->commands.AddCommand(new CMDAddComponent());
     world->commands.AddCommand(new CMDGoto());
     world->commands.AddCommand(new CMDZcreate());
-	world->commands.AddCommand(new CMDAStats());
-	world->commands.AddCommand(new CMDRcreate());
+    world->commands.AddCommand(new CMDAStats());
+    world->commands.AddCommand(new CMDRcreate());
 }
 
 //zlist
@@ -39,7 +39,7 @@ CMDZlist::CMDZlist()
 {
     SetAccess(RANK_BUILDER);
     SetName("zlist");
-	SetType(CommandType::Builder);
+    SetType(CommandType::Builder);
 }
 void CMDZlist::Syntax(Player* mobile, int subcmd) const
 {
@@ -74,7 +74,7 @@ CMDRlist::CMDRlist()
 {
     SetName("rlist");
     SetAccess(RANK_BUILDER);
-	SetType(CommandType::Builder);
+    SetType(CommandType::Builder);
 }
 void CMDRlist::Syntax(Player* mobile, int subcmd) const
 {
@@ -119,7 +119,7 @@ CMDDig::CMDDig()
 {
     SetName("dig");
     SetAccess(RANK_BUILDER);
-	SetType(CommandType::Builder);
+    SetType(CommandType::Builder);
 }
 void CMDDig::Syntax(Player* mobile, int subcmd) const
 {
@@ -280,9 +280,9 @@ BOOL CMDDig::Execute(const std::string &verb, Player* mobile,std::vector<std::st
 CMDAStats::CMDAStats()
 {
     SetName("astat");
-	AddAlias("zstat");
+    AddAlias("zstat");
     SetAccess(RANK_BUILDER);
-	SetType(CommandType::Builder);
+    SetType(CommandType::Builder);
 }
 BOOL CMDAStats::Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args,int subcmd)
 {
@@ -311,15 +311,15 @@ std::string CMDAStats::Stats(Player* mobile, Zone* area)
     std::stringstream st;
     st << area->GetName() << std::endl;
     st << Repeat('-', 80) << std::endl;
-	st << "Range: " << "Minimum Vnum: " << area->GetMinVnum() << " Maximum Vnum: " << area->GetMaxVnum() << std::endl;
-	return st.str();
+    st << "Range: " << "Minimum Vnum: " << area->GetMinVnum() << " Maximum Vnum: " << area->GetMaxVnum() << std::endl;
+    return st.str();
 }
 
 CMDVCreate::CMDVCreate()
 {
     SetAccess(RANK_BUILDER);
-	SetName("vcreate"); 
-	SetType(CommandType::Builder);
+    SetName("vcreate");
+    SetType(CommandType::Builder);
 }
 BOOL CMDVCreate::Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args,int subcmd)
 {
@@ -354,7 +354,7 @@ BOOL CMDVCreate::Execute(const std::string &verb, Player* mobile,std::vector<std
 
     st << "Created static object " << vobj->GetOnum() << ".";
     mobile->Message(MSG_INFO, st.str());
-	zone->SaveZone();
+    zone->SaveZone();
     return true;
 }
 
@@ -362,7 +362,7 @@ CMDVList::CMDVList()
 {
     SetAccess(RANK_BUILDER);
     SetName("vlist");
-	SetType(CommandType::Builder);
+    SetType(CommandType::Builder);
 }
 BOOL CMDVList::Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args,int subcmd)
 {
@@ -402,7 +402,7 @@ BOOL CMDVList::Execute(const std::string &verb, Player* mobile,std::vector<std::
         }
 
     itEnd = objects.end();
-	st << left << setw(10) << "vnum" << right << "name" << Repeat(" ", 20) << "Zone: " << zone->GetName() << endl;
+    st << left << setw(10) << "vnum" << right << "name" << Repeat(" ", 20) << "Zone: " << zone->GetName() << endl;
     st << Repeat('-', 80) << endl;
     for (it = objects.begin(); it != itEnd; ++it)
         {
@@ -418,7 +418,7 @@ CMDMCreate::CMDMCreate()
 {
     SetAccess(RANK_BUILDER);
     SetName("mcreate");
-	SetType(CommandType::Builder);
+    SetType(CommandType::Builder);
 }
 BOOL CMDMCreate::Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args,int subcmd)
 {
@@ -460,7 +460,7 @@ CMDMList::CMDMList()
 {
     SetAccess(RANK_BUILDER);
     SetName("mlist");
-	SetType(CommandType::Builder);
+    SetType(CommandType::Builder);
 }
 BOOL CMDMList::Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args,int subcmd)
 {
@@ -515,7 +515,7 @@ CMDMLoad::CMDMLoad()
 {
     SetName("mload");
     SetAccess(RANK_BUILDER);
-	SetType(CommandType::Builder);
+    SetType(CommandType::Builder);
 }
 BOOL CMDMLoad::Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args,int subcmd)
 {
@@ -570,7 +570,7 @@ CMDAddComponent::CMDAddComponent()
     SetName("addcomponent");
     AddAlias("adc");
     SetAccess(RANK_BUILDER);
-	SetType(CommandType::Builder);
+    SetType(CommandType::Builder);
 }
 BOOL CMDAddComponent::Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args,int subcmd)
 {
@@ -652,7 +652,7 @@ CMDGoto::CMDGoto()
 {
     SetName("goto");
     SetAccess(RANK_BUILDER);
-	SetType(CommandType::Builder);
+    SetType(CommandType::Builder);
 }
 BOOL CMDGoto::Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args,int subcmd)
 {
@@ -691,7 +691,7 @@ CMDZcreate::CMDZcreate()
 {
     SetName("zcreate");
     SetAccess(RANK_BUILDER);
-	SetType(CommandType::Builder);
+    SetType(CommandType::Builder);
 }
 BOOL CMDZcreate::Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args,int subcmd)
 {
@@ -751,42 +751,42 @@ BOOL CMDZcreate::Execute(const std::string &verb, Player* mobile,std::vector<std
 
 CMDRcreate::CMDRcreate()
 {
-	SetAccess(RANK_BUILDER);
-	SetName("rcreate");
-	SetType(CommandType::Builder);
+    SetAccess(RANK_BUILDER);
+    SetName("rcreate");
+    SetType(CommandType::Builder);
 }
 BOOL CMDRcreate::Execute(const std::string &verb, Player* mobile, std::vector<std::string> &args, int subcmd)
 {
-	Zone* zone = NULL;
-	ObjectContainer* location = NULL;
-	Room* room = NULL;
-	std::stringstream st;
+    Zone* zone = NULL;
+    ObjectContainer* location = NULL;
+    Room* room = NULL;
+    std::stringstream st;
 
-	location = mobile->GetLocation();
-	if (!location || !location->IsRoom())
-	{
-		mobile->Message(MSG_ERROR, "You are not in a room.");
-		return false;
-	}
+    location = mobile->GetLocation();
+    if (!location || !location->IsRoom())
+        {
+            mobile->Message(MSG_ERROR, "You are not in a room.");
+            return false;
+        }
 
-	zone = location->GetZone();
-	if (!zone)
-	{
-		mobile->Message(MSG_ERROR, "The room you are in does not have a zone.");
-		return false;
-	}
+    zone = location->GetZone();
+    if (!zone)
+        {
+            mobile->Message(MSG_ERROR, "The room you are in does not have a zone.");
+            return false;
+        }
 
-	try
-	{
-		room = zone->AddRoom();
-	}
-	catch (std::runtime_error e)
-	{
-		mobile->Message(MSG_ERROR, e.what());
-		return false;
-	}
+    try
+        {
+            room = zone->AddRoom();
+        }
+    catch (std::runtime_error e)
+        {
+            mobile->Message(MSG_ERROR, e.what());
+            return false;
+        }
 
-	st << "Created Room " << room->GetOnum() << ".";
-	mobile->Message(MSG_INFO, st.str());
-	return true;
+    st << "Created Room " << room->GetOnum() << ".";
+    mobile->Message(MSG_INFO, st.str());
+    return true;
 }

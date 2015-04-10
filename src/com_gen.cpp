@@ -46,7 +46,7 @@ void InitializeGenCommands()
 CMDQuit::CMDQuit()
 {
     SetName("quit");
-	SetType(CommandType::Misc);
+    SetType(CommandType::Misc);
 }
 BOOL CMDQuit::Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args,int subcmd)
 {
@@ -59,7 +59,7 @@ BOOL CMDQuit::Execute(const std::string &verb, Player* mobile,std::vector<std::s
 CMDSave::CMDSave()
 {
     SetName("save");
-	SetType(CommandType::Misc);
+    SetType(CommandType::Misc);
 }
 BOOL CMDSave::Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args,int subcmd)
 {
@@ -76,7 +76,7 @@ BOOL CMDSave::Execute(const std::string &verb, Player* mobile,std::vector<std::s
 CMDBackup::CMDBackup()
 {
     SetName("backup");
-	SetType(CommandType::Misc);
+    SetType(CommandType::Misc);
 }
 BOOL CMDBackup::Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args,int subcmd)
 {
@@ -109,7 +109,7 @@ CMDWho::CMDWho()
 {
     SetName("who");
     AddAlias("wh");
-	SetType(CommandType::Information);
+    SetType(CommandType::Information);
 }
 BOOL CMDWho::Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args,int subcmd)
 {
@@ -145,7 +145,7 @@ CMDToggle::CMDToggle()
 {
     SetName("toggle");
     AddAlias("tog");
-	SetType(CommandType::Misc);
+    SetType(CommandType::Misc);
 }
 BOOL CMDToggle::Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args,int subcmd)
 {
@@ -215,7 +215,7 @@ CMDScore::CMDScore()
 {
     SetName("score");
     AddAlias("sc");
-	SetType(CommandType::Information);
+    SetType(CommandType::Information);
 }
 BOOL CMDScore::Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args,int subcmd)
 {
@@ -243,7 +243,7 @@ CMDChan::CMDChan()
 {
     SetName("channels");
     AddAlias("chan");
-	SetType(CommandType::Communication);
+    SetType(CommandType::Communication);
 }
 BOOL CMDChan::Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args,int subcmd)
 {
@@ -266,7 +266,7 @@ BOOL CMDChan::Execute(const std::string &verb, Player* mobile,std::vector<std::s
 CMDCommands::CMDCommands()
 {
     SetName("commands");
-	SetType(CommandType::Information);
+    SetType(CommandType::Information);
 }
 void CMDCommands::GetCommands(Player*mobile, std::vector<std::string>& names, CommandType filter)
 {
@@ -301,77 +301,77 @@ BOOL CMDCommands::Execute(const std::string &verb, Player* mobile,std::vector<st
 {
     std::vector <std::string> commands;
     std::vector<std::string> headers;
-	std::stringstream all, info, move, comm, misc, builder, admin, god, object, socials;
+    std::stringstream all, info, move, comm, misc, builder, admin, god, object, socials;
     int count = 0;
 
-	if (!args.size())
-	{
-		if (mobile->HasAccess(RANK_GOD))
-		{
-			commands.clear();
-			god << Center("[Master Commands]", 80) << "\r\n\n";
-			GetCommands(mobile, commands, CommandType::God);
-			god << CenterLines(Explode(commands),80) << "\r\n\n";
-			commands.clear();
-		}
-		if (mobile->HasAccess(RANK_ADMIN))
-		{
-			admin << Center("[Administrative Commands]",80) << "\r\n\n";
-			GetCommands(mobile, commands, CommandType::Admin);
-			admin << CenterLines(Explode(commands), 80) << "\r\n\n";
-			commands.clear();
-		}
-		if (mobile->HasAccess(RANK_BUILDER))
-		{
-			builder << Center("[Builder Commands]", 80) << "\r\n\n";
-			GetCommands(mobile, commands, CommandType::Builder);
-			builder << CenterLines(Explode(commands),80) << "\r\n\n";
-			commands.clear();	
-		}
+    if (!args.size())
+        {
+            if (mobile->HasAccess(RANK_GOD))
+                {
+                    commands.clear();
+                    god << Center("[Master Commands]", 80) << "\r\n\n";
+                    GetCommands(mobile, commands, CommandType::God);
+                    god << CenterLines(Explode(commands),80) << "\r\n\n";
+                    commands.clear();
+                }
+            if (mobile->HasAccess(RANK_ADMIN))
+                {
+                    admin << Center("[Administrative Commands]",80) << "\r\n\n";
+                    GetCommands(mobile, commands, CommandType::Admin);
+                    admin << CenterLines(Explode(commands), 80) << "\r\n\n";
+                    commands.clear();
+                }
+            if (mobile->HasAccess(RANK_BUILDER))
+                {
+                    builder << Center("[Builder Commands]", 80) << "\r\n\n";
+                    GetCommands(mobile, commands, CommandType::Builder);
+                    builder << CenterLines(Explode(commands),80) << "\r\n\n";
+                    commands.clear();
+                }
 
-		info << Center("[Information Commands]",80) << "\r\n\n";
-		GetCommands(mobile, commands, CommandType::Information);
-		info << CenterLines(Explode(commands),80) << "\r\n\n";
-		commands.clear();
+            info << Center("[Information Commands]",80) << "\r\n\n";
+            GetCommands(mobile, commands, CommandType::Information);
+            info << CenterLines(Explode(commands),80) << "\r\n\n";
+            commands.clear();
 
-		move << Center("[Movement Commands]",80) << "\r\n\n";
-		GetCommands(mobile, commands, CommandType::Movement);
-		move << CenterLines(Explode(commands), 80) << "\r\n\n";
-		commands.clear();
+            move << Center("[Movement Commands]",80) << "\r\n\n";
+            GetCommands(mobile, commands, CommandType::Movement);
+            move << CenterLines(Explode(commands), 80) << "\r\n\n";
+            commands.clear();
 
-		comm << Center("[Communication Commands]",80) << "\r\n\n";
-		GetCommands(mobile, commands, CommandType::Communication);
-		GetCommands(mobile, commands, CommandType::Channel);
-		comm << CenterLines(Explode(commands), 80) << "\r\n\n";
-		commands.clear();
+            comm << Center("[Communication Commands]",80) << "\r\n\n";
+            GetCommands(mobile, commands, CommandType::Communication);
+            GetCommands(mobile, commands, CommandType::Channel);
+            comm << CenterLines(Explode(commands), 80) << "\r\n\n";
+            commands.clear();
 
-		misc << Center("[Miscellaneous Commands]",80) << "\r\n\n";
-		GetCommands(mobile, commands, CommandType::Misc);
-		misc << CenterLines(Explode(commands),80) << "\r\n\n";
-		commands.clear();
+            misc << Center("[Miscellaneous Commands]",80) << "\r\n\n";
+            GetCommands(mobile, commands, CommandType::Misc);
+            misc << CenterLines(Explode(commands),80) << "\r\n\n";
+            commands.clear();
 
 
-		GetCommands(mobile, commands, CommandType::Object);
-		if (!commands.empty())
-		{
-			object << Center("[Object Commands]",80) << "\r\n\n";
-			object << CenterLines(Explode(commands), 80) << "\r\n\n";
-			commands.clear();
-		}
-		commands.clear();
+            GetCommands(mobile, commands, CommandType::Object);
+            if (!commands.empty())
+                {
+                    object << Center("[Object Commands]",80) << "\r\n\n";
+                    object << CenterLines(Explode(commands), 80) << "\r\n\n";
+                    commands.clear();
+                }
+            commands.clear();
 
-		GetCommands(mobile, commands, CommandType::Social);
-		if (!commands.empty())
-		{
-			socials << Center("[Socials]", 80) << "\r\n\n";
-			socials << CenterLines(Explode(commands), 80) << "\r\n\n";
-			commands.clear();
-		}
-		commands.clear();
+            GetCommands(mobile, commands, CommandType::Social);
+            if (!commands.empty())
+                {
+                    socials << Center("[Socials]", 80) << "\r\n\n";
+                    socials << CenterLines(Explode(commands), 80) << "\r\n\n";
+                    commands.clear();
+                }
+            commands.clear();
 
-			all << god.str() << admin.str() << builder.str() << info.str() << move.str() << comm.str() << misc.str() << object.str() << socials.str();
-			mobile->Message(MSG_LIST, all.str());
-			return true;
+            all << god.str() << admin.str() << builder.str() << info.str() << move.str() << comm.str() << misc.str() << object.str() << socials.str();
+            mobile->Message(MSG_LIST, all.str());
+            return true;
         }
 
     if (args[0] == "god")
@@ -471,7 +471,7 @@ CMDHist::CMDHist()
 {
     SetName("history");
     AddAlias("hist");
-	SetType(CommandType::Information);
+    SetType(CommandType::Information);
 }
 BOOL CMDHist::Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args,int subcmd)
 {
@@ -516,7 +516,7 @@ BOOL CMDHist::Execute(const std::string &verb, Player* mobile,std::vector<std::s
 CMDUptime::CMDUptime()
 {
     SetName("uptime");
-	SetType(CommandType::Information);
+    SetType(CommandType::Information);
 }
 BOOL CMDUptime::Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args,int subcmd)
 {
@@ -542,7 +542,7 @@ CMDWhois::CMDWhois()
 {
     SetName("whois");
     AddAlias("finger");
-	SetType(CommandType::Information);
+    SetType(CommandType::Information);
 }
 BOOL CMDWhois::Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args,int subcmd)
 {
@@ -601,7 +601,7 @@ CMDLook::CMDLook()
 {
     SetName("look");
     AddAlias("l");
-	SetType(CommandType::Information);
+    SetType(CommandType::Information);
 }
 BOOL CMDLook::Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args,int subcmd)
 {
@@ -633,7 +633,7 @@ CMDCoord::CMDCoord()
 {
     SetName("coord");
     AddAlias("coords");
-	SetType(CommandType::Information);
+    SetType(CommandType::Information);
 }
 BOOL CMDCoord::Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args,int subcmd)
 {
@@ -656,7 +656,7 @@ BOOL CMDCoord::Execute(const std::string &verb, Player* mobile,std::vector<std::
 CMDSuicide::CMDSuicide()
 {
     SetName("suicide");
-	SetType(CommandType::Misc);
+    SetType(CommandType::Misc);
 }
 BOOL CMDSuicide::Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args,int subcmd)
 {
@@ -685,7 +685,7 @@ void CMDSuicide::Confirm(Socket* sock, BOOL choice)
 CMDSay::CMDSay()
 {
     SetName("say");
-	SetType(CommandType::Communication);
+    SetType(CommandType::Communication);
 }
 BOOL CMDSay::Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args,int subcmd)
 {
@@ -704,7 +704,7 @@ BOOL CMDSay::Execute(const std::string &verb, Player* mobile,std::vector<std::st
 CMDEmote::CMDEmote()
 {
     SetName("emote");
-	SetType(CommandType::Communication);
+    SetType(CommandType::Communication);
 }
 BOOL CMDEmote::Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args,int subcmd)
 {
@@ -722,7 +722,7 @@ BOOL CMDEmote::Execute(const std::string &verb, Player* mobile,std::vector<std::
 CMDPrompt::CMDPrompt()
 {
     SetName("prompt");
-	SetType(CommandType::Misc);
+    SetType(CommandType::Misc);
 }
 BOOL CMDPrompt::Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args,int subcmd)
 {
@@ -741,7 +741,7 @@ BOOL CMDPrompt::Execute(const std::string &verb, Player* mobile,std::vector<std:
 CMDSockstats::CMDSockstats()
 {
     SetName("sockstats");
-	SetType(CommandType::Information);
+    SetType(CommandType::Information);
 }
 BOOL CMDSockstats::Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args,int subcmd)
 {
@@ -776,7 +776,7 @@ BOOL CMDSockstats::Execute(const std::string &verb, Player* mobile,std::vector<s
 CMDExits::CMDExits()
 {
     SetName("exits");
-	SetType(CommandType::Movement);
+    SetType(CommandType::Movement);
 }
 BOOL CMDExits::Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args, int subcmd)
 {

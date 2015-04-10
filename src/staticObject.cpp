@@ -150,10 +150,10 @@ void StaticObject::Deserialize(TiXmlElement* root)
     TiXmlElement* components = NULL;
     IComponentMeta* com = NULL;
     std::string cname;
-	// TiXmlElement* obj = new TiXmlElement("staticobj");
+    // TiXmlElement* obj = new TiXmlElement("staticobj");
 
-	//BaseObject::Deserialize(obj);
-	BaseObject::Deserialize(root->FirstChild("BaseObject")->ToElement());
+    //BaseObject::Deserialize(obj);
+    BaseObject::Deserialize(root->FirstChild("BaseObject")->ToElement());
     _short = root->Attribute("short");
     _plural = root->Attribute("plural");
     node = root->FirstChild("components");
