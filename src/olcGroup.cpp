@@ -18,6 +18,7 @@ OlcGroup::~OlcGroup()
     for (it = _entries.begin(); it != itEnd; ++it)
         {
             delete (*it);
+            (*it) = nullptr;
         }
 }
 
@@ -57,6 +58,7 @@ void OlcGroup::ListEntries(std::vector<IOlcEntry*>* entries)
         }
 }
 
+
 void OlcGroup::SetComponentName(const std::string& comp)
 {
     _compname = comp;
@@ -72,8 +74,8 @@ OlcGroup* OlcGroup::GetInheritance()
 }
 void OlcGroup::SetInheritance(OlcGroup* inherit)
 {
-    // This recursively copies entries from the base OLCGroup (cont'd)
-    _inherit = inherit;                         // and from base OLCGroup's parent and so on until it (cont'd)
-    inherit->ListEntries(&_entries);                     // reaches an OLCGroup with no inheritance.
-
+    std::vector<IOlcEntry*> entries;              // This recursively copies entries from the base OLCGroup (cont'd)
+    _inherit = inherit;
+    _inherit->ListEntries(&_entries);                                       // and from base OLCGroup's parent and so on until it (cont'd)
+    // reaches an OLCGroup with no inheritance.
 }

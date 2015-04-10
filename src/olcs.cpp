@@ -5,6 +5,7 @@
 #include "room.h"
 #include "entity.h"
 #include "baseObject.h"
+#include "npc.h"
 
 BOOL InitializeOlcs()
 {
@@ -24,6 +25,9 @@ BOOL InitializeOlcs()
         {
             return false;
         }
-
+    if (!InitializeNPCOlcs())
+        {
+            return false;
+        }
     return true;
 }

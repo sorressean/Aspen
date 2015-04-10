@@ -17,4 +17,5 @@ public:
     BOOL IsNpc() const;
     virtual void Copy(BaseObject* obj) const;
 };
+BOOL InitializeNPCOlcs();
 #endif

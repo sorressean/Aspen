@@ -33,6 +33,7 @@ CMDCopyover::CMDCopyover()
 {
     SetName("copyover");
     SetAccess(RANK_GOD);
+    SetType(CommandType::God);
 }
 BOOL CMDCopyover::Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args,int subcmd)
 {
@@ -46,6 +47,7 @@ CMDMkgod::CMDMkgod()
 {
     SetName("mkgod");
     SetAccess(RANK_GOD);
+    SetType(CommandType::God);
 }
 BOOL CMDMkgod::Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args,int subcmd)
 {
@@ -86,6 +88,7 @@ CMDMkbuilder::CMDMkbuilder()
 {
     SetName("mkbuilder");
     SetAccess(RANK_GOD);
+    SetType(CommandType::God);
 }
 BOOL CMDMkbuilder::Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args,int subcmd)
 {
@@ -125,7 +128,8 @@ BOOL CMDMkbuilder::Execute(const std::string &verb, Player* mobile,std::vector<s
 CMDShutdown::CMDShutdown()
 {
     SetName("shutdown");
-    SetAccess(RANK_ADMIN);
+    SetAccess(RANK_GOD);
+    SetType(CommandType::God);
 }
 BOOL CMDShutdown::Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args,int subcmd)
 {
@@ -138,6 +142,7 @@ CMDBan::CMDBan()
 {
     SetName("ban");
     SetAccess(RANK_ADMIN);
+    SetType(CommandType::Admin);
 }
 BOOL CMDBan::Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args,int subcmd)
 {
@@ -181,6 +186,7 @@ CMDSilence::CMDSilence()
 {
     SetName("silence");
     SetAccess(RANK_ADMIN);
+    SetType(CommandType::Admin);
 }
 BOOL CMDSilence::Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args,int subcmd)
 {
@@ -224,6 +230,7 @@ CMDUnsilence::CMDUnsilence()
 {
     SetName("unsilence");
     SetAccess(RANK_ADMIN);
+    SetType(CommandType::Admin);
 }
 BOOL CMDUnsilence::Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args,int subcmd)
 {
@@ -262,6 +269,7 @@ CMDDisconnect::CMDDisconnect()
 {
     SetName("disconnect");
     SetAccess(RANK_ADMIN);
+    SetType(CommandType::Admin);
 }
 BOOL CMDDisconnect::Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args,int subcmd)
 {
@@ -301,6 +309,7 @@ CMDEcho::CMDEcho()
 {
     SetName("echo");
     SetAccess(RANK_ADMIN);
+    SetType(CommandType::Admin);
 }
 BOOL CMDEcho::Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args,int subcmd)
 {
@@ -330,6 +339,7 @@ CMDPdelete::CMDPdelete()
 {
     SetName("pdelete");
     SetAccess(RANK_ADMIN);
+    SetType(CommandType::Admin);
 }
 BOOL CMDPdelete::Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args,int subcmd)
 {
@@ -349,6 +359,7 @@ CMDSstatus::CMDSstatus()
     SetName("sstatus");
     AddAlias("sstat");
     SetAccess(RANK_ADMIN);
+    SetType(CommandType::Admin);
 }
 BOOL CMDSstatus::Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args,int subcmd)
 {
@@ -391,6 +402,7 @@ CMDForce::CMDForce()
 {
     SetName("force");
     SetAccess(RANK_ADMIN);
+    SetType(CommandType::Admin);
 }
 BOOL CMDForce::Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args,int subcmd)
 {
@@ -416,7 +428,7 @@ BOOL CMDForce::Execute(const std::string &verb, Player* mobile,std::vector<std::
             mobile->Message(MSG_ERROR, "That player was not found.");
             return false;
         }
-    if (BitIsSet(target->GetRank(),RANK_GOD))
+    if (BitIsSet(target->GetRank(),RANK_GOD) || (BitIsSet(mobile->GetRank(), RANK_ADMIN) && BitIsSet(target->GetRank(), RANK_ADMIN)))
         {
             mobile->Message(MSG_ERROR, "You probably shouldn't try to do that...");
             return false;

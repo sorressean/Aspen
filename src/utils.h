@@ -11,6 +11,7 @@
 
 //misc
 int tonum(const char* str);
+bool isnum(const char* str);
 BOOL FileExists(const std::string &name);
 /*
 *Checks to see if a directory exists.
@@ -65,6 +66,7 @@ std::string Capitalize(const std::string &str);
 std::string Repeat(const std::string &filler,const int count);
 std::string Repeat(const char filler, const int count);
 std::string Center(const std::string &str,const int width);
+std::string CenterLines(const std::string &str, const int width);
 std::string Explode(std::vector <std::string> &parts, const std::string &del = " ");
 std::string Explode(const std::vector<std::string>& parts, std::vector<std::string>::const_iterator it, const std::string &del = " ");
 std::string StripWhitespace(const std::string &str);
