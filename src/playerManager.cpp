@@ -87,6 +87,7 @@ void PlayerManager::Shutdown()
             (*it)->Message(MSG_CRITICAL,"The mud is shutting down now. Your Character will be autosaved.");
             (*it)->Save(true);
             (*it)->GetSocket()->Kill();
+RemovePlayer((*it));
             it = _users.begin();
         }
 }
