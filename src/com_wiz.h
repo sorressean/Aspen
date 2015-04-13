@@ -85,4 +85,11 @@ public:
     BOOL Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args,int subcmd);
 };
 
+class CMDPaste:public Command
+{
+public:
+    CMDPaste();
+    BOOL Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args,int subcmd);
+    void TextInput(Socket* sock, std::vector<std::string>* lines, void* args);
+};
 #endif

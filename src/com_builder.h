@@ -102,8 +102,8 @@ public:
 class CMDRcreate :public Command
 {
 public:
-	CMDRcreate();
-	BOOL Execute(const std::string &verb, Player* mobile, std::vector<std::string> &args, int subcmd);
+    CMDRcreate();
+    BOOL Execute(const std::string &verb, Player* mobile, std::vector<std::string> &args, int subcmd);
 };
 
 #endif

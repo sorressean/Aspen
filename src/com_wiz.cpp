@@ -10,6 +10,7 @@
 #include "world.h"
 #include "utils.h"
 #include "calloutManager.h"
+#include "editor.h"
 
 void InitializeWizCommands()
 {
@@ -27,6 +28,7 @@ void InitializeWizCommands()
     world->commands.AddCommand(new CMDEcho());
     world->commands.AddCommand(new CMDSstatus());
     world->commands.AddCommand(new CMDForce());
+    world->commands.AddCommand(new CMDPaste());
 }
 
 CMDCopyover::CMDCopyover()
@@ -438,4 +440,47 @@ BOOL CMDForce::Execute(const std::string &verb, Player* mobile,std::vector<std::
     command = Explode(args);
     target->GetSocket()->AddCommand(command);
     return true;
+}
+
+CMDPaste::CMDPaste()
+{
+    SetName("paste");
+    SetAccess(RANK_ADMIN);
+    SetType(CommandType::God);
+}
+BOOL CMDPaste::Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args,int subcmd)
+{
+    std::vector<std::string> *lines = new std::vector<std::string>();
+
+    mobile->Message(MSG_INFO, "Entering edotir. Type a . on a blank line to finish.");
+    if (!TextBlockHandler::CreateHandler(mobile->GetSocket(), std::bind(&CMDPaste::TextInput, this, std::placeholders::_1, std::placeholders::_2, (void*)mobile), lines))
+        {
+            mobile->Message(MSG_ERROR, "Could not create editor handler.");
+            return false;
+        }
+    return true;
+}
+void CMDPaste::TextInput(Socket* sock, std::vector<std::string>* lines, void* args)
+{
+    std::stringstream st;
+    Player* mobile = (Player*)args;
+    Room* location = (Room*)mobile->GetLocation();
+
+    st << "Paste from ";
+    st << Capitalize(mobile->GetName());
+    st << " of ";
+    st << lines->size();
+    st << "lines.";
+    st << std::endl;
+    st << Repeat("-", 80);
+    for (auto it: *lines)
+        {
+            st << it << std::endl;
+        }
+    st << Repeat("-", 80);
+
+    location->TellAll(st.str());
+    mobile->GetSocket()->ClearInput();
+    mobile->Message(MSG_INFO, "Paste finished.");
+    delete lines;
 }
