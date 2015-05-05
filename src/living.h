@@ -31,7 +31,6 @@ enum class Gender
 
 class Living:public Entity
 {
-    int _level;
     POSITION _position;
     Gender _gender;
     std::vector<Attribute*> _attributes;
@@ -60,12 +59,9 @@ public:
     /*getters and setters*/
     Gender GetGender() const;
     void SetGender(Gender gender);
-    int GetLevel() const;
-    void SetLevel(int level);
     bool AddAttribute(Attribute* attr);
-    void FindAttribute(AttributeApplication apply, int id, std::vector<Attribute*> &results);
-    void FindAttribute(AttributeType type, std::vector<Attribute*>& results);
-    bool RemoveAttribute(AttributeType type, int id);
+    void FindAttribute(int apply, int id, std::vector<Attribute*> &results);
+    void FindAttribute(int type, std::vector<Attribute*>& results);
     virtual void Serialize(TiXmlElement* root);
     virtual void Deserialize(TiXmlElement* root);
 };

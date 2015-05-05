@@ -125,7 +125,6 @@ BOOL CMDWho::Execute(const std::string &verb, Player* mobile,std::vector<std::st
     itEnd=players->end();
     for (it = players->begin(); it != itEnd; ++it)
         {
-            st << "[" << std::left << std::setw(4) << (*it)->GetLevel() << "] ";
             if ((*it)->HasAccess(RANK_GOD))
                 {
                     st << C_BLUE << "[ADMIN] " << C_RESET;
@@ -232,8 +231,6 @@ BOOL CMDScore::Execute(const std::string &verb, Player* mobile,std::vector<std::
     TimeInfo tm(mobile->GetOnlineTime());
     mobile->Write("Online time:\t"+tm.ToString()+"\n");
     mobile->Write(Repeat("-",80)+"\n");
-
-    st << left << setw(20) << "level: " << mobile->GetLevel() << std::endl;
     mobile->Write(st.str());
     return true;
 }

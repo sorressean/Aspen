@@ -7,7 +7,6 @@
 Living::Living()
 {
     events.RegisterEvent("HeartBeat", new DelayedEvent(LIVING_PULSE,0));
-    _level = 1;
     _position = POSITION::standing;
     _gender = Gender::Female;
 }
@@ -40,21 +39,12 @@ void Living::SetGender(Gender gender)
     _gender = gender;
 }
 
-int Living::GetLevel() const
-{
-    return _level;
-}
-void Living::SetLevel(int level)
-{
-    _level = level;
-}
-
 bool Living::AddAttribute(Attribute* attr)
 {
     _attributes.push_back(attr);
     return true;
 }
-void Living::FindAttribute(AttributeApplication apply, int id, std::vector<Attribute*> &results)
+void Living::FindAttribute(int apply, int id, std::vector<Attribute*> &results)
 {
     for (Attribute* attr: _attributes)
         {
@@ -64,7 +54,7 @@ void Living::FindAttribute(AttributeApplication apply, int id, std::vector<Attri
                 }
         }
 }
-void Living::FindAttribute(AttributeType type, std::vector<Attribute*>& results)
+void Living::FindAttribute(int type, std::vector<Attribute*>& results)
 {
     for (Attribute* attr:_attributes)
         {
@@ -79,7 +69,6 @@ void Living::Serialize(TiXmlElement* root)
 {
     TiXmlElement* node = new TiXmlElement("living");
     node->SetAttribute("gender", (int)_gender);
-    node->SetAttribute("level", _level);
     Entity::Serialize(node);
     root->LinkEndChild(node);
 }
@@ -89,6 +78,5 @@ void Living::Deserialize(TiXmlElement* root)
 
     root->Attribute("gender", &temp);
     _gender = (Gender)temp;
-    root->Attribute("level", &_level);
     Entity::Deserialize(root->FirstChild("entity")->ToElement());
 }
