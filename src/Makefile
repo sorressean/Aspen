@@ -14,7 +14,6 @@ CFLAGS	= -g -std=c++11 -O0 -march=native -Wall -pedantic -I../include
 
 #makes the compiler use our includes.
 CFLAGS += -isystem ../include -I../frisk/inc
-CFLAGS += -L../lib
 
 #required libraries
 LDFLAGS	= -L../lib -lz -lcrypto -langelscript -ltinyxml -lpthread

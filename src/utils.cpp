@@ -40,10 +40,9 @@ int tonum(const char* str)
 
 bool isnum(const char* str)
 {
-    int num = 0;
     try
         {
-            num = tonum(str);
+            tonum(str);
         }
     catch (std::bad_cast e)
         {
