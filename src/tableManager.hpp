@@ -7,6 +7,7 @@
 template <class T>
 class TableManager
 {
+protected:
     T _id;
     std::unordered_map<T, std::string> _vals;
     std::unordered_map<std::string, T> _strings;
@@ -15,7 +16,9 @@ public:
     {
         _id = 0;
     }
-    ~TableManager() default;
+    ~TableManager()
+    {
+    }
     T Add(const std::string& val)
     {
         _id++;

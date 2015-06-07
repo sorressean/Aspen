@@ -3,6 +3,7 @@
 #include "conf.h"
 #include "attribute.h"
 #include "world.h"
+#include "tableManager.hpp"
 
 Attribute::Attribute(int type, int application, int mod, int id):
     _type(type), _apply(application), _mod(mod), _id(id)
@@ -24,4 +25,26 @@ int Attribute::GetModifier() const
 int Attribute::GetId() const
 {
     return _id;
+}
+
+EVENT(CleanupAttributes)
+{
+    World* world = World::GetPtr();
+    AttributeTable* attributes = (AttributeTable*)world->GetProperty("attributes");
+    if (attributes)
+        {
+            delete attributes;
+        }
+}
+void InitializeAttributes()
+{
+    World* world = World::GetPtr();
+    AttributeTable* attributes = new AttributeTable();
+    world->AddProperty("attributes", (void*)attributes);
+    world->events.AddCallback("Shutdown", CleanupAttributes);
+}
+AttributeTable* GetAttributeTable()
+{
+    World* world = World::GetPtr();
+    return (AttributeTable*)world->GetProperty("attributes");
 }

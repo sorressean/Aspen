@@ -2,6 +2,8 @@
 #include <string>
 #include "mud.h"
 #include  "conf.h"
+#include "event.h"
+#include "tableManager.hpp"
 
 class Attribute
 {
@@ -17,3 +19,8 @@ public:
     int GetModifier() const;
     int GetId() const;
 };
+
+typedef TableManager<int> AttributeTable;
+EVENT(CleanupAttributes);
+void InitializeAttributes();
+AttributeTable* GetAttributeTable();
