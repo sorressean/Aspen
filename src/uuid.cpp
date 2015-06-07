@@ -47,7 +47,7 @@ void Uuid::Serialize(TiXmlElement* root)
 void Uuid::Deserialize(TiXmlElement* root)
 {
     TiXmlNode* node = NULL;
-TiXmlElement* element = NULL;
+    TiXmlElement* element = NULL;
 
     node = root->FirstChild("uuid");
     if (node)
