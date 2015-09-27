@@ -3,15 +3,13 @@
 #include "attribute.h"
 #include "affect.h"
 
-Affect::Affect(int duration, Attribute* attr)
+Affect::Affect(int duration, Attribute* attr):
+    _duration(duration), _attribute(attr)
 {
-    _duration = duration;
-    _attribute = attr;
 }
-Affect::Affect()
+Affect::Affect():
+    _duration(0), _attribute(nullptr)
 {
-    _duration = 0;
-    _attribute = nullptr;
 }
 Affect::~Affect()
 {
