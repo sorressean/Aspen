@@ -6,14 +6,8 @@
 #include "player.h"
 #include "world.h"
 
-Alias::Alias()
-{
-}
-Alias::Alias(const std::string& name)
-{
-    _name = name;
-}
-Alias::~Alias()
+Alias::Alias(const std::string& name):
+    _name(name)
 {
 }
 
@@ -35,6 +29,7 @@ void Alias::ProcessCommands(Player* mobile)
             world->DoCommand(mobile, it);
         }
 }
+
 void Alias::AddCommand(const std::string& command)
 {
     if (!command.empty())
@@ -71,7 +66,6 @@ void Alias::Serialize(TiXmlElement* root)
 }
 void Alias::Deserialize(TiXmlElement* root)
 {
-    TiXmlElement* command = nullptr;
     TiXmlElement* commands = nullptr;
     TiXmlNode* node = NULL;
     std::string val;
@@ -80,7 +74,7 @@ void Alias::Deserialize(TiXmlElement* root)
     commands = root->FirstChild("commands")->ToElement();
     for (node = commands->FirstChild(); node; node = node->NextSibling())
         {
-            command = node->ToElement();
+            TiXmlElement* command = node->ToElement();
             val = command->Attribute("value");
             _aliases.push_back(val);
         }
