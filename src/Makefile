@@ -42,7 +42,8 @@ option.cpp baseSocket.cpp banList.cpp listener.cpp inputHandlers.cpp\
 property.cpp uuid.cpp olcGroup.cpp olcManager.cpp playerManager.cpp\
 match.cpp calloutManager.cpp optionManager.cpp flag.cpp door.cpp\
 optionMeta.cpp bitfield.cpp attribute.cpp affect.cpp objectManager.cpp\
-page.cpp serializationHelpers.cpp telnetParser.cpp objectContainer.cpp
+page.cpp serializationHelpers.cpp telnetParser.cpp objectContainer.cpp\
+alias.cpp
 
 S_TEST_FILES=$(filter-out main.cpp, $(S_FILES))
 S_TEST_FILES+=../tests/test_main.cpp

@@ -3,6 +3,7 @@
 #include <string>
 #include "mud.h"
 #include "conf.h"
+#include "player.h"
 
 class Alias
 {
@@ -12,12 +13,12 @@ public:
     Alias();
     Alias(const std::string& name);
     ~Alias();
-    std::string GetName();
-    void setName(const std::string& name);
-    void processCommands();
+    std::string GetName() const;
+    void SetName(const std::string& name);
+    void ProcessCommands(Player* mobile);
     void AddCommand(const std::string& command);
     void ClearCommands();
-    void ListCommands(const std::vector<std::string>& commands);
+    void ListCommands(std::vector<std::string>& commands);
     virtual void Serialize(TiXmlElement* root);
     virtual void Deserialize(TiXmlElement* root);
 };
