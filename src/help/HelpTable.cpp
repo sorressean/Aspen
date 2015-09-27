@@ -112,8 +112,8 @@ BOOL HelpTable::RemoveEntry(const std::string &name)
                                     (*it2)->RemoveSeeAlso((*it)->GetName());
                                 }
                         }
-                    _entries.erase(it);
                     delete (*it);
+                    _entries.erase(it);
                     return true;
                 }
         }

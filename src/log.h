@@ -2,7 +2,7 @@
 #ifndef LOG_H
 #define LOG_H
 #include <string>
-#include <cstdio>
+#include <fstream>
 #include "mud.h"
 #include "conf.h"
 

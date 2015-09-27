@@ -159,8 +159,8 @@ static bool CopyoverRecover()
     FILE* recover = nullptr;
     unsigned short port = 0;
     unsigned long addr = 0;
-    char *name=new char[15];
-    char* host=new char[256];
+    char *name = nullptr;
+    char* host = nullptr;
     int desc = 0;
     int ruptime = 0;
 
@@ -172,6 +172,8 @@ static bool CopyoverRecover()
             return false;
         }
 
+    host = new char[256];
+    name = new char[15];
     fscanf(recover, "%d\n", &ruptime);
 
     world->SetRealUptime((time_t)ruptime);

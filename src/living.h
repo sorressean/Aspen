@@ -36,6 +36,8 @@ class Living:public Entity
     std::vector<Attribute*> _attributes;
     std::priority_queue<Affect*, std::vector<Affect*>, _aff_comp> _taffects;
     std::vector<Affect*> _paffects;
+    Living* _following;
+    std::list<Living*> _followers;
 public:
     Living();
     virtual ~Living();
@@ -62,6 +64,12 @@ public:
     bool AddAttribute(Attribute* attr);
     void FindAttribute(int apply, int id, std::vector<Attribute*> &results);
     void FindAttribute(int type, std::vector<Attribute*>& results);
+    /***
+    This is called to determine if follower can follow.
+    Return true on success, false otherwise.
+    */
+    bool CanFollow(Living* follower);
+
     virtual void Serialize(TiXmlElement* root);
     virtual void Deserialize(TiXmlElement* root);
 };

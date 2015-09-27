@@ -21,3 +21,5 @@ return _name;
 }
 void Alias::SetName(const std::string& name)
 {
+name = _name;
+}
