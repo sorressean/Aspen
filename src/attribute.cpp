@@ -31,20 +31,25 @@ EVENT(CleanupAttributes)
 {
     World* world = World::GetPtr();
     AttributeTable* attributes = (AttributeTable*)world->GetProperty("attributes");
+
     if (attributes)
         {
             delete attributes;
         }
 }
+
 void InitializeAttributes()
 {
     World* world = World::GetPtr();
     AttributeTable* attributes = new AttributeTable();
+
     world->AddProperty("attributes", (void*)attributes);
     world->events.AddCallback("Shutdown", CleanupAttributes);
 }
+
 AttributeTable* GetAttributeTable()
 {
     World* world = World::GetPtr();
+
     return (AttributeTable*)world->GetProperty("attributes");
 }
