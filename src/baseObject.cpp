@@ -24,24 +24,17 @@ BaseObject::BaseObject()
     _desc="You see nothing special.";
     _script="";
     _onum=0;
-    _components=new std::vector<Component*>();
-    _aliases = new std::vector<std::string>();
-    variables.SetObject(this);
     _persistent = true;
     _zone = NULL;
+
+    variables.SetObject(this);
 }
 BaseObject::~BaseObject()
 {
-    std::vector<Component*>::iterator it, itEnd;
-
-    itEnd = _components->end();
-    for (it=_components->begin(); it != itEnd; ++it)
+    for (auto it: _components)
         {
-            delete (*it);
+            delete it;
         }
-
-    delete _components;
-    delete _aliases;
 }
 
 std::string BaseObject::GetName() const
@@ -52,7 +45,6 @@ void BaseObject::SetName(const std::string &s)
 {
     _name=s;
 }
-
 
 std::string BaseObject::GetDescription() const
 {
@@ -71,6 +63,7 @@ void BaseObject::SetScript(const std::string &script)
 {
     _script=script;
 }
+
 BOOL BaseObject::GetPersistent() const
 {
     return _persistent;
@@ -100,16 +93,16 @@ void BaseObject::SetOnum(VNUM num)
 
 BOOL BaseObject::AddComponent(Component* component)
 {
-    if (component==NULL)
+    if (component == nullptr)
         {
             return false;
         }
-
     if (HasComponent(component->GetMeta()->GetName()))
         {
             return false;
         }
-    _components->push_back(component);
+
+    _components.push_back(component);
     component->Attach(this);
     return true;
 }
@@ -122,33 +115,27 @@ BOOL BaseObject::RemoveComponent(Component* component)
             return false;
         }
 
-    itEnd = _components->end();
-    for (it = _components->begin(); it != itEnd; ++it)
+    itEnd = _components.end();
+    for (it = _components.begin(); it != itEnd; ++it)
         {
             if ((*it) == component)
                 {
                     component->Detach();
-                    _components->erase(it);
+                    _components.erase(it);
                     delete (*it);
                     return true;
                 }
         }
 
-    return false; //should never happen.
+    return false;
 }
 bool BaseObject::HasComponent(const std::string &name)
 {
-    std::vector <Component*>::iterator it, itEnd;
-
-    if (_components->size())
+    for (auto it: _components)
         {
-            itEnd = _components->end();
-            for (it = _components->begin(); it != itEnd; ++it)
+            if (it->GetMeta()->GetName()==name)
                 {
-                    if ((*it)->GetMeta()->GetName()==name)
-                        {
-                            return true;
-                        }
+                    return true;
                 }
         }
 
@@ -156,63 +143,42 @@ bool BaseObject::HasComponent(const std::string &name)
 }
 Component* BaseObject::GetComponent(const std::string &name)
 {
-    std::vector <Component*>::iterator it, itEnd;
-
-    if (_components->size())
+    for (auto it: _components)
         {
-            itEnd = _components->end();
-            for (it = _components->begin(); it != itEnd; ++it)
+            if (it->GetMeta()->GetName()==name)
                 {
-                    if ((*it)->GetMeta()->GetName()==name)
-                        {
-                            return (*it);
-                        }
+                    return it;
                 }
         }
 
-    return NULL;
+    return nullptr;
 }
 
 void BaseObject::Attach()
 {
-    Attach(this);
-}
-void BaseObject::Attach(BaseObject* obj)
-{
-    std::vector <Component*>::iterator it, itEnd;
-    if (_components->size())
+    for (auto it: _components)
         {
-            itEnd = _components->end();
-            for (it = _components->begin(); it != itEnd; ++it)
-                {
-                    (*it)->Attach(obj);
-                }
+            it->Attach(this);
         }
 }
 
 BOOL BaseObject::AddAlias(const std::string &alias)
 {
-    if (AliasExists(alias) && alias != "")
+    if (AliasExists(alias) && !alias.empty())
         {
             return false;
         }
 
-    _aliases->push_back(alias);
+    _aliases.push_back(alias);
     return true;
 }
 BOOL BaseObject::AliasExists(const std::string & name)
 {
-    std::vector<std::string>::iterator it, itEnd;
-
-    if (_aliases->size())
+    for (auto it: _aliases)
         {
-            itEnd = _aliases->end();
-            for (it = _aliases->begin(); it != itEnd; ++it)
+            if (it == name)
                 {
-                    if ((*it) == name)
-                        {
-                            return true;
-                        }
+                    return true;
                 }
         }
 
@@ -220,7 +186,7 @@ BOOL BaseObject::AliasExists(const std::string & name)
 }
 std::vector<std::string>* BaseObject::GetAliases()
 {
-    return _aliases;
+    return &_aliases;
 }
 
 void BaseObject::Serialize(TiXmlElement* root)
@@ -231,31 +197,21 @@ void BaseObject::Serialize(TiXmlElement* root)
     TiXmlElement* alias = NULL;
     TiXmlElement* component = NULL;
     TiXmlElement* properties = new TiXmlElement("properties");
-    std::vector<std::string>::iterator ait, aitEnd;
-    std::vector <Component*>::iterator it, itEnd;
-    itEnd = _components->end();
 
-    if (_components->size())
+    for (auto it: _components)
         {
-            for (it=_components->begin(); it != itEnd; ++it)
-                {
-                    component = new TiXmlElement("component");
-                    component->SetAttribute("name", (*it)->GetMeta()->GetName().c_str());
-                    (*it)->Serialize(component);
-                    components->LinkEndChild(component);
-                }
+            component = new TiXmlElement("component");
+            component->SetAttribute("name", it->GetMeta()->GetName().c_str());
+            it->Serialize(component);
+            components->LinkEndChild(component);
         }
     node->LinkEndChild(components);
 
-    if (_aliases->size())
+    for (auto it: _aliases)
         {
-            aitEnd = _aliases->end();
-            for (ait = _aliases->begin(); ait != aitEnd; ++ait)
-                {
-                    alias = new TiXmlElement("alias");
-                    alias->SetAttribute("name", (*ait).c_str());
-                    aliases->LinkEndChild(alias);
-                }
+            alias = new TiXmlElement("alias");
+            alias->SetAttribute("name", it.c_str());
+            aliases->LinkEndChild(alias);
         }
     node->LinkEndChild(aliases);
 
@@ -319,15 +275,9 @@ void BaseObject::Deserialize(TiXmlElement* root)
 
 void BaseObject::Copy(BaseObject* obj) const
 {
-    std::vector<std::string>::iterator it, itEnd;
-    it = _aliases->end();
-
-    if (_aliases->size())
+    for (auto it: _aliases)
         {
-            for (it = _aliases->begin(); it != itEnd; ++it)
-                {
-                    obj->AddAlias((*it));
-                }
+            obj->AddAlias(it);
         }
 
     obj->SetName(_name);
@@ -345,6 +295,7 @@ std::string BaseObject::Identify(Player*mobile)
     st << "Originating zone: " << GetZone()->GetName() << std::endl;
     return st.str();
 }
+
 std::string BaseObject::DoLook(Player* mobile)
 {
     std::string str;
