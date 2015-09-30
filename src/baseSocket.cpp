@@ -1,6 +1,3 @@
-#include "mud.h"
-#include "conf.h"
-#include "baseSocket.h"
 #include <unistd.h>
 #include <sys/ioctl.h>
 #include <sys/socket.h>
@@ -11,16 +8,17 @@
 #include <ctime>
 #include <cstring>
 #include <cstdlib>
+#include "mud.h"
+#include "conf.h"
+#include "baseSocket.h"
 
-BaseSocket::BaseSocket()
+BaseSocket::BaseSocket():
+    _control(-1)
 {
-    _control = -1;
-    _addr = NULL;
 }
-BaseSocket::BaseSocket(const int desc)
+BaseSocket::BaseSocket(int desc):
+    _control(desc)
 {
-    _control = desc;
-    _addr=new sockaddr_in();
 }
 BaseSocket::~BaseSocket()
 {
@@ -28,11 +26,6 @@ BaseSocket::~BaseSocket()
         {
             close(_control);
             _control = -1;
-        }
-    if (_addr)
-        {
-            delete _addr;
-            _addr=NULL;
         }
 }
 
@@ -44,7 +37,8 @@ int BaseSocket::GetControl() const
 bool BaseSocket::Read()
 {
     char temp[4096 + 2];
-    int size,k=0;
+    int size = 0;
+    int k = 0;
     std::string line;
 
     while (true)
@@ -93,7 +87,9 @@ size_t BaseSocket::Write(const void* buffer, size_t count)
 
 bool BaseSocket::Flush()
 {
-    int b=0, w=0;
+    int b=0;
+    int w = 0;
+
     if (!_outBuffer.length())
         {
             return true;
@@ -127,16 +123,16 @@ void BaseSocket::ClrInBuffer()
 }
 BOOL BaseSocket::InputPending() const
 {
-    return (_inBuffer.length()>0?true:false);
+    return (_inBuffer.empty() ? false : true);
 }
 
-sockaddr_in* BaseSocket::GetAddr() const
+sockaddr_in* BaseSocket::GetAddr()
 {
-    return _addr;
+    return &_addr;
 }
 void BaseSocket::SetAddr(sockaddr_in* addr)
 {
-    memcpy(_addr,addr,sizeof(sockaddr_in));
+    memcpy(&_addr, addr, sizeof(sockaddr_in));
 }
 
 BOOL BaseSocket::Close()
@@ -156,26 +152,21 @@ BOOL BaseSocket::Connect(const char* address, unsigned short port)
         {
             return false;
         }
-    if (!_addr)
-        {
-            _addr = new sockaddr_in();
-        }
 
-    memset(_addr, 0, sizeof(sockaddr_in));
-    if (!inet_aton(address, &(_addr->sin_addr)))
+    memset(&_addr, 0, sizeof(sockaddr_in));
+    if (!inet_aton(address, &_addr.sin_addr))
         {
             return false;
         }
-    _addr->sin_family = AF_INET;
-    _addr->sin_port = htons(port);
-
+    _addr.sin_family = AF_INET;
+    _addr.sin_port = htons(port);
     _control = socket(AF_INET, SOCK_STREAM, 0);
+
     if (_control == -1)
         {
             return false;
         }
-
-    if (connect(_control, (sockaddr*)_addr, sizeof(sockaddr_in)) == -1)
+    if (connect(_control, (sockaddr*)&_addr, sizeof(sockaddr_in)) == -1)
         {
             return false;
         }
