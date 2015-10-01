@@ -10,13 +10,9 @@ OlcManager::OlcManager()
 }
 OlcManager::~OlcManager()
 {
-    std::unordered_map<int, OlcGroup*>::iterator it, itEnd;
-
-    itEnd = _olcs.end();
-
-    for (it = _olcs.begin(); it != itEnd; ++it)
+    for (auto it: _olcs)
         {
-            delete it->second;
+            delete it.second;
         }
 }
 

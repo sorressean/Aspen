@@ -12,13 +12,9 @@ OlcGroup::OlcGroup(const std::string& comp)
 }
 OlcGroup::~OlcGroup()
 {
-    std::vector<IOlcEntry*>::iterator it, itEnd;
-
-    itEnd = _entries.end();
-    for (it = _entries.begin(); it != itEnd; ++it)
+    for (auto it: _entries)
         {
-            delete (*it);
-            (*it) = nullptr;
+            delete it;
         }
 }
 
