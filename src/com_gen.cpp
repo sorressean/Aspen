@@ -1,9 +1,9 @@
+#include <unistd.h>
 #include <list>
 #include <map>
 #include <sstream>
 #include <iomanip>
 #include <cmath>
-#include <unistd.h>
 #include <functional>
 #include "mud.h"
 #include "conf.h"
@@ -42,7 +42,6 @@ void InitializeGenCommands()
     world->commands.AddCommand(new CMDExits());
 }
 
-//quit
 CMDQuit::CMDQuit()
 {
     SetName("quit");
@@ -55,7 +54,6 @@ BOOL CMDQuit::Execute(const std::string &verb, Player* mobile,std::vector<std::s
     return true;
 }
 
-//save
 CMDSave::CMDSave()
 {
     SetName("save");
@@ -71,8 +69,10 @@ BOOL CMDSave::Execute(const std::string &verb, Player* mobile,std::vector<std::s
         {
             mobile->Message(MSG_NORMAL, "Saved.");
         }
+
     return true;
 }
+
 CMDBackup::CMDBackup()
 {
     SetName("backup");
@@ -104,7 +104,6 @@ BOOL CMDBackup::Execute(const std::string &verb, Player* mobile,std::vector<std:
     return true;
 }
 
-//who
 CMDWho::CMDWho()
 {
     SetName("who");
@@ -114,32 +113,28 @@ CMDWho::CMDWho()
 BOOL CMDWho::Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args,int subcmd)
 {
     World* world = World::GetPtr();
-    std::list<Player*>* players = nullptr;
-    std::list <Player*>::iterator it, itEnd;
+    std::list<Player*> *players;
     std::stringstream st;
 
-    mobile->Write(Center(Capitalize(MUD_NAME),80)+"\n");
-    mobile->Write(Repeat("-",80));
+    st << Center(Capitalize(MUD_NAME), 80) << std::endl;
+    st << Repeat("-", 80);
 
     players = world->GetPlayerManager()->GetPlayers();
-    itEnd=players->end();
-    for (it = players->begin(); it != itEnd; ++it)
+    for (auto it: *players)
         {
-            if ((*it)->HasAccess(RANK_GOD))
+            if (it->HasAccess(RANK_GOD))
                 {
                     st << C_BLUE << "[ADMIN] " << C_RESET;
                 }
-            st << Capitalize((*it)->GetName()) << " " << (*it)->GetTitle();
-            mobile->Message(MSG_LIST, st.str());
-            st.str("");
+            st << Capitalize(it->GetName()) << " " << it->GetTitle();
         }
-    mobile->Write(Repeat("-",80));
+    st << Repeat("-", 80);
     st << MUD_NAME << " currently has " << players->size() << (players->size()==1?" user ":" users ") << "online.\n";
-    mobile->Write(st.str());
+    mobile->Message(MSG_LIST, st.str());
+
     return true;
 }
 
-//toggle
 CMDToggle::CMDToggle()
 {
     SetName("toggle");
@@ -209,7 +204,6 @@ BOOL CMDToggle::Execute(const std::string &verb, Player* mobile,std::vector<std:
     return true;
 }
 
-//score
 CMDScore::CMDScore()
 {
     SetName("score");
@@ -229,13 +223,12 @@ BOOL CMDScore::Execute(const std::string &verb, Player* mobile,std::vector<std::
     st << Repeat("-", 80) << endl << endl;
 
     TimeInfo tm(mobile->GetOnlineTime());
-    mobile->Write("Online time:\t"+tm.ToString()+"\n");
-    mobile->Write(Repeat("-",80)+"\n");
-    mobile->Write(st.str());
+    st << "Online time:\t"+tm.ToString()+"\n";
+    st << Repeat("-",80) << endl;;
+    mobile->Message(MSG_INFO, st.str());
     return true;
 }
 
-//channels
 CMDChan::CMDChan()
 {
     SetName("channels");
@@ -245,11 +238,10 @@ CMDChan::CMDChan()
 BOOL CMDChan::Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args,int subcmd)
 {
     World* world = World::GetPtr();
-
     Channel* chan = world->FindChannel(subcmd);
     std::string message=Explode(args);
 
-    if (chan==NULL)
+    if (chan==nullptr)
         {
             mobile->Message(MSG_ERROR,"That channel doesn't exist.");
             return false;
@@ -259,7 +251,6 @@ BOOL CMDChan::Execute(const std::string &verb, Player* mobile,std::vector<std::s
     return true;
 }
 
-//commands
 CMDCommands::CMDCommands()
 {
     SetName("commands");
@@ -346,7 +337,6 @@ BOOL CMDCommands::Execute(const std::string &verb, Player* mobile,std::vector<st
             GetCommands(mobile, commands, CommandType::Misc);
             misc << CenterLines(Explode(commands),80) << "\r\n\n";
             commands.clear();
-
 
             GetCommands(mobile, commands, CommandType::Object);
             if (!commands.empty())
@@ -463,7 +453,6 @@ BOOL CMDCommands::Execute(const std::string &verb, Player* mobile,std::vector<st
     return true;
 }
 
-//history
 CMDHist::CMDHist()
 {
     SetName("history");
@@ -473,10 +462,8 @@ CMDHist::CMDHist()
 BOOL CMDHist::Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args,int subcmd)
 {
     World* world = World::GetPtr();
-
-    Channel* chan=NULL;
-    std::list <HistoryNode*> *history;
-    std::list <HistoryNode*>::iterator it, itEnd;
+    Channel* chan=nullptr;
+    std::list <HistoryNode*> *history = nullptr;;
     TimeInfo tm;
 
     if (!args.size())
@@ -493,23 +480,21 @@ BOOL CMDHist::Execute(const std::string &verb, Player* mobile,std::vector<std::s
         }
 
     history=chan->GetHistory();
-
     if ((!history) || (!history->size()))
         {
             mobile->Message(MSG_INFO,"There is no recorded history, perhaps you should say something?");
             return true;
         }
 
-    for (it=history->begin(); it!=history->end(); it++)
+    for (auto it: *history)
         {
-            tm.Calculate(time(NULL)-(*it)->when);
-            mobile->Message(MSG_LIST,tm.ToString()+": "+(*it)->message);
+            tm.Calculate(time(NULL) - it->when);
+            mobile->Message(MSG_LIST,tm.ToString() + ": " + it->message);
         }
 
     return true;
 }
 
-//uptime
 CMDUptime::CMDUptime()
 {
     SetName("uptime");
@@ -534,7 +519,6 @@ BOOL CMDUptime::Execute(const std::string &verb, Player* mobile,std::vector<std:
     return true;
 }
 
-//whois
 CMDWhois::CMDWhois()
 {
     SetName("whois");
@@ -544,7 +528,7 @@ CMDWhois::CMDWhois()
 BOOL CMDWhois::Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args,int subcmd)
 {
     World* world = World::GetPtr();
-    Player* targ=NULL;
+    Player* targ=nullptr;
     BOOL load=false;
     TimeInfo tm;
 
@@ -553,6 +537,7 @@ BOOL CMDWhois::Execute(const std::string &verb, Player* mobile,std::vector<std::
             mobile->Message(MSG_ERROR,"Syntax: whois <player>.");
             return false;
         }
+
 //check to see if the player is online:
     targ=world->GetPlayerManager()->FindPlayer(args[0]);
     if (!targ)
@@ -593,7 +578,6 @@ BOOL CMDWhois::Execute(const std::string &verb, Player* mobile,std::vector<std::
     return true;
 }
 
-//look
 CMDLook::CMDLook()
 {
     SetName("look");
@@ -603,7 +587,7 @@ CMDLook::CMDLook()
 BOOL CMDLook::Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args,int subcmd)
 {
     World* world = World::GetPtr();
-    BaseObject* obj = NULL;
+    BaseObject* obj = nullptr;
     ObjectContainer* location = mobile->GetLocation();
 
 //look at environment:
@@ -615,6 +599,7 @@ BOOL CMDLook::Execute(const std::string &verb, Player* mobile,std::vector<std::s
                     return true;
                 }
         }
+
     obj =world->MatchObject(args[0],mobile);
     if (obj==NULL)
         {
@@ -636,7 +621,7 @@ BOOL CMDCoord::Execute(const std::string &verb, Player* mobile,std::vector<std::
 {
     Room* location = (Room*)mobile->GetLocation();
     std::stringstream st;
-    point *p = NULL;
+    point *p = nullptr;
 
     if (!location)
         {
@@ -715,6 +700,7 @@ BOOL CMDEmote::Execute(const std::string &verb, Player* mobile,std::vector<std::
     ((Room*)mobile->GetLocation())->TellAll(Capitalize(mobile->GetName())+" "+message);
     return true;
 }
+
 
 CMDPrompt::CMDPrompt()
 {
