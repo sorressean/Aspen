@@ -118,6 +118,7 @@ public:
     *Those who don't have the access right of the channel can not broadcast by default.
     */
     virtual void Broadcast(Player* caller,const std::string &message,BOOL access=true);
+
     static EVENT(SubscribeChannels);
     static EVENT(UnsubscribeChannels);
     static EVENT(OptionChanged);
