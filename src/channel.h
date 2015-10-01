@@ -1,7 +1,7 @@
-/*
-*A basic channel implamentation
-*Handles add and removal of users (listeners), and channel-specific patterns for broadcasting.
-*Also handles an ACL-type interface for a minimum broadcast.
+/**
+* Contains: Channel
+*
+* Channels are responsible for enabling communication between players.
 */
 
 #ifndef CHANNEL_H
@@ -14,15 +14,12 @@
 #include "event.h"
 #include "player.h"
 
-/*
-*Channel based defines
-*/
-
 void InitializeChannels();
 
-/*
-*Channel history entry
-*Each entry contains both a string and the time of the
+/**
+* Channel history entry
+*
+* Each entry contains both a string and the time of the
 *Message, which will be recorded in the history log.
 */
 struct HistoryNode
@@ -31,31 +28,53 @@ struct HistoryNode
     std::string message;
 };
 
-/*
-*Channel
-*Contains the information used for each channel (ID, history, listeners, access, and pattern.
-*The only thing that really needs to be explained here is the pattern.
-*The pattern is what defines how messages are shown to players.
-*Below is a list of modifiers; I have only used lowercase, but capitalizing the letter of the modifier will capitalize the first letter of it's
-*translated value.
-*%p: The player name.
-*%m: The message.
-*%n: The channel name.
+/**
+* Channels enable communication between players.
+*
+* Handles add and removal of users (listeners), and channel-specific patterns for broadcasting.
+* Also handles an ACL-type interface for a minimum broadcast.
+* Contains the information used for each channel (ID, history, listeners, access, and pattern.
+* The only concept that must be explained is pattern.
+* The pattern is what defines how messages are shown to players.
+* Below is a list of modifiers; I have only used lowercase, but capitalizing the letter of the modifier will capitalize the first letter of it's
+* translated value.
+* %p: The player name.
+* %m: The message.
+* %n: The channel name.
 */
-
 class Channel
 {
 protected:
-    std::list <HistoryNode*> *_history;
     std::string _name;
     std::string _alias;
-    FLAG _access;
-    std::list <Player*> *_listeners;
     std::string _pattern;
     std::string _epattern;
+    FLAG _access;
+    std::list <HistoryNode*> _history;
+    std::list <Player*> _listeners;
+
+    /**
+    * Adds the history entry
+    *
+    * @param [in] message the message to add to the history.
+    */
     void _AddHistoryEntry(const std::string &message);
+    /**
+    * Formats the specified message according to the pattern.
+    *
+    * @param [in] message the message to paternize.
+    * @param [in] caller the player to use.
+    * @return the new message, paternized.
+    */
     std::string _Patternize(const std::string &message,Player* caller);
 public:
+    /**
+    * Constructs a new channel.
+    *
+    * @param [in] name the name of the channel.
+    * @param [in] an alias to be used for the channel.
+    * @param [in] access Determines who can access this channel.
+    */
     Channel(const std::string &name,const std::string &alias,const FLAG access);
     virtual ~Channel();
 
@@ -72,7 +91,7 @@ public:
     virtual std::string GetPattern() const;
     virtual void SetAccess(const FLAG access);
     virtual FLAG GetAccess() const;
-    virtual std::list <HistoryNode*>* GetHistory() const;
+    virtual std::list <HistoryNode*>* GetHistory();
     /*
     *Adds and removes a listener from the list.
     *Param: [in] The player to add to the list.

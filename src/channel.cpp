@@ -3,6 +3,7 @@
 #include <list>
 #include <functional>
 #include "mud.h"
+#include "conf.h"
 #include "channel.h"
 #include "player.h"
 #include "world.h"
@@ -16,6 +17,7 @@ void InitializeChannels()
     world->WriteLog("Initializing channels");
     world->events.AddCallback("PlayerConnect", std::bind(&Channel::SubscribeChannels, std::placeholders::_1, std::placeholders::_2));
     world->events.AddCallback("PlayerDisconnect", std::bind(&Channel::UnsubscribeChannels, std::placeholders::_1, std::placeholders::_2));
+
 //Register channels here.
     world->AddChannel(new Channel("chat","ch",RANK_PLAYER));
 }
@@ -23,48 +25,41 @@ void InitializeChannels()
 CEVENT(Channel, SubscribeChannels)
 {
     World* world = World::GetPtr();
-
-    std::list <std::string> *names=new std::list<std::string>();
-    std::list <std::string>::iterator it, itEnd;
-    Channel* chan=NULL;
+    std::list <std::string> names;
+    Channel* chan=nullptr;
     Player* mobile=(Player*)caller;
-    mobile->events.AddCallback("OptionChanged", std::bind(&Channel::OptionChanged, std::placeholders::_1, std::placeholders::_2));
-    world->GetChannelNames(names);
 
-    itEnd = names->end();
-    for (it = names->begin(); it != itEnd; ++it)
+    mobile->events.AddCallback("OptionChanged", std::bind(&Channel::OptionChanged, std::placeholders::_1, std::placeholders::_2));
+    world->GetChannelNames(&names);
+
+    for (auto it: names)
         {
-            if (GetOptionValue((*it), mobile).GetInt() == 1)
+            if (GetOptionValue(it, mobile).GetInt() == 1)
                 {
-                    chan=world->FindChannel((*it));
+                    chan=world->FindChannel(it);
                     if (chan)
                         {
                             chan->AddListener(mobile,true);
                         }
                 }
         }
-    delete names;
 }
 CEVENT(Channel, UnsubscribeChannels)
 {
     World* world = World::GetPtr();
-
-    std::list <std::string>* names=new std::list <std::string>();
-    std::list <std::string>::iterator it, itEnd;
-    Channel* chan=NULL;
+    std::list <std::string> names;
+    Channel* chan=nullptr;
     Player* mobile=(Player*)caller;
-    world->GetChannelNames(names);
 
-    itEnd=names->end();
-    for (it = names->begin(); it != itEnd; ++it)
+    world->GetChannelNames(&names);
+    for (auto it: names)
         {
-            chan=world->FindChannel((*it));
+            chan=world->FindChannel(it);
             if (chan)
                 {
                     chan->RemoveListener(mobile,true);
                 }
         }
-    delete names;
 }
 CEVENT(Channel, OptionChanged)
 {
@@ -87,52 +82,39 @@ CEVENT(Channel, OptionChanged)
         }
 }
 
-Channel::Channel(const std::string &name,const std::string &alias,const FLAG access)
+Channel::Channel(const std::string &name,const std::string &alias,const FLAG access):
+    _name(name), _alias(alias), _access(access)
 {
-    _access=access;
-    _name=name;
-    _alias=alias;
-    _listeners=new std::list <Player*>();
-    _history=new std::list <HistoryNode*>();
     _pattern="[%N]: %P says, \'%M.\'";
 }
 Channel::~Channel()
 {
-    std::list <HistoryNode*>::iterator it, itEnd;
-    if (_history->size())
+    for (auto it: _history)
         {
-            itEnd = _history->end();
-            for (it = _history->begin(); it != itEnd; ++it)
-                {
-                    delete (*it);
-                }
+            delete it;
         }
-    delete _history;
-
-    delete _listeners;
 }
 
 void Channel::_AddHistoryEntry(const std::string &message)
 {
-    HistoryNode* node=NULL;
+    HistoryNode* node=nullptr;
 
     if (message=="")
         {
             return;
         }
-
-    if (_history->size()==MAX_CHAN_HISTORY_LENGTH)
+    if (_history.size()==MAX_CHAN_HISTORY_LENGTH)
         {
-            node=_history->front();
-            _history->pop_front();
+            node=_history.front();
+            _history.pop_front();
             delete node;
-            node=NULL;
+            node = nullptr;
         }
 
     node=new HistoryNode();
     node->when=time(NULL);
     node->message=message;
-    _history->push_back(node);
+    _history.push_back(node);
 }
 
 std::string Channel::_Patternize(const std::string &message,Player* caller)
@@ -141,6 +123,7 @@ std::string Channel::_Patternize(const std::string &message,Player* caller)
     std::stringstream format;
     std::string::iterator it, itEnd;
     BOOL emote=false;
+
     if (m[0]==':')
         {
             emote=true;
@@ -154,6 +137,7 @@ std::string Channel::_Patternize(const std::string &message,Player* caller)
         {
             itEnd = _pattern.end();
         }
+
     for (it=_pattern.begin(); it != itEnd; ++it)
         {
             if (((*it)=='%')&&((it++)!=(emote?_epattern.end():_pattern.end())))
@@ -190,6 +174,7 @@ std::string Channel::_Patternize(const std::string &message,Player* caller)
                     format << (*it);
                 }
         }
+
     return format.str();
 }
 
@@ -229,9 +214,9 @@ FLAG Channel::GetAccess() const
     return _access;
 }
 
-std::list <HistoryNode*>* Channel::GetHistory() const
+std::list <HistoryNode*>* Channel::GetHistory()
 {
-    return (_history->size()?_history:NULL);
+    return &_history;
 }
 
 void Channel::AddListener(Player* subscriber,BOOL quiet)
@@ -254,7 +239,7 @@ void Channel::AddListener(Player* subscriber,BOOL quiet)
             return;
         }
 
-    _listeners->push_back(subscriber);
+    _listeners.push_back(subscriber);
     if (!quiet)
         {
             subscriber->Message(MSG_INFO,"Tuned in.");
@@ -264,27 +249,26 @@ void Channel::RemoveListener(Player* subscriber,BOOL quiet)
 {
     if (HasListener(subscriber))
         {
-            _listeners->remove(subscriber);
+            _listeners.remove(subscriber);
             if (!quiet)
                 {
                     subscriber->Message(MSG_INFO,"Tuned out.");
                 }
             return;
         }
-
-    if (!quiet)
+    else
         {
-            subscriber->Message(MSG_INFO,"You are not tuned into that channel.");
+            if (!quiet)
+                {
+                    subscriber->Message(MSG_INFO,"You are not tuned into that channel.");
+                }
         }
 }
 BOOL Channel::HasListener(Player* mobile)
 {
-    std::list<Player*>::iterator it, itEnd;
-
-    itEnd = _listeners->end();
-    for (it = _listeners->begin(); it != itEnd; ++it)
+    for (auto it: _listeners)
         {
-            if ((*it) == mobile)
+            if (it == mobile)
                 {
                     return true;
                 }
@@ -300,18 +284,13 @@ BOOL Channel::CanBroadcastWithoutListening(Player* mobile) const
 
 void Channel::Broadcast(Player* caller,const std::string &message,BOOL access)
 {
-    std::list <Player*>::iterator it, itEnd;
     std::string paternized;
 
-    if (access)
+    if (!caller->HasAccess(_access))
         {
-            if (!caller->HasAccess(_access))
-                {
-                    caller->Message(MSG_ERROR,"You don't have the access needed to be able to broadcast to this channel.");
-                    return;
-                }
+            caller->Message(MSG_ERROR,"You don't have the access needed to be able to broadcast to this channel.");
+            return;
         }
-
     if (message=="")
         {
             caller->Message(MSG_ERROR,"You must provide a message.");
@@ -333,10 +312,9 @@ void Channel::Broadcast(Player* caller,const std::string &message,BOOL access)
 
     paternized=_Patternize(message,caller);
 
-    itEnd = _listeners->end();
-    for (it = _listeners->begin(); it != itEnd; ++it)
+    for (auto it: _listeners)
         {
-            (*it)->Message(MSG_CHANNEL,paternized);
+            it->Message(MSG_CHANNEL,paternized);
         }
 
     _AddHistoryEntry(paternized);
