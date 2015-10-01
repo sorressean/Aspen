@@ -1,7 +1,6 @@
 #include <sstream>
 #include <climits>
 #include <cstdlib>
-#include <deque>
 #include <queue>
 #include <string>
 #include "mud.h"
@@ -20,9 +19,6 @@ CalloutManager::CalloutManager():_curid(1)
     _deltaMin = LLONG_MAX;
     _deltaMax = 0;
 #endif
-}
-CalloutManager::CalloutManager(CalloutManager& m)
-{
 }
 CalloutManager::~CalloutManager()
 {
@@ -45,9 +41,10 @@ void CalloutManager::Release()
     if (_instance)
         {
             delete _instance;
-            _instance = NULL;
+            _instance = nullptr;
         }
 }
+
 CalloutManager* CalloutManager::GetInstance()
 {
     if (!_instance)
@@ -93,12 +90,13 @@ void CalloutManager::Update()
 
 unsigned int CalloutManager::RegisterCallout(int sec, int msec, const CALLOUT_CB cb, bool oneShot)
 {
-    Callout* call = NULL;
+    Callout* call = nullptr;
 
     if (sec <= 0 && msec <= 0)
         {
             return 0;
         }
+
     call = new Callout(sec, msec, cb, oneShot);
     call->SetId(_curid);
     _curid++;
