@@ -3,10 +3,12 @@
 #include "bitfield.h"
 #include "utils.h"
 
-Bitfield::Bitfield(int& flag, int position):_flag(flag), _position(position)
+Bitfield::Bitfield(int& flag, int position):
+    _flag(flag), _position(position)
 {
 }
-Bitfield::Bitfield(const Bitfield& bf):_flag(bf._flag), _position(bf._position)
+Bitfield::Bitfield(const Bitfield& bf):
+    _flag(bf._flag), _position(bf._position)
 {
 }
 Bitfield::~Bitfield()

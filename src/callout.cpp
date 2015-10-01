@@ -5,17 +5,10 @@
 #include "conf.h"
 #include "callout.h"
 
-Callout::Callout(int sec, int msec, const CALLOUT_CB cb, bool oneShot)
+Callout::Callout(int sec, int msec, const CALLOUT_CB cb, bool oneShot):
+    _sec(sec), _msec(msec), _cb(cb), _oneShot(oneShot), _id(0)
 {
-    _sec = sec;
-    _msec = msec;
-    _oneShot = oneShot;
-    _id = 0;
-    _cb = cb;
     Reset();
-}
-Callout::~Callout()
-{
 }
 
 int Callout::GetId() const
@@ -26,6 +19,7 @@ void Callout::SetId(unsigned int id)
 {
     _id = id;
 }
+
 int Callout::GetTime() const
 {
     return (_fireTime.tv_sec * 1000) + _fireTime.tv_usec/1000;
@@ -41,6 +35,7 @@ int Callout::GetDelta() const
 
     return cdelta-fdelta;
 }
+
 BOOL Callout::CanFire() const
 {
     int extra = 0;
@@ -51,6 +46,7 @@ BOOL Callout::CanFire() const
     extra += ((_fireTime.tv_usec - curtime.tv_usec) / 1000);
     return (extra <= 0? true : false);
 }
+
 void Callout::Fire()
 {
     _cb(this);
@@ -59,6 +55,7 @@ bool Callout::IsOneShot() const
 {
     return _oneShot;
 }
+
 void Callout::Reset()
 {
     int extra = 0;
