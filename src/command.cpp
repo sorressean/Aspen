@@ -19,9 +19,6 @@ Command::Command()
     _access = BitSet(0, RANK_PLAYER);
     _position = POSITION::any;
 }
-Command::~Command()
-{
-}
 
 void Command::SetName(const std::string &name)
 {
@@ -83,6 +80,7 @@ int Command::GetSubcmd() const
 {
     return _subcmd;
 }
+
 void Command::SetType(CommandType type)
 {
     _type = type;
@@ -91,6 +89,7 @@ CommandType Command::GetType() const
 {
     return _type;
 }
+
 void Command::SetAccess(FLAG access)
 {
     _access = access;
@@ -99,6 +98,7 @@ FLAG Command::GetAccess() const
 {
     return _access;
 }
+
 void Command::SetPosition(POSITION position)
 {
     _position = position;
@@ -107,13 +107,16 @@ POSITION Command::GetPosition() const
 {
     return _position;
 }
+
 BOOL Command::CanExecute(Player* mobile, int subcmd)
 {
     return true;
 }
+
 void Command::Syntax(Player* mobile, int subcmd) const
 {
 }
+
 //hook operations.
 bool Command::AddHook(CommandHook* hook, std::list<CommandHook*>* _hooks)
 {
