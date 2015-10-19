@@ -4,8 +4,16 @@
 #include "conf.h"
 #include "command.h"
 
+/**
+* Initializes commands used for movement.
+* Mostly north/south/etc.
+*/
 void InitializeMovementCommands();
 
+/**
+* Contains logic for moving the player through specified directions.
+* This command is mostly used via subcmd with the direction to prevent class duplication.
+*/
 class CMDMove:public Command
 {
 public:
