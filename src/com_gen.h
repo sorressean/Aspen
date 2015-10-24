@@ -1,3 +1,6 @@
+/**
+* Contains: general commands
+*/
 #ifndef COM_GEN_H
 #include "mud.h"
 #include "conf.h"

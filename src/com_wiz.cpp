@@ -1,9 +1,9 @@
+#include <sys/time.h>
+#include <sys/resource.h>
 #include <list>
 #include <sstream>
 #include <iomanip>
 #include <cstring>
-#include <sys/time.h>
-#include <sys/resource.h>
 #include "com_wiz.h"
 #include "command.h"
 #include "player.h"
@@ -18,7 +18,7 @@ void InitializeWizCommands()
 
     world->WriteLog("Initializing wizard commands.");
     world->commands.AddCommand(new CMDCopyover());
-    world->commands.AddCommand(new CMDMkgod());
+    world->commands.AddCommand(new CMDMkwiz());
     world->commands.AddCommand(new CMDShutdown());
     world->commands.AddCommand(new CMDMkbuilder());
     world->commands.AddCommand(new CMDBan());
@@ -40,18 +40,17 @@ CMDCopyover::CMDCopyover()
 BOOL CMDCopyover::Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args,int subcmd)
 {
     World* world = World::GetPtr();
-
     world->Copyover(mobile);
     return true;
 }
 
-CMDMkgod::CMDMkgod()
+CMDMkwiz::CMDMkwiz()
 {
-    SetName("mkgod");
+    SetName("mkwiz");
     SetAccess(RANK_GOD);
     SetType(CommandType::God);
 }
-BOOL CMDMkgod::Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args,int subcmd)
+BOOL CMDMkwiz::Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args,int subcmd)
 {
     World* world = World::GetPtr();
     PlayerManager* manager = world->GetPlayerManager();
@@ -59,30 +58,30 @@ BOOL CMDMkgod::Execute(const std::string &verb, Player* mobile,std::vector<std::
 
     if (!args.size())
         {
-            mobile->Message(MSG_ERROR,"You must specify the person that you would like to make a god.\n");
+            mobile->Message(MSG_ERROR,"You must specify the person that you would like to make a wizard.\n");
             return false;
         }
 
     target=manager->FindPlayer(args[0]);
     if (target==mobile)
         {
-            mobile->Message(MSG_ERROR,"You may not make yourself a god.");
+            mobile->Message(MSG_ERROR,"You may not make yourself a wizard.");
             return false;
         }
-    if (target==NULL)
+    if (target==nullptr)
         {
             mobile->Message(MSG_ERROR,"That person couldn't be found.");
             return false;
         }
     if (BitIsSet(target->GetRank(),RANK_GOD))
         {
-            mobile->Message(MSG_ERROR,"That person is already a god.");
+            mobile->Message(MSG_ERROR,"That person is already a wizard.");
             return false;
         }
 
     target->SetRank(BitSet(mobile->GetRank(), RANK_PLAYTESTER|RANK_NEWBIEHELPER|RANK_BUILDER|RANK_ADMIN|RANK_GOD));
-    target->Message(MSG_INFO,"You suddenly feel more godlike.");
-    mobile->Message(MSG_INFO, Capitalize(target->GetName())+" has been made a god.");
+    target->Message(MSG_INFO,"You suddenly feel more wizardly.");
+    mobile->Message(MSG_INFO, Capitalize(target->GetName())+" has been made a wizard.");
     return true;
 }
 
@@ -96,7 +95,7 @@ BOOL CMDMkbuilder::Execute(const std::string &verb, Player* mobile,std::vector<s
 {
     World* world = World::GetPtr();
     PlayerManager* manager = world->GetPlayerManager();
-    Player* target = NULL;
+    Player* target = nullptr;
 
     if (!args.size())
         {
@@ -105,7 +104,7 @@ BOOL CMDMkbuilder::Execute(const std::string &verb, Player* mobile,std::vector<s
         }
 
     target=manager->FindPlayer(args[0]);
-    if (target==NULL)
+    if (target==nullptr)
         {
             mobile->Message(MSG_ERROR,"That person couldn't be found.");
             return false;
@@ -148,27 +147,25 @@ CMDBan::CMDBan()
 }
 BOOL CMDBan::Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args,int subcmd)
 {
+    World*world = World::GetPtr();
+    BanList* blist = world->GetServer()->GetBanList();
+
     if (args.size() != 1)
         {
-            World*world = World::GetPtr();
-            BanList* blist = world->GetServer()->GetBanList();
-            std::vector<std::string>* addresses = new std::vector<std::string>();
             std::vector<std::string> header;
-
+            std::vector<std::string> addresses;
             int i = 0;
+
             for (i = 0; i < 5; i++)
                 {
                     header.push_back("address");
                 }
 
-            blist->ListAddresses(addresses);
-            mobile->Message(MSG_LIST, Columnize(addresses, 5, &header));
-            delete addresses;
+            blist->ListAddresses(&addresses);
+            mobile->Message(MSG_LIST, Columnize(&addresses, 5, &header));
             return true;
         }
 
-    World*world = World::GetPtr();
-    BanList* blist = world->GetServer()->GetBanList();
     if (blist->AddressExists(args[0]))
         {
             mobile->Message(MSG_ERROR, "That address is already in the ban list.");
@@ -184,6 +181,7 @@ BOOL CMDBan::Execute(const std::string &verb, Player* mobile,std::vector<std::st
     return true;
 }
 
+
 CMDSilence::CMDSilence()
 {
     SetName("silence");
@@ -192,9 +190,9 @@ CMDSilence::CMDSilence()
 }
 BOOL CMDSilence::Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args,int subcmd)
 {
-    Player* targ = NULL;
     World* world = World::GetPtr();
     PlayerManager* manager = world->GetPlayerManager();
+    Player* targ = nullptr;
 
     if (!args.size())
         {
@@ -210,7 +208,7 @@ BOOL CMDSilence::Execute(const std::string &verb, Player* mobile,std::vector<std
         }
     if (targ->HasAccess(RANK_ADMIN) || targ->HasAccess(RANK_GOD))
         {
-            mobile->Message(MSG_ERROR, "That player should be demoted before you try to silence them.");
+            mobile->Message(MSG_ERROR, "You should not be silencing staff.");
             return false;
         }
 
@@ -224,7 +222,6 @@ BOOL CMDSilence::Execute(const std::string &verb, Player* mobile,std::vector<std
     mobile->Message(MSG_INFO, Capitalize(targ->GetName())+" was silenced.");
     world->WriteLog(Capitalize(targ->GetName())+" was silenced by "+Capitalize(mobile->GetName())+".");
     targ->Message(MSG_ERROR, "You were silenced by "+Capitalize(mobile->GetName())+".");
-
     return true;
 }
 
@@ -236,9 +233,9 @@ CMDUnsilence::CMDUnsilence()
 }
 BOOL CMDUnsilence::Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args,int subcmd)
 {
-    Player* targ = NULL;
     World* world = World::GetPtr();
     PlayerManager* manager = world->GetPlayerManager();
+    Player* targ = nullptr;
 
     if (!args.size())
         {
@@ -252,7 +249,6 @@ BOOL CMDUnsilence::Execute(const std::string &verb, Player* mobile,std::vector<s
             mobile->Message(MSG_ERROR, "Could not find the specified player.");
             return false;
         }
-
     if (!BitIsSet(targ->GetPflag(), PF_SILENCE))
         {
             mobile->Message(MSG_INFO, "That player is not silenced.");
@@ -263,7 +259,6 @@ BOOL CMDUnsilence::Execute(const std::string &verb, Player* mobile,std::vector<s
     mobile->Message(MSG_INFO, Capitalize(targ->GetName())+" has been unsilenced.");
     world->WriteLog(Capitalize(targ->GetName())+" was unsilenced by "+Capitalize(mobile->GetName())+".");
     targ->Message(MSG_INFO, "You were unsilenced by "+Capitalize(mobile->GetName())+".");
-
     return true;
 }
 
@@ -276,8 +271,8 @@ CMDDisconnect::CMDDisconnect()
 BOOL CMDDisconnect::Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args,int subcmd)
 {
     World* world = World::GetPtr();
-    Player* target = NULL;
     PlayerManager* manager = world->GetPlayerManager();
+    Player* target = nullptr;
 
     if (!args.size())
         {
@@ -325,13 +320,10 @@ BOOL CMDEcho::Execute(const std::string &verb, Player* mobile,std::vector<std::s
         }
 
     std::string msg = Explode(args);
-    std::list<Player*>::iterator it, itEnd;
     std::list<Player*>* players = manager->GetPlayers();
-
-    itEnd = players->end();
-    for (it = players->begin(); it != itEnd; ++it)
+    for (auto it: *players)
         {
-            (*it)->Message(MSG_INFO, msg);
+            it->Message(MSG_INFO, msg);
         }
 
     return true;
@@ -365,14 +357,15 @@ CMDSstatus::CMDSstatus()
 }
 BOOL CMDSstatus::Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args,int subcmd)
 {
+    using std::setw;
+
     World* world = World::GetPtr();
     std::stringstream st;
     unsigned long long int updates = 0;
     unsigned long long int tu = 0; //total update time
     unsigned long long int ts = 0; //total sleep time.
-    unsigned long long int commands = 0;
-    unsigned long long int commandTime = 0;
-    using std::setw;
+    unsigned long long int commands = 0; //commands executed.
+    unsigned long long int commandTime = 0; //average command time.
     struct rusage usage;
 
     st << std::setprecision(3);
@@ -396,6 +389,7 @@ BOOL CMDSstatus::Execute(const std::string &verb, Player* mobile,std::vector<std
     commandTime = world->GetCommandTime();
     st << "Total commands executed (that succeeded): " << commands << std::endl;
     st << "Average command time: " << ((double)commandTime/commands)/1000 << " MS." << std::endl;
+
     mobile->Message(MSG_INFO, st.str());
     return true;
 }
@@ -410,7 +404,7 @@ BOOL CMDForce::Execute(const std::string &verb, Player* mobile,std::vector<std::
 {
     World* world = World::GetPtr();
     PlayerManager* manager = world->GetPlayerManager();
-    Player* target = NULL;
+    Player* target = nullptr;
     std::string command;
 
     if (!args.size() || args.size() < 2)
@@ -425,12 +419,12 @@ BOOL CMDForce::Execute(const std::string &verb, Player* mobile,std::vector<std::
             mobile->Message(MSG_ERROR, "Why would you need to force yourself to do that?");
             return false;
         }
-    if (target == NULL)
+    if (!target)
         {
             mobile->Message(MSG_ERROR, "That player was not found.");
             return false;
         }
-    if (BitIsSet(target->GetRank(),RANK_GOD) || (BitIsSet(mobile->GetRank(), RANK_ADMIN) && BitIsSet(target->GetRank(), RANK_ADMIN)))
+    if (BitIsSet(target->GetRank(),RANK_GOD) || (BitIsSet(mobile->GetRank(), RANK_ADMIN)))
         {
             mobile->Message(MSG_ERROR, "You probably shouldn't try to do that...");
             return false;
@@ -439,6 +433,7 @@ BOOL CMDForce::Execute(const std::string &verb, Player* mobile,std::vector<std::
     args.erase(args.begin());
     command = Explode(args);
     target->GetSocket()->AddCommand(command);
+    mobile->Message(MSG_INFO, "You force "+Capitalize(target->GetName())+" to execute: "+command);
     return true;
 }
 
@@ -458,6 +453,7 @@ BOOL CMDPaste::Execute(const std::string &verb, Player* mobile,std::vector<std::
             mobile->Message(MSG_ERROR, "Could not create editor handler.");
             return false;
         }
+
     return true;
 }
 void CMDPaste::TextInput(Socket* sock, std::vector<std::string>* lines, void* args)
@@ -477,7 +473,7 @@ void CMDPaste::TextInput(Socket* sock, std::vector<std::string>* lines, void* ar
         {
             st << it << std::endl;
         }
-    st << Repeat("-", 80);
+    st << Repeat("-", 80) << std::endl;
 
     location->TellAll(st.str());
     mobile->GetSocket()->ClearInput();
