@@ -17,7 +17,6 @@
 #include "calloutManager.h"
 #include "modules.h"
 #include "zone.h"
-#include "components.h"
 #include "world.h"
 
 //prototypes:
@@ -107,7 +106,6 @@ int main(int argc, const char** argv)
             return EXIT_FAILURE;
         }
 
-    CreateComponents();
     world->SetRealUptime(time(NULL));
     world->SetCopyoverUptime(0);
     srand(time(NULL));

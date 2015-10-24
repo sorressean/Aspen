@@ -37,13 +37,13 @@ exception.cpp command.cpp com_gen.cpp com_wiz.cpp event.cpp\
 delayedEvent.cpp eventManager.cpp staticObject.cpp living.cpp channel.cpp\
 modules.cpp component.cpp npc.cpp editor.cpp exit.cpp\
 room.cpp zone.cpp com_builder.cpp com_movement.cpp ComponentFactory.cpp\
-components.cpp olc.cpp socials.cpp olcs.cpp callout.cpp\
+alias.cpp olc.cpp socials.cpp olcs.cpp callout.cpp\
 option.cpp baseSocket.cpp banList.cpp listener.cpp inputHandlers.cpp\
 property.cpp uuid.cpp olcGroup.cpp olcManager.cpp playerManager.cpp\
 match.cpp calloutManager.cpp optionManager.cpp flag.cpp door.cpp\
 optionMeta.cpp bitfield.cpp attribute.cpp affect.cpp objectManager.cpp\
-page.cpp serializationHelpers.cpp telnetParser.cpp objectContainer.cpp\
-alias.cpp
+page.cpp serializationHelpers.cpp telnetParser.cpp objectContainer.cpp
+
 
 S_TEST_FILES=$(filter-out main.cpp, $(S_FILES))
 S_TEST_FILES+=../tests/test_main.cpp
