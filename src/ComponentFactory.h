@@ -1,6 +1,7 @@
-/*
-*Component Factory
-*Holds a list of component names and function pointers for their creation.
+/**
+* Contains: Component Factory
+*
+* The factory is responsible for creating components upon request.
 */
 #ifndef COMPONENT_FACTORY_H
 #define COMPONENT_FACTORY_H
@@ -11,31 +12,43 @@
 #include "component.h"
 #include "componentMeta.hpp"
 
+/**
+* The factory holds, manages and creates components.
+*/
 class ComponentFactory
 {
-    std::map <std::string, IComponentMeta*> *_components;
+    std::map <std::string, IComponentMeta*> _components;
 public:
-    ComponentFactory();
+    ComponentFactory() = default;
     ~ComponentFactory();
-    /*
-    *Checks for the existance of the specified component.
-    *Param: [in] the name of the component.
-    *Return: true if the component was found, false otherwise.
+    /**
+    * Checks for the existance of the specified component.
+    *
+    * @param [in] the name of the component.
+    * @return true if the component was found, false otherwise.
     */
     BOOL HasComponent(const std::string &name);
-    /*
-    *Registers the component with the factory if it isn't already registered by the same name.
-    *Param: [in] the name of the component.
-    *[in] a function pointer for the creation method of the component.
-    *Returns: True on success, false on failure.
+    /**
+    * Registers the component with the factory if it isn't already registered by the same name.
+    *
+    * @param [in] the name of the component.
+    *@param [in] the component meta.
+    * @return True on success, false on failure.
     */
     BOOL RegisterComponent(const std::string &name, IComponentMeta* meta);
-    /*
-    *Creates the specified component if it's in the registered components.
-    *Param: [in] the name of the component.
-    *Returns: A pointer to the object created, or NULL if the component wasn't created.
+    /**
+    * Creates the specified component if it's in the registered components.
+    *
+    * @param [in] the name of the component.
+    * @returns A newly created component if exists, nullptr otherwise.
     */
     Component* Create(const std::string &name);
+    /**
+    * Returns a component meta given the name of a component.
+    *
+    * @param [in] The name of the component meta.
+    * @return the meta object if exists, nullptr otherwise.
+    */
     IComponentMeta* GetMeta(const std::string &name);
 };
 #endif
