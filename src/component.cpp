@@ -21,9 +21,8 @@ Component::Component(IComponentMeta* parent):_parent(parent)
 }
 Component::Component()
 {
-    _parent = NULL;
+    _parent = nullptr;
 }
-
 Component::~Component()
 {
     events.CallEvent("OnDestroy", NULL, (void*)this);
@@ -48,6 +47,7 @@ BaseObject* Component::GetObject() const
 {
     return _object;
 }
+
 IComponentMeta* Component::GetMeta()
 {
     return _parent;
@@ -56,26 +56,23 @@ IComponentMeta* Component::GetMeta()
 void Component::Attach(BaseObject* obj)
 {
     World* world = World::GetPtr();
-    std::vector<std::string>::iterator it, itEnd;
     std::vector<std::string> dependencies;
-    _parent->GetDependencies(&dependencies);
 
     if (_attached)
         {
             return;
         }
 
-    SetObject(obj);
-
-    itEnd = dependencies.end();
-    for (it = dependencies.begin(); it != itEnd; ++it)
+    _parent->GetDependencies(&dependencies);
+    for (auto it: dependencies)
         {
-            obj->AddComponent(world->CreateComponent((*it)));
+            obj->AddComponent(world->CreateComponent(it));
         }
 
     ComponentAttachedArgs arg(obj);
     events.CallEvent("OnAttach", &arg, (void*)this);
     _attached = true;
+    SetObject(obj);
 }
 void Component::Detach()
 {
@@ -84,7 +81,7 @@ void Component::Detach()
             return;
         }
 
-    SetObject(NULL);
+    SetObject(nullptr);
     _attached = false;
     events.CallEvent("OnDetach", NULL, (void*) this);
 }
