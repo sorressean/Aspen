@@ -3,7 +3,6 @@
 */
 #ifndef DELAYED_EVENT_H
 #define DELAYED_EVENT_H
-#include "conf.h"
 #include "mud.h"
 #include "event.h"
 

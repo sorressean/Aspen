@@ -1,4 +1,3 @@
-#include "conf.h"
 #include "mud.h"
 #include "event.h"
 #include "delayedEvent.h"
@@ -37,7 +36,7 @@ void DelayedEvent::Invoke(EventArgs *args,void* caller)
 //the time between current time and last time elapsed is greater or equal to fire time
     if (celapse>=felapse)
         {
-            for (auto it: *_callbacks)
+            for (auto it: _callbacks)
                 {
                     it->cb(args,caller);
                 }
