@@ -13,6 +13,8 @@ as_scriptengine.cpp as_scriptfunction.cpp as_scriptnode.cpp as_scriptobject.cpp 
 as_string_util.cpp as_thread.cpp as_tokenizer.cpp as_typeinfo.cpp as_variablescope.cpp\
 scriptstdstring.cpp scriptstdstring_utils.cpp scriptarray.cpp
 
+include ../src/extensions/make.inc
+
 O_FILES := $(patsubst %.cpp,%.o, $(filter %.cpp, $(S_FILES)))
 all: $(O_FILES)
 	@echo Building Library

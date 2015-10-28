@@ -5,6 +5,7 @@ AR = ar
 RANLIB = ranlib
 #general build.
 CFLAGS = -I../include -O2 -march=native -s
+include ../src/extensions/make.inc
 
 S_FILES = tinystr.cpp tinyxml.cpp tinyxmlerror.cpp tinyxmlparser.cpp
 O_FILES := $(patsubst %.cpp,%.o, $(filter %.cpp, $(S_FILES)))
