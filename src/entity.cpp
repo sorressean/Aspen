@@ -1,11 +1,10 @@
+#include <tinyxml.h>
 #include <string>
 #include <list>
 #include <map>
 #include <sstream>
-#include <tinyxml.h>
 #include "entity.h"
 #include "world.h"
-#include "room.h"
 #include "eventargs.h"
 #include "event.h"
 #include "eventManager.h"
@@ -14,19 +13,16 @@
 #include "olc.h"
 #include "editor.h"
 #include "objectManager.h"
+#include "room.h"
 #ifdef MODULE_SCRIPTING
 #include "scripts/script.h"
 #endif
 
-Entity::Entity()
+Entity::Entity():
+    _location(nullptr), _parent(nullptr)
 {
-    _location=NULL;
-    _parent = NULL;
     events.RegisterEvent("PostLook", new Event());
     events.RegisterEvent("PreLook",new Event());
-}
-Entity::~Entity()
-{
 }
 
 std::string Entity::GetShort() const
@@ -37,7 +33,6 @@ void Entity::SetShort(const std::string &s)
 {
     _short = s;
 }
-
 
 ObjectContainer* Entity::GetLocation() const
 {
@@ -57,45 +52,6 @@ void Entity::SetParent(StaticObject* parent)
     _parent = parent;
 }
 
-void Entity::Serialize(TiXmlElement* root)
-{
-    TiXmlElement* ent = new TiXmlElement("entity");
-    ObjectContainer::Serialize(ent);
-    _uuid.Serialize(ent);
-
-    ent->SetAttribute("location", (_location?_location->GetOnum():0));
-    ent->SetAttribute("short", _short.c_str());
-    root->LinkEndChild(ent);
-}
-void Entity::Deserialize(TiXmlElement* root)
-{
-    World* world = World::GetPtr();
-    ObjectManager* omanager = world->GetObjectManager();
-    int loc;
-
-    root->Attribute("location", &loc);
-    _uuid.Deserialize(root);
-    _short = root->Attribute("short");
-    if (!loc)
-        {
-            _location=NULL;
-        }
-    else
-        {
-            _location=omanager->GetRoom(loc);
-        }
-
-//and now we notify everything that an object was loaded:
-    world->events.CallEvent("ObjectLoaded", NULL, this);
-    ObjectContainer::Deserialize(root->FirstChild("objc")->ToElement());
-#ifdef MODULE_SCRIPTING
-    /*
-        Script* script = (Script*)world->GetProperty("script");
-        script->Execute(this, GetScript());
-    */
-#endif
-}
-
 BOOL Entity::MoveTo(ObjectContainer* targ)
 {
     if (targ->CanReceive(this))
@@ -108,8 +64,10 @@ BOOL Entity::MoveTo(ObjectContainer* targ)
             targ->ObjectEnter(this);
             return true;
         }
+
     return false;
 }
+
 BOOL Entity::FromRoom()
 {
     Room* loc = (Room*)_location;
@@ -157,4 +115,43 @@ bool InitializeEntityOlcs()
 
     omanager->AddGroup(OLCGROUP::Entity, group);
     return true;
+}
+
+void Entity::Serialize(TiXmlElement* root)
+{
+    TiXmlElement* ent = new TiXmlElement("entity");
+    ObjectContainer::Serialize(ent);
+    _uuid.Serialize(ent);
+
+    ent->SetAttribute("location", (_location?_location->GetOnum():0));
+    ent->SetAttribute("short", _short.c_str());
+    root->LinkEndChild(ent);
+}
+void Entity::Deserialize(TiXmlElement* root)
+{
+    World* world = World::GetPtr();
+    ObjectManager* omanager = world->GetObjectManager();
+    int loc;
+
+    root->Attribute("location", &loc);
+    _uuid.Deserialize(root);
+    _short = root->Attribute("short");
+    if (!loc)
+        {
+            _location=NULL;
+        }
+    else
+        {
+            _location=omanager->GetRoom(loc);
+        }
+
+//and now we notify everything that an object was loaded:
+    world->events.CallEvent("ObjectLoaded", NULL, this);
+    ObjectContainer::Deserialize(root->FirstChild("objc")->ToElement());
+#ifdef MODULE_SCRIPTING
+    /*
+        Script* script = (Script*)world->GetProperty("script");
+        script->Execute(this, GetScript());
+    */
+#endif
 }
