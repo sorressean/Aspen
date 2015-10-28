@@ -1,17 +1,14 @@
-#include <string>
 #include <tinyxml.h>
+#include <string>
 #include "exit.h"
 #include "living.h"
 
-Exit::Exit(VNUM to)
+Exit::Exit(VNUM to):
+    _to(to)
 {
-    _to=to;
 }
-Exit::Exit()
-{
-    _to=EXIT_NOWHERE;
-}
-Exit::~Exit()
+Exit::Exit():
+    _to(EXIT_NOWHERE)
 {
 }
 
