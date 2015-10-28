@@ -19,10 +19,7 @@ Editor::Editor()
 
     _cursor = -1;
     _dirty=false;
-    _arg = NULL;
-}
-Editor::~Editor()
-{
+    _arg = nullptr;
 }
 
 BOOL Editor::Load()
@@ -39,7 +36,13 @@ void Editor::Save()
     events.CallEvent("save", &arg, this);
     return;
 }
-
+void Editor::Abort()
+{
+    _mobile->Message(MSG_INFO,"Aborting.");
+    EditorAbortedArgs arg(this);
+    events.CallEvent("abort", &arg, _mobile);
+    LeaveEditor();
+}
 void Editor::Quit()
 {
     if (!_dirty)
@@ -52,18 +55,10 @@ void Editor::Quit()
             _mobile->Message(MSG_ERROR,"You have not saved your text. Please use \'s\', to save changes, or \'a\', to abort without saving.");
         }
 }
-void Editor::Abort()
-{
-    _mobile->Message(MSG_INFO,"Aborting.");
-    EditorAbortedArgs arg(this);
-    events.CallEvent("abort", &arg, _mobile);
-    LeaveEditor();
-}
 
 void Editor::List(BOOL num)
 {
-    std::vector <std::string>::iterator it, itEnd;
-    int i = 0;
+    int i = 1;
     std::stringstream st;
 
     if (!_lines.size())
@@ -72,8 +67,7 @@ void Editor::List(BOOL num)
             return;
         }
 
-    itEnd = _lines.end();
-    for (i=1,it=_lines.begin(); it != itEnd; i++,++it)
+    for (auto it: _lines)
         {
             if (_cursor == i-1)
                 {
@@ -83,9 +77,11 @@ void Editor::List(BOOL num)
                 {
                     st << i << ": ";
                 }
-            st << (*it) << "\n";
+            st << it << "\n";
+            i++;
         }
     _mobile->Message(MSG_LIST,st.str());
+
     if (_cursor==-1)
         {
             _mobile->Message(MSG_LIST,"||");
@@ -130,7 +126,6 @@ void Editor::Insert(int index)
             _mobile->Message(MSG_ERROR, "Line out of range.");
             return;
         }
-
     if ((index==-1)||(index>=(int)_lines.size()))
         {
             _cursor=-1;
@@ -152,7 +147,6 @@ void Editor::Delete()
             _mobile->Message(MSG_INFO,"Buffer is empty.");
             return;
         }
-
     if (_cursor==-1)
         {
             _lines.erase(_lines.end());
@@ -171,7 +165,6 @@ void Editor::Delete()
 
     _mobile->Message(MSG_INFO,"Line erased.");
 }
-//fixme
 void Editor::Delete(int index)
 {
     std::vector<std::string>::iterator it;
@@ -179,7 +172,7 @@ void Editor::Delete(int index)
 
     if ((index<=0)||(index>(int)_lines.size()))
         {
-            _mobile->Message(MSG_INFO,"Line out of range.");
+            _mobile->Message(MSG_ERROR,"Line out of range.");
             return;
         }
 
@@ -187,12 +180,12 @@ void Editor::Delete(int index)
     advance(it, index-1);
     _lines.erase(it);
     _mobile->Message(MSG_INFO,"Line erased.");
+
     if ((_cursor != -1) && (i < _cursor))
         {
             _cursor--;
         }
 }
-//fixme
 void Editor::Delete(int first, int second)
 {
     int i=0;
@@ -203,7 +196,6 @@ void Editor::Delete(int first, int second)
             _mobile->Message(MSG_ERROR,"Invalid range.");
             return;
         }
-
     if (second==(int)_lines.size())
         {
             second=-1;
@@ -239,6 +231,7 @@ void Editor::LeaveEditor()
     events.CallEvent("atexit", &arg, _mobile);
     delete this;
 }
+
 void Editor::SetArg(void* arg)
 {
     _arg = arg;
@@ -247,6 +240,7 @@ void* Editor::GetArg() const
 {
     return _arg;
 }
+
 std::vector<std::string>* Editor::GetLines()
 {
     return &_lines;
@@ -254,16 +248,15 @@ std::vector<std::string>* Editor::GetLines()
 
 void Editor::Input(void* arg, const std::string &input)
 {
-    if (input=="")
+    int index=0;
+    std::vector <std::string> tokens;
+
+    if (input.empty())
         {
             return;
         }
 
-    int index=0;
-    std::vector <std::string> tokens;
-
     Tokenize(input,tokens);
-
 //a list of lines
     if ((tokens[0]=="l")||(tokens[0]=="list"))
         {
@@ -277,6 +270,7 @@ void Editor::Input(void* arg, const std::string &input)
                 }
             return;
         }
+
 //insertion
     if ((tokens[0]=="i")||(tokens[0]=="insert"))
         {
@@ -296,6 +290,7 @@ void Editor::Input(void* arg, const std::string &input)
                 }
             return;
         }
+
 //delete
     if ((tokens[0]=="delete")||(tokens[0]=="d"))
         {
@@ -320,12 +315,14 @@ void Editor::Input(void* arg, const std::string &input)
                 }
             return;
         }
+
 //abort
     if (tokens[0]=="abort")
         {
             Abort();
             return;
         }
+
 //help
     if ((tokens[0]=="h")||(tokens[0]=="help"))
         {
@@ -341,18 +338,21 @@ void Editor::Input(void* arg, const std::string &input)
             _mobile->Message(MSG_INFO, "s: Save changes.");
             return;
         }
+
 //quit
     if ((tokens[0]=="quit")||(tokens[0]=="q"))
         {
             Quit();
             return;
         }
+
 //save
     if ((tokens[0]=="save")||(tokens[0]=="s"))
         {
             Save();
             return;
         }
+
 //enter text mode
     if (tokens[0] == "t" || tokens[0] == "text")
         {
@@ -364,6 +364,7 @@ void Editor::Input(void* arg, const std::string &input)
                     return;
                 }
         }
+
 //append line
     if (input[0]=='\"')
         {
@@ -389,26 +390,25 @@ void Editor::Input(void* arg, const std::string &input)
 }
 void Editor::TextInput(Socket* sock, std::vector<std::string>* lines, void* args)
 {
-    std::vector<std::string>::iterator it, itEnd;
-    itEnd = lines->end();
     std::vector<std::string>::iterator ins;
 
     if (_cursor == -1)
         {
-            for (it = lines->begin(); it != itEnd; ++it)
+            for (auto it: _lines)
                 {
-                    _lines.push_back((*it));
+                    _lines.push_back(it);
                 }
         }
     else
         {
             ins=_lines.begin();
             advance(ins, _cursor-1);
-            for (it = lines->begin(); it != itEnd; ++it, ++ins)
+            for (auto it: _lines)
                 {
-                    _lines.insert(ins, (*it));
+                    _lines.insert(ins, it);
                 }
         }
+
     _mobile->GetSocket()->ClearInput();
     _mobile->Message(MSG_INFO, "Returning to editor.");
     delete lines;
