@@ -28,7 +28,7 @@ public:
     EventManager events;
 
     Editor();
-    ~Editor() = default;
+    virtual ~Editor() = default;
 
     /**
     * Called to fire the loaded event.
