@@ -40,9 +40,9 @@ room.cpp zone.cpp com_builder.cpp com_movement.cpp ComponentFactory.cpp\
 alias.cpp olc.cpp socials.cpp olcs.cpp callout.cpp\
 option.cpp baseSocket.cpp banList.cpp listener.cpp inputHandlers.cpp\
 property.cpp uuid.cpp olcGroup.cpp olcManager.cpp playerManager.cpp\
-match.cpp calloutManager.cpp optionManager.cpp flag.cpp  objectContainer.cpp\
+match.cpp calloutManager.cpp optionManager.cpp objectContainer.cpp telnetParser.cpp\
 optionMeta.cpp bitfield.cpp attribute.cpp affect.cpp objectManager.cpp\
-page.cpp serializationHelpers.cpp telnetParser.cpp
+page.cpp serializationHelpers.cpp
 
 
 S_TEST_FILES=$(filter-out main.cpp, $(S_FILES))
