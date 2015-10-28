@@ -33,7 +33,6 @@ struct range
 */
 //forward declarations
 //I wanted to avoid these, but it seems I have no choice
-class World;
 class Uuid;
 class Entity;
 class Socket;
