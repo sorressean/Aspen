@@ -1,25 +1,38 @@
 /*
-*This class is used so that external modules can create their own listeners.
-*When we receive data, we will pass it on to the listener to handle.
+*Contains: Listeners
+*
+* Listeners enable external modules to create their own servers.
+* This might be needed to implement a webserver, for example.
 */
 #ifndef LISTENER_H
 #define LISTENER_H
-#include <list>
-#include <sys/ioctl.h>
-#include <sys/socket.h>
-#include <sys/types.h>
 #include <errno.h>
 #include <ctype.h>
+#include <sys/types.h>
+#include <sys/ioctl.h>
+#include <sys/socket.h>
+#include <list>
 #include "mud.h"
-#include "conf.h"
 #include "eventManager.h"
 #include "baseSocket.h"
 #include "event.h"
 
+/**
+* Listeners are endpoints and servers.
+*/
 class Listener
 {
+    /**
+    * Accepts any incoming connections.
+    */
     void Accept();
+    /**
+    * Closes a socket.
+    *
+    * @todo clean this up.
+    */
     std::list<BaseSocket*>::iterator CloseSocket(std::list<BaseSocket*>::iterator &it);
+
     std::list<BaseSocket*> _sockets;
     fd_set fset, rset;
     sockaddr_in _addr;
@@ -28,9 +41,17 @@ public:
     EventManager events;
 
     Listener();
-    ~Listener();
+    ~Listener() = default;
+
+    /**
+    * Establishes the listener on the specified port.
+    *
+    * @param [in] port the port to listen for connections on.
+    */
     BOOL Listen(int port);
+    /**
+    * Update the listener.
+    */
     void Poll();
-    void ReceiveText();
 };
 #endif

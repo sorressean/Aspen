@@ -3,20 +3,29 @@
 #include <list>
 #include <string>
 #include "mud.h"
-#include "conf.h"
 #include "baseSocket.h"
 #include "listener.h"
 #include "world.h"
 #include "event.h"
 
-Listener::Listener()
+std::list<BaseSocket*>::iterator Listener::CloseSocket(std::list<BaseSocket*>::iterator &it)
 {
-    _control = -1;
+    BaseSocket* tmp = (*it);
+    tmp->Flush();
+    tmp->Close();
+    // clear the sockets descriptor from the listening set
+    FD_CLR(tmp->GetControl(), &fset);
+    // and finally delete the socket
+    delete tmp;
+//remove the socket.
+    return _sockets.erase(it);
+}
+
+Listener::Listener():
+    _control(-1)
+{
     FD_ZERO(&fset);
     FD_ZERO(&rset);
-}
-Listener::~Listener()
-{
 }
 
 void Listener::Accept()
@@ -26,7 +35,6 @@ void Listener::Accept()
     int arg = 0;
 
     memset(&addr, 0, sizeof(addr));
-
     if (!FD_ISSET(_control, &rset))
         {
             return;
@@ -45,18 +53,6 @@ void Listener::Accept()
     _sockets.push_back(sock);
     FD_SET(fd, &fset);
     memcpy(sock->GetAddr(),&addr,sizeof(sockaddr_in));
-}
-std::list<BaseSocket*>::iterator Listener::CloseSocket(std::list<BaseSocket*>::iterator &it)
-{
-    BaseSocket* tmp = (*it);
-    tmp->Flush();
-    tmp->Close();
-    // clear the sockets descriptor from the listening set
-    FD_CLR(tmp->GetControl(), &fset);
-    // and finally delete the socket
-    delete tmp;
-//remove the socket.
-    return _sockets.erase(it);
 }
 
 BOOL Listener::Listen(int port)
@@ -85,7 +81,6 @@ BOOL Listener::Listen(int port)
             close(_control);
             return false;
         }
-
     if (listen(_control, LISTEN_BACKLOG) == -1)
         {
             close(_control);
