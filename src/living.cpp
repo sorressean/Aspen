@@ -1,17 +1,16 @@
+#include <tinyxml.h>
+#include "mud.h"
 #include "living.h"
 #include "event.h"
 #include "delayedEvent.h"
 #include "world.h"
-#include <tinyxml.h>
 
 Living::Living()
 {
     events.RegisterEvent("HeartBeat", new DelayedEvent(LIVING_PULSE,0));
+
     _position = POSITION::standing;
-    _gender = Gender::Female;
-}
-Living::~Living()
-{
+    _gender = Gender::Neuter;
 }
 
 void Living::EnterGame()
@@ -25,6 +24,7 @@ void Living::Update()
 {
     events.CallEvent("HeartBeat", NULL, (void*)this);
 }
+
 BOOL Living::IsLiving() const
 {
     return true;

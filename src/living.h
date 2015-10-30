@@ -1,20 +1,23 @@
-/*
-*The main living class
-*Holds functions needed for both players and mobs.
+/**
+* Contains: Living
 */
 #pragma once
 #ifndef LIVING_H
 #define LIVING_H
+#include <tinyxml.h>
 #include <queue>
 #include <vector>
-#include <tinyxml.h>
 #include "mud.h"
-#include "conf.h"
 #include "event.h"
 #include "entity.h"
 #include "attribute.h"
 #include "affect.h"
 
+/**
+* Affect comparison.
+*
+* This functor is used to compare affects in the priority queue.
+*/
 struct _aff_comp
 {
     bool operator()(Affect* a, Affect* b)
@@ -23,12 +26,18 @@ struct _aff_comp
     }
 };
 
+/**
+* Gender of the object.
+*/
 enum class Gender
 {
     Male=1,
-    Female
+    Female, Neuter
 };
 
+/**
+* Objects which should be sentient or alive (players, NPCS) should inherit this.
+*/
 class Living:public Entity
 {
     POSITION _position;
@@ -40,25 +49,26 @@ class Living:public Entity
     std::list<Living*> _followers;
 public:
     Living();
-    virtual ~Living();
-    /*
-    *This is called when an object enters or leaves the game environment
+    virtual ~Living() = default;
+
+    /**
+    * This is called when an object enters or leaves the game environment
     */
     virtual void EnterGame();
+/**
+* This is called when the object leaves the game environment.
+*/
     virtual void LeaveGame();
-    /*
-    *This is updated on a set interval to keep the objects up-to-date.
-    *This includes heartbeat, removing uneeded objects, etc.
-    */
-    virtual void Update();
 
-    /*
-    *Find out what type of living this is
-    *Return: False
-    *Note: Should overwrite this for player and NPC objects to return true for each object.
-    */
-    virtual BOOL IsLiving() const;
-    /*getters and setters*/
+/**
+* This is called whenever the living is pulsed.
+*/
+    virtual void Update();
+/**
+* Overwritten to note that this is a living object.
+*/
+BOOL IsLiving() const;
+
     Gender GetGender() const;
     void SetGender(Gender gender);
     bool AddAttribute(Attribute* attr);
