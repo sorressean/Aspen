@@ -4,7 +4,7 @@ OUTPUT=../lib/libtinyxml.a
 AR = ar
 RANLIB = ranlib
 #general build.
-CFLAGS = -I../include -O2 -march=native -s -std=c++11
+CFLAGS = -I../include -O0 -march=native -s -std=c++11
 include ../src/extensions/make.inc
 
 S_FILES = tinyxml2.cpp

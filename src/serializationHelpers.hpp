@@ -41,7 +41,7 @@ bool SerializeList(const std::string& parent, tinyxml2::XMLElement* root, C& con
 template <class O, class C>
 bool DeserializeList(tinyxml2::XMLElement* root, const std::string &parent, C& objects)
 {
-    DeserializeCollection(root, parent, [objects](tinyxml2::XMLElement* visitor) mutable
+    DeserializeCollection(root, parent, [&objects](tinyxml2::XMLElement* visitor) mutable
     {
         O* obj = new O();
         obj->Deserialize(visitor);
