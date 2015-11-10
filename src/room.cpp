@@ -188,7 +188,7 @@ void Room::Serialize(tinyxml2::XMLElement* root)
     room->SetAttribute("y", _coord.y);
     room->SetAttribute("z", _coord.z);
 
-            SerializeList<Exit*, std::vector<Exit*>>("exits", room, _exits);
+    SerializeList<Exit*, std::vector<Exit*>>("exits", room, _exits);
 
     ObjectContainer::Serialize(room);
     root->InsertEndChild(room);
