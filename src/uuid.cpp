@@ -1,10 +1,10 @@
-#include <random>
-#include <chrono>
-#include "uuid.h"
+#include <tinyxml2.h>
 #include <string>
 #include <sstream>
 #include <iomanip>
-#include <tinyxml.h>
+#include <random>
+#include <chrono>
+#include "uuid.h"
 #include "serializationHelpers.h"
 
 Uuid::Uuid()
@@ -38,21 +38,20 @@ unsigned long long int Uuid::GetValue() const
     return _id;
 }
 
-void Uuid::Serialize(TiXmlElement* root)
+void Uuid::Serialize(tinyxml2::XMLElement* root)
 {
-    TiXmlElement* node = new TiXmlElement("uuid");
+    tinyxml2::XMLDocument* doc = root->ToDocument();
+    tinyxml2::XMLElement* node = doc->NewElement("uuid");
     SerializeLong(node, _id);
-    root->LinkEndChild(node);
+    root->InsertEndChild(node);
 }
-void Uuid::Deserialize(TiXmlElement* root)
+void Uuid::Deserialize(tinyxml2::XMLElement* root)
 {
-    TiXmlNode* node = NULL;
-    TiXmlElement* element = NULL;
+    tinyxml2::XMLElement* element = nullptr;
 
-    node = root->FirstChild("uuid");
-    if (node)
+    element = root->FirstChildElement("uuid");
+    if (element)
         {
-            element = node->ToElement();
             _id = DeserializeLong(root);
         }
 }

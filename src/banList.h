@@ -5,6 +5,7 @@
 */
 #ifndef BAN_LIST_H
 #define BAN_LIST_H
+#include <tinyxml2.h>
 #include <vector>
 #include "mud.h"
 #include "conf.h"
@@ -53,7 +54,7 @@ public:
     */
     void ListAddresses(std::vector<std::string> *addresses);
 
-    void Serialize(TiXmlElement* root);
-    void Deserialize(TiXmlElement* root);
+    void Serialize(tinyxml2::XMLElement* root);
+    void Deserialize(tinyxml2::XMLElement* root);
 };
 #endif

@@ -1,11 +1,13 @@
 #pragma once
 #ifndef STATIC_OBJECT_H
 #define STATIC_OBJECT_H
+#include <tinyxml2.h>
 #include "conf.h"
 #include "mud.h"
 #include "baseObject.h"
 #include "olc.h"
 #include "componentMeta.hpp"
+
 class Npc;
 class StaticObject:public BaseObject
 {
@@ -28,8 +30,8 @@ public:
     Entity* Create();
     BOOL Recycle(Entity* obj);
     BOOL RecycleContents();
-    virtual void Serialize(TiXmlElement* root);
-    virtual void Deserialize(TiXmlElement* root);
+    virtual void Serialize(tinyxml2::XMLElement* root);
+    virtual void Deserialize(tinyxml2::XMLElement* root);
 };
 
 BOOL InitializeStaticObjectOlcs();

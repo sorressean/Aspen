@@ -1,4 +1,4 @@
-#include <tinyxml.h>
+#include <tinyxml2.h>
 #include <vector>
 #include "board.h"
 #include "boardManager.h"
@@ -49,11 +49,10 @@ Board* BoardManager::GetBoardByIndex(int index)
 
 void BoardManager::Serialize(TiXmlElement* root)
 {
-    SerializeList<Board, std::vector<Board*>, std::vector<Board*>::iterator>("boards", "board", root, _boards);
+    SerializeList<Board, std::vector<Board*>>("boards", "board", root, _boards);
 }
 void BoardManager::Deserialize(TiXmlElement* root)
 {
-    DeserializeList<Board, std::vector<Board*> >(root, "boards", _boards);
+    DeserializeList<Board, std::vector<Board*>>(root, "boards", _boards);
 }
-
 #endif

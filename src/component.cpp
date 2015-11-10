@@ -1,5 +1,5 @@
+#include <tinyxml2.h>
 #include <vector>
-#include <tinyxml.h>
 #include "component.h"
 #include "exception.h"
 #include "eventargs.h"
@@ -28,12 +28,12 @@ Component::~Component()
     events.CallEvent("OnDestroy", NULL, (void*)this);
 }
 
-void Component::Serialize(TiXmlElement* root)
+void Component::Serialize(tinyxml2::XMLElement* root)
 {
     root->SetAttribute("name", _parent->GetName().c_str());
     variables.Serialize(root);
 }
-void Component::Deserialize(TiXmlElement* root)
+void Component::Deserialize(tinyxml2::XMLElement* root)
 {
 //we need to pull the name in entity when we deserialize, so we don't need that here.
     variables.Deserialize(root);

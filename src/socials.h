@@ -10,7 +10,6 @@
 */
 #ifndef SOCIALS_H
 #define SOCIALS_H
-#include <tinyxml.h>
 #include <string>
 #include <map>
 #include "mud.h"

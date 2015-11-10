@@ -1,4 +1,4 @@
-#include <tinyxml.h>
+#include <tinyxml2.h>
 #include <string>
 #include <map>
 #include "socials.h"
@@ -24,7 +24,6 @@ void Socials::Initialize()
 }
 Socials::~Socials()
 {
-
     for (auto it:_slist)
         {
             delete it.second;
@@ -33,17 +32,16 @@ Socials::~Socials()
 
 void Socials::Save()
 {
-    TiXmlDocument doc;
-    TiXmlElement* socials = new TiXmlElement("socials");
-    TiXmlElement* social = NULL;
-    TiXmlDeclaration *decl = new TiXmlDeclaration("1.0", "", "");
-    doc.LinkEndChild(decl);
+    tinyxml2::XMLDocument doc;
+    tinyxml2::XMLElement* socials = doc.NewElement("socials");
+    tinyxml2::XMLElement* social = nullptr;
     SOCIAL_DATA* sdata = NULL;
+    doc.InsertEndChild(doc.NewDeclaration());
 
     for (auto it: _slist)
         {
             sdata = it.second;
-            social = new TiXmlElement("social");
+            social = doc.NewElement("social");
             social->SetAttribute("id", sdata->id);
             social->SetAttribute("name", sdata->name.c_str());
             social->SetAttribute("ynotarg", sdata->ynotarg.c_str());
@@ -51,20 +49,20 @@ void Socials::Save()
             social->SetAttribute("ttarg", sdata->ttarg.c_str());
             social->SetAttribute("rtarg", sdata->rtarg.c_str());
             social->SetAttribute("ytarg", sdata->ytarg.c_str());
-            socials->LinkEndChild(social);
+            socials->InsertEndChild(social);
         }
-    doc.LinkEndChild(socials);
+
+    doc.InsertEndChild(socials);
     doc.SaveFile(SOCIALS_FILE);
 }
 void Socials::Load()
 {
     World* world = World::GetPtr();
     int id = 0;
-    TiXmlDocument doc(SOCIALS_FILE);
-    TiXmlElement* socials = NULL;
-    TiXmlElement* social = NULL;
-    TiXmlNode* node = NULL;
-    SOCIAL_DATA* data = NULL;
+    tinyxml2::XMLDocument doc;
+    tinyxml2::XMLElement* socials = nullptr;
+    tinyxml2::XMLElement* social = nullptr;
+    SOCIAL_DATA* data = nullptr;
 
     if (!FileExists(SOCIALS_FILE))
         {
@@ -76,23 +74,20 @@ void Socials::Load()
             return;
         }
 
-    if (!doc.LoadFile())
+    if (!doc.LoadFile(SOCIALS_FILE))
         {
             world->WriteLog("Could not load XML socials file.");
             return;
         }
 
-    node = doc.FirstChild("socials");
-    if (node)
+    socials = doc.FirstChildElement("socials");
+    if (socials)
         {
-            socials = node->ToElement();
 
-            for (node = socials->FirstChild(); node; node = node->NextSibling())
+            for (social = socials->FirstChildElement(); social; social = social->NextSiblingElement())
                 {
-                    social = node->ToElement();
                     data = new SOCIAL_DATA();
-                    social->Attribute("id", &id);
-                    data->id = id;
+                    data->id = social->IntAttribute("id");
                     data->name = social->Attribute("name");
                     data->ynotarg = social->Attribute("ynotarg");
                     data->rnotarg = social->Attribute("rnotarg");
@@ -100,13 +95,12 @@ void Socials::Load()
                     data->rtarg = social->Attribute("rtarg");
                     data->ytarg = social->Attribute("ytarg");
 
-                    if ((unsigned int)id > (unsigned int)_socid)
+                    if (id > _socid)
                         {
                             _socid = id+1;
                         }
 
                     _slist[data->name] = data;
-                    data = NULL;
                 }
         }
 }

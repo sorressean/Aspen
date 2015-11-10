@@ -11,10 +11,10 @@
 */
 #ifndef COMPONENT_H
 #define COMPONENT_H
+#include <tinyxml2.h>
 #include <string>
 #include <vector>
 #include <functional>
-#include <tinyxml.h>
 #include "mud.h"
 #include "conf.h"
 #include "entity.h"
@@ -42,8 +42,8 @@ public:
     Component(IComponentMeta* parent);
     Component();
     virtual ~Component();
-    virtual void Serialize(TiXmlElement* root);
-    virtual void Deserialize(TiXmlElement* root);
+    virtual void Serialize(tinyxml2::XMLElement* root);
+    virtual void Deserialize(tinyxml2::XMLElement* root);
 
     /**
     * Sets the object that this component is attached to.

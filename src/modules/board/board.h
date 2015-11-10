@@ -3,7 +3,7 @@
 *Holds posts for a single board etc.
 */
 #pragma once
-#include <tinyxml.h>
+#include <tinyxml2.h>
 #include <vector>
 #include <string>
 #include "../../mud.h"
@@ -28,8 +28,8 @@ public:
     void AddPost(BoardPost* post);
     std::vector<BoardPost*>* GetPosts();
     BoardPost* GetPostByIndex(int index);
-    void Serialize(TiXmlElement* root);
-    void Deserialize(TiXmlElement* root);
+    void Serialize(tinyxml2::XMLElement* root);
+    void Deserialize(tinyxml2::XMLElement* root);
 };
 
 #endif

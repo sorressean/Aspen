@@ -1,3 +1,4 @@
+#include <tinyxml2.h>
 #include <vector>
 #include <string>
 #include "mud.h"
@@ -5,6 +6,7 @@
 #include "alias.h"
 #include "player.h"
 #include "world.h"
+#include "serializationHelpers.h"
 
 Alias::Alias(const std::string& name):
     _name(name)
@@ -49,33 +51,25 @@ void Alias::ListCommands(std::vector<std::string>& commands)
         }
 }
 
-void Alias::Serialize(TiXmlElement* root)
+void Alias::Serialize(tinyxml2::XMLElement* root)
 {
-    TiXmlElement* alias = new TiXmlElement("alias");
-    TiXmlElement* commands = new TiXmlElement("commands");
+    tinyxml2::XMLDocument* doc = root->ToDocument();
+    tinyxml2::XMLElement* alias = doc->NewElement("alias");
+
     alias->SetAttribute("name", _name.c_str());
 
-    for (auto it: _aliases)
-        {
-            TiXmlElement* command = new TiXmlElement("command");
-            command->SetAttribute("value", it.c_str());
-            commands->LinkEndChild(command);
-        }
-    alias->LinkEndChild(commands);
+    SerializeCollection<std::vector<std::string>, std::string>("commands", "command", root, _aliases, [this](tinyxml2::XMLElement* visitor, std::string command)
+    {
+        visitor->SetAttribute("value", command.c_str());
+    });
     root->LinkEndChild(alias);
 }
-void Alias::Deserialize(TiXmlElement* root)
+void Alias::Deserialize(tinyxml2::XMLElement* root)
 {
-    TiXmlElement* commands = nullptr;
-    TiXmlNode* node = NULL;
-    std::string val;
     _name = root->Attribute("name");
 
-    commands = root->FirstChild("commands")->ToElement();
-    for (node = commands->FirstChild(); node; node = node->NextSibling())
-        {
-            TiXmlElement* command = node->ToElement();
-            val = command->Attribute("value");
-            _aliases.push_back(val);
-        }
+    DeserializeCollection(root, "commands", [this](tinyxml2::XMLElement* visitor)
+    {
+        _aliases.push_back(visitor->Attribute("value"));
+    });
 }

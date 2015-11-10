@@ -1,4 +1,4 @@
-#include <tinyxml.h>
+#include <tinyxml2.h>
 #include <string>
 #include <list>
 #include <map>
@@ -117,28 +117,29 @@ bool InitializeEntityOlcs()
     return true;
 }
 
-void Entity::Serialize(TiXmlElement* root)
+void Entity::Serialize(tinyxml2::XMLElement* root)
 {
-    TiXmlElement* ent = new TiXmlElement("entity");
+    tinyxml2::XMLDocument* doc = root->ToDocument();
+    tinyxml2::XMLElement* ent = doc->NewElement("entity");
     ObjectContainer::Serialize(ent);
     _uuid.Serialize(ent);
 
     ent->SetAttribute("location", (_location?_location->GetOnum():0));
     ent->SetAttribute("short", _short.c_str());
-    root->LinkEndChild(ent);
+    root->InsertEndChild(ent);
 }
-void Entity::Deserialize(TiXmlElement* root)
+void Entity::Deserialize(tinyxml2::XMLElement* root)
 {
     World* world = World::GetPtr();
     ObjectManager* omanager = world->GetObjectManager();
-    int loc;
+    int loc = 0;
 
-    root->Attribute("location", &loc);
-    _uuid.Deserialize(root);
+    loc = root->IntAttribute("location");
     _short = root->Attribute("short");
+
     if (!loc)
         {
-            _location=NULL;
+            _location=nullptr;
         }
     else
         {
@@ -147,7 +148,9 @@ void Entity::Deserialize(TiXmlElement* root)
 
 //and now we notify everything that an object was loaded:
     world->events.CallEvent("ObjectLoaded", NULL, this);
-    ObjectContainer::Deserialize(root->FirstChild("objc")->ToElement());
+
+    _uuid.Deserialize(root);
+    ObjectContainer::Deserialize(root->FirstChildElement("objc"));
 #ifdef MODULE_SCRIPTING
     /*
         Script* script = (Script*)world->GetProperty("script");

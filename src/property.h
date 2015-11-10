@@ -4,12 +4,12 @@
 #pragma once
 #ifndef _PROPERTY_HPP
 #define _PROPERTY_HPP
-#include "mud.h"
-#include "conf.h"
-#include <tinyxml.h>
-#include "variant.h"
+#include <tinyxml2.h>
 #include <vector>
 #include <string>
+#include "mud.h"
+#include "conf.h"
+#include "variant.h"
 
 class Property
 {
@@ -44,7 +44,7 @@ public:
     void RemoveProperty(Property *prop);
     // Finds a Property based on its name.
     Property *FindProperty(const std::string &name);
-    void Serialize(TiXmlElement *root);
-    void Deserialize(TiXmlElement* root, Property* parent = NULL);
+    void Serialize(tinyxml2::XMLElement *root);
+    void Deserialize(tinyxml2::XMLElement* root, Property* parent = NULL);
 };
 #endif /* _Property_HPP */

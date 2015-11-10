@@ -1,13 +1,12 @@
 #ifndef HELP_TABLE_H
 #define HELP_TABLE_H
+#include <tinyxml2.h>
+#include <vector>
+#include <string>
 #include "../mud.h"
 #include "../conf.h"
 #include "../player.h"
 #include "HelpEntry.h"
-#include <vector>
-#include <string>
-#include <tinyxml.h>
-
 #ifdef MODULE_HELP
 class HelpTable
 {

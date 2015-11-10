@@ -4,7 +4,7 @@
 #pragma once
 #ifndef LIVING_H
 #define LIVING_H
-#include <tinyxml.h>
+#include <tinyxml2.h>
 #include <queue>
 #include <vector>
 #include "mud.h"
@@ -55,19 +55,19 @@ public:
     * This is called when an object enters or leaves the game environment
     */
     virtual void EnterGame();
-/**
-* This is called when the object leaves the game environment.
-*/
+    /**
+    * This is called when the object leaves the game environment.
+    */
     virtual void LeaveGame();
 
-/**
-* This is called whenever the living is pulsed.
-*/
+    /**
+    * This is called whenever the living is pulsed.
+    */
     virtual void Update();
-/**
-* Overwritten to note that this is a living object.
-*/
-BOOL IsLiving() const;
+    /**
+    * Overwritten to note that this is a living object.
+    */
+    BOOL IsLiving() const;
 
     Gender GetGender() const;
     void SetGender(Gender gender);
@@ -80,7 +80,7 @@ BOOL IsLiving() const;
     */
     bool CanFollow(Living* follower);
 
-    virtual void Serialize(TiXmlElement* root);
-    virtual void Deserialize(TiXmlElement* root);
+    virtual void Serialize(tinyxml2::XMLElement* root);
+    virtual void Deserialize(tinyxml2::XMLElement* root);
 };
 #endif

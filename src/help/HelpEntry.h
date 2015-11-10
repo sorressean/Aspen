@@ -1,11 +1,10 @@
 #ifndef HELP_ENTRY_H
 #define HELP_ENTRY_H
-#include "../mud.h"
-#include "../conf.h"
+#include <tinyxml2.h>
 #include <string>
 #include <vector>
-#include <tinyxml.h>
-
+#include "../mud.h"
+#include "../conf.h"
 #ifdef MODULE_HELP
 enum class HelpType
 {
@@ -122,12 +121,12 @@ public:
     *Serializes the entry into the xml element.
     *Param: [in] the root xml element to append entries to.
     */
-    void Serialize(TiXmlElement* root);
+    void Serialize(tinyxml2::XMLElement* root);
     /*
     *Retrieves help entry data from the specified XML entry.
     *Param: [in] the element where the data is to be retrieved from.
     */
-    void Deserialize(TiXmlElement* entry);
+    void Deserialize(tinyxml2::XMLElement* entry);
 };
 
 #endif

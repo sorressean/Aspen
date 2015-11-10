@@ -7,7 +7,7 @@
 #pragma once
 #ifndef BASE_OBJECT_H
 #define BASE_OBJECT_H
-#include <tinyxml.h>
+#include <tinyxml2.h>
 #include <list>
 #include <string>
 #include "mud.h"
@@ -168,8 +168,8 @@ public:
     std::vector<std::string>* GetAliases();
 //TODO: finish docs when this code is cleaned.
     virtual std::string Identify(Player* mobile);
-    virtual void Serialize(TiXmlElement* root);
-    virtual void Deserialize(TiXmlElement* root);
+    virtual void Serialize(tinyxml2::XMLElement* root);
+    virtual void Deserialize(tinyxml2::XMLElement* root);
     virtual void Copy(BaseObject* obj) const;
     virtual std::string DoLook(Player* mobile);
     virtual BOOL IsPlayer() const;

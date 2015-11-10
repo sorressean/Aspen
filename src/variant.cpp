@@ -1,4 +1,4 @@
-#include <tinyxml.h>
+#include <tinyxml2.h>
 #include "variant.h"
 #include "exception.h"
 #include "world.h"
@@ -233,9 +233,10 @@ void Variant::SetType(VARIABLE_TYPE t)
     type = t;
 }
 
-void Variant::Serialize(TiXmlElement* root)
+void Variant::Serialize(tinyxml2::XMLElement* root)
 {
-    TiXmlElement* var = new TiXmlElement("variable");
+    tinyxml2::XMLDocument* doc = root->ToDocument();
+    tinyxml2::XMLElement* var = doc->NewElement("variable");
     var->SetAttribute("type", (int)Typeof());
 
     switch (type)
@@ -250,7 +251,7 @@ void Variant::Serialize(TiXmlElement* root)
             var->SetAttribute("value", str.c_str());
             break;
         case VAR_DOUBLE:
-            var->SetDoubleAttribute("value", d);
+            var->SetAttribute("value", d);
             break;
         case VAR_EMPTY:
             var->SetAttribute("value", 0);
@@ -259,29 +260,25 @@ void Variant::Serialize(TiXmlElement* root)
 //should we error here?
             break;
         }
-    root->LinkEndChild(var);
+    root->InsertEndChild(var);
 }
-void Variant::Deserialize(TiXmlElement* var)
+void Variant::Deserialize(tinyxml2::XMLElement* var)
 {
-    int tmp;
-
-    var->Attribute("type", &tmp);
-    type = (VARIABLE_TYPE)tmp;
+    type = (VARIABLE_TYPE)(var->IntAttribute("type"));
 
     switch (type)
         {
         case VAR_INT:
-            var->Attribute("value", &i32);
+            i32 = var->IntAttribute("value");
             break;
         case VAR_BYTE:
-            var->Attribute("value", &tmp);
-            byte = (char)tmp;
+            byte = (char)var->IntAttribute("value");
             break;
         case VAR_STR:
             str = var->Attribute("value");
             break;
         case VAR_DOUBLE:
-            var->Attribute("value", &d);
+            d = var->DoubleAttribute("value");
             break;
         case VAR_EMPTY:
             break;

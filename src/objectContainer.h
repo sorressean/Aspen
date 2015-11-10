@@ -1,4 +1,5 @@
 #pragma once
+#include <tinyxml2.h>
 #include <list>
 #include "mud.h"
 #include "conf.h"
@@ -31,6 +32,6 @@ public:
     */
     virtual void ObjectEnter(Entity* obj);
     virtual void ObjectLeave(Entity* obj);
-    virtual void Serialize(TiXmlElement* root);
-    virtual void Deserialize(TiXmlElement* root);
+    virtual void Serialize(tinyxml2::XMLElement* root);
+    virtual void Deserialize(tinyxml2::XMLElement* root);
 };

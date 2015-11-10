@@ -3,10 +3,9 @@
 *It allows the user to specify the type for the variable.
 *Also allows for serialization and deserialization, so they can be stored.
 */
-
 #ifndef VARIANT_H
 #define VARIANT_H
-#include <tinyxml.h>
+#include <tinyxml2.h>
 #include "mud.h"
 #include "conf.h"
 #include "exception.h"
@@ -140,8 +139,8 @@ public:
     void SetType(VARIABLE_TYPE t);
 
 //serialization
-    void Serialize(TiXmlElement* var);
-    void Deserialize(TiXmlElement* var);
+    void Serialize(tinyxml2::XMLElement* var);
+    void Deserialize(tinyxml2::XMLElement* var);
 //math operator overloads:
 //prefix ++ and --
     Variant& operator ++();

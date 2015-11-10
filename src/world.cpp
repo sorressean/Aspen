@@ -1,3 +1,4 @@
+#include <tinyxml2.h>
 #include <sys/stat.h>
 #include <sys/types.h>
 #include <dirent.h>
@@ -10,7 +11,6 @@
 #include <string>
 #include <cstring>
 #include <ctime>
-#include <tinyxml.h>
 #include "world.h"
 #include "channel.h"
 #include "player.h"
@@ -752,21 +752,20 @@ BOOL World::StateExists(const std::string &name)
 
 BOOL World::SaveState()
 {
-    std::map<std::string, ISerializable*>::iterator sit, sitEnd;
-    TiXmlElement* element = NULL;
-    sitEnd = _state.end();
-    for (sit = _state.begin(); sit != sitEnd; ++sit)
+    tinyxml2::XMLElement* element = nullptr;
+
+    for (auto sit: _state)
         {
-            TiXmlDocument doc;
-            TiXmlDeclaration *decl = new TiXmlDeclaration("1.0", "", "");
-            doc.LinkEndChild(decl);
-            element = new TiXmlElement("state");
-            element->SetAttribute("name", (*sit).first.c_str());
-            (*sit).second->Serialize(element);
-            doc.LinkEndChild(element);
-            doc.SaveFile((std::string(STATE_DIR)+std::string((*sit).first)).c_str());
-            element = NULL;
+            tinyxml2::XMLDocument doc;
+            doc.InsertEndChild(doc.NewDeclaration());
+            element = doc.NewElement("state");
+            element->SetAttribute("name", sit.first.c_str());
+            sit.second->Serialize(element);
+            doc.InsertEndChild(element);
+            doc.SaveFile((STATE_DIR+sit.first).c_str());
+            element = nullptr;
         }
+
     return true;
 }
 BOOL World::LoadState()
@@ -786,21 +785,21 @@ BOOL World::LoadState()
                 {
                     continue;
                 }
-            TiXmlDocument doc((std::string(STATE_DIR)+std::string(dir->d_name)).c_str());
+
+            tinyxml2::XMLDocument doc;
             std::string name;
-            if (!doc.LoadFile())
+            if (!doc.LoadFile((std::string(STATE_DIR)+dir->d_name).c_str()))
                 {
                     WriteLog("Could not load"+std::string(dir->d_name)+" state file.", WARN);
                     closedir(statedir);
                     return false;
                 }
 
-            TiXmlElement* root = doc.FirstChild("state")->ToElement();
+            tinyxml2::XMLElement* root = doc.FirstChildElement("state")->ToElement();
             name = root->Attribute("name");
             if (!StateExists(name))
                 {
-                    WriteLog("Could not find a matching registered state for "+name+" in the state register. This state will not be deserialized.",
-                             WARN);
+                    WriteLog("Could not find a matching registered state for "+name+" in the state register. This state will not be deserialized.", WARN);
                     continue;
                 }
             else

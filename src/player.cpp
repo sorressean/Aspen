@@ -1,7 +1,7 @@
+#include <tinyxml2.h>
 #include <openssl/sha.h>
 #include <cstdarg>
 #include <cmath>
-#include <tinyxml.h>
 #include <map>
 #include <string>
 #include <sstream>
@@ -39,8 +39,6 @@ Player::Player()
     _lastBackup = 0;
     _watching = NULL;
     _watchers = new std::list<Player*>();
-//config defaults:
-    _config=new std::vector<Option*>();
 
 //messages:
     _messages=new std::map<MessageType,std::string>();
@@ -63,16 +61,10 @@ Player::~Player()
             _messages=NULL;
         }
 
-    for (Option* oit:*_config)
+    for (Option* oit: _config)
         {
             delete oit;
         }
-    if (_config)
-        {
-            delete _config;
-            _config=nullptr;
-        }
-
     delete _watchers;
 }
 
@@ -80,75 +72,49 @@ BOOL Player::IsPlayer() const
 {
     return true;
 }
-void Player::SerializeDoc(TiXmlDocument* doc)
+void Player::Serialize(tinyxml2::XMLElement* root)
 {
-    TiXmlDeclaration *decl = new TiXmlDeclaration("1.0", "", "");
-    doc->LinkEndChild(decl);
-    TiXmlElement* root = new TiXmlElement("player");
-    Serialize(root);
-    doc->LinkEndChild(root);
-}
-void Player::Serialize(TiXmlElement* root)
-{
-    OptionMeta* ometa = nullptr;
+    using tinyxml2::XMLElement;
+
+    tinyxml2::XMLDocument* doc = root->GetDocument();
     std::string name;
 
 //password info
-    TiXmlElement* password = new TiXmlElement("password");
+    XMLElement* password = doc->NewElement("password");
     password->SetAttribute("value", _password.c_str());
     password->SetAttribute("invalid", _invalidPassword);
-    root->LinkEndChild(password);
+    root->InsertEndChild(password);
 
 //time info
-    TiXmlElement* timeinfo = new TiXmlElement("timeinfo");
-    timeinfo->SetAttribute("firstLogin", _firstLogin);
-    timeinfo->SetAttribute("onlineTime", _onlineTime);
-    timeinfo->SetAttribute("lastLogin", _lastLogin);
-    root->LinkEndChild(timeinfo);
+    XMLElement* timeinfo = doc->NewElement("timeinfo");
+    timeinfo->SetAttribute("firstLogin", (unsigned int)_firstLogin);
+    timeinfo->SetAttribute("onlineTime", (unsigned int)_onlineTime);
+    timeinfo->SetAttribute("lastLogin", (unsigned int)_lastLogin);
+    root->InsertEndChild(timeinfo);
 
-//options
-    TiXmlElement* options = new TiXmlElement("options");
-    if (_config->size())
-        {
-//we serialize if there is actually something to serialize.
-            for (Option* opt:*_config)
-                {
-                    ometa = opt->GetMeta();
-                    /*     if (ometa->GetValue() == opt->GetValue())
-                             {
-                                 continue;
-                             }*/
-                    TiXmlElement* option = new TiXmlElement("option");
-                    name =/* OptionSectionToString(ometa->GetSection()) + "." +*/ ometa->GetName();
-                    option->SetAttribute("name", name.c_str());
-                    opt->GetValue().Serialize(option);
-                    options->LinkEndChild(option);
-                }
-        }
-    root->LinkEndChild(options);
+    SerializeCollection<std::vector<Option*>, Option*>("options", "option", root, _config, [](tinyxml2::XMLElement* element, Option* opt)
+    {
+        OptionMeta* ometa = opt->GetMeta();
+        std::string name = ometa->GetName();
+        element->SetAttribute("name", name.c_str());
+        opt->GetValue().Serialize(element);
+    });
 
     root->SetAttribute("title", _title.c_str());
     root->SetAttribute("prompt", _prompt.c_str());
     root->SetAttribute("rank", _rank);
     root->SetAttribute("pflag", _pflag);
     Living::Serialize(root);
-    /*	delete option;
-    	delete options;
-    	delete timeinfo;
-    	delete password;*/
 }
-void Player::Deserialize(TiXmlElement* root)
+void Player::Deserialize(tinyxml2::XMLElement* root)
 {
+    using tinyxml2::XMLElement;
+
+    XMLElement* ent = nullptr;
     World* world = World::GetPtr();
     OptionManager* omanager = world->GetOptionManager();
     Option* opt = nullptr;
     OptionMeta* ometa = nullptr;
-    int tmp = 0;
-    TiXmlElement* password = NULL;
-    TiXmlElement* tinfo = NULL;
-    TiXmlElement* option = NULL;
-    TiXmlElement* options = NULL;
-    TiXmlNode* node = NULL;
     Variant var;
     std::string name;
 
@@ -157,53 +123,40 @@ void Player::Deserialize(TiXmlElement* root)
             throw(FileLoadException("Error loading file: player element was not found."));
         }
 
-    node = root->FirstChild("password");
-    if (!node)
+    ent = root->FirstChildElement("password");
+    if (!ent)
         {
             throw(FileLoadException("Error loading file: password element was not found."));
         }
-    password = node->ToElement();
-    _password = password->Attribute("value");
-    password->Attribute("invalid", &_invalidPassword);
+    _password = ent->Attribute("value");
+    _invalidPassword = ent->IntAttribute("invalid");
 
-    node = root->FirstChild("timeinfo");
-    if (!node)
+    ent = root->FirstChildElement("timeinfo");
+    if (!ent)
         {
             throw(FileLoadException("Could not find timeinfo element."));
         }
-    tinfo = node->ToElement();
-    tinfo->Attribute("firstLogin", &tmp);
-    _firstLogin = tmp;
-    tinfo->Attribute("onlineTime", &tmp);
-    _onlineTime = tmp;
-    tinfo->Attribute("lastLogin", &tmp);
-    _lastLogin = tmp;
+    _firstLogin = ent->IntAttribute("firstLogin");
+    _onlineTime = ent->IntAttribute("onlineTime");
+    _lastLogin =ent->IntAttribute("lastLogin");
 
-    node = root->FirstChild("options")->ToElement();
-    if (!node)
-        {
-            throw(FileLoadException("Error: options node was not found."));
-        }
-    options = node->ToElement();
-//now we iterate through the options list, and pull in the options to deserialize.
-    for (node = options->FirstChild(); node; node = node->NextSibling())
-        {
-            option = node->ToElement();
-            name = option->Attribute("name");
-            ometa = omanager->GetOption(name);
-            if (ometa)
-                {
-                    var.Deserialize(option->FirstChild("variable")->ToElement());
-                    opt = new Option(ometa, var);
-                    _config->push_back(opt);
-                }
-        }
+    DeserializeCollection(root, "options", [=](XMLElement* cur) mutable
+    {
+        name = cur->Attribute("name");
+        ometa = omanager->GetOption(name);
+        if (ometa)
+            {
+                var.Deserialize(cur->FirstChildElement("variable"));
+                opt = new Option(ometa, var);
+                _config.push_back(opt);
+            }
+    });
 
     _title = root->Attribute("title");
     _prompt = root->Attribute("prompt");
-    root->Attribute("rank", &_rank);
-    root->Attribute("pflag", &_pflag);
-    Living::Deserialize(root->FirstChild("living")->ToElement());
+    _rank = root->IntAttribute("rank");
+    _pflag = root->IntAttribute("pflag");
+    Living::Deserialize(root->FirstChildElement("living"));
 }
 
 void Player::SetSocket(Socket* sock)
@@ -278,13 +231,15 @@ BOOL Player::Save(BOOL force)
                 {
                     return false;
                 }
-
             _lastSave = time(NULL);
         }
 
-    TiXmlDocument doc;
-    SerializeDoc(&doc);
-    doc.SaveFile((std::string(PLAYER_DIR)+GetName()).c_str());
+    tinyxml2::XMLDocument doc;
+    doc.InsertEndChild(doc.NewDeclaration());
+    tinyxml2::XMLElement* root = doc.NewElement("player");
+    Serialize(root);
+    doc.InsertEndChild(root);
+    doc.SaveFile((PLAYER_DIR + GetName()).c_str());
     return true;
 }
 BOOL Player::Backup()
@@ -293,20 +248,19 @@ BOOL Player::Backup()
         {
             return false;
         }
-
-    TiXmlDocument doc;
-    SerializeDoc(&doc);
-    doc.SaveFile((std::string(BACKUP_DIR)+GetName()).c_str());
+    /**
+    * @todo update to make save take a backup param.
+    */
     return true;
 }
 void Player::Load()
 {
-    TiXmlDocument doc((std::string(PLAYER_DIR)+GetName()).c_str());
-    if (!doc.LoadFile())
+    tinyxml2::XMLDocument doc;
+    if (!doc.LoadFile((std::string(PLAYER_DIR)+GetName()).c_str()))
         {
             throw(FileLoadException("Error loading "+(std::string(PLAYER_DIR)+GetName())+"."));
         }
-    TiXmlElement* root = doc.FirstChild("player")->ToElement();
+    tinyxml2::XMLElement* root = doc.FirstChildElement("player");
     Deserialize(root);
 }
 
@@ -465,13 +419,13 @@ void Player::SetOption(const std::string &option, Variant &val)
             if (ometa->GetValue().Typeof() == val.Typeof())
                 {
                     opt = new Option(ometa, val);
-                    _config->push_back(opt);
+                    _config.push_back(opt);
                 }
         }
 }
 Option* Player::GetOption(const std::string &option) const
 {
-    for (Option* opt:*_config)
+    for (Option* opt: _config)
         {
             if (opt->GetMeta()->GetName() == option)
                 {
@@ -484,7 +438,7 @@ Option* Player::GetOption(const std::string &option) const
 
 BOOL Player::OptionExists(const std::string &option) const
 {
-    for (Option* opt: *_config)
+    for (Option* opt: _config)
         {
             if (opt->GetMeta()->GetName() == option)
                 {
@@ -516,7 +470,7 @@ BOOL Player::ToggleOption(const std::string &option)
                             temp = 1;
                         }
                     node = new Option(ometa, Variant(temp));
-                    _config->push_back(node);
+                    _config.push_back(node);
                     OptionChangedArgs arg(node);
                     events.CallEvent("OptionChanged", &arg, this);
                 }
@@ -543,9 +497,9 @@ BOOL Player::ToggleOption(const std::string &option)
 
     return false;
 }
-std::vector<Option*>* Player::GetOptions() const
+std::vector<Option*>* Player::GetOptions()
 {
-    return _config;
+    return &_config;
 }
 
 BOOL Player::HasAccess(FLAG access) const

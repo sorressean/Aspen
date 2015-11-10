@@ -1,3 +1,4 @@
+#include <tinyxml2.h>
 #include <string>
 #include "../modules.h"
 #include "../../mud.h"
@@ -51,21 +52,21 @@ void BoardPost::SetPoster(Player* mobile)
     _pid = mobile->GetUuid();
 }
 
-void BoardPost::Serialize(TiXmlElement* root)
+void BoardPost::Serialize(tinyxml2::XMLElement* root)
 {
-    TiXmlElement* post = new TiXmlElement("post");
+    tinyxml2::XMLDocument* doc = root->ToDocument();
+    tinyxml2::XMLElement* post = doc->NewElement("post");
     post->SetAttribute("subject", _subject.c_str());
     post->SetAttribute("message", _message.c_str());
     post->SetAttribute("poster", _poster.c_str());
     _pid.Serialize(post);
-    root->LinkEndChild(post);
+    root->InsertEndChild(post);
 }
-void BoardPost::Deserialize(TiXmlElement* root)
+void BoardPost::Deserialize(tinyxml2::XMLElement* root)
 {
     _pid.Deserialize(root);
     _subject = root->Attribute("subject");
     _message = root->Attribute("message");
     _poster = root->Attribute("poster");
 }
-
 #endif

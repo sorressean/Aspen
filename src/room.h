@@ -3,9 +3,9 @@
 */
 #ifndef ROOM_H
 #define ROOM_H
+#include <tinyxml2.h>
 #include <list>
 #include <string>
-#include <tinyxml.h>
 #include "mud.h"
 #include "conf.h"
 #include "entity.h"
@@ -92,8 +92,8 @@ public:
     void SetCoord(point& coord);
     BOOL IsRoom() const;
 //serialization
-    virtual void Serialize(TiXmlElement* root);
-    virtual void Deserialize(TiXmlElement* node);
+    virtual void Serialize(tinyxml2::XMLElement* root);
+    virtual void Deserialize(tinyxml2::XMLElement* node);
     void ObjectEnter(Entity* obj);
     void ObjectLeave(Entity* obj);
     std::string TellObviousExits();

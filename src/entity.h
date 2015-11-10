@@ -6,7 +6,7 @@
 #pragma once
 #ifndef ENTITY_H
 #define ENTITY_H
-#include <tinyxml.h>
+#include <tinyxml2.h>
 #include <list>
 #include <map>
 #include <string>
@@ -100,8 +100,8 @@ public:
     virtual std::string Identify(Player* mob);
     virtual BOOL IsObject() const;
 
-    virtual void Serialize(TiXmlElement* root);
-    virtual void Deserialize(TiXmlElement* root);
+    virtual void Serialize(tinyxml2::XMLElement* root);
+    virtual void Deserialize(tinyxml2::XMLElement* root);
 };
 
 /**

@@ -3,15 +3,15 @@
 */
 #ifndef SERIALIZER_H
 #define SERIALIZER_H
+#include <tinyxml2.h>
 #include "mud.h"
 #include "conf.h"
-#include <tinyxml.h>
 
 class ISerializable
 {
 public:
     virtual ~ISerializable() { }
-    virtual void Serialize(TiXmlElement* root) = 0;
-    virtual void Deserialize(TiXmlElement* root) = 0;
+    virtual void Serialize(tinyxml2::XMLElement* root) = 0;
+    virtual void Deserialize(tinyxml2::XMLElement* root) = 0;
 };
 #endif

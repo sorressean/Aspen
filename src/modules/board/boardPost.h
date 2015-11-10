@@ -1,5 +1,5 @@
 #pragma once
-#include <tinyxml.h>
+#include <tinyxml2.h>
 #include <string>
 #include "../../mud.h"
 #include "../../conf.h"
@@ -26,8 +26,8 @@ public:
     std::string GetPoster() const;
     BOOL IsPoster(Player* mobile);
     void SetPoster(Player* mobile);
-    void Serialize(TiXmlElement* root);
-    void Deserialize(TiXmlElement* root);
+    void Serialize(tinyxml2::XMLElement* root);
+    void Deserialize(tinyxml2::XMLElement* root);
 };
 
 #endif

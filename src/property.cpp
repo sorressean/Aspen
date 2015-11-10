@@ -1,10 +1,12 @@
-#include <tinyxml.h>
+#include <tinyxml2.h>
+#include <vector>
+#include <string>
 #include "mud.h"
 #include "conf.h"
 #include "property.h"
 #include "variant.h"
-#include <vector>
-#include <string>
+#include "serializationHelpers.h"
+
 
 Property::Property(const std::string &name, const Variant& value, Property* parent):
     _name(name), _value(value), _parent(parent)
@@ -172,30 +174,25 @@ Property* Property::FindProperty(const std::string &name)
     return NULL;
 }
 
-void Property::Serialize(TiXmlElement *root)
+void Property::Serialize(tinyxml2::XMLElement *root)
 {
-    std::vector<Property*>::iterator it, itEnd;
+    tinyxml2::XMLDocument* doc = root->ToDocument();
+    tinyxml2::XMLElement *prop = doc->NewElement("property");
 
-    TiXmlElement *prop = new TiXmlElement("property");
-    prop->SetAttribute("name", _name.c_str());
-    _value.Serialize(prop);
     if (_children.size())
         {
-            itEnd = _children.end();
-            for (it = _children.begin(); it != itEnd; ++it)
-                {
-                    (*it)->Serialize(prop);
-                }
+            SerializeList<Property, std::vector<Property*>>("property", root, _children);
         }
 
-    root->LinkEndChild(prop);
+    prop->SetAttribute("name", _name.c_str());
+    _value.Serialize(prop);
 }
-void Property::Deserialize(TiXmlElement* root, Property* parent)
+void Property::Deserialize(tinyxml2::XMLElement* root, Property* parent)
 {
-    TiXmlElement* property = NULL;
-    TiXmlNode *node = NULL;
+    tinyxml2::XMLElement* property = nullptr;
+    tinyxml2::XMLElement* child = nullptr;
     Property prop;
-    const char* val = NULL;
+    const char* val = nullptr;
 
     val = root->Attribute("name");
     if (val)
@@ -203,17 +200,17 @@ void Property::Deserialize(TiXmlElement* root, Property* parent)
             _name = val;
         }
 
-    node = root->FirstChild("variable");
-    if (node)
+    property = root->FirstChildElement("property");
+    if (property)
         {
-            _value.Deserialize(node->ToElement());
+            _value.Deserialize(property);
+        }
+
+    for (child = root->FirstChildElement("variable"); child; child = child->NextSiblingElement())
+        {
+            prop = Property();
+            prop.Deserialize(child, this);
         }
 
     SetParent(parent);
-    for (node = root->FirstChild(); node; node = node->NextSibling())
-        {
-            property = node->ToElement();
-            prop = Property();
-            prop.Deserialize(property, this);
-        }
 }

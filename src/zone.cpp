@@ -1,4 +1,4 @@
-#include <tinyxml.h>
+#include <tinyxml2.h>
 #include <dirent.h>
 #include <sys/stat.h>
 #include <string>
@@ -368,37 +368,34 @@ void Zone::Update()
 {
 }
 
-void Zone::Serialize(TiXmlElement* root)
+void Zone::Serialize(tinyxml2::XMLElement* root)
 {
     root->SetAttribute("name", _name.c_str());
     root->SetAttribute("flags", _flags);
-    root->SetAttribute("creation", _creation);
-    root->SetAttribute("opened", _opened);
+    root->SetAttribute("creation", (unsigned int)_creation);
+    root->SetAttribute("opened", (unsigned int)_opened);
     root->SetAttribute("resetmsg", _resetmsg.c_str());
-    root->SetAttribute("resetfreq", _resetfreq);
+    root->SetAttribute("resetfreq", (unsigned int)_resetfreq);
     root->SetAttribute("minvnum", _vnumrange.min);
     root->SetAttribute("maxvnum", _vnumrange.max);
 
-    SerializeList<StaticObject, std::vector<StaticObject*>, std::vector<StaticObject*>::iterator>("vobjes", "vobj", root, _virtualobjs);
-    SerializeList<Room, std::vector<Room*>, std::vector<Room*>::iterator>("rooms", "room", root, _roomobjs);
-    SerializeList<Npc, std::vector<Npc*>, std::vector<Npc*>::iterator>("npcs", "npc", root, _mobobjs);
+    SerializeList<StaticObject, std::vector<StaticObject*>>("vobjes", "vobj", root, _virtualobjs);
+    SerializeList<Room, std::vector<Room*>>("rooms", "room", root, _roomobjs);
+    SerializeList<Npc, std::vector<Npc*>>("npcs", "npc", root, _mobobjs);
 }
-void Zone::Deserialize(TiXmlElement* zone)
+void Zone::Deserialize(tinyxml2::XMLElement* zone)
 {
-    unsigned int u = 0;
     World* world = World::GetPtr();
     ObjectManager* omanager = world->GetObjectManager();
 
     _name = zone->Attribute("name");
-    zone->Attribute("flags", &_flags);
-    zone->Attribute("creation", &u);
-    _creation = u;
-    zone->Attribute("opened", &u);
-    _opened = u;
+    _flags = (int)zone->IntAttribute("flags");
+    _creation = (time_t)zone->IntAttribute("creation");
+    _opened = (time_t)zone->IntAttribute("opened");
     _resetmsg = zone->Attribute("resetmsg");
-    zone->Attribute("resetfreq", &_resetfreq);
-    zone->Attribute("minvnum", &(_vnumrange.min));
-    zone->Attribute("maxvnum", &(_vnumrange.max));
+    _resetfreq = (time_t)zone->Attribute("resetfreq");
+    _vnumrange.min = zone->IntAttribute("minvnum");
+    _vnumrange.max = zone->IntAttribute("maxvnum");
 
     DeserializeList<StaticObject, std::vector<StaticObject*> >(zone, "vobjes", _virtualobjs);
     DeserializeList<Room, std::vector<Room*> >(zone, "rooms", _roomobjs);
@@ -487,12 +484,11 @@ BOOL Zone::SaveZones()
         {
             for (Zone* zone:*zones)
                 {
-                    TiXmlDocument doc;
-                    TiXmlElement* zelement = new TiXmlElement("zone");
-                    TiXmlDeclaration *decl = new TiXmlDeclaration("1.0", "", "");
-                    doc.LinkEndChild(decl);
+                    tinyxml2::XMLDocument doc;
+                    tinyxml2::XMLElement* zelement = doc.NewElement("zone");
+                    doc.InsertEndChild(doc.NewDeclaration());
                     zone->Serialize(zelement);
-                    doc.LinkEndChild(zelement);
+                    doc.InsertEndChild(zelement);
                     path = AREA_DIR+zone->GetName();
                     Lower(path);
                     doc.SaveFile(path.c_str());
@@ -505,9 +501,8 @@ BOOL Zone::LoadZones()
 {
     World* world = World::GetPtr();
     Zone* zone=nullptr;
-    TiXmlElement* root = nullptr;
-    TiXmlNode* node = nullptr;
-    dirent* cdir = NULL;
+    tinyxml2::XMLElement* root = nullptr;
+    dirent* cdir = nullptr;
     DIR* dir = opendir(AREA_DIR);
 
     if (!dir)
@@ -522,22 +517,21 @@ BOOL Zone::LoadZones()
                     continue;
                 }
 
-            TiXmlDocument doc((std::string(AREA_DIR)+cdir->d_name).c_str());
-            if (!doc.LoadFile())
+            tinyxml2::XMLDocument doc;
+            if (!doc.LoadFile((AREA_DIR+std::string(cdir->d_name)).c_str()))
                 {
                     closedir(dir);
                     return false;
                 }
 
             zone = new Zone();
-            node = doc.FirstChild("zone");
-            if (!node)
+            root = doc.FirstChildElement("zone");
+            if (!root)
                 {
                     closedir(dir);
                     return false;
                 }
 
-            root = node->ToElement();
             zone->Deserialize(root);
             world->AddZone(zone);
         }

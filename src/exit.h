@@ -5,7 +5,7 @@
 */
 #ifndef EXIT_H
 #define EXIT_H
-#include <tinyxml.h>
+#include <tinyxml2.h>
 #include <string>
 #include "mud.h"
 #include "living.h"
@@ -59,7 +59,7 @@ public:
     */
     virtual BOOL CanEnter(Living* mobile);
 
-    virtual void Serialize(TiXmlElement* root);
-    virtual void Deserialize(TiXmlElement* node);
+    virtual void Serialize(tinyxml2::XMLElement* root);
+    virtual void Deserialize(tinyxml2::XMLElement* node);
 };
 #endif

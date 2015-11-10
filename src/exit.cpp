@@ -1,4 +1,4 @@
-#include <tinyxml.h>
+#include <tinyxml2.h>
 #include <string>
 #include "exit.h"
 #include "living.h"
@@ -60,20 +60,17 @@ BOOL Exit::CanEnter(Living* mobile)
     return true;
 }
 
-void Exit::Serialize(TiXmlElement* root)
+void Exit::Serialize(tinyxml2::XMLElement* root)
 {
-    TiXmlElement* node = new TiXmlElement("exit");
+    tinyxml2::XMLDocument* doc = root->ToDocument();
+    tinyxml2::XMLElement* node = doc->NewElement("exit");
 
-    int tmp = (int)_direction;
-    node->SetAttribute("direction", tmp);
+    node->SetAttribute("direction", _direction);
     node->SetAttribute("to", _to);
-    root->LinkEndChild(node);
+    root->InsertEndChild(node);
 }
-void Exit::Deserialize(TiXmlElement* node)
+void Exit::Deserialize(tinyxml2::XMLElement* node)
 {
-    int tmp = 0;
-
-    node->Attribute("to", &_to);
-    node->Attribute("direction", &tmp);
-    _direction = (ExitDirection)tmp;
+    _to = node->IntAttribute("to");
+    _direction = (ExitDirection)node->IntAttribute("direction");
 }

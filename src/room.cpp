@@ -1,8 +1,8 @@
+#include <tinyxml2.h>
 #include <sstream>
 #include <string>
 #include <list>
 #include <functional>
-#include <tinyxml.h>
 #include "room.h"
 #include "living.h"
 #include "exit.h"
@@ -178,11 +178,10 @@ BOOL Room::IsRoom() const
     return true;
 }
 
-void Room::Serialize(TiXmlElement* root)
+void Room::Serialize(tinyxml2::XMLElement* root)
 {
-    TiXmlElement* room = new TiXmlElement("room");
-    TiXmlElement* exits = new TiXmlElement("exits");
-    ObjectContainer::Serialize(room);
+    tinyxml2::XMLDocument* doc = root->ToDocument();
+    tinyxml2::XMLElement* room = doc->NewElement("room");
 
     room->SetAttribute("rflag", _rflag);
     room->SetAttribute("x", _coord.x);
@@ -191,37 +190,21 @@ void Room::Serialize(TiXmlElement* root)
 
     if (_exits.size())
         {
-            for (auto it: _exits)
-                {
-                    it->Serialize(exits);
-                }
+            SerializeList<Exit*, std::vector<Exit*>>("exits", room, _exits);
         }
-    room->LinkEndChild(exits);
 
-    root->LinkEndChild(room);
+    ObjectContainer::Serialize(room);
+    root->InsertEndChild(room);
 }
-void Room::Deserialize(TiXmlElement* room)
+void Room::Deserialize(tinyxml2::XMLElement* room)
 {
-    TiXmlElement* exit = NULL;
-    TiXmlElement* exits = NULL;
-    TiXmlNode* node = NULL;
-    Exit* ex = NULL;
+    _rflag = room->IntAttribute("rflag");
+    _coord.x = room->IntAttribute("x");
+    _coord.y = room->IntAttribute("y");
+    _coord.z = room->IntAttribute("z");
 
-    room->Attribute("rflag", &_rflag);
-    room->Attribute("x", &_coord.x);
-    room->Attribute("y", &_coord.y);
-    room->Attribute("z", &_coord.z);
-    exits = room->FirstChild("exits")->ToElement();
-    for (node = exits->FirstChild(); node; node = node->NextSibling())
-        {
-            exit = node->ToElement();
-            ex = new Exit();
-            ex->Deserialize(exit);
-            _exits.push_back(ex);
-            ex = NULL;
-        }
-
-    ObjectContainer::Deserialize(room->FirstChild("objc")->ToElement());
+    DeserializeList<Exit, std::vector<Exit*>>(room, "exits", _exits);
+    ObjectContainer::Deserialize(room->FirstChildElement("objc"));
 }
 
 void Room::ObjectEnter(Entity* obj)

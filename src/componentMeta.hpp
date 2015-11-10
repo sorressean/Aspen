@@ -7,7 +7,7 @@
 #pragma once
 #ifndef COMPONENT_META_H
 #define COMPONENT_META_H
-#include <tinyxml.h>
+#include <tinyxml2.h>
 #include <algorithm>
 #include <string>
 #include <vector>
@@ -15,8 +15,10 @@
 #include "conf.h"
 #include "olcGroup.h"
 #include "olc.h"
+#include "serializer.h"
+#include "serializationHelpers.h"
 
-class IComponentMeta
+class IComponentMeta:public ISerializable
 {
 public:
     virtual ~IComponentMeta() { }
@@ -26,8 +28,6 @@ public:
     virtual     BOOL AddDependency(const std::string &dependency) = 0;
     virtual     void GetDependencies(std::vector<std::string>* out) const = 0;
     virtual OLCGROUP GetOlcGroup() const = 0;
-    virtual void Serialize(TiXmlElement* root) = 0;
-    virtual void Deserialize(TiXmlElement* root) = 0;
 };
 
 template <class T>
@@ -119,43 +119,23 @@ public:
     {
         return OLCGROUP::NONE;
     }
-    virtual void Serialize(TiXmlElement* root)
+    virtual void Serialize(tinyxml2::XMLElement* root)
     {
-        TiXmlElement* ent = new TiXmlElement("cmeta");
-        TiXmlElement* dependencies = new TiXmlElement("dependencies");
-        TiXmlElement* dependency = NULL;
-        std::vector<std::string>::iterator it, itEnd;
-
+        tinyxml2::XMLDocument* doc = root->ToDocument();
+        tinyxml2::XMLElement* ent = doc->NewElement("cmeta");
         ent->SetAttribute("name", _name.c_str());
 
-        itEnd = _dependencies.end();
-        for (it = _dependencies.begin(); it != itEnd; ++it)
-            {
-                dependency = new TiXmlElement("dependency");
-                dependency->SetAttribute("name", (*it).c_str());
-                dependencies->LinkEndChild(dependency);
-            }
-        ent->LinkEndChild(dependencies);
-
-        root->LinkEndChild(ent);
+        SerializeList<std::string, std::vector<std::string>>("dependencies", "dependency", ent, _dependencies);
+        root->InsertEndChild(ent);
     }
-    virtual void Deserialize(TiXmlElement* root)
+    virtual void Deserialize(tinyxml2::XMLElement* root)
     {
-        TiXmlNode* node = NULL;
-        TiXmlElement* dependency = NULL;
-        TiXmlElement *dependencies = NULL;
         _name = root->Attribute("name");
 
-        node = root->FirstChild("dependencies");
-        if (node)
-            {
-                dependencies = node->ToElement();
-                for (node = dependencies->FirstChild(); node; node = node->NextSibling())
-                    {
-                        dependency = node->ToElement();
-                        AddDependency(dependency->Attribute("name"));
-                    }
-            }
+        DeserializeCollection(root, "dependencies", [this](tinyxml2::XMLElement* visitor)
+        {
+            AddDependency(visitor->Attribute("name"));
+        });
     }
 };
 #endif

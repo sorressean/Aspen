@@ -1,10 +1,10 @@
+#include <tinyxml2.h>
+#include <string>
+#include <vector>
 #include "../mud.h"
 #include "../conf.h"
 #include "../utils.h"
 #include "HelpEntry.h"
-#include <string>
-#include <vector>
-
 #ifdef MODULE_HELP
 HelpEntry::HelpEntry(const std::string &name, const std::string &data, FLAG access, HelpType type):_name(name), _data(data), _access(access), _type(type)
 {
@@ -157,28 +157,25 @@ void HelpEntry::UpdateAccess(FLAG access)
     SetAccess(access);
 }
 
-void HelpEntry::Serialize(TiXmlElement* root)
+void HelpEntry::Serialize(tinyxml2::XMLElement* root)
 {
-    TiXmlElement* entry = new TiXmlElement("entry");
+    tinyxml2::XMLDocument* doc = root->ToDocument();
+    tinyxml2::XMLElement* entry = doc->NewElement("entry");
     entry->SetAttribute("name", _name.c_str());
     entry->SetAttribute("data", _data.c_str());
     entry->SetAttribute("type", (int)_type);
     entry->SetAttribute("access", _access);
-    entry->SetAttribute("lastModified", _lastModified);
+    entry->SetAttribute("lastModified", (unsigned int)_lastModified);
     entry->SetAttribute("id", _id);
-    root->LinkEndChild(entry);
+    root->InsertEndChild(entry);
 }
-void HelpEntry::Deserialize(TiXmlElement* entry)
+void HelpEntry::Deserialize(tinyxml2::XMLElement* entry)
 {
-    int tmp = 0;
-
     _name = entry->Attribute("name");
     _data = entry->Attribute("data");
-    entry->Attribute("access", &_access);
-    entry->Attribute("type", &tmp);
-    _type = (HelpType)tmp;
-    tmp = (int)_lastModified;
-    entry->Attribute("lastModified", &tmp);
-    entry->Attribute("id", (int*)&_id);
+    _access = entry->IntAttribute("access");
+    _type = (HelpType)entry->IntAttribute("type");
+    _lastModified = (time_t)entry->IntAttribute("lastModified");
+    _id = entry->IntAttribute("id");
 }
 #endif

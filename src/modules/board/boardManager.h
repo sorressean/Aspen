@@ -1,5 +1,5 @@
 #pragma once
-#include <tinyxml.h>
+#include <tinyxml2.h>
 #include <vector>
 #include "board.h"
 #include "../modules.h"
@@ -18,8 +18,8 @@ public:
     void AddBoard(Board* board);
     void GetBoards(std::vector<Board*>* boards);
     Board* GetBoardByIndex(int index);
-    void Serialize(TiXmlElement* root);
-    void Deserialize(TiXmlElement* root);
+    void Serialize(tinyxml2::XMLElement* root);
+    void Deserialize(tinyxml2::XMLElement* root);
 };
 
 #endif

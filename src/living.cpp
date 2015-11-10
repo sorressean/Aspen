@@ -1,4 +1,4 @@
-#include <tinyxml.h>
+#include <tinyxml2.h>
 #include "mud.h"
 #include "living.h"
 #include "event.h"
@@ -65,18 +65,17 @@ void Living::FindAttribute(int type, std::vector<Attribute*>& results)
         }
 }
 
-void Living::Serialize(TiXmlElement* root)
+void Living::Serialize(tinyxml2::XMLElement* root)
 {
-    TiXmlElement* node = new TiXmlElement("living");
+    tinyxml2::XMLDocument* doc = root->ToDocument();
+    tinyxml2::XMLElement* node = doc->NewElement("living");
+
     node->SetAttribute("gender", (int)_gender);
     Entity::Serialize(node);
-    root->LinkEndChild(node);
+    root->InsertEndChild(node);
 }
-void Living::Deserialize(TiXmlElement* root)
+void Living::Deserialize(tinyxml2::XMLElement* root)
 {
-    int temp = 0;
-
-    root->Attribute("gender", &temp);
-    _gender = (Gender)temp;
-    Entity::Deserialize(root->FirstChild("entity")->ToElement());
+    _gender = (Gender)root->IntAttribute("gender");
+    Entity::Deserialize(root->FirstChildElement("entity"));
 }

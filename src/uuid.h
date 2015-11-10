@@ -1,5 +1,5 @@
 #pragma once
-#include <tinyxml.h>
+#include <tinyxml2.h>
 #include <string>
 
 class Uuid
@@ -13,8 +13,8 @@ public:
     void Initialize();
     std::string ToString() const;
     unsigned long long int GetValue() const;
-    void Serialize(TiXmlElement* root);
-    void Deserialize(TiXmlElement* root);
+    void Serialize(tinyxml2::XMLElement* root);
+    void Deserialize(tinyxml2::XMLElement* root);
     Uuid& operator =(Uuid& u);
     bool operator ==(Uuid& u);
 };

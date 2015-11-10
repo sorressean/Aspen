@@ -37,7 +37,7 @@ class Player:public Living
     time_t _lastLogin;
     time_t _lastSave;
     time_t _lastBackup;
-    std::vector<Option*> *_config;
+    std::vector<Option*> _config;
     std::map <MessageType,std::string> *_messages;
     Socket *_sock;
     Player* _watching;
@@ -55,9 +55,8 @@ public:
     *Functions to load and retrieve player data from their file
     *param: [in] the TiXml document.
     */
-    void SerializeDoc(TiXmlDocument* doc);
-    virtual void Serialize(TiXmlElement* root);
-    virtual void Deserialize(TiXmlElement* root);
+    virtual void Serialize(tinyxml2::XMLElement* root);
+    virtual void Deserialize(tinyxml2::XMLElement* root);
     /*
     *Getters and setters
     *Exposes the properties that can be set on the player object.
@@ -151,7 +150,7 @@ public:
     *Param: [in] The name of the option.
     */
     BOOL ToggleOption(const std::string &option);
-    std::vector<Option*>* GetOptions() const;
+    std::vector<Option*>* GetOptions();
     /*
     *Checks to see if the player has the specified rank.
     *Param: [in] The rank to check for.

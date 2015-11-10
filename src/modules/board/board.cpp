@@ -1,4 +1,4 @@
-#include <tinyxml.h>
+#include <tinyxml2.h>
 #include <string>
 #include <vector>
 #include "board.h"
@@ -59,19 +59,18 @@ BoardPost* Board::GetPostByIndex(int index)
 }
 void Board::Serialize(TiXmlElement* root)
 {
-    TiXmlElement* board = new TiXmlElement("board");
+    tinyxml2::XMLDocument* doc = root->ToDocument();
+    tinyxml2::XMLElement* board = doc->NewElement("board");
     board->SetAttribute("name", _name.c_str());
     board->SetAttribute("access", _access);
-    SerializeList<BoardPost, std::vector<BoardPost*>, std::vector<BoardPost*>::iterator>("posts", "post", board, _posts);
-    root->LinkEndChild(board);
+    SerializeList<BoardPost, std::vector<BoardPost*>>("posts", "post", board, _posts);
+    root->InsertEndChild(board);
 }
 void Board::Deserialize(TiXmlElement* board)
 {
     unsigned int flag = 0;
     _name = board->Attribute("name");
-    board->Attribute("access", &flag);
-    _access = flag;
-
+    _access = board->IntAttribute("access");
     DeserializeList<BoardPost, std::vector<BoardPost*> >(board, "posts", _posts);
 }
 #endif

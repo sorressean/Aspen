@@ -1,41 +1,69 @@
 #pragma once
-#include <tinyxml.h>
+#include <tinyxml2.h>
+#include <functional>
 #include <string>
 
-template <class O, class C, class I>
-bool SerializeList(const std::string& parent, const std::string& nodename, TiXmlElement* root, C& container)
-{
-    I it, itEnd;
-    TiXmlElement* pnode = new TiXmlElement(parent.c_str());
+bool SerializeLong(tinyxml2::XMLElement* parent, unsigned long long int val);
+unsigned long long int DeserializeLong(tinyxml2::XMLElement* parent);
+void DeserializeCollection(tinyxml2::XMLElement* root, const std::string& name, std::function<void (tinyxml2::XMLElement*)> cb);
 
-    itEnd = container.end();
-    for (it = container.begin(); it != itEnd; ++it)
+template <class O, class C>
+bool SerializeList(const std::string& parent, const std::string& nodename, tinyxml2::XMLElement* root, C& container)
+{
+    tinyxml2::XMLDocument* doc = root->ToDocument();
+    tinyxml2::XMLElement* pnode = doc->NewElement(parent.c_str());
+    tinyxml2::XMLElement* cur = nullptr;
+
+    for (auto it: container)
         {
-            (*it)->Serialize(pnode);
+            cur = doc->NewElement(nodename.c_str());
+            it->Serialize(cur);
+            pnode->InsertEndChild(cur);
         }
-    root->LinkEndChild(pnode);
+
+    root->InsertEndChild(pnode);
+    return true;
+}
+template <class O, class C>
+bool SerializeList(const std::string& parent, tinyxml2::XMLElement* root, C& container)
+{
+    tinyxml2::XMLDocument* doc = root->ToDocument();
+    tinyxml2::XMLElement* pnode = doc->NewElement(parent.c_str());
+
+    for (auto it: container)
+        {
+            it->Serialize(pnode);
+        }
+    root->InsertEndChild(pnode);
     return true;
 }
 
 template <class O, class C>
-bool DeserializeList(TiXmlElement* root, const std::string &parent, C& objects)
+bool DeserializeList(tinyxml2::XMLElement* root, const std::string &parent, C& objects)
 {
-    TiXmlNode* node = NULL;
-    TiXmlElement* element = NULL;
-    TiXmlElement* pnode = NULL;
-    O* obj = NULL;
+    DeserializeCollection(root, parent, [objects](tinyxml2::XMLElement* visitor) mutable
+    {
+        O* obj = new O();
+        obj->Deserialize(visitor);
+        objects.push_back(obj);
+    });
 
-    node = root->FirstChild(parent.c_str());
-    if (node)
-        {
-            pnode = node->ToElement();
-            for (node = pnode->FirstChild(); node; node=node->NextSibling())
-                {
-                    element = node->ToElement();
-                    obj = new O();
-                    obj->Deserialize(element);
-                    objects.push_back(obj);
-                }
-        }
     return true;
+}
+
+template <class C, class E>
+void SerializeCollection(const std::string& colname, const std::string& name, tinyxml2::XMLElement* root, C& container, std::function<void (tinyxml2::XMLElement*, E&)> cb)
+{
+    tinyxml2::XMLDocument* doc = root->ToDocument();
+    tinyxml2::XMLElement* collection = doc->NewElement(colname.c_str());
+    tinyxml2::XMLElement* item = nullptr;
+
+    for (auto it: container)
+        {
+            item = doc->NewElement(name.c_str());
+            cb(item, it);
+            collection->InsertEndChild(item);
+        }
+
+    root->InsertEndChild(collection);
 }

@@ -1,9 +1,8 @@
+#include <tinyxml2.h>
 #include <string>
-#include <tinyxml.h>
 #include <arpa/inet.h>
 #include "mud.h"
 #include "conf.h"
-#include "serializer.h"
 #include "banList.h"
 
 BOOL BanList::AddAddress(const std::string &address)
@@ -88,38 +87,37 @@ void BanList::ListAddresses(std::vector<std::string>* addresses)
         }
 }
 
-void BanList::Serialize(TiXmlElement* root)
+void BanList::Serialize(tinyxml2::XMLElement* root)
 {
-    TiXmlElement *entries = new TiXmlElement("entries");
+    tinyxml2::XMLDocument* doc = root->ToDocument();
+    tinyxml2::XMLElement* entries = doc->NewElement("entries");
     in_addr addr;
     std::string printable;
 
     for (auto it: _addresses)
         {
-            TiXmlElement* entry = new TiXmlElement("entry");
+            tinyxml2::XMLElement* entry = doc->NewElement("entry");
             addr.s_addr = it;
             printable = inet_ntoa(addr);
             entry->SetAttribute("address", printable.c_str());
-            entries->LinkEndChild(entry);
+            entries->InsertEndChild(entry);
         }
 
-    root->LinkEndChild(entries);
+    root->InsertEndChild(entries);
 }
-void BanList::Deserialize(TiXmlElement* root)
+void BanList::Deserialize(tinyxml2::XMLElement* root)
 {
-    TiXmlElement* entries = NULL;
-    TiXmlNode* node = NULL;
+    tinyxml2::XMLElement* entries = nullptr;
+    tinyxml2::XMLElement* entry = nullptr;
 
-    node = root->FirstChild("entries");
-    if (!node)
+    entries = root->FirstChildElement("entries");
+    if (!entries)
         {
             return;
         }
 
-    entries = node->ToElement();
-    for (node = entries->FirstChild(); node; node = node->NextSibling())
+    for (entry = entries->FirstChildElement(); entry; entry = entries->NextSiblingElement())
         {
-            TiXmlElement* entry = node->ToElement();
             AddAddress(entry->Attribute("address"));
         }
 }

@@ -1,7 +1,7 @@
+#include <tinyxml2.h>
 #include <string>
 #include <sstream>
 #include <list>
-#include <tinyxml.h>
 #include "entity.h"
 #include "baseObject.h"
 #include "world.h"
@@ -11,6 +11,7 @@
 #include "editor.h"
 #include "component.h"
 #include "eventargs.h"
+#include "serializationHelpers.h"
 
 BaseObject::BaseObject()
 {
@@ -189,88 +190,56 @@ std::vector<std::string>* BaseObject::GetAliases()
     return &_aliases;
 }
 
-void BaseObject::Serialize(TiXmlElement* root)
+void BaseObject::Serialize(tinyxml2::XMLElement* root)
 {
-    TiXmlElement*node = new TiXmlElement("BaseObject");
-    TiXmlElement *components = new TiXmlElement("components");
-    TiXmlElement* aliases = new TiXmlElement("aliases");
-    TiXmlElement* alias = NULL;
-    TiXmlElement* component = NULL;
-    TiXmlElement* properties = new TiXmlElement("properties");
+    tinyxml2::XMLDocument* doc = root->ToDocument();
+    tinyxml2::XMLElement*node = doc->NewElement("BaseObject");
+    tinyxml2::XMLElement* properties = doc->NewElement("properties");
 
-    for (auto it: _components)
-        {
-            component = new TiXmlElement("component");
-            component->SetAttribute("name", it->GetMeta()->GetName().c_str());
-            it->Serialize(component);
-            components->LinkEndChild(component);
-        }
-    node->LinkEndChild(components);
+    SerializeCollection<std::vector<Component*>, Component*>("components", "component", node, _components, [](tinyxml2::XMLElement* compelement, Component* compobj)
+    {
+        compelement->SetAttribute("name", compobj->GetMeta()->GetName().c_str());
+        compobj->Serialize(compelement);
+    });
 
-    for (auto it: _aliases)
-        {
-            alias = new TiXmlElement("alias");
-            alias->SetAttribute("name", it.c_str());
-            aliases->LinkEndChild(alias);
-        }
-    node->LinkEndChild(aliases);
+    SerializeCollection<std::vector<std::string>, std::string>("aliases", "alias", node, _aliases, [](tinyxml2::XMLElement* aelement, const std::string &alias)
+    {
+        aelement->SetAttribute("name", alias.c_str());
+    });
 
     variables.Serialize(properties);
-    node->LinkEndChild(properties);
+    node->InsertEndChild(properties);
 
     node->SetAttribute("name", _name.c_str());
     node->SetAttribute("desc", _desc.c_str());
     node ->SetAttribute("script", _script.c_str());
     node->SetAttribute("onum", _onum);
-    root->LinkEndChild(node);
+    root->InsertEndChild(node);
 }
-void BaseObject::Deserialize(TiXmlElement* root)
+void BaseObject::Deserialize(tinyxml2::XMLElement* root)
 {
     World* world = World::GetPtr();
+    tinyxml2::XMLElement* properties = NULL;
 
-    TiXmlElement* components = NULL;
-    TiXmlElement* component = NULL;
-    TiXmlElement* alias = NULL;
-    TiXmlElement*aliases = NULL;
-    TiXmlElement* properties = NULL;
-    TiXmlNode* node = NULL;
-    Component* com = NULL;
+    DeserializeCollection(root, "components", [this, world](tinyxml2::XMLElement* visitor)
+    {
+        Component* com = world->CreateComponent(visitor->Attribute("name"));
+        com->Deserialize(visitor);
+        AddComponent(com);
+    });
 
-    node = root->FirstChild("components");
-    if (node)
-        {
-            components = node->ToElement();
-            for (node = components->FirstChild(); node; node = node->NextSibling())
-                {
-                    component = node->ToElement();
-                    com = world->CreateComponent(component->Attribute("name"));
-                    com->Deserialize(component);
-                    AddComponent(com);
-                }
-        }
+    DeserializeCollection(root, "aliases", [this](tinyxml2::XMLElement* visitor)
+    {
+        AddAlias(visitor->Attribute("name"));
+    });
 
-    node = root->FirstChild("aliases");
-    if (node)
-        {
-            aliases = node->ToElement();
-            for (node = aliases->FirstChild(); node; node = node->NextSibling())
-                {
-                    alias=node->ToElement();
-                    AddAlias(alias->Attribute("name"));
-                }
-        }
-
-    node = root->FirstChild("properties");
-    if (node)
-        {
-            properties = node->ToElement();
-            variables.Deserialize(properties);
-        }
+    properties = root->FirstChildElement("properties");
+    variables.Deserialize(properties);
 
     _name = root->Attribute("name");
     _desc = root->Attribute("desc");
     _script = root->Attribute("script");
-    root->Attribute("onum", (unsigned int*)&_onum);
+    _onum = (unsigned int)root->IntAttribute("onum");
 }
 
 void BaseObject::Copy(BaseObject* obj) const

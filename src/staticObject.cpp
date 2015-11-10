@@ -1,3 +1,4 @@
+#include <tinyxml2.h>
 #include <algorithm>
 #include <functional>
 #include "conf.h"
@@ -122,49 +123,32 @@ BOOL StaticObject::RecycleContents()
     return true;
 }
 
-void StaticObject::Serialize(TiXmlElement* root)
+void StaticObject::Serialize(tinyxml2::XMLElement* root)
 {
-    std::vector<IComponentMeta*>::iterator it, itEnd;
-    TiXmlElement* obj = new TiXmlElement("staticobj");
-    TiXmlElement* component = NULL;
-    BaseObject::Serialize(obj);
+    tinyxml2::XMLDocument* doc = root->ToDocument();
+    tinyxml2::XMLElement* obj = doc->NewElement("staticobj");
+
     obj->SetAttribute("short", _short.c_str());
     obj->SetAttribute("plural", _plural.c_str());
-    TiXmlElement* components = new TiXmlElement("components");
-    itEnd = _components.end();
-    for (it = _components.begin(); it != itEnd; ++it)
-        {
-            component = new TiXmlElement("component");
-            (*it)->Serialize(component);
-            components->LinkEndChild(component);
-        }
 
-    obj->LinkEndChild(components);
-    root->LinkEndChild(obj);
+    SerializeList<IComponentMeta*, std::vector<IComponentMeta*>>("components", root, _components);
+    BaseObject::Serialize(obj);
+    root->InsertEndChild(obj);
 }
-void StaticObject::Deserialize(TiXmlElement* root)
+void StaticObject::Deserialize(tinyxml2::XMLElement* root)
 {
     World* world = World::GetPtr();
-    TiXmlNode* node = NULL;
-    TiXmlElement* cmeta = NULL;
-    TiXmlElement* components = NULL;
-    IComponentMeta* com = NULL;
-    std::string cname;
 
     _short = root->Attribute("short");
     _plural = root->Attribute("plural");
-    node = root->FirstChild("components");
-    if (node)
-        {
-            components = node->ToElement();
-            for (node = components->FirstChild(); node; node = node->NextSibling())
-                {
-                    cmeta = node->ToElement();
-                    cname = cmeta->Attribute("name");
-                    com = world->GetComponentFactory()->GetMeta(cname);
-                    com->Deserialize(cmeta);
-                }
-        }
+    DeserializeCollection(root, "components", [world](tinyxml2::XMLElement* visitor)
+    {
+        IComponentMeta* com = nullptr;
+        std::string cname;
+        cname = visitor->Attribute("name");
+        com = world->GetComponentFactory()->GetMeta(cname);
+        com->Deserialize(visitor);
+    });
 }
 
 //initialize olcs.

@@ -1,12 +1,12 @@
+#include <tinyxml2.h>
+#include <vector>
+#include <string>
 #include "../mud.h"
 #include "../conf.h"
 #include "../world.h"
 #include "../player.h"
 #include "HelpTable.h"
 #include "HelpEntry.h"
-#include <vector>
-#include <string>
-#include <tinyxml.h>
 
 #ifdef MODULE_HELP
 HelpTable::HelpTable()
@@ -23,45 +23,36 @@ HelpTable::~HelpTable()
 void HelpTable::Load()
 {
     World* world = World::GetPtr();
-    TiXmlDocument doc(HELP_FILE);
-    TiXmlElement* root = NULL;
-    TiXmlElement* element = NULL;
-    TiXmlNode* node = NULL;
-    HelpEntry* entry = NULL;
-    if (!doc.LoadFile())
+    tinyxml2::XMLDocument doc;
+    tinyxml2::XMLElement* root = nullptr;
+    tinyxml2::XMLElement* element = nullptr;
+    HelpEntry* entry = nullptr;
+
+    if (!doc.LoadFile(HELP_FILE))
         {
             world->WriteLog("Could not find help files.", ERR);
             return;
         }
 
-    node = doc.FirstChild("help");
-    if (!node)
+    root = doc.FirstChildElement("help");
+    if (!root)
         {
             world->WriteLog("The help files were loaded, but the top element could not be located. Help will not load.", ERR);
             return;
         }
-    root = node->ToElement();
 
-    node=root->FirstChild("entry");
-    if (!node)
-        {
-            return;
-        }
-    element = node->ToElement();
-    for (node = element->FirstChild(); node; node = node->NextSibling())
+    for (element = root->FirstChildElement("entry"); element; element = element->NextSiblingElement())
         {
             entry = new HelpEntry();
             entry->Deserialize(element);
             _entries.push_back(entry);
         }
 }
-
 void HelpTable::Save()
 {
-    TiXmlDocument doc;
-    TiXmlDeclaration *decl = new TiXmlDeclaration("1.0", "", "");
-    doc.LinkEndChild(decl);
-    TiXmlElement* root = new TiXmlElement("help");
+    tinyxml2::XMLDocument doc;
+    doc.LinkEndChild(doc.NewDeclaration());
+    tinyxml2::XMLElement* root = doc.NewElement("help");
 
     for (auto it: _entries)
         {

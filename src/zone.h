@@ -1,8 +1,8 @@
 #pragma once
 #ifndef ZONE_H
 #define ZONE_H
+#include <tinyxml2.h>
 #include <stack>
-#include <tinyxml.h>
 #include <unordered_map>
 #include "mud.h"
 #include "conf.h"
@@ -98,8 +98,8 @@ public:
     Npc* CreateNpc(VNUM num, Room* origin);
     void CalculateVnumRanges();
     void Update();
-    virtual void Serialize(TiXmlElement* root);
-    virtual void Deserialize(TiXmlElement* zone);
+    virtual void Serialize(tinyxml2::XMLElement* root);
+    virtual void Deserialize(tinyxml2::XMLElement* zone);
 
     static BOOL SaveZones();
     static BOOL LoadZones();

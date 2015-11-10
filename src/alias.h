@@ -7,6 +7,7 @@
 * This elimenates the need to type both commands, as you can have an alias that calls both commands.
 */
 #pragma once
+#include <tinyxml2.h>
 #include <vector>
 #include <string>
 #include "mud.h"
@@ -65,6 +66,6 @@ public:
     */
     void ListCommands(std::vector<std::string>& commands);
 
-    virtual void Serialize(TiXmlElement* root);
-    virtual void Deserialize(TiXmlElement* root);
+    virtual void Serialize(tinyxml2::XMLElement* root);
+    virtual void Deserialize(tinyxml2::XMLElement* root);
 };

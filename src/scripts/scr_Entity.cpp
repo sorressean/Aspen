@@ -1,3 +1,4 @@
+#include <cassert>
 #include <angelscript.h>
 #include <scriptarray.h>
 #include "../mud.h"
