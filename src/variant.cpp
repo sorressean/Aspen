@@ -235,7 +235,7 @@ void Variant::SetType(VARIABLE_TYPE t)
 
 void Variant::Serialize(tinyxml2::XMLElement* root)
 {
-    tinyxml2::XMLDocument* doc = root->ToDocument();
+    tinyxml2::XMLDocument* doc = root->GetDocument();
     tinyxml2::XMLElement* var = doc->NewElement("variable");
     var->SetAttribute("type", (int)Typeof());
 

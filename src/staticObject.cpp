@@ -125,7 +125,7 @@ BOOL StaticObject::RecycleContents()
 
 void StaticObject::Serialize(tinyxml2::XMLElement* root)
 {
-    tinyxml2::XMLDocument* doc = root->ToDocument();
+    tinyxml2::XMLDocument* doc = root->GetDocument();
     tinyxml2::XMLElement* obj = doc->NewElement("staticobj");
 
     obj->SetAttribute("short", _short.c_str());

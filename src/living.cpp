@@ -67,7 +67,7 @@ void Living::FindAttribute(int type, std::vector<Attribute*>& results)
 
 void Living::Serialize(tinyxml2::XMLElement* root)
 {
-    tinyxml2::XMLDocument* doc = root->ToDocument();
+    tinyxml2::XMLDocument* doc = root->GetDocument();
     tinyxml2::XMLElement* node = doc->NewElement("living");
 
     node->SetAttribute("gender", (int)_gender);

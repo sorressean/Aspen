@@ -159,7 +159,7 @@ void HelpEntry::UpdateAccess(FLAG access)
 
 void HelpEntry::Serialize(tinyxml2::XMLElement* root)
 {
-    tinyxml2::XMLDocument* doc = root->ToDocument();
+    tinyxml2::XMLDocument* doc = root->GetDocument();
     tinyxml2::XMLElement* entry = doc->NewElement("entry");
     entry->SetAttribute("name", _name.c_str());
     entry->SetAttribute("data", _data.c_str());

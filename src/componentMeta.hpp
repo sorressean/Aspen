@@ -121,7 +121,7 @@ public:
     }
     virtual void Serialize(tinyxml2::XMLElement* root)
     {
-        tinyxml2::XMLDocument* doc = root->ToDocument();
+        tinyxml2::XMLDocument* doc = root->GetDocument();
         tinyxml2::XMLElement* ent = doc->NewElement("cmeta");
         ent->SetAttribute("name", _name.c_str());
 

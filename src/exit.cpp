@@ -62,7 +62,7 @@ BOOL Exit::CanEnter(Living* mobile)
 
 void Exit::Serialize(tinyxml2::XMLElement* root)
 {
-    tinyxml2::XMLDocument* doc = root->ToDocument();
+    tinyxml2::XMLDocument* doc = root->GetDocument();
     tinyxml2::XMLElement* node = doc->NewElement("exit");
 
     node->SetAttribute("direction", _direction);

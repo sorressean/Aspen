@@ -59,7 +59,7 @@ BoardPost* Board::GetPostByIndex(int index)
 }
 void Board::Serialize(TiXmlElement* root)
 {
-    tinyxml2::XMLDocument* doc = root->ToDocument();
+    tinyxml2::XMLDocument* doc = root->GetDocument();
     tinyxml2::XMLElement* board = doc->NewElement("board");
     board->SetAttribute("name", _name.c_str());
     board->SetAttribute("access", _access);

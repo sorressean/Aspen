@@ -380,7 +380,7 @@ void Zone::Serialize(tinyxml2::XMLElement* root)
     root->SetAttribute("maxvnum", _vnumrange.max);
 
     SerializeList<StaticObject, std::vector<StaticObject*>>("vobjes", "vobj", root, _virtualobjs);
-    SerializeList<Room, std::vector<Room*>>("rooms", "room", root, _roomobjs);
+    SerializeList<Room, std::vector<Room*>>("rooms", root, _roomobjs);
     SerializeList<Npc, std::vector<Npc*>>("npcs", "npc", root, _mobobjs);
 }
 void Zone::Deserialize(tinyxml2::XMLElement* zone)

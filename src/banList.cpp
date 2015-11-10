@@ -89,7 +89,7 @@ void BanList::ListAddresses(std::vector<std::string>* addresses)
 
 void BanList::Serialize(tinyxml2::XMLElement* root)
 {
-    tinyxml2::XMLDocument* doc = root->ToDocument();
+    tinyxml2::XMLDocument* doc = root->GetDocument();
     tinyxml2::XMLElement* entries = doc->NewElement("entries");
     in_addr addr;
     std::string printable;

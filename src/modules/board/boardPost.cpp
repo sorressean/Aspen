@@ -54,7 +54,7 @@ void BoardPost::SetPoster(Player* mobile)
 
 void BoardPost::Serialize(tinyxml2::XMLElement* root)
 {
-    tinyxml2::XMLDocument* doc = root->ToDocument();
+    tinyxml2::XMLDocument* doc = root->GetDocument();
     tinyxml2::XMLElement* post = doc->NewElement("post");
     post->SetAttribute("subject", _subject.c_str());
     post->SetAttribute("message", _message.c_str());

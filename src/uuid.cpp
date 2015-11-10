@@ -40,7 +40,7 @@ unsigned long long int Uuid::GetValue() const
 
 void Uuid::Serialize(tinyxml2::XMLElement* root)
 {
-    tinyxml2::XMLDocument* doc = root->ToDocument();
+    tinyxml2::XMLDocument* doc = root->GetDocument();
     tinyxml2::XMLElement* node = doc->NewElement("uuid");
     SerializeLong(node, _id);
     root->InsertEndChild(node);

@@ -192,7 +192,7 @@ std::vector<std::string>* BaseObject::GetAliases()
 
 void BaseObject::Serialize(tinyxml2::XMLElement* root)
 {
-    tinyxml2::XMLDocument* doc = root->ToDocument();
+    tinyxml2::XMLDocument* doc = root->GetDocument();
     tinyxml2::XMLElement*node = doc->NewElement("BaseObject");
     tinyxml2::XMLElement* properties = doc->NewElement("properties");
 

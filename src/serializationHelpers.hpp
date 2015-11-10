@@ -10,7 +10,7 @@ void DeserializeCollection(tinyxml2::XMLElement* root, const std::string& name, 
 template <class O, class C>
 bool SerializeList(const std::string& parent, const std::string& nodename, tinyxml2::XMLElement* root, C& container)
 {
-    tinyxml2::XMLDocument* doc = root->ToDocument();
+    tinyxml2::XMLDocument* doc = root->GetDocument();
     tinyxml2::XMLElement* pnode = doc->NewElement(parent.c_str());
     tinyxml2::XMLElement* cur = nullptr;
 
@@ -27,7 +27,7 @@ bool SerializeList(const std::string& parent, const std::string& nodename, tinyx
 template <class O, class C>
 bool SerializeList(const std::string& parent, tinyxml2::XMLElement* root, C& container)
 {
-    tinyxml2::XMLDocument* doc = root->ToDocument();
+    tinyxml2::XMLDocument* doc = root->GetDocument();
     tinyxml2::XMLElement* pnode = doc->NewElement(parent.c_str());
 
     for (auto it: container)
@@ -54,7 +54,7 @@ bool DeserializeList(tinyxml2::XMLElement* root, const std::string &parent, C& o
 template <class C, class E>
 void SerializeCollection(const std::string& colname, const std::string& name, tinyxml2::XMLElement* root, C& container, std::function<void (tinyxml2::XMLElement*, E&)> cb)
 {
-    tinyxml2::XMLDocument* doc = root->ToDocument();
+    tinyxml2::XMLDocument* doc = root->GetDocument();
     tinyxml2::XMLElement* collection = doc->NewElement(colname.c_str());
     tinyxml2::XMLElement* item = nullptr;
 

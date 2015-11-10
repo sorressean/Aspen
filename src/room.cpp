@@ -180,7 +180,7 @@ BOOL Room::IsRoom() const
 
 void Room::Serialize(tinyxml2::XMLElement* root)
 {
-    tinyxml2::XMLDocument* doc = root->ToDocument();
+    tinyxml2::XMLDocument* doc = root->GetDocument();
     tinyxml2::XMLElement* room = doc->NewElement("room");
 
     room->SetAttribute("rflag", _rflag);

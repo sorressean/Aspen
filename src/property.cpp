@@ -176,7 +176,7 @@ Property* Property::FindProperty(const std::string &name)
 
 void Property::Serialize(tinyxml2::XMLElement *root)
 {
-    tinyxml2::XMLDocument* doc = root->ToDocument();
+    tinyxml2::XMLDocument* doc = root->GetDocument();
     tinyxml2::XMLElement *prop = doc->NewElement("property");
 
     if (_children.size())

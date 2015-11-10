@@ -53,7 +53,7 @@ void Alias::ListCommands(std::vector<std::string>& commands)
 
 void Alias::Serialize(tinyxml2::XMLElement* root)
 {
-    tinyxml2::XMLDocument* doc = root->ToDocument();
+    tinyxml2::XMLDocument* doc = root->GetDocument();
     tinyxml2::XMLElement* alias = doc->NewElement("alias");
 
     alias->SetAttribute("name", _name.c_str());

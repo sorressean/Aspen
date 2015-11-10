@@ -119,7 +119,7 @@ bool InitializeEntityOlcs()
 
 void Entity::Serialize(tinyxml2::XMLElement* root)
 {
-    tinyxml2::XMLDocument* doc = root->ToDocument();
+    tinyxml2::XMLDocument* doc = root->GetDocument();
     tinyxml2::XMLElement* ent = doc->NewElement("entity");
     ObjectContainer::Serialize(ent);
     _uuid.Serialize(ent);
