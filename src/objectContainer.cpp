@@ -41,7 +41,7 @@ void ObjectContainer::Serialize(tinyxml2::XMLElement* root)
     tinyxml2::XMLElement* ent = doc->NewElement("objc");
     BaseObject::Serialize(ent);
 
-    SerializeList<Entity, std::list<Entity*>>("contents", root, _contents);
+    SerializeList<Entity, std::list<Entity*>>("contents", ent, _contents);
     root->InsertEndChild(ent);
 }
 void ObjectContainer::Deserialize(tinyxml2::XMLElement* root)
