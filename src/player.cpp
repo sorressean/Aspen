@@ -256,7 +256,7 @@ BOOL Player::Backup()
 void Player::Load()
 {
     tinyxml2::XMLDocument doc;
-    if (!doc.LoadFile((std::string(PLAYER_DIR)+GetName()).c_str()))
+    if (doc.LoadFile((std::string(PLAYER_DIR)+GetName()).c_str()) != tinyxml2::XML_NO_ERROR)
         {
             throw(FileLoadException("Error loading "+(std::string(PLAYER_DIR)+GetName())+"."));
         }

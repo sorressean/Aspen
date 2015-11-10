@@ -28,7 +28,7 @@ void HelpTable::Load()
     tinyxml2::XMLElement* element = nullptr;
     HelpEntry* entry = nullptr;
 
-    if (!doc.LoadFile(HELP_FILE))
+    if (doc.LoadFile(HELP_FILE) != tinyxml2::XML_NO_ERROR)
         {
             world->WriteLog("Could not find help files.", ERR);
             return;

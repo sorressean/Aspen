@@ -788,7 +788,7 @@ BOOL World::LoadState()
 
             tinyxml2::XMLDocument doc;
             std::string name;
-            if (!doc.LoadFile((std::string(STATE_DIR)+dir->d_name).c_str()))
+            if (doc.LoadFile((std::string(STATE_DIR)+dir->d_name).c_str()) != tinyxml2::XML_NO_ERROR)
                 {
                     WriteLog("Could not load"+std::string(dir->d_name)+" state file.", WARN);
                     closedir(statedir);

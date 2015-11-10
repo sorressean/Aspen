@@ -74,7 +74,7 @@ void Socials::Load()
             return;
         }
 
-    if (!doc.LoadFile(SOCIALS_FILE))
+    if (doc.LoadFile(SOCIALS_FILE) != tinyxml2::XML_NO_ERROR)
         {
             world->WriteLog("Could not load XML socials file.");
             return;

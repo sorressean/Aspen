@@ -518,7 +518,7 @@ BOOL Zone::LoadZones()
                 }
 
             tinyxml2::XMLDocument doc;
-            if (!doc.LoadFile((AREA_DIR+std::string(cdir->d_name)).c_str()))
+            if (doc.LoadFile((AREA_DIR+std::string(cdir->d_name)).c_str()) != tinyxml2::XML_NO_ERROR)
                 {
                     closedir(dir);
                     return false;
