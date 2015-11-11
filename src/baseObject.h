@@ -34,8 +34,6 @@ protected:
     Zone* _zone;
 public:
     EventManager events;
-    Property variables;
-    Commandable commands;
 
     BaseObject();
     virtual ~BaseObject();

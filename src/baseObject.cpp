@@ -27,7 +27,7 @@ BaseObject::BaseObject()
     _onum=0;
     _zone = NULL;
 
-    variables.SetObject(this);
+//    variables.SetObject(this);
 }
 BaseObject::~BaseObject()
 {
@@ -165,7 +165,7 @@ void BaseObject::Serialize(tinyxml2::XMLElement* root)
         compobj->Serialize(compelement);
     });
 
-    variables.Serialize(properties);
+//    variables.Serialize(properties);
     node->InsertEndChild(properties);
 
     node->SetAttribute("name", _name.c_str());
@@ -187,7 +187,7 @@ void BaseObject::Deserialize(tinyxml2::XMLElement* root)
     });
 
     properties = root->FirstChildElement("properties");
-    variables.Deserialize(properties);
+//    variables.Deserialize(properties);
 
     _name = root->Attribute("name");
     _desc = root->Attribute("desc");

@@ -562,27 +562,30 @@ BOOL World::DoCommand(Player* mobile,std::string args)
                 }
         }
 //todo: check inventory and room commands here.
-    location = (Room*)mobile->GetLocation();
-    if (location)
-        {
-            cptr = location->commands.GetPtr();
-            for (auto it: *cptr)
-                {
-                    if ((it->GetName() == cmd)||(it->HasAlias(cmd, true)))
-                        {
-                            if (!mobile->HasAccess(it->GetAccess()))
-                                {
-                                    return false;
-                                }
-                            it->Execute(it->GetName(), mobile, params, it->GetSubcmd());
-                            gettimeofday(&end, NULL);
-                            _commandElapsed += ((end.tv_sec - start.tv_sec) * 1000000);
-                            _commandElapsed += (float)(end.tv_usec-start.tv_usec);
-                            _commands ++;
-                            return true;
-                        }
-                }
-        }
+    /*
+        location = (Room*)mobile->GetLocation();
+        if (location)
+            {
+                cptr = location->commands.GetPtr();
+                for (auto it: *cptr)
+                    {
+                        if ((it->GetName() == cmd)||(it->HasAlias(cmd, true)))
+                            {
+                                if (!mobile->HasAccess(it->GetAccess()))
+                                    {
+                                        return false;
+                                    }
+                                it->Execute(it->GetName(), mobile, params, it->GetSubcmd());
+                                gettimeofday(&end, NULL);
+                                _commandElapsed += ((end.tv_sec - start.tv_sec) * 1000000);
+                                _commandElapsed += (float)(end.tv_usec-start.tv_usec);
+                                _commands ++;
+                                return true;
+                            }
+
+                    }
+            }
+    */
     return false;
 }
 
