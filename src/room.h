@@ -27,7 +27,7 @@ class Room:public ObjectContainer
     std::vector<Exit*> _exits;
     FLAG _rflag;
 public:
-    Commandable commands;
+
     Room();
     virtual ~Room();
     /*
