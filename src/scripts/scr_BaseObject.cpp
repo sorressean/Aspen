@@ -19,18 +19,16 @@ void RegisterBaseObjectMethods(const char* obj)
     assert(r);
     r = engine->RegisterMethod(obj, "void SetDescription(string description)", asMETHOD(BaseObject, SetDescription));
     assert(r);
-    r = engine->RegisterMethod(obj, "bool GetPersistent() const", asMETHOD(BaseObject, GetPersistent));
-    assert(r);
-    r = engine->RegisterMethod(obj, "void SetPersistent(bool persistent)", asMETHOD(BaseObject, SetPersistent));
-    assert(r);
 //add get/set Zone
     r = engine->RegisterMethod(obj, "int GetOnum() const", asMETHOD(BaseObject, GetOnum));
     assert(r);
 //TODO: add components.
     r = engine->RegisterMethod(obj, "void Attach()", asMETHOD(BaseObject, Attach));
-    r = engine->RegisterMethod(obj, "bool AddAlias(string alias)", asMETHOD(BaseObject, AddAlias));
-    assert(r);
-    r = engine->RegisterMethod(obj, "bool AliasExists(string& alias) const", asMETHOD(BaseObject, AliasExists));
+    /*
+        r = engine->RegisterMethod(obj, "bool AddAlias(string alias)", asMETHOD(BaseObject, AddAlias));
+        assert(r);
+        r = engine->RegisterMethod(obj, "bool AliasExists(string& alias) const", asMETHOD(BaseObject, AliasExists));
+    */
 }
 
 void InitializeBaseObject()

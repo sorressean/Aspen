@@ -27,13 +27,11 @@ class BaseObject:public ISerializable
 {
 protected:
     std::vector <Component*> _components;
-    std::vector<std::string> _aliases;
     VNUM _onum;
     std::string _name;
     std::string _desc;
     std::string _script; //the scripting associated with this object.
     Zone* _zone;
-    BOOL _persistent;
 public:
     EventManager events;
     Property variables;
@@ -75,18 +73,6 @@ public:
     * @param [in] script The new code.
     */
     virtual void SetScript(const std::string &script);
-    /**
-    * Determines if the object will be saved.
-    *
-    * @return True if the object is persistent, false otherwise.
-    */
-    virtual BOOL GetPersistent() const;
-    /**
-    * Toggles whether or not the object will be saved.
-    *
-    * @param [in] s True if the object should be persistent, false otherwise.
-    */
-    virtual void SetPersistent(BOOL s);
     /**
     * Gets a pointer to the zone object.
     *
@@ -145,27 +131,6 @@ public:
     * This can also be used to process other component-specific logic.
     */
     void Attach();
-    /**
-    * Adds the specified alias to the object.
-    *
-    * Aliases are other identifiers by which an object can be known.
-    * For example, a sword could be known as a sword or by a name.
-    * @param [in] alias the name of the alias to add.
-    * @return True if the alias could be added, false otherwise.
-    */
-    BOOL AddAlias(const std::string &alias);
-    /**
-    * checks to see if the alias exists.
-    *
-    * @param: [in] the name of the alias.
-    * @return True on success, false on failure.
-    */
-    BOOL AliasExists(const std::string &name);
-    /**
-    * Returns a pointer to the list of aliases.
-    * @return a pointer to a vector of strings.
-    */
-    std::vector<std::string>* GetAliases();
 //TODO: finish docs when this code is cleaned.
     virtual std::string Identify(Player* mobile);
     virtual void Serialize(tinyxml2::XMLElement* root);

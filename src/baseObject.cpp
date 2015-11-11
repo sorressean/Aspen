@@ -25,7 +25,6 @@ BaseObject::BaseObject()
     _desc="You see nothing special.";
     _script="";
     _onum=0;
-    _persistent = true;
     _zone = NULL;
 
     variables.SetObject(this);
@@ -63,15 +62,6 @@ std::string BaseObject::GetScript() const
 void BaseObject::SetScript(const std::string &script)
 {
     _script=script;
-}
-
-BOOL BaseObject::GetPersistent() const
-{
-    return _persistent;
-}
-void BaseObject::SetPersistent(BOOL s)
-{
-    _persistent = s;
 }
 
 Zone* BaseObject::GetZone() const
@@ -163,33 +153,6 @@ void BaseObject::Attach()
         }
 }
 
-BOOL BaseObject::AddAlias(const std::string &alias)
-{
-    if (AliasExists(alias) && !alias.empty())
-        {
-            return false;
-        }
-
-    _aliases.push_back(alias);
-    return true;
-}
-BOOL BaseObject::AliasExists(const std::string & name)
-{
-    for (auto it: _aliases)
-        {
-            if (it == name)
-                {
-                    return true;
-                }
-        }
-
-    return false;
-}
-std::vector<std::string>* BaseObject::GetAliases()
-{
-    return &_aliases;
-}
-
 void BaseObject::Serialize(tinyxml2::XMLElement* root)
 {
     tinyxml2::XMLDocument* doc = root->GetDocument();
@@ -200,11 +163,6 @@ void BaseObject::Serialize(tinyxml2::XMLElement* root)
     {
         compelement->SetAttribute("name", compobj->GetMeta()->GetName().c_str());
         compobj->Serialize(compelement);
-    });
-
-    SerializeCollection<std::vector<std::string>, std::string>("aliases", "alias", node, _aliases, [](tinyxml2::XMLElement* aelement, const std::string &alias)
-    {
-        aelement->SetAttribute("name", alias.c_str());
     });
 
     variables.Serialize(properties);
@@ -228,11 +186,6 @@ void BaseObject::Deserialize(tinyxml2::XMLElement* root)
         AddComponent(com);
     });
 
-    DeserializeCollection(root, "aliases", [this](tinyxml2::XMLElement* visitor)
-    {
-        AddAlias(visitor->Attribute("name"));
-    });
-
     properties = root->FirstChildElement("properties");
     variables.Deserialize(properties);
 
@@ -244,23 +197,26 @@ void BaseObject::Deserialize(tinyxml2::XMLElement* root)
 
 void BaseObject::Copy(BaseObject* obj) const
 {
-    for (auto it: _aliases)
-        {
-            obj->AddAlias(it);
-        }
+    /**
+    * @todo move this to entity.
+    */
+    /*
+        for (auto it: _aliases)
+            {
+                obj->AddAlias(it);
+            }
+    */
 
     obj->SetName(_name);
     obj->SetOnum(_onum);
     obj->SetDescription(_desc);
     obj->SetScript(_script);
-    obj->SetPersistent(_persistent);
 }
 
 std::string BaseObject::Identify(Player*mobile)
 {
     std::stringstream st;
     st << GetName() << std::endl;
-    st << "Persistent: " << (GetPersistent()? "yes." : "no.") << std::endl;
     st << "Originating zone: " << GetZone()->GetName() << std::endl;
     return st.str();
 }

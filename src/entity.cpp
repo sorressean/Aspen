@@ -89,6 +89,32 @@ Uuid& Entity::GetUuid()
 {
     return _uuid;
 }
+BOOL Entity::AddAlias(const std::string &alias)
+{
+    if (AliasExists(alias) && !alias.empty())
+        {
+            return false;
+        }
+
+    _aliases.push_back(alias);
+    return true;
+}
+BOOL Entity::AliasExists(const std::string & name)
+{
+    for (auto it: _aliases)
+        {
+            if (it == name)
+                {
+                    return true;
+                }
+        }
+
+    return false;
+}
+std::vector<std::string>* Entity::GetAliases()
+{
+    return &_aliases;
+}
 
 std::string Entity::Identify(Player* mob)
 {
@@ -126,6 +152,11 @@ void Entity::Serialize(tinyxml2::XMLElement* root)
 
     ent->SetAttribute("location", (_location?_location->GetOnum():0));
     ent->SetAttribute("short", _short.c_str());
+
+    SerializeCollection<std::vector<std::string>, std::string>("aliases", "alias", ent, _aliases, [](tinyxml2::XMLElement* aelement, const std::string &alias)
+    {
+        aelement->SetAttribute("name", alias.c_str());
+    });
     root->InsertEndChild(ent);
 }
 void Entity::Deserialize(tinyxml2::XMLElement* root)
@@ -150,6 +181,11 @@ void Entity::Deserialize(tinyxml2::XMLElement* root)
     world->events.CallEvent("ObjectLoaded", NULL, this);
 
     _uuid.Deserialize(root);
+    DeserializeCollection(root, "aliases", [this](tinyxml2::XMLElement* visitor)
+    {
+        AddAlias(visitor->Attribute("name"));
+    });
+
     ObjectContainer::Deserialize(root->FirstChildElement("objc"));
 #ifdef MODULE_SCRIPTING
     /*

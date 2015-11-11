@@ -27,6 +27,8 @@ protected:
     ObjectContainer* _location;
     StaticObject* _parent;
     Uuid _uuid;
+    std::vector<std::string> _aliases;
+
     std::string _short;
 public:
     Entity();
@@ -91,7 +93,27 @@ public:
     * Gets the UUID associated with the entity.
     */
     Uuid& GetUuid();
-
+    /**
+    * Adds the specified alias to the object.
+    *
+    * Aliases are other identifiers by which an object can be known.
+    * For example, a sword could be known as a sword or by a name.
+    * @param [in] alias the name of the alias to add.
+    * @return True if the alias could be added, false otherwise.
+    */
+    BOOL AddAlias(const std::string &alias);
+    /**
+    * checks to see if the alias exists.
+    *
+    * @param: [in] the name of the alias.
+    * @return True on success, false on failure.
+    */
+    BOOL AliasExists(const std::string &name);
+    /**
+    * Returns a pointer to the list of aliases.
+    * @return a pointer to a vector of strings.
+    */
+    std::vector<std::string>* GetAliases();
     /**
     * Returns stats for this object.
     *

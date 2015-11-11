@@ -19,7 +19,6 @@ Room::Room()
 {
     _rflag = 0;
     SetOnum(ROOM_NOWHERE);
-    SetPersistent(false);
     events.AddCallback("PostLook", std::bind(&Room::PostLook, this, std::placeholders::_1, std::placeholders::_2));
 }
 Room::~Room()
