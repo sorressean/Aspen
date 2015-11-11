@@ -33,7 +33,6 @@ void InitializeGenCommands()
     world->commands.AddCommand(new CMDUptime());
     world->commands.AddCommand(new CMDWhois());
     world->commands.AddCommand(new CMDLook());
-    world->commands.AddCommand(new CMDCoord());
     world->commands.AddCommand(new CMDSuicide());
     world->commands.AddCommand(new CMDSay());
     world->commands.AddCommand(new CMDEmote());
@@ -608,30 +607,6 @@ BOOL CMDLook::Execute(const std::string &verb, Player* mobile,std::vector<std::s
         }
 
     mobile->Message(MSG_INFO,obj->DoLook(mobile));
-    return true;
-}
-
-CMDCoord::CMDCoord()
-{
-    SetName("coord");
-    AddAlias("coords");
-    SetType(CommandType::Information);
-}
-BOOL CMDCoord::Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args,int subcmd)
-{
-    Room* location = (Room*)mobile->GetLocation();
-    std::stringstream st;
-    point *p = nullptr;
-
-    if (!location)
-        {
-            mobile->Message(MSG_INFO, "You are not in a room.");
-            return false;
-        }
-
-    p = location->GetCoord();
-    st << "You are at coords (" << p->x << ", " << p->y << ", " << p->z << ").";
-    mobile->Message(MSG_INFO, st.str());
     return true;
 }
 

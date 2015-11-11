@@ -145,16 +145,6 @@ public:
 };
 
 /**
-* Get the coordenates of the current room.
-*/
-class CMDCoord:public Command
-{
-public:
-    CMDCoord();
-    BOOL Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args,int subcmd);
-};
-
-/**
 * Delete current player.
 */
 class CMDSuicide:public Command

@@ -131,7 +131,6 @@ BOOL CMDDig::Execute(const std::string &verb, Player* mobile,std::vector<std::st
     std::stringstream st;
     Room* room = nullptr;
     Room* location = (Room*)mobile->GetLocation();
-    point p;
     VNUM toid = 0;
     Zone* zone = nullptr;
     Exit* orig = nullptr; //from current room to another room.
@@ -207,53 +206,6 @@ BOOL CMDDig::Execute(const std::string &verb, Player* mobile,std::vector<std::st
                 }
             st << "Found room " << room->GetOnum() << "\n";
         }
-
-    p = *location->GetCoord();
-    if (args[0] == "north" || args[0] == "n")
-        {
-            p.y++;
-        }
-    else if (args[0] == "south" || args[0] == "s")
-        {
-            p.y--;
-        }
-    else if (args[0] == "east" || args[0] == "e")
-        {
-            p.x++;
-        }
-    else if (args[0] == "west" || args[0] == "w")
-        {
-            p.x--;
-        }
-    else if(args[0] == "northeast" || args[0] == "ne")
-        {
-            p.y++;
-            p.x++;
-        }
-    else if(args[0] == "northwest" || args[0] == "nw")
-        {
-            p.y++;
-            p.x--;
-        }
-    else if(args[0] == "southeast" || args[0] == "se")
-        {
-            p.x++;
-            p.y--;
-        }
-    else if(args[0] == "southwest" || args[0] == "sw")
-        {
-            p.y--;
-            p.x--;
-        }
-    else if (args[0] == "up" || args[0] == "u")
-        {
-            p.z++;
-        }
-    else if (args[0] == "down" || args[0] == "d")
-        {
-            p.z--;
-        }
-    room->SetCoord(p);
 
     orig=new Exit(room->GetOnum());
     orig->SetDirection(GetDirectionByName(args[0]));
@@ -693,7 +645,6 @@ BOOL CMDZcreate::Execute(const std::string &verb, Player* mobile,std::vector<std
     int  min=0;
     int max = 0;
     Zone* newZone = nullptr;
-    point p;
     std::vector<Zone*> zones;
 
     if (args.size() != 3)
@@ -731,7 +682,6 @@ BOOL CMDZcreate::Execute(const std::string &verb, Player* mobile,std::vector<std
     newZone->SetRange(min, max);
     room = newZone->AddRoom();
     room->SetName("An empty room");
-    room->SetCoord(p);
     world->AddZone(newZone);
     st << "Created zone with name " <<  newZone->GetName() << " with one empty room."  << "\n";
     mobile->Message(MSG_INFO, st.str());

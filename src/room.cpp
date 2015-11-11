@@ -164,15 +164,6 @@ void Room::TellAllBut(const std::string &message, Player* exclude)
         }
 }
 
-point* Room::GetCoord()
-{
-    return &_coord;
-}
-void Room::SetCoord(point& coord)
-{
-    _coord = coord;
-}
-
 BOOL Room::IsRoom() const
 {
     return true;
@@ -184,10 +175,6 @@ void Room::Serialize(tinyxml2::XMLElement* root)
     tinyxml2::XMLElement* room = doc->NewElement("room");
 
     room->SetAttribute("rflag", _rflag);
-    room->SetAttribute("x", _coord.x);
-    room->SetAttribute("y", _coord.y);
-    room->SetAttribute("z", _coord.z);
-
     SerializeList<Exit*, std::vector<Exit*>>("exits", room, _exits);
 
     ObjectContainer::Serialize(room);
@@ -196,9 +183,6 @@ void Room::Serialize(tinyxml2::XMLElement* root)
 void Room::Deserialize(tinyxml2::XMLElement* room)
 {
     _rflag = room->IntAttribute("rflag");
-    _coord.x = room->IntAttribute("x");
-    _coord.y = room->IntAttribute("y");
-    _coord.z = room->IntAttribute("z");
 
     DeserializeList<Exit, std::vector<Exit*>>(room, "exits", _exits);
     ObjectContainer::Deserialize(room->FirstChildElement("objc"));

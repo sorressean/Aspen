@@ -424,7 +424,6 @@ void Zone::Deserialize(tinyxml2::XMLElement* zone)
 BOOL InitializeZones()
 {
     World* world = World::GetPtr();
-    point p;
     struct stat FInfo;
 
     world->WriteLog("Initializing areas.");
@@ -455,7 +454,6 @@ BOOL InitializeZones()
             zone->CalculateVnumRanges();
             Room* room = zone->AddRoom(ROOM_START);
             room->SetName("A blank room");
-            room->SetCoord(p);
             if (!Zone::SaveZones())
                 {
                     return false;
