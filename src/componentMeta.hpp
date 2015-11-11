@@ -125,7 +125,10 @@ public:
         tinyxml2::XMLElement* ent = doc->NewElement("cmeta");
         ent->SetAttribute("name", _name.c_str());
 
-        SerializeList<std::string, std::vector<std::string>>("dependencies", "dependency", ent, _dependencies);
+        SerializeCollection<std::vector<std::string>, std::string>("dependencies", "dependency", root, _dependencies, [this](tinyxml2::XMLElement* visitor, const std::string& dep)
+        {
+            visitor->SetAttribute("name", dep.c_str());
+        });
         root->InsertEndChild(ent);
     }
     virtual void Deserialize(tinyxml2::XMLElement* root)
