@@ -18,7 +18,6 @@
 #include <functional>
 #include "mud.h"
 
-
 /**
 * Event arguments are passed to individual events.
 *
@@ -47,11 +46,6 @@ struct EventContainer
 {
     EVENTFUNC cb;
     UINT id;
-#ifdef MODULE_SCRIPTING
-    BOOL script;
-    int func;
-    Entity* obj;
-#endif
 };
 
 /**
