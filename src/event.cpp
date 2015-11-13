@@ -4,7 +4,6 @@
 #include <functional>
 #include "event.h"
 #include "exception.h"
-
 Event::Event():
     _id(0)
 {
@@ -29,10 +28,6 @@ UINT Event::Add(const EVENTFUNC cb)
     _id++;
     c->id = _id;
     c->cb = cb;
-#ifdef MODULE_SCRIPTING
-    c->script = false;
-    c->obj = NULL;
-#endif
     _callbacks.push_back(c);
     return c->id;
 }
@@ -62,15 +57,8 @@ BOOL Event::Remove(UINT id)
 #ifdef MODULE_SCRIPTING
 UINT Event::AddScriptCallback(Entity* obj, int func)
 {
-    EventContainer* c = new EventContainer();
-
-    _id++;
-    c->id = _id;
-    c->script = true;
-    c->obj = obj;
-    c->func = func;
-    _callbacks.push_back(c);
-    return c->id;
+    /** @todo fix this for scripting. */
+    return 0;
 }
 #endif
 
@@ -78,13 +66,6 @@ void Event::Invoke(EventArgs* args, void* caller)
 {
     for (auto it: _callbacks)
         {
-#ifdef MODULE_SCRIPTING
-            if (it->script)
-                {
-//                    SCR_CallEvent((*it)->obj, (*it)->func, args, caller);
-                    continue;
-                }
-#endif
             it->cb(args,caller);
         }
 }

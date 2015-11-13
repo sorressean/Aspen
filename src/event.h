@@ -67,8 +67,8 @@ void c::name(EventArgs* args,void* caller)
 class Event
 {
 protected:
+    unsigned int _id;
     std::vector<EventContainer*> _callbacks;
-    UINT _id;
 public:
     Event();
     virtual ~Event();
