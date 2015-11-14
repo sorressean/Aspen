@@ -83,6 +83,7 @@ public:
     Room* AddRoom();
     Room* AddRoom(VNUM num);
     BOOL RemoveRoom(VNUM num);
+    Room* GetRoom(VNUM num);
     void GetRooms(std::vector<Room*> *rooms);
     BOOL RoomExists(VNUM num);
     StaticObject* AddVirtual();
