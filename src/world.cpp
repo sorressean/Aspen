@@ -380,10 +380,12 @@ void World::Update()
 //flushes the output buffers of all sockets.
     _server->FlushSockets();
 //update living objects:
+    _pmanager->Update();
     for (auto zone: _zones)
         {
             zone->Update();
         }
+    _objectManager.Update();
     callouts->Update();
 
     _updates ++;

@@ -6,7 +6,6 @@
 #include "entity.h"
 #include "npc.h"
 #include "room.h"
-#include "zone.h"
 
 /**
 The object manager is responsible for handling and managing objects.
@@ -15,25 +14,35 @@ These properties are stored on the zone, but we need a global copy as well.
 */
 class ObjectManager
 {
-    /**
-    * @todo perhaps move this to world or whatever ends up managing zones.
-    * at least it could prevent a copy.
-    */
-    Zone* FindZone(VNUM num);
+    std::unordered_map<VNUM ,Room*> _rooms;
+    std::unordered_map<VNUM, StaticObject*> _objects;
+    std::unordered_map<VNUM, Npc*> _npcs;
 public:
-    ObjectManager() = default;
-    ~ObjectManager() = default;
+    ObjectManager();
+    ~ObjectManager();
+
+    /**
+    Updates the objects that require individually updating.
+    */
+    void Update();
+
     /**
     Tries to create a copy of an Entity from a virtual object.
     Param: [in] the vnum of the object to clone.
     \return: A pointer to the new object on success, NULL on failure.
     */
-    Entity* CreateObject(VNUM num);
+    Entity* CreateObject(VNUM obj);
     /**
     Recycles the specified  object, as well as removes it from the virtual obj statistics.
     Also cleans up the object and the contents of that object.
     */
     BOOL RecycleObject(ObjectContainer* obj);
+    /*
+    *Adds the specified virtual object to the list.
+    *Param: [in] a pointer to the static object to add.
+    *Return: True on success, false on failure.
+    */
+    BOOL AddVirtual(StaticObject* obj);
     /*
     *Checks to see if the specified virtual object exists.
     *Param: [in] the  num of the virtual object to check.
@@ -47,6 +56,24 @@ public:
     */
     StaticObject* GetVirtual(VNUM num);
     /*
+    *Removes the specified virtual, as well as deletes each individual object that belongs to it.
+    *Param: [in] the vnum of the object to remove.
+    *Return: True on success, false on failure.
+    */
+    BOOL RemoveVirtual(VNUM num);
+    /*
+    *Tries to add the specified room.
+    *Param: [in] a pointer to the room to be added.
+    *Return: True on success, false on failure.
+    */
+    BOOL AddRoom(Room* room);
+    /*
+    *Tries to remove the specified room.
+    *Param: [in] the VNUM of the room to remove.
+    *Return: True on success, false on failure.
+    */
+    BOOL RemoveRoom(VNUM num);
+    /*
     *Checks to see if the specified room exists.
     *Param: [in] the VNUM of the room.
     *Return: True on success, false on failure.
@@ -58,6 +85,8 @@ public:
     *Return: a pointer to the room object on success, NULL otherwise.
     */
     Room* GetRoom(VNUM num);
+    BOOL AddNpc(Npc* mob);
+    BOOL RemoveNpc(VNUM num);
     bool NpcExists(VNUM num);
     Npc*  GetNpc(VNUM num);
 };

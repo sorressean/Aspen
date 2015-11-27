@@ -1,4 +1,5 @@
 #include "mud.h"
+#include "conf.h"
 #include "objectManager.h"
 #include "baseObject.h"
 #include "staticObject.h"
@@ -6,25 +7,37 @@
 #include "npc.h"
 #include "room.h"
 #include "world.h"
-#include "zone.h"
 
-Zone* ObjectManager::FindZone(VNUM num)
+ObjectManager::ObjectManager()
 {
-    World* world = World::GetPtr();
-    std::vector<Zone*> zones;
-
-    world->GetZones(&zones);
-    for (auto it: zones)
-        {
-            if (num >= it->GetMinVnum() || num <= it->GetMaxVnum())
-                {
-                    return it;
-                }
-        }
-
-    return nullptr;
+}
+ObjectManager::~ObjectManager()
+{
 }
 
+void ObjectManager::Update()
+{
+    for (auto npc: _npcs)
+        {
+            (npc.second)->Update();
+        }
+}
+Entity* ObjectManager::CreateObject(VNUM obj)
+{
+    Entity* object = NULL;
+    StaticObject* virt = NULL;
+    World* world = World::GetPtr();
+
+    if (obj != 0 && !VirtualExists(obj))
+        {
+            world->WriteLog("Tried to create virtual with nonexistant vnum", ERR);
+            return NULL;
+        }
+
+    virt = _objects[obj];
+    object = virt->Create();
+    return object;
+}
 BOOL ObjectManager::RecycleObject(ObjectContainer* obj)
 {
     World* world = World::GetPtr();
@@ -73,79 +86,134 @@ BOOL ObjectManager::RecycleObject(ObjectContainer* obj)
     return true;
 }
 
-Entity* ObjectManager::CreateObject(VNUM num)
+BOOL ObjectManager::AddVirtual(StaticObject* obj)
 {
-    Entity* object = nullptr;
-    StaticObject* virt = nullptr;
-
-    virt = GetVirtual(num);
-    if (!virt)
+    VNUM num = 0;
+    if (!obj)
         {
-            return nullptr;
+            return false;
         }
 
-    object = virt->Create();
-    return object;
+    num = obj->GetOnum();
+    if (VirtualExists(num))
+        {
+            return false;
+        }
+
+    _objects[num] = obj;
+    return true;
 }
 BOOL ObjectManager::VirtualExists(VNUM num)
 {
-    return (GetVirtual(num)? true : false);
+    return (_objects.count(num)? true:false);
 }
 StaticObject* ObjectManager::GetVirtual(VNUM num)
 {
-    Zone* zone = nullptr;
-
-    if (num <= 0)
+    if (!VirtualExists(num))
         {
-            return nullptr;
-        }
-    zone = FindZone(num);
-    if (!zone)
-        {
-            return nullptr;
+            return NULL;
         }
 
-    return zone->GetVirtual(num);
+    return _objects[num];
+}
+BOOL ObjectManager::RemoveVirtual(VNUM num)
+{
+    StaticObject* virt = GetVirtual(num);
+    if (!virt)
+        {
+            return false;
+        }
+
+    virt->RecycleContents();
+    _objects.erase(num);
+    return true;
 }
 
+BOOL ObjectManager::AddRoom(Room* room)
+{
+    VNUM num = 0;
+    if (!room)
+        {
+            return false;
+        }
+
+    num = room->GetOnum();
+    if (RoomExists(num))
+        {
+            return false;
+        }
+
+    _rooms[num] = room;
+    return true;
+}
+BOOL ObjectManager::RemoveRoom(VNUM num)
+{
+    Room* room = NULL;
+
+    room = GetRoom(num);
+    if (!room)
+        {
+            return false;
+        }
+
+    _rooms.erase(room->GetOnum());
+    return true;
+}
 BOOL ObjectManager::RoomExists(VNUM num)
 {
-    return (GetRoom(num)? true : false);
+    return _rooms.count(num)? true : false;
 }
 Room* ObjectManager::GetRoom(VNUM num)
 {
-    Zone* zone = nullptr;
-
-    if (num <= 0)
+    if (!RoomExists(num))
         {
-            return nullptr;
-        }
-    zone = FindZone(num);
-    if (!zone)
-        {
-            return nullptr;
+            return NULL;
         }
 
-    return zone->GetRoom(num);
+    return _rooms[num];
 }
 
+BOOL ObjectManager::AddNpc(Npc* mob)
+{
+    VNUM num = 0;
+
+    if (!mob)
+        {
+            return false;
+        }
+
+    num = mob->GetOnum();
+    if (NpcExists(num))
+        {
+            return false;
+        }
+
+    _npcs[num] = mob;
+    return true;
+}
+BOOL ObjectManager::RemoveNpc(VNUM num)
+{
+    Npc* mob = NULL;
+
+    mob = GetNpc(num);
+    if (!mob)
+        {
+            return false;
+        }
+
+    _npcs.erase(mob->GetOnum());
+    return true;
+}
 bool ObjectManager::NpcExists(VNUM num)
 {
-    return (GetNpc(num)? true : false);
+    return  (_npcs.count(num) ? true : false);
 }
 Npc*  ObjectManager::GetNpc(VNUM num)
 {
-    Zone* zone = nullptr;
-
-    if (num <= 0)
+    if (!NpcExists(num))
         {
-            return nullptr;
-        }
-    zone = FindZone(num);
-    if (!zone)
-        {
-            return nullptr;
+            return NULL;
         }
 
-    return zone->GetNpc(num);
+    return _npcs[num];
 }
