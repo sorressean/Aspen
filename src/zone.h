@@ -35,12 +35,9 @@ class Room;
 class Zone
 {
     std::string _name;
-    std::unordered_map <VNUM, StaticObject*> _virtuals; //a dictionary of all static objects.
     std::vector<StaticObject*> _virtualobjs; //a vector of pointers to all virtual objs.
-    std::list<Entity*> _objects; //a vector of all currently cloned objects;
-    std::unordered_map<VNUM, Room*> _rooms; //a mapping of VNUM to room.
+    std::list<Entity*> _objects;
     std::vector<Room*> _roomobjs; //a vector to all current room objects;
-    std::unordered_map<VNUM, Npc*> _mobs;
     std::vector<Npc*> _mobobjs;
     std::stack<VNUM> _rnums; //a stack of all empty room numbers.
     std::stack<VNUM> _onums; //a list of all empty object numbers.

@@ -94,7 +94,6 @@ Room* Zone::AddRoom()
     _rnums.pop();
     room->SetOnum(num);
     room->SetZone(this);
-    _rooms[num] = room;
     _roomobjs.push_back(room);
     omanager->AddRoom(room);
     return room;
@@ -138,16 +137,17 @@ Room* Zone::AddRoom(VNUM num)
     _rnums = temp;
     room->SetOnum(num);
     room->SetZone(this);
-    _rooms[num] = room;
     _roomobjs.push_back(room);
     omanager->AddRoom(room);
     return room;
 }
 BOOL Zone::RemoveRoom(VNUM num)
 {
+    World* world = World::GetPtr();
+    ObjectManager* omanager = world->GetObjectManager();
     std::vector<Room*>::iterator it, itEnd;
 
-    if (_rooms.count(num))
+    if (omanager->RoomExists(num))
         {
             itEnd = _roomobjs.end();
             for (it = _roomobjs.begin(); it != itEnd; ++it)
@@ -155,8 +155,7 @@ BOOL Zone::RemoveRoom(VNUM num)
                     if ((*it)->GetOnum() == num)
                         {
                             _roomobjs.erase(it);
-                            delete _rooms[num];
-                            _rooms.erase(num);
+                            omanager->RemoveRoom(num);
                             return true;
                         }
                 }
@@ -170,7 +169,14 @@ void Zone::GetRooms(std::vector<Room*> *rooms)
 }
 BOOL Zone::RoomExists(VNUM num)
 {
-    return (_rooms.count(num) ? true : false);
+    World* world = World::GetPtr();
+    ObjectManager* omanager = world->GetObjectManager();
+    if (num < _vnumrange.min || num > _vnumrange.max)
+        {
+            return false;
+        }
+
+    return omanager->RoomExists(num);
 }
 
 StaticObject* Zone::AddVirtual()
@@ -193,13 +199,14 @@ StaticObject* Zone::AddVirtual()
     num = _onums.top();
     _onums.pop();
     obj->SetOnum(num);
-    _virtuals[num] = obj;
     _virtualobjs.push_back(obj);
     omanager->AddVirtual(obj);
     return obj;
 }
 BOOL Zone::RemoveVirtual(VNUM num)
 {
+    World* world = World::GetPtr();
+    ObjectManager* omanager = world->GetObjectManager();
     std::vector<StaticObject*>::iterator it, itEnd;
 
     itEnd = _virtualobjs.end();
@@ -208,8 +215,7 @@ BOOL Zone::RemoveVirtual(VNUM num)
             if ((*it)->GetOnum() == num)
                 {
                     _virtualobjs.erase(it);
-                    delete _virtualobjs[num];
-                    _virtuals.erase(num);
+                    omanager->RemoveVirtual(num);
                     return true;
                 }
         }
@@ -218,23 +224,30 @@ BOOL Zone::RemoveVirtual(VNUM num)
 }
 StaticObject* Zone::GetVirtual(VNUM num)
 {
+    World*world = World::GetPtr();
+    ObjectManager* omanager = world->GetObjectManager();
+
     if (VirtualExists(num))
         {
-            return _virtuals[num];
+            return omanager->GetVirtual(num);
         }
 
     return nullptr;
 }
 void Zone::GetVirtuals(std::vector<StaticObject*>* objects)
 {
-    for (auto it: _virtuals)
-        {
-            objects->push_back(it.second);
-        }
+    std::copy(_virtualobjs.begin(), _virtualobjs.end(), std::back_inserter(*objects));
 }
 BOOL Zone::VirtualExists(VNUM num)
 {
-    return (_virtuals.count(num) ? true : false);
+    World* world = World::GetPtr();
+    ObjectManager* omanager = world->GetObjectManager();
+    if (num > _vnumrange.max || num < _vnumrange.min)
+        {
+            return false;
+        }
+
+    return omanager->VirtualExists(num);
 }
 
 Npc* Zone::AddNpc()
@@ -257,13 +270,14 @@ Npc* Zone::AddNpc()
     num = _mnums.top();
     _mnums.pop();
     mob->SetOnum(num);
-    _mobs[num] = mob;
     _mobobjs.push_back(mob);
     omanager->AddNpc(mob);
     return mob;
 }
 BOOL Zone::RemoveNpc(VNUM num)
 {
+    World* world = World::GetPtr();
+    ObjectManager* omanager = world->GetObjectManager();
     std::vector<Npc*>::iterator it, itEnd;
 
     itEnd = _mobobjs.end();
@@ -272,8 +286,7 @@ BOOL Zone::RemoveNpc(VNUM num)
             if ((*it)->GetOnum() == num)
                 {
                     _mobobjs.erase(it);
-                    delete _mobs[num];
-                    _mobs.erase(num);
+                    omanager->RemoveNpc(num);
                     return true;
                 }
         }
@@ -282,9 +295,11 @@ BOOL Zone::RemoveNpc(VNUM num)
 }
 Npc* Zone::GetNpc(VNUM num)
 {
+    World* world = World::GetPtr();
+    ObjectManager* omanager = world->GetObjectManager();
     if (NpcExists(num))
         {
-            return _mobs[num];
+            return omanager->GetNpc(num);
         }
 
     return nullptr;
@@ -295,7 +310,14 @@ void Zone::GetNpcs(std::vector<Npc*>* npcs)
 }
 BOOL Zone::NpcExists(VNUM num)
 {
-    return (_mobs.count(num) ? true : false);
+    World* world = World::GetPtr();
+    ObjectManager* omanager = world->GetObjectManager();
+    if (num > _vnumrange.max || num < _vnumrange.min)
+        {
+            return false;
+        }
+
+    return omanager->NpcExists(num);
 }
 Npc* Zone::CreateNpc(VNUM num, Room* origin)
 {
@@ -404,20 +426,17 @@ void Zone::Deserialize(tinyxml2::XMLElement* zone)
     for (auto it: _roomobjs)
         {
             omanager->AddRoom(it);
-            _rooms[it->GetOnum()] = it;
             it->SetZone(this);
         }
 
     for (auto it: _virtualobjs)
         {
-            _virtuals[it->GetOnum()] = it;
             omanager->AddVirtual(it);
         }
 
     for (auto it: _mobobjs)
         {
             omanager->AddNpc(it);
-            _mobs[it->GetOnum()] = it;
         }
 }
 
