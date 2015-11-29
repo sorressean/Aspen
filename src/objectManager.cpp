@@ -128,6 +128,24 @@ BOOL ObjectManager::RemoveVirtual(VNUM num)
     _objects.erase(num);
     return true;
 }
+VNUM ObjectManager::GetFreeVirtualVnum(VNUM min, VNUM max, VNUM num)
+{
+    int i = min;
+    if (!num)
+        {
+            return (VirtualExists(num) ? num : 0);
+        }
+
+    for (; i < max; ++i)
+        {
+            if (!VirtualExists(i))
+                {
+                    return i;
+                }
+        }
+
+    return 0;
+}
 
 BOOL ObjectManager::AddRoom(Room* room)
 {
@@ -171,6 +189,24 @@ Room* ObjectManager::GetRoom(VNUM num)
         }
 
     return _rooms[num];
+}
+VNUM ObjectManager::GetFreeRoomVnum(VNUM min, VNUM max, VNUM num)
+{
+    int i = min;
+    if (!num)
+        {
+            return (RoomExists(num) ? num : 0);
+        }
+
+    for (; i < max; ++i)
+        {
+            if (!RoomExists(i))
+                {
+                    return i;
+                }
+        }
+
+    return 0;
 }
 
 BOOL ObjectManager::AddNpc(Npc* mob)
@@ -216,4 +252,22 @@ Npc*  ObjectManager::GetNpc(VNUM num)
         }
 
     return _npcs[num];
+}
+VNUM ObjectManager::GetFreeNpcVnum(VNUM min, VNUM max, VNUM num)
+{
+    int i = min;
+    if (!num)
+        {
+            return (NpcExists(num) ? num : 0);
+        }
+
+    for (; i < max; ++i)
+        {
+            if (!NpcExists(i))
+                {
+                    return i;
+                }
+        }
+
+    return 0;
 }

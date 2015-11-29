@@ -2,7 +2,6 @@
 #ifndef ZONE_H
 #define ZONE_H
 #include <tinyxml2.h>
-#include <stack>
 #include <unordered_map>
 #include "mud.h"
 #include "conf.h"
@@ -39,9 +38,6 @@ class Zone
     std::list<Entity*> _objects;
     std::vector<Room*> _roomobjs; //a vector to all current room objects;
     std::vector<Npc*> _mobobjs;
-    std::stack<VNUM> _rnums; //a stack of all empty room numbers.
-    std::stack<VNUM> _onums; //a list of all empty object numbers.
-    std::stack<VNUM> _mnums; //a stack of all empty mob nums.
     FLAG _flags;
     time_t _creation;
     time_t _opened; //when was the zone opened for public?
@@ -93,7 +89,6 @@ public:
     BOOL NpcExists(VNUM num);
     void GetNpcs(std::vector<Npc*>* npcs);
     Npc* CreateNpc(VNUM num, Room* origin);
-    void CalculateVnumRanges();
     void Update();
     virtual void Serialize(tinyxml2::XMLElement* root);
     virtual void Deserialize(tinyxml2::XMLElement* zone);

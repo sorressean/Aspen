@@ -78,20 +78,14 @@ Room* Zone::AddRoom()
     World* world = World::GetPtr();
     ObjectManager* omanager = world->GetObjectManager();
     Room* room = NULL;
-    VNUM num = 0;
+    VNUM num = omanager->GetFreeRoomVnum(_vnumrange.min, _vnumrange.max);
 
-    if (_rnums.empty())
+    if (!num)
         {
-            CalculateVnumRanges();
-            if (_rnums.empty())
-                {
-                    throw(std::runtime_error("No more vnums available"));
-                }
+            throw(std::runtime_error("No more vnums available"));
         }
 
     room = new Room();
-    num = _rnums.top();
-    _rnums.pop();
     room->SetOnum(num);
     room->SetZone(this);
     _roomobjs.push_back(room);
@@ -102,39 +96,13 @@ Room* Zone::AddRoom(VNUM num)
 {
     World* world = World::GetPtr();
     ObjectManager* omanager = world->GetObjectManager();
-
-    VNUM cur = 0;
-    std::stack<VNUM> temp;
     Room* room = NULL;
-    BOOL found = false;
-
-    if (_rnums.empty())
+    if (!omanager->GetFreeRoomVnum(_vnumrange.min, _vnumrange.max, num))
         {
-            CalculateVnumRanges();
-            if (_rnums.empty())
-                {
-                    throw(std::runtime_error("No more vnums available"));
-                }
+            throw(std::runtime_error("No more vnums available"));
         }
 
     room = new Room();
-    while (!_rnums.empty())
-        {
-            cur = _rnums.top();
-            _rnums.pop();
-            if (cur == num)
-                {
-                    found = true;
-                    continue;
-                }
-            temp.push(cur);
-        }
-    if (!found)
-        {
-            throw(std::runtime_error("That num wasn't found."));
-        }
-
-    _rnums = temp;
     room->SetOnum(num);
     room->SetZone(this);
     _roomobjs.push_back(room);
@@ -184,20 +152,14 @@ StaticObject* Zone::AddVirtual()
     World* world = World::GetPtr();
     ObjectManager* omanager = world->GetObjectManager();
     StaticObject* obj = NULL;
-    VNUM num = 0;
+    VNUM num = omanager->GetFreeVirtualVnum(_vnumrange.min, _vnumrange.max);
 
-    if (_onums.empty())
+    if (!num)
         {
-            CalculateVnumRanges();
-            if (_onums.empty())
-                {
-                    throw(std::runtime_error("No more vnums available"));
-                }
+            throw(std::runtime_error("No more vnums available"));
         }
 
     obj = new StaticObject();
-    num = _onums.top();
-    _onums.pop();
     obj->SetOnum(num);
     _virtualobjs.push_back(obj);
     omanager->AddVirtual(obj);
@@ -255,20 +217,14 @@ Npc* Zone::AddNpc()
     World* world = World::GetPtr();
     ObjectManager* omanager = world->GetObjectManager();
     Npc* mob = nullptr;
-    VNUM num = 0;
+    VNUM num = omanager->GetFreeNpcVnum(_vnumrange.min, _vnumrange.max);
 
-    if (_mnums.empty())
+    if (!num)
         {
-            CalculateVnumRanges();
-            if (_mnums.empty())
-                {
-                    throw(std::runtime_error("No more vnums available"));
-                }
+            throw(std::runtime_error("No more vnums available"));
         }
 
     mob = new Npc();
-    num = _mnums.top();
-    _mnums.pop();
     mob->SetOnum(num);
     _mobobjs.push_back(mob);
     omanager->AddNpc(mob);
@@ -341,49 +297,6 @@ Npc* Zone::CreateNpc(VNUM num, Room* origin)
         }
 
     return ret;
-}
-void Zone::CalculateVnumRanges()
-{
-    int i = 0; //for counter
-
-//find all empty virtual objects.
-    for (i = _vnumrange.max; i >= _vnumrange.min; i--)
-        {
-            if (!VirtualExists(i))
-                {
-                    if (_onums.size() == VNUMKEEP)
-                        {
-                            break;
-                        }
-                    _onums.push(i);
-                }
-        }
-
-//find all empty room objects.
-    for (i = _vnumrange.max; i >= _vnumrange.min; i--)
-        {
-            if (!RoomExists(i))
-                {
-                    if (_rnums.size() == VNUMKEEP)
-                        {
-                            break;
-                        }
-                    _rnums.push(i);
-                }
-        }
-
-//find all empty npc objects
-    for (i = _vnumrange.max; i >= _vnumrange.min; i--)
-        {
-            if (_mnums.size() == VNUMKEEP)
-                {
-                    break;
-                }
-            if (!NpcExists(i))
-                {
-                    _mnums.push(i);
-                }
-        }
 }
 
 void Zone::Update()
@@ -470,7 +383,6 @@ BOOL InitializeZones()
                     return false;
                 }
             zone->SetRange(1, 100);
-            zone->CalculateVnumRanges();
             Room* room = zone->AddRoom(ROOM_START);
             room->SetName("A blank room");
             if (!Zone::SaveZones())

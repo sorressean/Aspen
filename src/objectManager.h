@@ -61,6 +61,7 @@ public:
     *Return: True on success, false on failure.
     */
     BOOL RemoveVirtual(VNUM num);
+    VNUM GetFreeVirtualVnum(VNUM min, VNUM max, VNUM num=0);
     /*
     *Tries to add the specified room.
     *Param: [in] a pointer to the room to be added.
@@ -85,8 +86,10 @@ public:
     *Return: a pointer to the room object on success, NULL otherwise.
     */
     Room* GetRoom(VNUM num);
+    VNUM GetFreeRoomVnum(VNUM min, VNUM max, VNUM num=0);
     BOOL AddNpc(Npc* mob);
     BOOL RemoveNpc(VNUM num);
     bool NpcExists(VNUM num);
     Npc*  GetNpc(VNUM num);
+    VNUM GetFreeNpcVnum(VNUM min, VNUM max, VNUM = 0);
 };
