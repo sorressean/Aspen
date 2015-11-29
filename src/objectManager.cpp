@@ -136,7 +136,7 @@ VNUM ObjectManager::GetFreeVirtualVnum(VNUM min, VNUM max, VNUM num)
             return (VirtualExists(num) ? num : 0);
         }
 
-    for (; i < max; ++i)
+    for (; i <= max; ++i)
         {
             if (!VirtualExists(i))
                 {
@@ -198,7 +198,7 @@ VNUM ObjectManager::GetFreeRoomVnum(VNUM min, VNUM max, VNUM num)
             return (RoomExists(num) ? num : 0);
         }
 
-    for (; i < max; ++i)
+    for (; i <= max; ++i)
         {
             if (!RoomExists(i))
                 {
@@ -261,7 +261,7 @@ VNUM ObjectManager::GetFreeNpcVnum(VNUM min, VNUM max, VNUM num)
             return (NpcExists(num) ? num : 0);
         }
 
-    for (; i < max; ++i)
+    for (; i <= max; ++i)
         {
             if (!NpcExists(i))
                 {
