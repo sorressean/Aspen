@@ -45,10 +45,10 @@ ScriptEngine::ScriptEngine()
 {
     _engine = asCreateScriptEngine(ANGELSCRIPT_VERSION);
     RegisterScriptArray(_engine, true);
-    RegisterScriptDictionary(_engine);
     RegisterScriptMath(_engine);
     RegisterStdString(_engine);
     RegisterStdStringUtils(_engine);
+    RegisterScriptDictionary(_engine);
     _engine->SetMessageCallback(asFUNCTION(MessageCallback), NULL, asCALL_CDECL);
 }
 ScriptEngine::~ScriptEngine()
@@ -119,6 +119,7 @@ static void InitializeObjects()
     ret = engine->RegisterObject("Entity");
     assert(ret);
 }
+
 /**
 Initializes individual methods, properties and etc on specific objects.
 */

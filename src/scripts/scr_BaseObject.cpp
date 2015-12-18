@@ -19,11 +19,23 @@ void RegisterBaseObjectMethods(const char* obj)
     assert(r);
     r = engine->RegisterMethod(obj, "void SetDescription(string description)", asMETHOD(BaseObject, SetDescription));
     assert(r);
-//add get/set Zone
+//TODO: add get/set Zone
     r = engine->RegisterMethod(obj, "int GetOnum() const", asMETHOD(BaseObject, GetOnum));
     assert(r);
 //TODO: add components.
     r = engine->RegisterMethod(obj, "void Attach()", asMETHOD(BaseObject, Attach));
+    assert(r);
+    r = engine->RegisterMethod(obj, "bool IsPlayer()", asMETHOD(BaseObject, IsPlayer));
+    assert(r);
+    r = engine->RegisterMethod(obj, "bool IsLiving()", asMETHOD(BaseObject, IsLiving));
+    assert(r);
+    r = engine->RegisterMethod(obj, "bool IsRoom()", asMETHOD(BaseObject, IsRoom));
+    assert(r);
+    r = engine->RegisterMethod(obj, "bool IsNpc()", asMETHOD(BaseObject, IsNpc));
+    assert(r);
+    r = engine->RegisterMethod(obj, "bool IsObject()", asMETHOD(BaseObject, IsObject));
+    assert(r);
+
     /*
         r = engine->RegisterMethod(obj, "bool AddAlias(string alias)", asMETHOD(BaseObject, AddAlias));
         assert(r);
