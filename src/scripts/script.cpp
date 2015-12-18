@@ -1,6 +1,8 @@
 #include <angelscript.h>
 #include <scriptstdstring.h>
 #include <scriptarray.h>
+#include <scriptdictionary.h>
+#include <scriptmath.h>
 #include <sstream>
 #include <cassert>
 #include "../mud.h"
@@ -10,7 +12,6 @@
 #include "script.h"
 #include "scr_BaseObject.h"
 #include "scr_Entity.h"
-
 
 static void MessageCallback(const asSMessageInfo *msg, void *param)
 {
@@ -44,6 +45,8 @@ ScriptEngine::ScriptEngine()
 {
     _engine = asCreateScriptEngine(ANGELSCRIPT_VERSION);
     RegisterScriptArray(_engine, true);
+    RegisterScriptDictionary(_engine);
+    RegisterScriptMath(_engine);
     RegisterStdString(_engine);
     RegisterStdStringUtils(_engine);
     _engine->SetMessageCallback(asFUNCTION(MessageCallback), NULL, asCALL_CDECL);

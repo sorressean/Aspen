@@ -12,7 +12,7 @@
 #include "mud.h"
 #include "event.h"
 
-    typedef std::unordered_map<std::tuple<VNUM, std::string>, Event*> EventTable;
+typedef std::unordered_map<std::tuple<VNUM, std::string>, Event*> EventTable;
 
 /**
 * This is a container for multiple events.
