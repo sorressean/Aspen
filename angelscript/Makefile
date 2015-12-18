@@ -11,7 +11,8 @@ as_gc.cpp as_generic.cpp as_globalproperty.cpp as_memory.cpp as_module.cpp\
 as_objecttype.cpp as_outputbuffer.cpp as_parser.cpp as_restore.cpp as_scriptcode.cpp\
 as_scriptengine.cpp as_scriptfunction.cpp as_scriptnode.cpp as_scriptobject.cpp as_string.cpp\
 as_string_util.cpp as_thread.cpp as_tokenizer.cpp as_typeinfo.cpp as_variablescope.cpp\
-scriptstdstring.cpp scriptstdstring_utils.cpp scriptarray.cpp
+scriptstdstring.cpp scriptstdstring_utils.cpp scriptarray.cpp contextmgr.cpp\
+scripthelper.cpp scriptdictionary.cpp scriptmath.cpp scriptgrid.cpp
 
 include ../src/extensions/make.inc
 

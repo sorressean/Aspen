@@ -6,8 +6,13 @@
 */
 #ifndef EVENT_MANAGER_H
 #define EVENT_MANAGER_H
+#include <tuple>
+#include <unordered_map>
+#include <string>
 #include "mud.h"
 #include "event.h"
+
+    typedef std::unordered_map<std::tuple<VNUM, std::string>, Event*> EventTable;
 
 /**
 * This is a container for multiple events.
