@@ -12,6 +12,7 @@
 #include "script.h"
 #include "scr_BaseObject.h"
 #include "scr_Entity.h"
+#include "scr_ObjectContainer.h"
 
 static void MessageCallback(const asSMessageInfo *msg, void *param)
 {
@@ -118,6 +119,8 @@ static void InitializeObjects()
     assert(ret);
     ret = engine->RegisterObject("Entity");
     assert(ret);
+    ret = engine->RegisterObject("ObjectContainer");
+    assert(ret);
 }
 
 /**
@@ -127,6 +130,7 @@ static void InitializeObjectTraits()
 {
     InitializeBaseObject();
     InitializeEntity();
+    InitializeObjectContainer();
 }
 
 bool InitializeScript()

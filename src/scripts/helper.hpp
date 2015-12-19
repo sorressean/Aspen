@@ -10,8 +10,8 @@ template <class C>
 CScriptArray* ContainerToScriptArray(const char* odecl, C& container)
 {
     ScriptEngine* engine = ScriptEngine::GetPtr();
-    size_t size; //size of container.
-    size_t i; //for index.
+    size_t size = 0; //size of container.
+    size_t i = 0; //for index.
     void* ptr = nullptr; //holds the individual element.
     asIObjectType* objtype = nullptr; //holds declaration.
     CScriptArray* ret  = nullptr;
