@@ -19,7 +19,7 @@ void RegisterBaseObjectMethods(const char* obj)
     r = engine->RegisterMethod(obj, "void SetDescription(string description)", asMETHOD(BaseObject, SetDescription));
     assert(r);
 //TODO: add get/set Zone
-    r = engine->RegisterMethod(obj, "int GetOnum() const", asMETHOD(BaseObject, GetOnum));
+    r = engine->RegisterMethod(obj, "VNUM GetOnum() const", asMETHOD(BaseObject, GetOnum));
     assert(r);
 //TODO: add components.
     r = engine->RegisterMethod(obj, "void Attach()", asMETHOD(BaseObject, Attach));
