@@ -1,7 +1,6 @@
 #include <angelscript.h>
 #include <cassert>
 #include "../mud.h"
-#include "../conf.h"
 #include "../baseObject.h"
 #include "script.h"
 #include "scr_BaseObject.h"
@@ -25,15 +24,15 @@ void RegisterBaseObjectMethods(const char* obj)
 //TODO: add components.
     r = engine->RegisterMethod(obj, "void Attach()", asMETHOD(BaseObject, Attach));
     assert(r);
-    r = engine->RegisterMethod(obj, "bool IsPlayer()", asMETHOD(BaseObject, IsPlayer));
+    r = engine->RegisterMethod(obj, "bool IsPlayer() const", asMETHOD(BaseObject, IsPlayer));
     assert(r);
-    r = engine->RegisterMethod(obj, "bool IsLiving()", asMETHOD(BaseObject, IsLiving));
+    r = engine->RegisterMethod(obj, "bool IsLiving() const", asMETHOD(BaseObject, IsLiving));
     assert(r);
-    r = engine->RegisterMethod(obj, "bool IsRoom()", asMETHOD(BaseObject, IsRoom));
+    r = engine->RegisterMethod(obj, "bool IsRoom() const", asMETHOD(BaseObject, IsRoom));
     assert(r);
-    r = engine->RegisterMethod(obj, "bool IsNpc()", asMETHOD(BaseObject, IsNpc));
+    r = engine->RegisterMethod(obj, "bool IsNpc() const", asMETHOD(BaseObject, IsNpc));
     assert(r);
-    r = engine->RegisterMethod(obj, "bool IsObject()", asMETHOD(BaseObject, IsObject));
+    r = engine->RegisterMethod(obj, "bool IsObject() const", asMETHOD(BaseObject, IsObject));
     assert(r);
 
     /*
