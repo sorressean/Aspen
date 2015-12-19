@@ -1,7 +1,6 @@
 #include <cassert>
 #include <angelscript.h>
 #include "../mud.h"
-#include "../conf.h"
 #include "../entity.h"
 #include "script.h"
 #include "scr_Entity.h"
