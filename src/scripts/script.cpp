@@ -115,8 +115,8 @@ static void InitializeObjects()
     bool ret = false;
     ScriptEngine* engine = ScriptEngine::GetPtr();
 
-ret = engine->GetBaseEngine()->RegisterTypedef("VNUM", "int");
-assert(ret);
+ret = engine->GetBaseEngine()->RegisterTypedef("vnum", "int");
+assert(ret>=00);
     ret = engine->RegisterObject("BaseObject");
     assert(ret);
     ret = engine->RegisterObject("Entity");
