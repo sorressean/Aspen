@@ -48,7 +48,7 @@
 // AS_NO_THREADS
 // Turns off support for multithreading. By turning off
 // this when it's not needed a bit of performance is gained.
-
+#define AS_NO_THREADS
 // AS_WINDOWS_THREADS
 // If the library should be compiled using windows threads.
 
@@ -67,7 +67,6 @@
 // If this flag is defined then some backwards compatibility is maintained.
 // There is no guarantee for how well deprecated functionality will work though
 // so it is best to exchange it for the new functionality as soon as possible.
-
 // AS_NO_CLASS_METHODS
 // Disables the possibility to add class methods. Can increase the
 // portability of the library.
