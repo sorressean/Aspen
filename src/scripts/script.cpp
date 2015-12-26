@@ -13,6 +13,7 @@
 #include "scr_BaseObject.h"
 #include "scr_Entity.h"
 #include "scr_ObjectContainer.h"
+#include "scr_Exit.h"
 
 static void MessageCallback(const asSMessageInfo *msg, void *param)
 {
@@ -115,13 +116,15 @@ static void InitializeObjects()
     bool ret = false;
     ScriptEngine* engine = ScriptEngine::GetPtr();
 
-ret = engine->GetBaseEngine()->RegisterTypedef("vnum", "int");
-assert(ret>=00);
+    ret = engine->GetBaseEngine()->RegisterTypedef("vnum", "int");
+    assert(ret>=00);
     ret = engine->RegisterObject("BaseObject");
     assert(ret);
     ret = engine->RegisterObject("Entity");
     assert(ret);
     ret = engine->RegisterObject("ObjectContainer");
+    assert(ret);
+    ret = engine->RegisterObject("Exit");
     assert(ret);
 }
 
@@ -133,6 +136,7 @@ static void InitializeObjectTraits()
     InitializeBaseObject();
     InitializeEntity();
     InitializeObjectContainer();
+    InitializeExit();
 }
 
 bool InitializeScript()
