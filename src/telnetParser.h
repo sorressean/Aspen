@@ -1,7 +1,7 @@
 #pragma once
 #include "mud.h"
 #include "conf.h"
-#include "eventManager.h"
+#include "uuid.h"
 
 class TelnetParser
 {
@@ -10,8 +10,8 @@ class TelnetParser
     unsigned char* _newbuff;
     unsigned int _size;
     unsigned int _newsize;
+Uuid _id;
 public:
-    EventManager events;
     TelnetParser();
     ~TelnetParser();
     void SetBuffer(unsigned char* buff);

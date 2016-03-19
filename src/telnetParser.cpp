@@ -4,16 +4,15 @@
 #include "telnetParser.h"
 #include "telnetParserEvents.hpp"
 #include "telnet.h"
-#include "eventManager.h"
 #include "event.h"
+#include "uuid.h"
 
 TelnetParser::TelnetParser()
 {
     _buff = nullptr;
     _newbuff = nullptr;
     Reset();
-    events.RegisterEvent("OnNegotiation", new Event());
-    events.RegisterEvent("OnOption", new Event());
+_id.Initialize();
 }
 TelnetParser::~TelnetParser()
 {

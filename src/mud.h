@@ -5,6 +5,8 @@
 #ifndef MUD_H
 #define MUD_H
 #include "conf.h"
+#include "eventDefs.h"
+
 /**
 * @todo move to utils.h
 */

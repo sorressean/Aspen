@@ -15,12 +15,6 @@
 
 BaseObject::BaseObject()
 {
-    events.RegisterEvent("PreLook", new Event());
-    events.RegisterEvent("PostLook", new Event());
-    events.RegisterEvent("OnEnter", new Event());
-    events.RegisterEvent("OnExit", new Event());
-    events.RegisterEvent("OnLook", new Event());
-
     _name="A blank object";
     _desc="You see nothing special.";
     _script="";

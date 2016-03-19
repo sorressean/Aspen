@@ -8,15 +8,11 @@
 #include "editor.h"
 #include "event.h"
 #include "eventargs.h"
+#include "eventTable.h"
 #include "inputHandlers.h"
 
 Editor::Editor()
 {
-    events.RegisterEvent("save", new Event());
-    events.RegisterEvent("load", new Event());
-    events.RegisterEvent("abort", new Event());
-    events.RegisterEvent("atexit", new Event());
-
     _cursor = -1;
     _dirty=false;
     _arg = nullptr;

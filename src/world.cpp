@@ -27,7 +27,7 @@
 #include "serializer.h"
 #include "event.h"
 #include "delayedEvent.h"
-#include "eventManager.h"
+#include "eventTable.h"
 #include "calloutManager.h"
 #include "com_gen.h"
 

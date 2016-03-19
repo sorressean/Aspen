@@ -9,14 +9,16 @@
 #include "world.h"
 #include "utils.h"
 #include "option.h"
+#include "eventTable.h"
 
 void InitializeChannels()
 {
     World* world = World::GetPtr();
+EventTable* events = EventTable::GetPtr();
 
     world->WriteLog("Initializing channels");
-    world->events.AddCallback("PlayerConnect", std::bind(&Channel::SubscribeChannels, std::placeholders::_1, std::placeholders::_2));
-    world->events.AddCallback("PlayerDisconnect", std::bind(&Channel::UnsubscribeChannels, std::placeholders::_1, std::placeholders::_2));
+    events->AddCallback(GEVENT_PLAYER_CONNECT, std::bind(&Channel::SubscribeChannels, std::placeholders::_1, std::placeholders::_2));
+    events->AddCallback(GEVENT_PLAYER_DISCONNECT, std::bind(&Channel::UnsubscribeChannels, std::placeholders::_1, std::placeholders::_2));
 
 //Register channels here.
     world->AddChannel(new Channel("chat","ch",RANK_PLAYER));

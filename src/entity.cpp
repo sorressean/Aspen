@@ -7,7 +7,7 @@
 #include "world.h"
 #include "eventargs.h"
 #include "event.h"
-#include "eventManager.h"
+#include "eventTable.h"
 #include "utils.h"
 #include "command.h"
 #include "olc.h"
