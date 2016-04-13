@@ -26,9 +26,10 @@ class Entity:public ObjectContainer
 protected:
     ObjectContainer* _location;
     StaticObject* _parent;
+    Uuid _uuid;
     std::vector<std::string> _aliases;
+
     std::string _short;
-Uuid _uuid;
 public:
     Entity();
     virtual ~Entity() = default;
