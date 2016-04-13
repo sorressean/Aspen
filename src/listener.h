@@ -13,7 +13,7 @@
 #include <sys/socket.h>
 #include <list>
 #include "mud.h"
-#include "eventTable.h"
+#include "eventManager.h"
 #include "baseSocket.h"
 #include "event.h"
 

@@ -12,6 +12,7 @@
 #include "log.h"
 #include "command.h"
 #include "channel.h"
+#include "eventManager.h"
 #include "player.h"
 #include "component.h"
 #include "componentMeta.hpp"
@@ -58,6 +59,7 @@ class World
 public:
     static World* GetPtr();
 //these are objects we need to store on each entity.
+    EventManager events;
     Commandable commands;
 
     World();

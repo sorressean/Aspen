@@ -12,7 +12,7 @@
 #include <string>
 #include "mud.h"
 #include "event.h"
-#include "eventTable.h"
+#include "eventManager.h"
 #include "eventargs.h"
 #include "variant.h"
 #include "command.h"

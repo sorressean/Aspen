@@ -33,7 +33,7 @@ MODULES =
 S_FILES= world.cpp variant.cpp baseObject.cpp entity.cpp player.cpp\
 socket.cpp utils.cpp log.cpp server.cpp main.cpp\
 exception.cpp command.cpp com_gen.cpp com_wiz.cpp event.cpp\
-delayedEvent.cpp eventTable.cpp staticObject.cpp living.cpp channel.cpp\
+delayedEvent.cpp eventManager.cpp staticObject.cpp living.cpp channel.cpp\
 modules.cpp component.cpp npc.cpp editor.cpp exit.cpp\
 room.cpp zone.cpp com_builder.cpp com_movement.cpp ComponentFactory.cpp\
 alias.cpp olc.cpp socials.cpp olcs.cpp callout.cpp\

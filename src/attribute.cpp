@@ -1,9 +1,9 @@
 #include <string>
 #include "mud.h"
+#include "conf.h"
 #include "attribute.h"
 #include "world.h"
 #include "tableManager.hpp"
-#include "eventTable.h"
 
 Attribute::Attribute(int type, int application, int mod, int id):
     _type(type), _apply(application), _mod(mod), _id(id)
@@ -42,10 +42,9 @@ void InitializeAttributes()
 {
     World* world = World::GetPtr();
     AttributeTable* attributes = new AttributeTable();
-EventTable* events = EventTable::GetPtr();;
 
     world->AddProperty("attributes", (void*)attributes);
-events->AddCallback(GEVENT_SHUTDOWN, CleanupAttributes);
+    world->events.AddCallback("Shutdown", CleanupAttributes);
 }
 
 AttributeTable* GetAttributeTable()

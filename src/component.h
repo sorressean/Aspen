@@ -19,7 +19,7 @@
 #include "conf.h"
 #include "entity.h"
 #include "event.h"
-#include "eventTable.h"
+#include "eventManager.h"
 #include "componentMeta.hpp"
 #include "property.h"
 

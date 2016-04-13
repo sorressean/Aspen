@@ -47,12 +47,6 @@ struct EventContainer
     EVENTFUNC cb;
     UINT id;
 };
-//macros for creating event types.
-#define GEVTDEF(v)((v&0xFFFFFFF8)|0)
-#define REVTDEF(v)((v&0xFFFFFFF8)|0x1)
-#define SEVTDEF(v)((v&0xFFFFFFF8)|2)
-#define NEVTDEF(v)((v&0xFFFFFFF8)|3)
-#define UEVTDEF(v)((v&0xFFFFFFF8)|4)
 
 /**
 * Use this macro to create event functions.

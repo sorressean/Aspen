@@ -12,7 +12,6 @@
 #include "socket.h"
 #include "event.h"
 #include "inputHandlers.h"
-#include "uuid.h"
 
 /**
 * The editor is an interface to edit buffers.
@@ -25,8 +24,9 @@ protected:
     int _cursor;
     BOOL _dirty;
     void* _arg;
-Uuid _uuid;
 public:
+    EventManager events;
+
     Editor();
     virtual ~Editor() = default;
 

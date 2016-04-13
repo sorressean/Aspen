@@ -13,6 +13,7 @@
 #include "mud.h"
 #include "conf.h"
 #include "event.h"
+#include "eventManager.h"
 #include "eventargs.h"
 #include "variant.h"
 #include "property.h"
@@ -32,6 +33,8 @@ protected:
     std::string _script; //the scripting associated with this object.
     Zone* _zone;
 public:
+    EventManager events;
+
     BaseObject();
     virtual ~BaseObject();
 
