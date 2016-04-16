@@ -500,7 +500,6 @@ void World::ParseArguments(const std::string& args, int start, std::vector<std::
 BOOL World::DoCommand(Player* mobile,std::string args)
 {
     timeval start, end; //measure execution time
-    Room* location = nullptr;
     std::vector<Command*>* cptr = commands.GetPtr();
     std::string cmd = ""; // the parsed command name
     const char *line = args.c_str(); // the command line
