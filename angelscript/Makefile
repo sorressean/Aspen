@@ -3,7 +3,7 @@
 OUTPUT=../lib/libangelscript.a
 AR = ar
 RANLIB = ranlib
-CFLAGS = -O2 -march=native -s -I../include
+CFLAGS = -O2 -march=native -I../include
 
 S_FILES = as_atomic.cpp as_builder.cpp as_bytecode.cpp as_callfunc.cpp as_callfunc_x86.cpp\
 as_callfunc_x64_gcc.cpp as_compiler.cpp as_configgroup.cpp as_context.cpp as_datatype.cpp\
