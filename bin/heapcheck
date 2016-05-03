@@ -1,0 +1,1 @@
+valgrind --tool=massif --log-file=heapcheck.log ./aspen
