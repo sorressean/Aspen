@@ -30,6 +30,7 @@ void InitializeBuilderCommands()
     world->commands.AddCommand(new CMDAddComponent());
     world->commands.AddCommand(new CMDGoto());
     world->commands.AddCommand(new CMDZcreate());
+    world->commands.AddCommand(new CMDZdestroy());
     world->commands.AddCommand(new CMDAStats());
     world->commands.AddCommand(new CMDRcreate());
 }
@@ -684,6 +685,37 @@ BOOL CMDZcreate::Execute(const std::string &verb, Player* mobile,std::vector<std
     room->SetName("An empty room");
     world->AddZone(newZone);
     st << "Created zone with name " <<  newZone->GetName() << " with one empty room."  << "\n";
+    mobile->Message(MSG_INFO, st.str());
+
+    return true;
+}
+
+CMDZdestroy::CMDZdestroy()
+{
+    SetName("zdestroy");
+    SetAccess(RANK_BUILDER);
+    SetType(CommandType::Builder);
+}
+BOOL CMDZdestroy::Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args,int subcmd)
+{
+    World* world = World::GetPtr();
+    std::stringstream st;
+
+    if (args.size() != 1)
+        {
+            mobile->Message(MSG_ERROR,"Syntax: zcreate <name of zone> destroys the zone with the specified name\n");
+            return false;
+        }
+  
+    if (world->GetZone(args[0]) == nullptr)
+        {
+            mobile->Message(MSG_ERROR,"Error: zone with name doesnt exists.\n");
+            return false;
+        }
+
+    world->RemoveZone(world->GetZone(args[0]));
+
+    st << "Removed zone with name " << args[0] << "\n";
     mobile->Message(MSG_INFO, st.str());
 
     return true;
