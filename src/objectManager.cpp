@@ -131,9 +131,9 @@ BOOL ObjectManager::RemoveVirtual(VNUM num)
 VNUM ObjectManager::GetFreeVirtualVnum(VNUM min, VNUM max, VNUM num)
 {
     int i = min;
-    if (!num)
+    if (num != 0)
         {
-            return (VirtualExists(num) ? num : 0);
+            return (!VirtualExists(num) ? num : 0);
         }
 
     for (; i <= max; ++i)
