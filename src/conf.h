@@ -29,7 +29,7 @@
 * For example, 1000/10, 1000/2, etc.
 * Change this if you need faster pulses, but understand that it will give slower updates eventually.
 */
-#define PULSES_PER_SECOND 5
+#define PULSES_PER_SECOND 10
 #define MS_PER_PULSE 1000/PULSES_PER_SECOND
 
 /**
