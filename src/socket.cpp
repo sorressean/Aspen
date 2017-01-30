@@ -454,6 +454,10 @@ void Socket::Kill()
             _Close=true;
         }
 }
+void Socket::Close()
+{
+    _Close = true;
+}
 
 short Socket::GetPort() const
 {
@@ -558,6 +562,10 @@ time_t Socket::GetLastCommand()
 Player* Socket::GetMobile()
 {
     return _mobile;
+}
+void Socket::ClearMobile()
+{
+    _mobile = nullptr;
 }
 BOOL Socket::CommandPending() const
 {
@@ -664,8 +672,10 @@ bool Socket::HandleNameInput()
 bool Socket::HandlePasswordInput()
 {
     World* world = World::GetPtr();
+    PlayerManager* players = world->GetPlayerManager();
     Server* server = world->GetServer();
     Player* mobile = GetPlayer();
+    Player* connected = nullptr;
     std::string input;
 
     input = PopCommand();
@@ -680,6 +690,23 @@ bool Socket::HandlePasswordInput()
 
     Write(TELNET_ECHO_ON);
     SetConnectionType(CON_Game);
+
+//see if the player was already connected.
+    connected = players->FindPlayer(mobile->GetName());
+    if (connected)
+        {
+            connected->Message(MSG_INFO, "This player has been taken over from another connection...");
+            connected->GetSocket()->Flush();
+            connected->GetSocket()->SetConnectionType(CON_Disconnected);
+            connected->GetSocket()->ClearMobile();
+            connected->GetSocket()->Kill();
+            connected->SetSocket(this);
+            connected->Message(MSG_INFO, "Taking over connection.");
+            delete _mobile;
+            _mobile = connected;
+            return true;
+        }
+
     mobile->SetSocket(this);
     if (server->GetLinkdeadUser(mobile->GetName()))
         {

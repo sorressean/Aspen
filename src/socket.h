@@ -163,6 +163,7 @@ public:
     *Param: [in] a pointer to the world object.
     */
     void Kill();
+    void Close();
     short GetPort() const;
     void SetPort(short port);
     unsigned int GetTotalReceived() const;
@@ -208,6 +209,7 @@ public:
     */
     time_t GetLastCommand();
     Player* GetMobile();
+    void ClearMobile();
     /*
     *Checks to see if a command is pending in the queue or not.
     *Return: True if one or more commands is in the command queue, false otherwise.
