@@ -58,7 +58,7 @@ protected:
     int _subcmd;
     CommandType _type;
     FLAG _access;
-    POSITION _position;
+    unsigned int _position;
 
     /**
     * Adds a command hook.
@@ -157,11 +157,11 @@ public:
     * This is needed in order to prevent a player from chopping down a tree while unconcious, for example.
     * @param [in] position the minimum position at which the command can execute.
     */
-    void SetPosition(POSITION position);
+    void SetPosition(unsigned int position);
     /**
     * Retrieves the minimum position for this command to execute.
     */
-    POSITION GetPosition() const;
+    unsigned int GetPosition() const;
     /**
     * Executes the command.
     *

@@ -9,7 +9,7 @@ Living::Living()
 {
     events.RegisterEvent("HeartBeat", new DelayedEvent(LIVING_PULSE,0));
 
-    _position = POSITION::standing;
+    _position = POSITION_STANDING;
     _gender = Gender::Neuter;
 }
 
@@ -37,6 +37,15 @@ Gender Living::GetGender() const
 void Living::SetGender(Gender gender)
 {
     _gender = gender;
+}
+
+unsigned int Living::GetPosition() const
+{
+    return _position;
+}
+void Living::SetPosition(unsigned int pos)
+{
+    _position = pos;
 }
 
 bool Living::AddAttribute(Attribute* attr)

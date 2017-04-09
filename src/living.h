@@ -7,6 +7,7 @@
 #include <tinyxml2.h>
 #include <queue>
 #include <vector>
+
 #include "mud.h"
 #include "event.h"
 #include "entity.h"
@@ -40,7 +41,7 @@ enum class Gender
 */
 class Living:public Entity
 {
-    POSITION _position;
+    unsigned int _position;
     Gender _gender;
     std::vector<Attribute*> _attributes;
     std::priority_queue<Affect*, std::vector<Affect*>, _aff_comp> _taffects;
@@ -71,6 +72,15 @@ public:
 
     Gender GetGender() const;
     void SetGender(Gender gender);
+    /**
+    * Retrieves the position of the living.
+    */
+    unsigned int GetPosition() const;
+    /**
+    * sets the position for this object.
+    * \param [in] the position.
+    */
+    void SetPosition(unsigned int pos);
     bool AddAttribute(Attribute* attr);
     void FindAttribute(int apply, int id, std::vector<Attribute*> &results);
     void FindAttribute(int type, std::vector<Attribute*>& results);

@@ -91,11 +91,12 @@ enum class TERRAIN
 {
     OCEAN, UNDERWATER, AIR, PLANE, DESERT, UNDERGROUND, SWAMP, HILLS, MOUNTAIN, FOREST, LIGHTFOREST, CITY, INSIDE, MAX
 };
+#define POSITION_ANY 0
+#define POSITION_UNCONCIOUS 1<<1
+#define POSITION_SLEEPING 1<<2
+#define POSITION_SITTING 1<<3
+#define POSITION_STANDING 1<<4
 
-enum class POSITION
-{
-    any, unconcious, sleeping, sitting, standing, flying
-};
 //exit/room constants:
 #define EXIT_NOWHERE -1
 #define ROOM_NOWHERE -1

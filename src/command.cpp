@@ -17,7 +17,7 @@ Command::Command()
     _subcmd=0;
     _type = CommandType::Misc;
     _access = BitSet(0, RANK_PLAYER);
-    _position = POSITION::any;
+    _position = POSITION_ANY;
 }
 
 void Command::SetName(const std::string &name)
@@ -99,11 +99,11 @@ FLAG Command::GetAccess() const
     return _access;
 }
 
-void Command::SetPosition(POSITION position)
+void Command::SetPosition(unsigned int position)
 {
     _position = position;
 }
-POSITION Command::GetPosition() const
+unsigned int Command::GetPosition() const
 {
     return _position;
 }

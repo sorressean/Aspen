@@ -16,9 +16,11 @@
 #include <sys/stat.h>
 #include <dirent.h>
 #include <sys/time.h>
+
 #include "utils.h"
 #include "editor.h"
 #include "uuid.h"
+#include "extensions/utils.h"
 
 int tonum(const char* str)
 {
@@ -756,4 +758,23 @@ int RandomRange(int bottom, int top)
 bool iequals(const std::string& a, const std::string& b)
 {
     return (strcasecmp(a.c_str(), b.c_str()) == 0? true:false);
+}
+
+std::string GetPositionString(unsigned int position)
+{
+    switch(position)
+        {
+        case POSITION_ANY:
+            return "<any>";
+        case POSITION_UNCONCIOUS:
+            return "unconcious";
+        case POSITION_SLEEPING:
+            return "sleeping";
+        case POSITION_SITTING:
+            return "sitting";
+        case POSITION_STANDING:
+            return "standing";
+        default:
+            return GetExtendedPositionString(position);
+        }
 }
