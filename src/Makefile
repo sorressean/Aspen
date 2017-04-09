@@ -42,6 +42,8 @@ property.cpp uuid.cpp olcGroup.cpp olcManager.cpp playerManager.cpp\
 match.cpp calloutManager.cpp optionManager.cpp objectContainer.cpp telnetParser.cpp\
 optionMeta.cpp bitfield.cpp attribute.cpp affect.cpp objectManager.cpp\
 page.cpp serializationHelpers.cpp
+#add this to makefile so changes don't break things.
+S_FILES += extensions/extensions.cpp extensions/utils.cpp
 
 ###
 ###YOU SHOULD NOT MODIFY ANYTHING PAST THIS POINT.
