@@ -10,7 +10,7 @@ ECHO = echo
 #enable if you want to profile.
 PROF =
 LDFLAGS= -L../lib
-CFLAGS	= -g -std=c++11 -O2 -march=native -Wall -pedantic -Wextra -I../include
+CFLAGS	= -g -std=c++11 -O2 -march=native -Wall -pedantic -Wextra -Wno-unused-variable -Wno-unused-parameter -I../include
 #makes the compiler use our includes.
 CFLAGS += -isystem ../include
 
