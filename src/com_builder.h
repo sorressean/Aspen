@@ -146,6 +146,16 @@ public:
 };
 
 /**
+* Destroys the specified zone.
+*/
+class CMDZdestroy:public Command
+{
+public:
+    CMDZdestroy();
+    BOOL Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args,int subcmd);
+};
+
+/**
 * Creates a room in the zone.
 */
 class CMDRcreate :public Command
