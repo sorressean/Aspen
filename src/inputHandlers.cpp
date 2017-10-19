@@ -16,8 +16,10 @@ void YesNoHandler::Input(void* arg, const std::string &input)
         {
             _cb((Socket*)arg, true, _arg);
         }
-
+else
+{
     _cb((Socket*)arg, false, _arg);
+}
 }
 
 BOOL YesNoHandler::CreateHandler(Socket* sock,  YESNOCB cb, void* arg)
