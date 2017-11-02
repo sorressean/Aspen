@@ -193,7 +193,15 @@ BOOL CMDDig::Execute(const std::string &verb, Player* mobile,std::vector<std::st
     if (!toid)
         {
             zone=location->GetZone();
-            room = zone->AddRoom();
+            try
+                {
+                    room = zone->AddRoom();
+                }
+            catch(std::runtime_error& e)
+                {
+                    mobile->Message(MSG_ERROR, e.what());
+                    return true;
+                }
             st << "Created room " << room->GetOnum() << "\n";
         }
     else
