@@ -147,7 +147,7 @@ BOOL Server::PollSockets()
                     // if read fails, close the connection
                     if (sock->Read() == false)
                         {
-                            if (sock->GetMobile())
+                            if (sock->GetMobile() && sock->GetConnectionType() == CON_Game)
                                 {
                                     LinkdeathNode* ld = new LinkdeathNode();
                                     ld->added = time(NULL);
