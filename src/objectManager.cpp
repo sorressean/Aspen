@@ -193,7 +193,7 @@ Room* ObjectManager::GetRoom(VNUM num)
 VNUM ObjectManager::GetFreeRoomVnum(VNUM min, VNUM max, VNUM num)
 {
     int i = min;
-    if (!num)
+    if (num)
         {
             return (RoomExists(num) ? num : 0);
         }
