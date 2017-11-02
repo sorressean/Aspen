@@ -685,7 +685,7 @@ bool Socket::HandlePasswordInput()
         {
             Write("That password isn't valid!\n");
             mobile->IncInvalidPassword();
-            mobile->GetSocket()->Kill();
+            Close();
             return false;
         }
 
