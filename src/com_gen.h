@@ -91,6 +91,13 @@ class CMDCommands:public Command
 public:
     CMDCommands();
     /**
+    * collects and organizes the command information.
+    *
+    * @param [in] the player object to print the information to.
+    *@param [in] the type of command.
+    */
+    void PrintCommandInfo(Player* mobile, CommandType filter);
+    /**
     * Returns a list of commands filtered by type.
     *
     * @param [in] mobile the player requesting the list.

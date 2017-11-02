@@ -355,7 +355,7 @@ std::string CenterLines(const std::string &str, const int width)
     lines = str;
     if (str.empty())
         {
-            return str;
+            return "";
         }
 
     if ((int)str.length() < (width - (int)str.length()))
@@ -778,3 +778,35 @@ std::string GetPositionString(unsigned int position)
             return GetExtendedPositionString(position);
         }
 }
+
+std::string GetCommandTypeName(CommandType type)
+{
+    switch(type)
+        {
+        case CommandType::Misc:
+            return "miscellaneous";
+        case CommandType::Builder:
+            return "builder";
+        case CommandType::Admin:
+            return "admin";
+        case CommandType::God:
+            return "god";
+        case CommandType::Information:
+            return "information";
+        case CommandType::Object:
+            return "object";
+        case CommandType::Movement:
+            return "movement";
+        case CommandType::Script:
+            return "script";
+        case CommandType::Social:
+            return "social";
+        case CommandType::Channel:
+            return "channel";
+        case CommandType::Communication:
+            return "communication";
+        default:
+            return "unknown";
+        }
+}
+

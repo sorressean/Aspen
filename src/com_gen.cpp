@@ -5,6 +5,7 @@
 #include <iomanip>
 #include <cmath>
 #include <functional>
+
 #include "mud.h"
 #include "conf.h"
 #include "com_gen.h"
@@ -255,14 +256,28 @@ CMDCommands::CMDCommands()
     SetName("commands");
     SetType(CommandType::Information);
 }
+
+void CMDCommands::PrintCommandInfo(Player* mobile, CommandType filter)
+{
+    std::vector<std::string> names;
+    std::stringstream st;
+    GetCommands(mobile, names, filter);
+    if (!names.size())
+        {
+            mobile->Message(MSG_INFO, "["+GetCommandTypeName(filter)+"](none)");
+            return;
+        }
+    mobile->Message(MSG_LIST, "["+GetCommandTypeName(filter)+"]\n"+Columnize(&names, 3));
+}
+
 void CMDCommands::GetCommands(Player*mobile, std::vector<std::string>& names, CommandType filter)
 {
     World* world = World::GetPtr();
     std::vector<std::string> commands;
-
     world->commands.ListCommands(&commands,mobile, filter);
     std::copy(commands.begin(), commands.end(), std::back_inserter(names));
 }
+
 void CMDCommands::Syntax(Player* mobile, int subcmd) const
 {
     std::stringstream st;
@@ -284,79 +299,29 @@ void CMDCommands::Syntax(Player* mobile, int subcmd) const
 
     mobile->Message(MSG_INFO, st.str());
 }
+
 BOOL CMDCommands::Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args,int subcmd)
 {
-    std::vector <std::string> commands;
-    std::vector<std::string> headers;
-    std::stringstream all, info, move, comm, misc, builder, admin, god, object, socials;
-    int count = 0;
-
     if (!args.size())
         {
             if (mobile->HasAccess(RANK_GOD))
                 {
-                    commands.clear();
-                    god << Center("[Master Commands]", 80) << "\r\n\n";
-                    GetCommands(mobile, commands, CommandType::God);
-                    god << CenterLines(Explode(commands),80) << "\r\n\n";
-                    commands.clear();
+                    PrintCommandInfo(mobile, CommandType::God);
                 }
             if (mobile->HasAccess(RANK_ADMIN))
                 {
-                    admin << Center("[Administrative Commands]",80) << "\r\n\n";
-                    GetCommands(mobile, commands, CommandType::Admin);
-                    admin << CenterLines(Explode(commands), 80) << "\r\n\n";
-                    commands.clear();
+                    PrintCommandInfo(mobile, CommandType::Admin);
                 }
             if (mobile->HasAccess(RANK_BUILDER))
                 {
-                    builder << Center("[Builder Commands]", 80) << "\r\n\n";
-                    GetCommands(mobile, commands, CommandType::Builder);
-                    builder << CenterLines(Explode(commands),80) << "\r\n\n";
-                    commands.clear();
+                    PrintCommandInfo(mobile, CommandType::Builder);
                 }
 
-            info << Center("[Information Commands]",80) << "\r\n\n";
-            GetCommands(mobile, commands, CommandType::Information);
-            info << CenterLines(Explode(commands),80) << "\r\n\n";
-            commands.clear();
-
-            move << Center("[Movement Commands]",80) << "\r\n\n";
-            GetCommands(mobile, commands, CommandType::Movement);
-            move << CenterLines(Explode(commands), 80) << "\r\n\n";
-            commands.clear();
-
-            comm << Center("[Communication Commands]",80) << "\r\n\n";
-            GetCommands(mobile, commands, CommandType::Communication);
-            GetCommands(mobile, commands, CommandType::Channel);
-            comm << CenterLines(Explode(commands), 80) << "\r\n\n";
-            commands.clear();
-
-            misc << Center("[Miscellaneous Commands]",80) << "\r\n\n";
-            GetCommands(mobile, commands, CommandType::Misc);
-            misc << CenterLines(Explode(commands),80) << "\r\n\n";
-            commands.clear();
-
-            GetCommands(mobile, commands, CommandType::Object);
-            if (!commands.empty())
-                {
-                    object << Center("[Object Commands]",80) << "\r\n\n";
-                    object << CenterLines(Explode(commands), 80) << "\r\n\n";
-                    commands.clear();
-                }
-            commands.clear();
-
-            GetCommands(mobile, commands, CommandType::Social);
-            if (!commands.empty())
-                {
-                    socials << Center("[Socials]", 80) << "\r\n\n";
-                    socials << CenterLines(Explode(commands), 80) << "\r\n\n";
-                    commands.clear();
-                }
-            commands.clear();
-
-            all << god.str() << admin.str() << builder.str() << info.str() << move.str() << comm.str() << misc.str() << object.str() << socials.str();
-            mobile->Message(MSG_LIST, all.str());
+            PrintCommandInfo(mobile, CommandType::Information);
+            PrintCommandInfo(mobile, CommandType::Movement);
+            PrintCommandInfo(mobile, CommandType::Communication);
+            PrintCommandInfo(mobile, CommandType::Misc);
+            PrintCommandInfo(mobile, CommandType::Object);
             return true;
         }
 
@@ -367,10 +332,8 @@ BOOL CMDCommands::Execute(const std::string &verb, Player* mobile,std::vector<st
                     Syntax(mobile, subcmd);
                     return false;
                 }
-            else
-                {
-                    GetCommands(mobile, commands, CommandType::God);
-                }
+            PrintCommandInfo(mobile, CommandType::God);
+            return true;
         }
     else if (args[0] == "admin")
         {
@@ -379,10 +342,8 @@ BOOL CMDCommands::Execute(const std::string &verb, Player* mobile,std::vector<st
                     Syntax(mobile, subcmd);
                     return false;
                 }
-            else
-                {
-                    GetCommands(mobile, commands, CommandType::Admin);
-                }
+            PrintCommandInfo(mobile, CommandType::Admin);
+            return true;
         }
     else if (args[0] == "builder")
         {
@@ -391,35 +352,37 @@ BOOL CMDCommands::Execute(const std::string &verb, Player* mobile,std::vector<st
                     Syntax(mobile, subcmd);
                     return false;
                 }
-            else
-                {
-                    GetCommands(mobile, commands, CommandType::Builder);
-                }
+            PrintCommandInfo(mobile, CommandType::Builder);
+            return true;
         }
     else if (args[0] == "misc")
         {
-            GetCommands(mobile, commands, CommandType::Misc);
+            PrintCommandInfo(mobile, CommandType::Misc);
+            return true;
         }
     else if (args[0] == "information")
         {
-            GetCommands(mobile, commands, CommandType::Information);
+            PrintCommandInfo(mobile, CommandType::Information);
+            return true;
         }
     else if (args[0] == "object")
         {
-            GetCommands(mobile, commands, CommandType::Object);
+            PrintCommandInfo(mobile, CommandType::Object);
+            return true;
         }
     else if (args[0] == "movement")
         {
-            GetCommands(mobile, commands, CommandType::Movement);
+            PrintCommandInfo(mobile, CommandType::Movement);
+            return true;
         }
     else if (args[0] == "social")
         {
-            GetCommands(mobile, commands, CommandType::Social);
+            PrintCommandInfo(mobile, CommandType::Social);
         }
     else if (args[0] == "communication")
         {
-            GetCommands(mobile, commands, CommandType::Channel);
-            GetCommands(mobile, commands, CommandType::Communication);
+            PrintCommandInfo(mobile, CommandType::Communication);
+            return true;
         }
     else
         {
@@ -427,28 +390,6 @@ BOOL CMDCommands::Execute(const std::string &verb, Player* mobile,std::vector<st
             return false;
         }
 
-    count = Min((int)commands.size(),4);
-    if (count == 0)
-        {
-            mobile->Message(MSG_INFO, "No commands found.");
-            return true;
-        }
-
-    switch(count)
-        {
-        default:
-            break;
-        case 4:
-            headers.push_back("command");
-        case 3:
-            headers.push_back("command");
-        case 2:
-            headers.push_back("command");
-        case 1:
-            headers.push_back("command");
-        }
-
-    mobile->Message(MSG_LIST, Columnize(&commands, count, &headers));
     return true;
 }
 

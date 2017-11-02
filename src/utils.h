@@ -5,9 +5,11 @@
 #include <list>
 #include <vector>
 #include <sys/time.h>
+
 #include "mud.h"
 #include "conf.h"
 #include "editor.h"
+#include "command.h"
 
 //misc
 int tonum(const char* str);
@@ -174,4 +176,5 @@ int RandomPercent();
 int RandomRange(int bottom, int top);
 bool iequals(const std::string& a, const std::string& b);
 std::string GetPositionString(unsigned int position);
+std::string GetCommandTypeName(CommandType type);
 #endif
