@@ -113,7 +113,7 @@ as methods sometimes rely on other objects.
 */
 static void InitializeObjects()
 {
-bool ret = false;
+    bool ret = false;
     ScriptEngine* engine = ScriptEngine::GetPtr();
 
     assert(engine->GetBaseEngine()->RegisterTypedef("vnum", "int") >= 0);

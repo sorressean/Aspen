@@ -14,7 +14,7 @@ These properties are stored on the zone, but we need a global copy as well.
 */
 class ObjectManager
 {
-    std::unordered_map<VNUM ,Room*> _rooms;
+    std::unordered_map<VNUM,Room*> _rooms;
     std::unordered_map<VNUM, StaticObject*> _objects;
     std::unordered_map<VNUM, Npc*> _npcs;
 public:

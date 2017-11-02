@@ -27,7 +27,7 @@ enum class CommandType
 /**
 * Command hook callback.
 */
-typedef std::function<bool (const std::string &, Player* ,std::vector<std::string> &, int)> CHOOK_CB;
+typedef std::function<bool (const std::string &, Player*,std::vector<std::string> &, int)> CHOOK_CB;
 
 /**
 * This structure holds data for individual command hooks.

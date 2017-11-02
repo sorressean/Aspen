@@ -362,7 +362,7 @@ std::string CenterLines(const std::string &str, const int width)
         {
             return Center(str, width);
         }
-    std::string::iterator it = lines.begin() , itEnd = lines.end();
+    std::string::iterator it = lines.begin(), itEnd = lines.end();
     for (; it != itEnd; ++it)
         {
             temp1 += (*it);
