@@ -1,0 +1,5 @@
+#ifndef BUILD_CONFIG_H
+#define BUILD_CONFIG_H
+#define Aspen_VERSION_MAJOR @Aspen_VERSION_MAJOR@
+#define Aspen_VERSION_MINOR @Aspen_VERSION_MINOR@
+#endif

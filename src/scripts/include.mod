@@ -1,1 +1,0 @@
-S_FILES += scripts/script.cpp scripts/scr_BaseObject.cpp scripts/scr_Entity.cpp scripts/scr_ObjectContainer.cpp scripts/scr_Exit.cpp
