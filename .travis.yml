@@ -12,7 +12,7 @@ before_install:
 install:
   - if [ "$CXX" = "g++" ]; then sudo apt-get install -qq g++; fi
   - if [ "$CXX" = "g++" ]; then export CXX="g++"; fi
-  - sudo apt-get install -qq libssl-dev zlib1g-dev libboost1.58-all-dev cmake
+  - sudo apt-get install -qq libssl-dev zlib1g-dev libboost-all-dev cmake
 
 script:
   - git submodule update
