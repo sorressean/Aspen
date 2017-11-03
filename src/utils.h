@@ -177,4 +177,5 @@ int RandomRange(int bottom, int top);
 bool iequals(const std::string& a, const std::string& b);
 std::string GetPositionString(unsigned int position);
 std::string GetCommandTypeName(CommandType type);
+std::string Sha256Hash(const std::string& str);
 #endif

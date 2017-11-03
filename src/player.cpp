@@ -1,5 +1,4 @@
 #include <tinyxml2.h>
-#include <openssl/sha.h>
 #include <cstdarg>
 #include <cmath>
 #include <map>
@@ -176,18 +175,7 @@ std::string Player::GetPassword() const
 }
 void Player::SetPassword(const std::string &s)
 {
-    std::stringstream st;
-    int i = 0;
-    unsigned char str[MAX_PASSWORD+1];
-    memcpy(str, s.c_str(), s.length()+1);
-    unsigned char password[SHA256_DIGEST_LENGTH+1];
-    memset(password, 0, SHA256_DIGEST_LENGTH+1);
-    SHA256(str, s.length(), password);
-    for (i = 0; i < SHA256_DIGEST_LENGTH; ++i)
-        {
-            st << std::hex << (int)password[i];
-        }
-    _password = st.str();
+_password=Sha256Hash(s);
 }
 
 std::string Player::GetTempPassword() const
@@ -196,17 +184,7 @@ std::string Player::GetTempPassword() const
 }
 void Player::SetTempPassword(const std::string &s)
 {
-    std::stringstream st;
-    int i = 0;
-    unsigned char password[SHA256_DIGEST_LENGTH+1];
-    unsigned char str[MAX_PASSWORD+1];
-    memcpy(str, s.c_str(), s.length()+1);
-    SHA256(str, s.length(), password);
-    for (i = 0; i < SHA256_DIGEST_LENGTH; ++i)
-        {
-            st << std::hex << (int)password[i];
-        }
-    _tempPassword = st.str();
+    _tempPassword = Sha256Hash(s);
 }
 void Player::ClearTempPassword()
 {

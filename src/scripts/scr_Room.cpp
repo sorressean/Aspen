@@ -8,3 +8,4 @@
 
 void RegisterRoomMethods(const char* obj)
 {
+}
