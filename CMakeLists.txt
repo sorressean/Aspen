@@ -13,4 +13,5 @@ ${CMAKE_CURRENT_SOURCE_DIR}/include
 )
 add_subdirectory(xml)
 add_subdirectory(angelscript)
+add_subdirectory(sqlite3cpp)
 add_subdirectory(src)
