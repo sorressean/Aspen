@@ -24,7 +24,7 @@ FORMAT_FLAGS = --style=gnu
 ###
 #modules
 #core modules: modules that ship with the mud--do not add anything here without good reason.
-COREMODULES = scripts syslog help
+COREMODULES = scripts syslog
 #external modules: modules found in the modules directory. Just list the name of the module.
 #e.g: MODULES = quest board
 MODULES =
