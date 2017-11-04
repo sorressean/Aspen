@@ -19,30 +19,30 @@ namespace pt = boost::property_tree;
 class Configuration
 {
     static Configuration* _ptr;
-pt::ptree tree; //property tree
+    pt::ptree tree; //property tree
 
-Configuration() = default;
-~Configuration() = default;
+    Configuration() = default;
+    ~Configuration() = default;
 public:
-/**
-* Retrieves the pointer for the singleton object.
-*/
+    /**
+    * Retrieves the pointer for the singleton object.
+    */
     static Configuration* GetPtr();
-/**
-* Creates the configuration object for the singleton.
-*/
-static void Initialize();
-/**
-* Releases the configuration object.
-*/
-static void Release();
-/**
-* Loads the configuration data.
-*/
-void Load();
-/**
-* Saves configuration data.
-*/
-void Save();
+    /**
+    * Creates the configuration object for the singleton.
+    */
+    static void Initialize();
+    /**
+    * Releases the configuration object.
+    */
+    static void Release();
+    /**
+    * Loads the configuration data.
+    */
+    void Load();
+    /**
+    * Saves configuration data.
+    */
+    void Save();
 };
 #endif
