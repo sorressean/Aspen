@@ -1,0 +1,7 @@
+dir=`pwd`
+cd src
+astyle --style=gnu -Q --suffix=none --recursive "*.cpp"
+astyle --style=gnu -Q --suffix=none --recursive "*.hpp"
+astyle --style=gnu -Q --suffix=none --recursive "*.h"
+cd $dir
+
