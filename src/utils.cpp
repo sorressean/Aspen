@@ -813,17 +813,17 @@ std::string GetCommandTypeName(CommandType type)
 
 std::string Sha256Hash(const std::string& str)
 {
-int i = 0;
-std::stringstream st;
+    int i = 0;
+    std::stringstream st;
     unsigned char digest[SHA256_DIGEST_LENGTH+1];
 
-SHA256_CTX sha256;
-SHA256_Init(&sha256);
-SHA256_Update(&sha256, str.c_str(), str.length());
-SHA256_Final(digest, &sha256);
+    SHA256_CTX sha256;
+    SHA256_Init(&sha256);
+    SHA256_Update(&sha256, str.c_str(), str.length());
+    SHA256_Final(digest, &sha256);
     for (i = 0; i < SHA256_DIGEST_LENGTH; ++i)
         {
             st << std::hex << (int)digest[i];
         }
-return st.str();
+    return st.str();
 }

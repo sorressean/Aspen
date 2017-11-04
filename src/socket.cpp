@@ -450,6 +450,8 @@ void Socket::Kill()
                         {
                             _mobile->LeaveGame();
                         }
+                    delete _mobile;
+                    _mobile=nullptr;
                 }
             _Close=true;
         }

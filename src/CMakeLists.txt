@@ -1,6 +1,6 @@
 find_package(ZLIB REQUIRED)
 find_package(OpenSSL REQUIRED)
-find_package(Boost REQUIRED)
+find_package(Boost COMPONENTS system filesystem REQUIRED)
 
 add_executable(aspen
 world.cpp variant.cpp baseObject.cpp entity.cpp player.cpp
@@ -14,7 +14,9 @@ option.cpp baseSocket.cpp banList.cpp listener.cpp inputHandlers.cpp
 property.cpp uuid.cpp olcGroup.cpp olcManager.cpp playerManager.cpp
 match.cpp calloutManager.cpp optionManager.cpp objectContainer.cpp telnetParser.cpp
 optionMeta.cpp bitfield.cpp attribute.cpp affect.cpp objectManager.cpp
-page.cpp serializationHelpers.cpp
+page.cpp
+serializationHelpers.cpp
+configuration.cpp
 extensions/extensions.cpp
 extensions/utils.cpp
 modules/modules.cpp
@@ -31,6 +33,7 @@ scripts/scr_Room.cpp
 scripts/script.cpp
 )
 
+link_directories(${Boost_LIBRARY_DIR})
 target_link_libraries (aspen LINK_PUBLIC
 angelscript
 tinyxml

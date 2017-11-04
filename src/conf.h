@@ -120,6 +120,7 @@
 #define BACKUP_DIR "../data/backups/"
 #define AREA_DIR "../data/areas/"
 #define AREA_STARTFILE "../data/areas/start"
+#define SETTINGS_FILE "../data/config.xml"
 
 /**
 * VNums can be stored to keep track of unused numbers.

@@ -175,7 +175,7 @@ std::string Player::GetPassword() const
 }
 void Player::SetPassword(const std::string &s)
 {
-_password=Sha256Hash(s);
+    _password=Sha256Hash(s);
 }
 
 std::string Player::GetTempPassword() const

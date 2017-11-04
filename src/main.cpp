@@ -8,8 +8,10 @@
 #include <signal.h>
 #include <sys/stat.h>
 #include <sys/types.h>
+
 #include "mud.h"
 #include "conf.h"
+#include "configuration.h"
 #include "socket.h"
 #include "server.h"
 #include "log.h"
@@ -42,6 +44,10 @@ int main(int argc, const char** argv)
             std::cerr << "You should not be running as root, exiting." << std::endl;
             return EXIT_FAILURE;
         }
+
+//load and read configuration
+    Configuration::Initialize();
+    Configuration::GetPtr()->Load();
 
 //this needs to be done before world is forcefully created.
     CalloutManager::Initialize();
@@ -144,6 +150,8 @@ int main(int argc, const char** argv)
     world->WriteLog("Entering game loop.");
     GameLoop();
     CalloutManager::Release();
+    Configuration::GetPtr()->Save();
+    Configuration::Release();
     world->WriteLog("Game loop finished, exiting.");
     delete world;
     return EXIT_SUCCESS;
