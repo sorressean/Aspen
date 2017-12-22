@@ -111,7 +111,6 @@ int main(int argc, const char** argv)
             world->WriteLog("could not initialize zones.", ERR);
             return EXIT_FAILURE;
         }
-
     world->SetRealUptime(time(NULL));
     world->SetCopyoverUptime(0);
     srand(time(NULL));

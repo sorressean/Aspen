@@ -10,6 +10,7 @@ configure_file (
   "${PROJECT_BINARY_DIR}/BuildConfig.h")
 include_directories("${PROJECT_BINARY_DIR}"
 ${CMAKE_CURRENT_SOURCE_DIR}/include
+${CMAKE_CURRENT_SOURCE_DIR}/sqlite3cpp/include
 )
 add_subdirectory(xml)
 add_subdirectory(angelscript)
