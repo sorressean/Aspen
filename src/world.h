@@ -42,7 +42,7 @@ class World
     std::vector<Zone*> _zones;
     OlcManager _olcs;
     ObjectManager _objectManager;
-    PlayerManager* _pmanager;
+    PlayerManager _pmanager;
     int _chanid;
     unsigned long long int _updates;
     unsigned long long int _totalUpdateTime;
@@ -90,7 +90,7 @@ public:
     Returns a pointer to the component factory object.
     */
     ComponentFactory* GetComponentFactory();
-    PlayerManager* GetPlayerManager();
+    PlayerManager& GetPlayerManager();
     /*
     *Adds a channel to the worlds channel lookup table.
     *Param: [in] A pointer to the object to add.

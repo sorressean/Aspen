@@ -119,7 +119,7 @@ BOOL CMDWho::Execute(const std::string &verb, Player* mobile,std::vector<std::st
     st << Center(Capitalize(MUD_NAME), 80) << std::endl;
     st << Repeat("-", 80);
 
-    players = world->GetPlayerManager()->GetPlayers();
+    players = world->GetPlayerManager().GetPlayers();
     for (auto it: *players)
         {
             if (it->HasAccess(RANK_GOD))
@@ -479,11 +479,11 @@ BOOL CMDWhois::Execute(const std::string &verb, Player* mobile,std::vector<std::
         }
 
 //check to see if the player is online:
-    targ=world->GetPlayerManager()->FindPlayer(args[0]);
+    targ=world->GetPlayerManager().FindPlayer(args[0]);
     if (!targ)
         {
 //check to see if the player can be loaded
-            targ=world->GetPlayerManager()->LoadPlayer(args[0]);
+            targ=world->GetPlayerManager().LoadPlayer(args[0]);
             load=true;
         }
 //check to see if the load succeeded.

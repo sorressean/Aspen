@@ -674,7 +674,7 @@ bool Socket::HandleNameInput()
 bool Socket::HandlePasswordInput()
 {
     World* world = World::GetPtr();
-    PlayerManager* players = world->GetPlayerManager();
+    PlayerManager& players = world->GetPlayerManager();
     Server* server = world->GetServer();
     Player* mobile = GetPlayer();
     Player* connected = nullptr;
@@ -695,7 +695,7 @@ bool Socket::HandlePasswordInput()
     SetConnectionType(CON_Game);
 
 //see if the player was already connected.
-    connected = players->FindPlayer(mobile->GetName());
+    connected = players.FindPlayer(mobile->GetName());
     if (connected)
         {
             connected->Message(MSG_INFO, "This player has been taken over from another connection...");

@@ -11,6 +11,7 @@
 #include <string>
 #include <cstring>
 #include <ctime>
+
 #include "world.h"
 #include "channel.h"
 #include "player.h"
@@ -45,7 +46,6 @@ World::World()
 {
     _running = true;
     _chanid=1;
-    _pmanager = new PlayerManager();
     _server = nullptr;
     _motd = nullptr;
     _banner = nullptr;
@@ -69,10 +69,6 @@ World::World()
 }
 World::~World()
 {
-    if (_pmanager)
-        {
-            delete _pmanager;
-        }
     if (_motd)
         {
             delete [] _motd;
@@ -112,7 +108,7 @@ void World::InitializeServer()
 
 void World::Shutdown()
 {
-    _pmanager->Shutdown();
+    _pmanager.Shutdown();
     SaveState();
     events.CallEvent("Shutdown", NULL, static_cast<void*>(this));
     _running = false;
@@ -136,8 +132,8 @@ void World::Copyover(Player* mobile)
     fprintf(copyover, "%d\n", ruptime);
     sockaddr_in* addr=NULL;
 //itterate through the players and write info to their copyover file:
-    _users = _pmanager->GetPlayers();
-    for (Player* person: *_users)
+    _users = _pmanager.GetPlayers();
+    for (auto person: *_users)
         {
             if (person->GetSocket()->GetConnectionType() != CON_Game)
                 {
@@ -182,7 +178,7 @@ ComponentFactory* World::GetComponentFactory()
     return &_cfactory;
 }
 
-PlayerManager* World::GetPlayerManager()
+PlayerManager& World::GetPlayerManager()
 {
     return _pmanager;
 }
@@ -380,7 +376,7 @@ void World::Update()
 //flushes the output buffers of all sockets.
     _server->FlushSockets();
 //update living objects:
-    _pmanager->Update();
+    _pmanager.Update();
     for (auto zone: _zones)
         {
             zone->Update();

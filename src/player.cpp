@@ -264,7 +264,7 @@ void Player::EnterGame(BOOL quiet)
 
     Living::EnterGame();
 //add the player to the users list:
-    world->GetPlayerManager()->AddPlayer(this);
+    world->GetPlayerManager().AddPlayer(this);
 //if there were password attempts, tell the player.
     if (_invalidPassword)
         {
@@ -295,7 +295,7 @@ void Player::LeaveGame()
     Save(true);
     Living::LeaveGame();
 //take the player from the users list:
-    world->GetPlayerManager()->RemovePlayer(this);
+    world->GetPlayerManager().RemovePlayer(this);
     world->events.CallEvent("PlayerDisconnect", NULL, this);
     events.CallEvent("LeaveGame", NULL,this);
 }
@@ -493,7 +493,7 @@ void InitializePlayer()
 {
     CalloutManager* manager = CalloutManager::GetInstance();
     World* world = World::GetPtr();
-    std::list<Player*>* players = world->GetPlayerManager()->GetPlayers();
+    std::list<Player*>* players = world->GetPlayerManager().GetPlayers();
 
     manager->RegisterCallout(60*30, 0, [players] (Callout* foo)
     {
