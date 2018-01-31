@@ -1,3 +1,22 @@
+env:
+  global:
+   # The next declaration is the encrypted COVERITY_SCAN_TOKEN, created
+   #   via the "travis encrypt" command using the project repo's public key
+   - secure: "M9U5HYpYoeGsO8S8JQBMhmQR9X+Eo7PPNzw8eqE4wFPeKEeNPyOPZvXqLXk9wRuRK0FH547XpSrHtP/3RY/VydLEqYe8g7p6cABs9fy2uB+FhLNERZqCEON0glN15yTXyrGPEO6KNZUXbmOYI27uJYCZGU87OCpV/yWEzZFMRHs="
+
+before_install:
+      - echo -n | openssl s_client -connect scan.coverity.com:443 | sed -ne '/-BEGIN CERTIFICATE-/,/-END CERTIFICATE-/p' | sudo tee -a /etc/ssl/certs/ca-
+
+addons:
+  coverity_scan:
+    project:
+      name: "sorressean/Aspen"
+      description: "Build submitted via Travis CI."
+    notification_email: tyler@tysdomain.com
+    build_command_prepend: ""
+    build_command:   "git submodule update;mkdir obj;cd obj;cmake ../;make"
+    branch_pattern: coverity_scan
+
 language: cpp
 
 compiler:
