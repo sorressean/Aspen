@@ -13,8 +13,8 @@ addons:
       name: "sorressean/Aspen"
       description: "Build submitted via Travis CI."
     notification_email: tyler@tysdomain.com
-    build_command_prepend: ""
-    build_command:   "git submodule update;mkdir obj;cd obj;cmake ../;make"
+    build_command_prepend: "git submodule update;mkdir obj;cd obj;cmake ../"
+    build_command:   "make"
     branch_pattern: coverity_scan
 
 language: cpp
@@ -39,4 +39,5 @@ script:
   - cd obj
   - cmake ../
   - make
+
 
