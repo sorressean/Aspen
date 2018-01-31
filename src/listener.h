@@ -48,7 +48,7 @@ public:
     *
     * @param [in] port the port to listen for connections on.
     */
-    BOOL Listen(int port);
+    bool Listen(int port);
     /**
     * Update the listener.
     */

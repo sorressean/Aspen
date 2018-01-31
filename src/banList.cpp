@@ -5,7 +5,7 @@
 #include "conf.h"
 #include "banList.h"
 
-BOOL BanList::AddAddress(const std::string &address)
+bool BanList::AddAddress(const std::string &address)
 {
     in_addr addr;
 
@@ -21,7 +21,7 @@ BOOL BanList::AddAddress(const std::string &address)
     _addresses.push_back(addr.s_addr);
     return true;
 }
-BOOL BanList::RemoveAddress(const std::string &address)
+bool BanList::RemoveAddress(const std::string &address)
 {
     std::vector<unsigned long>::iterator it, itEnd;
     in_addr addr;
@@ -43,7 +43,7 @@ BOOL BanList::RemoveAddress(const std::string &address)
 
     return false;
 }
-BOOL BanList::AddressExists(const std::string &address)
+bool BanList::AddressExists(const std::string &address)
 {
     in_addr addr;
 
@@ -62,7 +62,7 @@ BOOL BanList::AddressExists(const std::string &address)
 
     return false;
 }
-BOOL BanList::AddressExists(unsigned long address)
+bool BanList::AddressExists(unsigned long address)
 {
     for (auto it: _addresses)
         {

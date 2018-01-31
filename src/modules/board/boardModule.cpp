@@ -258,7 +258,7 @@ void CMDBoard::Read(Player* mobile, int id)
     st << post->GetMessage() << endl;
     mobile->Message(MSG_INFO, st.str());
 }
-BOOL CMDBoard::Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args,int subcmd)
+bool CMDBoard::Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args,int subcmd)
 {
     if (!args.size())
         {
@@ -318,7 +318,7 @@ void CMDABoard::Help(Player*mobile)
     mobile->Message(MSG_LIST, "Help: shows this help message.");
     mobile->Message(MSG_LIST, "Create <name>: creates the specified board.");
 }
-BOOL CMDABoard::Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args, int subcmd)
+bool CMDABoard::Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args, int subcmd)
 {
     World* world = World::GetPtr();
 

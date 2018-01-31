@@ -49,7 +49,7 @@ public:
     *Checks to see if the object is a player.
     *Return: True
     */
-    virtual BOOL IsPlayer() const;
+    virtual bool IsPlayer() const;
 
     /*
     *Functions to load and retrieve player data from their file
@@ -96,18 +96,18 @@ public:
     *Makes a comparison of the password stored on the player object and the TempPassword.
     *Return: true if the match is complete, false otherwise.
     */
-    BOOL ComparePassword();
+    bool ComparePassword();
     /*
     *Functions directly called to load and save the player object.
     */
-    BOOL Save(BOOL force=false);
-    BOOL Backup();
+    bool Save(bool force=false);
+    bool Backup();
     void Load();
     /*
     *EnterGame and LeaveGame are called when the player enters or leaves the game, and should be used to initialize the player after this stage.
     *Param: [in] True if EnterGame shouldn't print messages (used for copyover), false otherwise (default).
     */
-    void EnterGame(BOOL quiet = false);
+    void EnterGame(bool quiet = false);
     virtual void EnterGame();
     void LeaveGame();
     /*
@@ -144,19 +144,19 @@ public:
     *Param: [in] The name of the option.
     *Return: true if the option exists, false otherwise.
     */
-    BOOL OptionExists(const std::string &option) const;
+    bool OptionExists(const std::string &option) const;
     /*
     *Toggles the specified option to on if it is off, or off if it is on.
     *Param: [in] The name of the option.
     */
-    BOOL ToggleOption(const std::string &option);
+    bool ToggleOption(const std::string &option);
     std::vector<Option*>* GetOptions();
     /*
     *Checks to see if the player has the specified rank.
     *Param: [in] The rank to check for.
     *Return: True if the player has the specified access rank, false otherwise.
     */
-    BOOL HasAccess(FLAG access) const;
+    bool HasAccess(FLAG access) const;
     /*
     *Adds a message type to the player.
     *Param: [in] the type of the message.

@@ -73,7 +73,7 @@ std::string OlcTypeToString(OLCDT dt)
             return "str";
         case OLCDT::DECIMAL:
             return "dec";
-        case OLCDT::BOOLEAN:
+        case OLCDT::boolEAN:
             return "bool";
         case OLCDT::FLG:
             return "flag";
@@ -254,7 +254,7 @@ CMDREdit::CMDREdit()
     SetAccess(RANK_BUILDER);
     SetType(CommandType::Builder);
 }
-BOOL CMDREdit::Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args, int subcmd)
+bool CMDREdit::Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args, int subcmd)
 {
     World* world = World::GetPtr();
     ObjectManager* objmanager = world->GetObjectManager();
@@ -338,7 +338,7 @@ CMDMEdit::CMDMEdit()
     SetAccess(RANK_BUILDER);
     SetType(CommandType::Builder);
 }
-BOOL CMDMEdit::Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args, int subcmd)
+bool CMDMEdit::Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args, int subcmd)
 {
     World* world = World::GetPtr();
     ObjectManager* objmanager = world->GetObjectManager();
@@ -421,7 +421,7 @@ CMDOEdit::CMDOEdit()
     SetAccess(RANK_BUILDER);
     SetType(CommandType::Builder);
 }
-BOOL CMDOEdit::Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args, int subcmd)
+bool CMDOEdit::Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args, int subcmd)
 {
     World* world = World::GetPtr();
     ObjectManager* objmanager = world->GetObjectManager();
@@ -498,7 +498,7 @@ BOOL CMDOEdit::Execute(const std::string &verb, Player* mobile,std::vector<std::
     return HandleEntry(mobile, targ, group, args, OlcEditType::Object);
 }
 
-BOOL InitializeOlc()
+bool InitializeOlc()
 {
     World* world = World::GetPtr();
     world->commands.AddCommand(new CMDREdit());

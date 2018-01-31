@@ -52,7 +52,7 @@ void Entity::SetParent(StaticObject* parent)
     _parent = parent;
 }
 
-BOOL Entity::MoveTo(ObjectContainer* targ)
+bool Entity::MoveTo(ObjectContainer* targ)
 {
     if (targ->CanReceive(this))
         {
@@ -68,7 +68,7 @@ BOOL Entity::MoveTo(ObjectContainer* targ)
     return false;
 }
 
-BOOL Entity::FromRoom()
+bool Entity::FromRoom()
 {
     Room* loc = (Room*)_location;
     if (!_location || !_location->IsRoom())
@@ -89,7 +89,7 @@ Uuid& Entity::GetUuid()
 {
     return _uuid;
 }
-BOOL Entity::AddAlias(const std::string &alias)
+bool Entity::AddAlias(const std::string &alias)
 {
     if (AliasExists(alias) && !alias.empty())
         {
@@ -99,7 +99,7 @@ BOOL Entity::AddAlias(const std::string &alias)
     _aliases.push_back(alias);
     return true;
 }
-BOOL Entity::AliasExists(const std::string & name)
+bool Entity::AliasExists(const std::string & name)
 {
     for (auto it: _aliases)
         {
@@ -124,7 +124,7 @@ std::string Entity::Identify(Player* mob)
     return st.str();
 }
 
-BOOL Entity::IsObject() const
+bool Entity::IsObject() const
 {
     return true;
 }

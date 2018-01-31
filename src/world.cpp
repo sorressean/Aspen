@@ -207,7 +207,7 @@ void World::GetChannelNames(std::list <std::string>* out)
         }
 }
 
-BOOL World::ChannelExists(Channel* chan)
+bool World::ChannelExists(Channel* chan)
 {
 
     for (auto it: _channels)
@@ -220,7 +220,7 @@ BOOL World::ChannelExists(Channel* chan)
 
     return false;
 }
-BOOL World::AddChannel(Channel* chan,BOOL command)
+bool World::AddChannel(Channel* chan,bool command)
 {
     OptionMeta* opt = nullptr;
     if (!ChannelExists(chan))
@@ -288,7 +288,7 @@ Channel* World::FindChannel(const std::string &name)
     return NULL;
 }
 
-BOOL World::InitializeFiles()
+bool World::InitializeFiles()
 {
     struct stat fs; //holds file stats
 //load our banner:
@@ -393,7 +393,7 @@ void World::Update()
     _totalSleepTime += _server->Sleep(PULSES_PER_SECOND);
 }
 
-BOOL World::RegisterComponent(IComponentMeta* meta)
+bool World::RegisterComponent(IComponentMeta* meta)
 {
     return _cfactory.RegisterComponent(meta->GetName(), meta);
 }
@@ -420,7 +420,7 @@ void World::SetCopyoverUptime(time_t tm)
     _cuptime=tm;
 }
 
-BOOL World::AddProperty(const std::string &name,void* ptr)
+bool World::AddProperty(const std::string &name,void* ptr)
 {
     if (!_properties.count(name))
         {
@@ -439,7 +439,7 @@ void* World::GetProperty(const std::string &name)
 
     return NULL;
 }
-BOOL World::RemoveProperty(const std::string &name)
+bool World::RemoveProperty(const std::string &name)
 {
     if (_properties.count(name))
         {
@@ -493,7 +493,7 @@ void World::ParseArguments(const std::string& args, int start, std::vector<std::
                 }
         }
 }
-BOOL World::DoCommand(Player* mobile,std::string args)
+bool World::DoCommand(Player* mobile,std::string args)
 {
     timeval start, end; //measure execution time
     std::vector<Command*>* cptr = commands.GetPtr();
@@ -584,7 +584,7 @@ BOOL World::DoCommand(Player* mobile,std::string args)
     return false;
 }
 
-BOOL World::AddZone(Zone* zone)
+bool World::AddZone(Zone* zone)
 {
 
     if (_zones.size())
@@ -601,7 +601,7 @@ BOOL World::AddZone(Zone* zone)
     _zones.push_back(zone);
     return true;
 }
-BOOL World::RemoveZone(Zone* zone)
+bool World::RemoveZone(Zone* zone)
 {
     std::vector<Zone*>::iterator it, itEnd;
 
@@ -630,13 +630,13 @@ Zone* World::GetZone(const std::string &name)
 
     return NULL;
 }
-BOOL World::GetZones(std::vector<Zone*> *zones)
+bool World::GetZones(std::vector<Zone*> *zones)
 {
     std::copy(_zones.begin(), _zones.end(), std::back_inserter(*zones));
     return true;
 }
 
-BOOL World::LogExists(const std::string &name)
+bool World::LogExists(const std::string &name)
 {
     if (_logs.count(name))
         {
@@ -645,7 +645,7 @@ BOOL World::LogExists(const std::string &name)
 
     return false;
 }
-BOOL World::RegisterLog(const std::string &path, const std::string &name)
+bool World::RegisterLog(const std::string &path, const std::string &name)
 {
     if (LogExists(name))
         {
@@ -670,20 +670,20 @@ void World::WriteLog(const std::string &data, LOG_LEVEL l, const std::string &na
             GetLog(name)->Write(data, l);
         }
 }
-BOOL World::IsRunning() const
+bool World::IsRunning() const
 {
     return _running;
 }
-void World::SetRunning(BOOL running)
+void World::SetRunning(bool running)
 {
     _running = running;
 }
 
-BOOL World::PromptExists(char prompt)
+bool World::PromptExists(char prompt)
 {
     return (_prompts.count(prompt)==0? false:true);
 }
-BOOL World::RegisterPrompt(char c, PROMPTCB callback)
+bool World::RegisterPrompt(char c, PROMPTCB callback)
 {
     if (PromptExists(c))
         {
@@ -723,7 +723,7 @@ std::string World::BuildPrompt(const std::string &prompt, Player* mobile)
     return ret;
 }
 
-BOOL World::AddState(const std::string &name, ISerializable* s)
+bool World::AddState(const std::string &name, ISerializable* s)
 {
     if (StateExists(name))
         {
@@ -733,7 +733,7 @@ BOOL World::AddState(const std::string &name, ISerializable* s)
     _state[name] = s;
     return true;
 }
-BOOL World::RemoveState(const std::string &name)
+bool World::RemoveState(const std::string &name)
 {
     if (!StateExists(name))
         {
@@ -743,12 +743,12 @@ BOOL World::RemoveState(const std::string &name)
     _state.erase(name);
     return true;
 }
-BOOL World::StateExists(const std::string &name)
+bool World::StateExists(const std::string &name)
 {
     return (_state.count(name)==1?true:false);
 }
 
-BOOL World::SaveState()
+bool World::SaveState()
 {
     tinyxml2::XMLElement* element = nullptr;
 
@@ -766,7 +766,7 @@ BOOL World::SaveState()
 
     return true;
 }
-BOOL World::LoadState()
+bool World::LoadState()
 {
     DIR* statedir = opendir(STATE_DIR);
     dirent* dir = NULL;

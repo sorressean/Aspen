@@ -24,7 +24,7 @@ public:
     std::string GetMessage() const;
     void SetMessage(const std::string &m);
     std::string GetPoster() const;
-    BOOL IsPoster(Player* mobile);
+    bool IsPoster(Player* mobile);
     void SetPoster(Player* mobile);
     void Serialize(tinyxml2::XMLElement* root);
     void Deserialize(tinyxml2::XMLElement* root);

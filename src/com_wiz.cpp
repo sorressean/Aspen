@@ -37,7 +37,7 @@ CMDCopyover::CMDCopyover()
     SetAccess(RANK_GOD);
     SetType(CommandType::God);
 }
-BOOL CMDCopyover::Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args,int subcmd)
+bool CMDCopyover::Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args,int subcmd)
 {
     World* world = World::GetPtr();
     world->Copyover(mobile);
@@ -50,7 +50,7 @@ CMDMkwiz::CMDMkwiz()
     SetAccess(RANK_GOD);
     SetType(CommandType::God);
 }
-BOOL CMDMkwiz::Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args,int subcmd)
+bool CMDMkwiz::Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args,int subcmd)
 {
     World* world = World::GetPtr();
     PlayerManager& manager = world->GetPlayerManager();
@@ -91,7 +91,7 @@ CMDMkbuilder::CMDMkbuilder()
     SetAccess(RANK_GOD);
     SetType(CommandType::God);
 }
-BOOL CMDMkbuilder::Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args,int subcmd)
+bool CMDMkbuilder::Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args,int subcmd)
 {
     World* world = World::GetPtr();
     PlayerManager& manager = world->GetPlayerManager();
@@ -132,7 +132,7 @@ CMDShutdown::CMDShutdown()
     SetAccess(RANK_GOD);
     SetType(CommandType::God);
 }
-BOOL CMDShutdown::Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args,int subcmd)
+bool CMDShutdown::Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args,int subcmd)
 {
     World* world = World::GetPtr();
     world->SetRunning(false);
@@ -145,7 +145,7 @@ CMDBan::CMDBan()
     SetAccess(RANK_ADMIN);
     SetType(CommandType::Admin);
 }
-BOOL CMDBan::Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args,int subcmd)
+bool CMDBan::Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args,int subcmd)
 {
     World*world = World::GetPtr();
     BanList* blist = world->GetServer()->GetBanList();
@@ -188,7 +188,7 @@ CMDSilence::CMDSilence()
     SetAccess(RANK_ADMIN);
     SetType(CommandType::Admin);
 }
-BOOL CMDSilence::Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args,int subcmd)
+bool CMDSilence::Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args,int subcmd)
 {
     World* world = World::GetPtr();
     PlayerManager& manager = world->GetPlayerManager();
@@ -231,7 +231,7 @@ CMDUnsilence::CMDUnsilence()
     SetAccess(RANK_ADMIN);
     SetType(CommandType::Admin);
 }
-BOOL CMDUnsilence::Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args,int subcmd)
+bool CMDUnsilence::Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args,int subcmd)
 {
     World* world = World::GetPtr();
     PlayerManager& manager = world->GetPlayerManager();
@@ -268,7 +268,7 @@ CMDDisconnect::CMDDisconnect()
     SetAccess(RANK_ADMIN);
     SetType(CommandType::Admin);
 }
-BOOL CMDDisconnect::Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args,int subcmd)
+bool CMDDisconnect::Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args,int subcmd)
 {
     World* world = World::GetPtr();
     PlayerManager& manager = world->GetPlayerManager();
@@ -308,7 +308,7 @@ CMDEcho::CMDEcho()
     SetAccess(RANK_ADMIN);
     SetType(CommandType::Admin);
 }
-BOOL CMDEcho::Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args,int subcmd)
+bool CMDEcho::Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args,int subcmd)
 {
     World* world = World::GetPtr();
     PlayerManager& manager = world->GetPlayerManager();
@@ -335,7 +335,7 @@ CMDPdelete::CMDPdelete()
     SetAccess(RANK_ADMIN);
     SetType(CommandType::Admin);
 }
-BOOL CMDPdelete::Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args,int subcmd)
+bool CMDPdelete::Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args,int subcmd)
 {
 //  World* world = World::GetPtr();
 
@@ -355,7 +355,7 @@ CMDSstatus::CMDSstatus()
     SetAccess(RANK_ADMIN);
     SetType(CommandType::Admin);
 }
-BOOL CMDSstatus::Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args,int subcmd)
+bool CMDSstatus::Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args,int subcmd)
 {
     using std::setw;
 
@@ -400,7 +400,7 @@ CMDForce::CMDForce()
     SetAccess(RANK_ADMIN);
     SetType(CommandType::Admin);
 }
-BOOL CMDForce::Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args,int subcmd)
+bool CMDForce::Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args,int subcmd)
 {
     World* world = World::GetPtr();
     PlayerManager& manager = world->GetPlayerManager();
@@ -443,7 +443,7 @@ CMDPaste::CMDPaste()
     SetAccess(RANK_ADMIN);
     SetType(CommandType::God);
 }
-BOOL CMDPaste::Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args,int subcmd)
+bool CMDPaste::Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args,int subcmd)
 {
     std::vector<std::string> *lines = new std::vector<std::string>();
 

@@ -18,6 +18,6 @@ class CMDMove:public Command
 {
 public:
     CMDMove(int direction);
-    BOOL Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args,int subcmd);
+    bool Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args,int subcmd);
 };
 #endif

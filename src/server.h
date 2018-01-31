@@ -45,7 +45,7 @@ public:
     *param [in] The port to open as a listening poDWORD.
     *Returns True on success, false on failure.
     */
-    BOOL                 Listen          (const int port );
+    bool                 Listen          (const int port );
     /*
     *Returns the listening socket
     */
@@ -59,7 +59,7 @@ public:
     *Checks to make sure that no incoming connections need to be accepted, reads and handles data from sockets.
     *returns True on success, false on failure.
     */
-    BOOL PollSockets(void );
+    bool PollSockets(void );
     /**
     *sleeps for the remainder of the pulses that haven't been used up.
     */

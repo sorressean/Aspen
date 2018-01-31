@@ -97,19 +97,19 @@ public:
     *Param: [in] The player to add to the list.
     *[in]: Determines whether or not the players add/remove is announced to the player. useful for logging in or adding mobs to channels.
     */
-    virtual void AddListener(Player* subscriber,BOOL quiet = false);
-    virtual void RemoveListener(Player* subscriber,BOOL quiet = false);
+    virtual void AddListener(Player* subscriber,bool quiet = false);
+    virtual void RemoveListener(Player* subscriber,bool quiet = false);
     /*
     *Checks to see if a listener exists.
     *Param: [in] a pointer to the player
     *Return: True if the specified listener exists, false otherwise.
     */
-    virtual BOOL HasListener(Player* mobile);
+    virtual bool HasListener(Player* mobile);
     /*
     *Checks to see if a player can broadcast without listening to the channel.
     *Useful for channels where players events are being logged, etc.
     */
-    virtual BOOL CanBroadcastWithoutListening(Player* mobile) const;
+    virtual bool CanBroadcastWithoutListening(Player* mobile) const;
     /*
     *Sends a message to all those subscribed to the channel.
     *Param: [in] the player doing the broadcast.
@@ -117,7 +117,7 @@ public:
     *[in] Whether or not to check the access rights of the player before broadcasting.
     *Those who don't have the access right of the channel can not broadcast by default.
     */
-    virtual void Broadcast(Player* caller,const std::string &message,BOOL access=true);
+    virtual void Broadcast(Player* caller,const std::string &message,bool access=true);
 
     static EVENT(SubscribeChannels);
     static EVENT(UnsubscribeChannels);

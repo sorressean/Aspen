@@ -36,19 +36,19 @@ public:
     Recycles the specified  object, as well as removes it from the virtual obj statistics.
     Also cleans up the object and the contents of that object.
     */
-    BOOL RecycleObject(ObjectContainer* obj);
+    bool RecycleObject(ObjectContainer* obj);
     /*
     *Adds the specified virtual object to the list.
     *Param: [in] a pointer to the static object to add.
     *Return: True on success, false on failure.
     */
-    BOOL AddVirtual(StaticObject* obj);
+    bool AddVirtual(StaticObject* obj);
     /*
     *Checks to see if the specified virtual object exists.
     *Param: [in] the  num of the virtual object to check.
     *Return: True if the object exists, false otherwise.
     */
-    BOOL VirtualExists(VNUM num);
+    bool VirtualExists(VNUM num);
     /*
     *Retrieves a pointer to the specified virtual object.
     *Param: [in] the vnum of the object.
@@ -60,26 +60,26 @@ public:
     *Param: [in] the vnum of the object to remove.
     *Return: True on success, false on failure.
     */
-    BOOL RemoveVirtual(VNUM num);
+    bool RemoveVirtual(VNUM num);
     VNUM GetFreeVirtualVnum(VNUM min, VNUM max, VNUM num=0);
     /*
     *Tries to add the specified room.
     *Param: [in] a pointer to the room to be added.
     *Return: True on success, false on failure.
     */
-    BOOL AddRoom(Room* room);
+    bool AddRoom(Room* room);
     /*
     *Tries to remove the specified room.
     *Param: [in] the VNUM of the room to remove.
     *Return: True on success, false on failure.
     */
-    BOOL RemoveRoom(VNUM num);
+    bool RemoveRoom(VNUM num);
     /*
     *Checks to see if the specified room exists.
     *Param: [in] the VNUM of the room.
     *Return: True on success, false on failure.
     */
-    BOOL RoomExists(VNUM num);
+    bool RoomExists(VNUM num);
     /*
     *Tries to retrieve the specified room.
     *Param: [in] the vnum of the room.
@@ -87,8 +87,8 @@ public:
     */
     Room* GetRoom(VNUM num);
     VNUM GetFreeRoomVnum(VNUM min, VNUM max, VNUM num=0);
-    BOOL AddNpc(Npc* mob);
-    BOOL RemoveNpc(VNUM num);
+    bool AddNpc(Npc* mob);
+    bool RemoveNpc(VNUM num);
     bool NpcExists(VNUM num);
     Npc*  GetNpc(VNUM num);
     VNUM GetFreeNpcVnum(VNUM min, VNUM max, VNUM = 0);

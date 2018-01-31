@@ -122,7 +122,7 @@ std::string Channel::_Patternize(const std::string &message,Player* caller)
     std::string m=message;
     std::stringstream format;
     std::string::iterator it, itEnd;
-    BOOL emote=false;
+    bool emote=false;
 
     if (m[0]==':')
         {
@@ -219,7 +219,7 @@ std::list <HistoryNode*>* Channel::GetHistory()
     return &_history;
 }
 
-void Channel::AddListener(Player* subscriber,BOOL quiet)
+void Channel::AddListener(Player* subscriber,bool quiet)
 {
     if (!subscriber->HasAccess(_access))
         {
@@ -245,7 +245,7 @@ void Channel::AddListener(Player* subscriber,BOOL quiet)
             subscriber->Message(MSG_INFO,"Tuned in.");
         }
 }
-void Channel::RemoveListener(Player* subscriber,BOOL quiet)
+void Channel::RemoveListener(Player* subscriber,bool quiet)
 {
     if (HasListener(subscriber))
         {
@@ -264,7 +264,7 @@ void Channel::RemoveListener(Player* subscriber,BOOL quiet)
                 }
         }
 }
-BOOL Channel::HasListener(Player* mobile)
+bool Channel::HasListener(Player* mobile)
 {
     for (auto it: _listeners)
         {
@@ -277,12 +277,12 @@ BOOL Channel::HasListener(Player* mobile)
     return false;
 }
 
-BOOL Channel::CanBroadcastWithoutListening(Player* mobile) const
+bool Channel::CanBroadcastWithoutListening(Player* mobile) const
 {
     return false;
 }
 
-void Channel::Broadcast(Player* caller,const std::string &message,BOOL access)
+void Channel::Broadcast(Player* caller,const std::string &message,bool access)
 {
     std::string paternized;
 

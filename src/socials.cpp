@@ -105,11 +105,11 @@ void Socials::Load()
         }
 }
 
-BOOL Socials::SocialExists(const std::string &name) const
+bool Socials::SocialExists(const std::string &name) const
 {
     return (_slist.count(name) == 0? false:true);
 }
-BOOL Socials::AddSocial(const std::string &name, const std::string &ynotarg, const std::string &rnotarg, const std::string &ytarg, const std::string &rtarg, const std::string &ttarg)
+bool Socials::AddSocial(const std::string &name, const std::string &ynotarg, const std::string &rnotarg, const std::string &ytarg, const std::string &rtarg, const std::string &ttarg)
 {
     if (SocialExists(name))
         {
@@ -185,7 +185,7 @@ EVENT(socials_shutdown)
 CMDSocials::CMDSocials()
 {
 }
-BOOL CMDSocials::Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args,int subcmd)
+bool CMDSocials::Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args,int subcmd)
 {
     Socials* soc = Socials::GetPtr();
     SOCIAL_DATA* data = soc->GetSocial(verb);
@@ -197,7 +197,7 @@ BOOL CMDSocials::Execute(const std::string &verb, Player* mobile,std::vector<std
     return true;
 }
 
-BOOL InitializeSocials()
+bool InitializeSocials()
 {
     World* world = World::GetPtr();
     world->WriteLog("Initializing socials.");

@@ -18,7 +18,7 @@
 * @param [in] true if yes was chosen, false otherwise.
 * @param [in] associated args.
 */
-typedef std::function<void (Socket*, BOOL, void*)> YESNOCB;
+typedef std::function<void (Socket*, bool, void*)> YESNOCB;
 /**
 * Line input callback.
 *
@@ -55,7 +55,7 @@ public:
     * @param [in] cb the callback.
     * @param [in] args associated arguments.
     */
-    static BOOL CreateHandler(Socket* sock, YESNOCB cb, void* arg = nullptr);
+    static bool CreateHandler(Socket* sock, YESNOCB cb, void* arg = nullptr);
 };
 
 /**
@@ -85,7 +85,7 @@ public:
     * @param [in] sock the socket associated with the handle.
     * @param [in] cb the callback.
     */
-    static BOOL CreateHandler(Socket* sock, LINECB cb);
+    static bool CreateHandler(Socket* sock, LINECB cb);
 };
 
 /**
@@ -117,6 +117,6 @@ public:
     * @param [in] lines a pointer to the vector that received the input.
     * @param [in] args the args associated with the handler.
     */
-    static BOOL CreateHandler(Socket* sock, TEXTBLOCKCB cb, std::vector<std::string>* lines, void* arg = nullptr);
+    static bool CreateHandler(Socket* sock, TEXTBLOCKCB cb, std::vector<std::string>* lines, void* arg = nullptr);
 };
 #endif

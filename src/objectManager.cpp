@@ -38,7 +38,7 @@ Entity* ObjectManager::CreateObject(VNUM obj)
     object = virt->Create();
     return object;
 }
-BOOL ObjectManager::RecycleObject(ObjectContainer* obj)
+bool ObjectManager::RecycleObject(ObjectContainer* obj)
 {
     World* world = World::GetPtr();
     ObjectContainer* location = NULL;
@@ -86,7 +86,7 @@ BOOL ObjectManager::RecycleObject(ObjectContainer* obj)
     return true;
 }
 
-BOOL ObjectManager::AddVirtual(StaticObject* obj)
+bool ObjectManager::AddVirtual(StaticObject* obj)
 {
     VNUM num = 0;
     if (!obj)
@@ -103,7 +103,7 @@ BOOL ObjectManager::AddVirtual(StaticObject* obj)
     _objects[num] = obj;
     return true;
 }
-BOOL ObjectManager::VirtualExists(VNUM num)
+bool ObjectManager::VirtualExists(VNUM num)
 {
     return (_objects.count(num)? true:false);
 }
@@ -116,7 +116,7 @@ StaticObject* ObjectManager::GetVirtual(VNUM num)
 
     return _objects[num];
 }
-BOOL ObjectManager::RemoveVirtual(VNUM num)
+bool ObjectManager::RemoveVirtual(VNUM num)
 {
     StaticObject* virt = GetVirtual(num);
     if (!virt)
@@ -147,7 +147,7 @@ VNUM ObjectManager::GetFreeVirtualVnum(VNUM min, VNUM max, VNUM num)
     return 0;
 }
 
-BOOL ObjectManager::AddRoom(Room* room)
+bool ObjectManager::AddRoom(Room* room)
 {
     VNUM num = 0;
     if (!room)
@@ -164,7 +164,7 @@ BOOL ObjectManager::AddRoom(Room* room)
     _rooms[num] = room;
     return true;
 }
-BOOL ObjectManager::RemoveRoom(VNUM num)
+bool ObjectManager::RemoveRoom(VNUM num)
 {
     Room* room = NULL;
 
@@ -177,7 +177,7 @@ BOOL ObjectManager::RemoveRoom(VNUM num)
     _rooms.erase(room->GetOnum());
     return true;
 }
-BOOL ObjectManager::RoomExists(VNUM num)
+bool ObjectManager::RoomExists(VNUM num)
 {
     return _rooms.count(num)? true : false;
 }
@@ -209,7 +209,7 @@ VNUM ObjectManager::GetFreeRoomVnum(VNUM min, VNUM max, VNUM num)
     return 0;
 }
 
-BOOL ObjectManager::AddNpc(Npc* mob)
+bool ObjectManager::AddNpc(Npc* mob)
 {
     VNUM num = 0;
 
@@ -227,7 +227,7 @@ BOOL ObjectManager::AddNpc(Npc* mob)
     _npcs[num] = mob;
     return true;
 }
-BOOL ObjectManager::RemoveNpc(VNUM num)
+bool ObjectManager::RemoveNpc(VNUM num)
 {
     Npc* mob = NULL;
 

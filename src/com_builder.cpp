@@ -45,7 +45,7 @@ void CMDZlist::Syntax(Player* mobile, int subcmd) const
     mobile->Message(MSG_INFO, "Syntax: zlist.");
     mobile->Message(MSG_INFO, "Shows a list of all zones.");
 }
-BOOL CMDZlist::Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args,int subcmd)
+bool CMDZlist::Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args,int subcmd)
 {
     World* world = World::GetPtr();
     std::stringstream st;
@@ -80,7 +80,7 @@ void CMDRlist::Syntax(Player* mobile, int subcmd) const
     st << "Lists all rooms in the specified zone, or the current zone if no argument is provided.";
     mobile->Message(MSG_INFO, st.str());
 }
-BOOL CMDRlist::Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args,int subcmd)
+bool CMDRlist::Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args,int subcmd)
 {
     World* world = World::GetPtr();
     std::stringstream st;
@@ -124,7 +124,7 @@ void CMDDig::Syntax(Player* mobile, int subcmd) const
     st << "Digs from the current room to the specified direction. If a vnum is provided, exits will be created to and from the provided room.";
     mobile->Message(MSG_INFO, st.str());
 }
-BOOL CMDDig::Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args,int subcmd)
+bool CMDDig::Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args,int subcmd)
 {
     World* world = World::GetPtr();
     ObjectManager* omanager = world->GetObjectManager();
@@ -238,7 +238,7 @@ CMDAStats::CMDAStats()
     SetAccess(RANK_BUILDER);
     SetType(CommandType::Builder);
 }
-BOOL CMDAStats::Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args,int subcmd)
+bool CMDAStats::Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args,int subcmd)
 {
     Zone* area = nullptr;
 
@@ -278,7 +278,7 @@ CMDVCreate::CMDVCreate()
     SetName("vcreate");
     SetType(CommandType::Builder);
 }
-BOOL CMDVCreate::Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args,int subcmd)
+bool CMDVCreate::Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args,int subcmd)
 {
     Zone* zone = nullptr;
     ObjectContainer* location = nullptr;
@@ -321,7 +321,7 @@ CMDVList::CMDVList()
     SetName("vlist");
     SetType(CommandType::Builder);
 }
-BOOL CMDVList::Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args,int subcmd)
+bool CMDVList::Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args,int subcmd)
 {
     using std::left;
     using std::setw;
@@ -375,7 +375,7 @@ CMDMCreate::CMDMCreate()
     SetName("mcreate");
     SetType(CommandType::Builder);
 }
-BOOL CMDMCreate::Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args,int subcmd)
+bool CMDMCreate::Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args,int subcmd)
 {
     Zone* zone = nullptr;
     ObjectContainer* location = nullptr;
@@ -417,7 +417,7 @@ CMDMList::CMDMList()
     SetName("mlist");
     SetType(CommandType::Builder);
 }
-BOOL CMDMList::Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args,int subcmd)
+bool CMDMList::Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args,int subcmd)
 {
     using std::left;
     using std::setw;
@@ -470,7 +470,7 @@ CMDMLoad::CMDMLoad()
     SetAccess(RANK_BUILDER);
     SetType(CommandType::Builder);
 }
-BOOL CMDMLoad::Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args,int subcmd)
+bool CMDMLoad::Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args,int subcmd)
 {
     Zone* zone = nullptr;
     ObjectContainer* location = nullptr;
@@ -525,7 +525,7 @@ CMDAddComponent::CMDAddComponent()
     SetAccess(RANK_BUILDER);
     SetType(CommandType::Builder);
 }
-BOOL CMDAddComponent::Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args,int subcmd)
+bool CMDAddComponent::Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args,int subcmd)
 {
     World* world = World::GetPtr();
     Zone* zone = nullptr;
@@ -606,7 +606,7 @@ CMDGoto::CMDGoto()
     SetAccess(RANK_BUILDER);
     SetType(CommandType::Builder);
 }
-BOOL CMDGoto::Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args,int subcmd)
+bool CMDGoto::Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args,int subcmd)
 {
     World* world = World::GetPtr();
     ObjectManager* omanager = world->GetObjectManager();
@@ -645,7 +645,7 @@ CMDZcreate::CMDZcreate()
     SetAccess(RANK_BUILDER);
     SetType(CommandType::Builder);
 }
-BOOL CMDZcreate::Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args,int subcmd)
+bool CMDZcreate::Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args,int subcmd)
 {
     World* world = World::GetPtr();
     std::stringstream st;
@@ -703,7 +703,7 @@ CMDRcreate::CMDRcreate()
     SetName("rcreate");
     SetType(CommandType::Builder);
 }
-BOOL CMDRcreate::Execute(const std::string &verb, Player* mobile, std::vector<std::string> &args, int subcmd)
+bool CMDRcreate::Execute(const std::string &verb, Player* mobile, std::vector<std::string> &args, int subcmd)
 {
     Zone* zone = nullptr;
     ObjectContainer* location = nullptr;

@@ -75,29 +75,29 @@ public:
     */
     Room* AddRoom();
     Room* AddRoom(VNUM num);
-    BOOL RemoveRoom(VNUM num);
+    bool RemoveRoom(VNUM num);
     void GetRooms(std::vector<Room*> *rooms);
-    BOOL RoomExists(VNUM num);
+    bool RoomExists(VNUM num);
     StaticObject* AddVirtual();
-    BOOL RemoveVirtual(VNUM num);
+    bool RemoveVirtual(VNUM num);
     StaticObject* GetVirtual(VNUM num);
     void GetVirtuals(std::vector<StaticObject*>* objects);
-    BOOL VirtualExists(VNUM num);
+    bool VirtualExists(VNUM num);
     Npc* AddNpc();
-    BOOL RemoveNpc(VNUM num);
+    bool RemoveNpc(VNUM num);
     Npc* GetNpc(VNUM num);
-    BOOL NpcExists(VNUM num);
+    bool NpcExists(VNUM num);
     void GetNpcs(std::vector<Npc*>* npcs);
     Npc* CreateNpc(VNUM num, Room* origin);
     void Update();
     virtual void Serialize(tinyxml2::XMLElement* root);
     virtual void Deserialize(tinyxml2::XMLElement* zone);
 
-    static BOOL SaveZones();
-    static BOOL LoadZones();
+    static bool SaveZones();
+    static bool LoadZones();
     static EVENT(Autosave);
     static EVENT(Shutdown);
 };
 
-BOOL InitializeZones();
+bool InitializeZones();
 #endif

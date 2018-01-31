@@ -103,23 +103,23 @@ void Variant::SetStr(const char* s)
     type = VAR_STR;
 }
 
-BOOL Variant::IsEmpty() const
+bool Variant::IsEmpty() const
 {
     return (type==VAR_EMPTY);
 }
-BOOL Variant::IsInt() const
+bool Variant::IsInt() const
 {
     return (type==VAR_INT);
 }
-BOOL Variant::IsByte() const
+bool Variant::IsByte() const
 {
     return (type==VAR_STR);
 }
-BOOL Variant::IsDouble() const
+bool Variant::IsDouble() const
 {
     return (type==VAR_DOUBLE);
 }
-BOOL Variant::IsNumber() const
+bool Variant::IsNumber() const
 {
     switch (type)
         {
@@ -130,16 +130,16 @@ BOOL Variant::IsNumber() const
             return false;
         }
 }
-BOOL Variant::IsChar() const
+bool Variant::IsChar() const
 {
     return (type == VAR_BYTE? true:false);
 }
-BOOL Variant::IsString() const
+bool Variant::IsString() const
 {
     return (type == VAR_STR);
 }
 
-BOOL Variant::Compare(const Variant &var) const
+bool Variant::Compare(const Variant &var) const
 {
     VARIABLE_TYPE vtype = var.Typeof();
     switch(type)
@@ -194,11 +194,11 @@ BOOL Variant::Compare(const Variant &var) const
 
     return false;
 }
-BOOL Variant::operator ==(const Variant &var)
+bool Variant::operator ==(const Variant &var)
 {
     return Compare(var);
 }
-BOOL Variant::operator !=(const Variant &var)
+bool Variant::operator !=(const Variant &var)
 {
     return (Compare(var)==1?0:1);
 }

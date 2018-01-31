@@ -57,7 +57,7 @@ public:
     * @param [in] the mobile to test.
     * @return true if the player/npc can enter, false otherwise.
     */
-    virtual BOOL CanEnter(Living* mobile);
+    virtual bool CanEnter(Living* mobile);
 
     virtual void Serialize(tinyxml2::XMLElement* root);
     virtual void Deserialize(tinyxml2::XMLElement* node);

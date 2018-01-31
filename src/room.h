@@ -35,13 +35,13 @@ public:
     *Param: [in] a pointer to the Exit object to be added.
     *Return: True if the exit could be added, false otherwise.
     */
-    virtual BOOL AddExit(Exit* exit);
+    virtual bool AddExit(Exit* exit);
     /*
     *Checks for the existance of an exit
     *Param: [in] the direction of the exit to check for.
     *Return: True if the exit exists, false otherwise.
     */
-    virtual BOOL ExitExists(ExitDirection dir);
+    virtual bool ExitExists(ExitDirection dir);
     /*
     *Finds the specified exit.
     *Param: [in] the name of the exit.
@@ -89,7 +89,7 @@ public:
     *Param: [in] the coord structure to copy.
     */
     void SetCoord(point& coord);
-    BOOL IsRoom() const;
+    bool IsRoom() const;
 //serialization
     virtual void Serialize(tinyxml2::XMLElement* root);
     virtual void Deserialize(tinyxml2::XMLElement* node);

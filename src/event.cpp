@@ -16,7 +16,7 @@ Event::~Event()
         }
 }
 
-BOOL Event::operator +=(const EVENTFUNC cb)
+bool Event::operator +=(const EVENTFUNC cb)
 {
     Add(cb);
     return true;
@@ -32,12 +32,12 @@ UINT Event::Add(const EVENTFUNC cb)
     return c->id;
 }
 
-BOOL Event::operator -=(UINT id)
+bool Event::operator -=(UINT id)
 {
     Remove(id);
     return true;
 }
-BOOL Event::Remove(UINT id)
+bool Event::Remove(UINT id)
 {
     std::vector<EventContainer*>::iterator it, itEnd;
 

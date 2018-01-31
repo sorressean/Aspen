@@ -7,7 +7,7 @@
 #include "baseObject.h"
 #include "npc.h"
 
-BOOL InitializeOlcs()
+bool InitializeOlcs()
 {
     if (!InitializeBaseObjectOlcs())
         {

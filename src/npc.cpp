@@ -20,7 +20,7 @@ void Npc::SetOrigin(Room* o)
     _origin = o;
 }
 
-BOOL Npc::IsNpc() const
+bool Npc::IsNpc() const
 {
     return true;
 }
@@ -29,7 +29,7 @@ void Npc::Copy(BaseObject* obj) const
     BaseObject::Copy(obj);
 }
 
-BOOL InitializeNPCOlcs()
+bool InitializeNPCOlcs()
 {
     World* world = World::GetPtr();
     OlcManager* omanager = world->GetOlcManager();

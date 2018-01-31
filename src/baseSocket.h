@@ -79,7 +79,7 @@ public:
     * Determines whether there is input pending in the buffer.
     * @return True if input is pending, false otherwise.
     */
-    virtual BOOL InputPending() const;
+    virtual bool InputPending() const;
     /**
     * Returns the address of the socket.
     */
@@ -95,7 +95,7 @@ public:
     *
     *@return True if the socket could be closed, false otherwise.
     */
-    BOOL Close();
+    bool Close();
     /**
     * Creates a socket and connects it to the specified address.
     *
@@ -103,6 +103,6 @@ public:
     * @param [in] port the port to connect to.
     * @return True if the socket could be created and connected, false otherwise.
     */
-    BOOL Connect(const char* address, unsigned short port);
+    bool Connect(const char* address, unsigned short port);
 };
 #endif

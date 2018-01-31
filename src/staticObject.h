@@ -25,14 +25,14 @@ public:
     virtual void SetPlural(const std::string &s);
     unsigned int GetTotalCount() const;
     unsigned int CountDescendants() const;
-    BOOL IsDescendant(Entity* obj);
-    BOOL RemoveDescendant(Entity* obj);
+    bool IsDescendant(Entity* obj);
+    bool RemoveDescendant(Entity* obj);
     Entity* Create();
-    BOOL Recycle(Entity* obj);
-    BOOL RecycleContents();
+    bool Recycle(Entity* obj);
+    bool RecycleContents();
     virtual void Serialize(tinyxml2::XMLElement* root);
     virtual void Deserialize(tinyxml2::XMLElement* root);
 };
 
-BOOL InitializeStaticObjectOlcs();
+bool InitializeStaticObjectOlcs();
 #endif

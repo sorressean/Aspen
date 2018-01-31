@@ -55,7 +55,7 @@ std::string Exit::GetName() const
         }
 }
 
-BOOL Exit::CanEnter(Living* mobile)
+bool Exit::CanEnter(Living* mobile)
 {
     return true;
 }

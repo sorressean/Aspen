@@ -34,7 +34,7 @@ static bool InitializeDirectories();
 int main(int argc, const char** argv)
 {
     World* world = nullptr;
-    BOOL copyover=false; //are we rebooting for copyover?
+    bool copyover=false; //are we rebooting for copyover?
     int listener=0; //the socket to listen on when recovering from copyover
     int port = 0;
 

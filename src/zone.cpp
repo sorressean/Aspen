@@ -109,7 +109,7 @@ Room* Zone::AddRoom(VNUM num)
     omanager->AddRoom(room);
     return room;
 }
-BOOL Zone::RemoveRoom(VNUM num)
+bool Zone::RemoveRoom(VNUM num)
 {
     World* world = World::GetPtr();
     ObjectManager* omanager = world->GetObjectManager();
@@ -135,7 +135,7 @@ void Zone::GetRooms(std::vector<Room*> *rooms)
 {
     std::copy(_roomobjs.begin(), _roomobjs.end(), std::back_inserter(*rooms));
 }
-BOOL Zone::RoomExists(VNUM num)
+bool Zone::RoomExists(VNUM num)
 {
     World* world = World::GetPtr();
     ObjectManager* omanager = world->GetObjectManager();
@@ -165,7 +165,7 @@ StaticObject* Zone::AddVirtual()
     omanager->AddVirtual(obj);
     return obj;
 }
-BOOL Zone::RemoveVirtual(VNUM num)
+bool Zone::RemoveVirtual(VNUM num)
 {
     World* world = World::GetPtr();
     ObjectManager* omanager = world->GetObjectManager();
@@ -200,7 +200,7 @@ void Zone::GetVirtuals(std::vector<StaticObject*>* objects)
 {
     std::copy(_virtualobjs.begin(), _virtualobjs.end(), std::back_inserter(*objects));
 }
-BOOL Zone::VirtualExists(VNUM num)
+bool Zone::VirtualExists(VNUM num)
 {
     World* world = World::GetPtr();
     ObjectManager* omanager = world->GetObjectManager();
@@ -230,7 +230,7 @@ Npc* Zone::AddNpc()
     omanager->AddNpc(mob);
     return mob;
 }
-BOOL Zone::RemoveNpc(VNUM num)
+bool Zone::RemoveNpc(VNUM num)
 {
     World* world = World::GetPtr();
     ObjectManager* omanager = world->GetObjectManager();
@@ -264,7 +264,7 @@ void Zone::GetNpcs(std::vector<Npc*>* npcs)
 {
     std::copy(_mobobjs.begin(), _mobobjs.end(), std::back_inserter(*npcs));
 }
-BOOL Zone::NpcExists(VNUM num)
+bool Zone::NpcExists(VNUM num)
 {
     World* world = World::GetPtr();
     ObjectManager* omanager = world->GetObjectManager();
@@ -353,7 +353,7 @@ void Zone::Deserialize(tinyxml2::XMLElement* zone)
         }
 }
 
-BOOL InitializeZones()
+bool InitializeZones()
 {
     World* world = World::GetPtr();
     struct stat FInfo;
@@ -402,7 +402,7 @@ BOOL InitializeZones()
     return true;
 }
 
-BOOL Zone::SaveZones()
+bool Zone::SaveZones()
 {
     World* world = World::GetPtr();
     std::vector<Zone*> *zones=new std::vector<Zone*>();
@@ -426,7 +426,7 @@ BOOL Zone::SaveZones()
     delete zones;
     return true;
 }
-BOOL Zone::LoadZones()
+bool Zone::LoadZones()
 {
     World* world = World::GetPtr();
     Zone* zone=nullptr;

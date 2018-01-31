@@ -8,7 +8,7 @@
 #include "modules/modules.h"
 #include "extensions/extensions.h"
 
-BOOL InitializeModules()
+bool InitializeModules()
 {
     if (!InitializeScript())
         {

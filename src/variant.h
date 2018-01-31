@@ -68,13 +68,13 @@ public:
     void SetStr(const std::string &s);
     void SetStr(const char* s);
 //type checks
-    BOOL IsEmpty() const;
-    BOOL IsInt() const;
-    BOOL IsByte() const;
-    BOOL IsDouble() const;
-    BOOL IsNumber() const;
-    BOOL IsChar() const;
-    BOOL IsString() const;
+    bool IsEmpty() const;
+    bool IsInt() const;
+    bool IsByte() const;
+    bool IsDouble() const;
+    bool IsNumber() const;
+    bool IsChar() const;
+    bool IsString() const;
 
     template <class T>
     T Get() const
@@ -102,11 +102,11 @@ public:
             }
     }
 
-    BOOL Compare(const Variant &var) const;
+    bool Compare(const Variant &var) const;
 
 //operator overloads
-    BOOL operator ==(const Variant &var);
-    BOOL operator !=(const Variant &var);
+    bool operator ==(const Variant &var);
+    bool operator !=(const Variant &var);
 //assignment overloads
     Variant& operator =(int s);
     Variant& operator =(char s);

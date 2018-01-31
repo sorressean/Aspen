@@ -23,7 +23,7 @@ void InitializeMovementCommands()
     world->commands.AddCommand(new CMDMove(DIR_DOWN));
 }
 
-static BOOL DoMove(const std::string &verb, Player* mobile,std::vector<std::string> &args,int subcmd)
+static bool DoMove(const std::string &verb, Player* mobile,std::vector<std::string> &args,int subcmd)
 {
     World* world = World::GetPtr();
     ObjectManager* omanager = world->GetObjectManager();
@@ -114,7 +114,7 @@ CMDMove::CMDMove(int direction)
             world->WriteLog("Invalid direction specified.", ERR);
         }
 }
-BOOL CMDMove::Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args,int subcmd)
+bool CMDMove::Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args,int subcmd)
 {
     return DoMove(verb, mobile, args, subcmd);
 }

@@ -11,7 +11,7 @@ EventManager::~EventManager()
         }
 }
 
-BOOL EventManager::IsEventRegistered(const std::string &name)
+bool EventManager::IsEventRegistered(const std::string &name)
 {
     return (_events.count(name)==0?false:true);
 }
@@ -26,7 +26,7 @@ Event* EventManager::GetEvent(const std::string &name)
     return _events[name];
 }
 
-BOOL EventManager::RegisterEvent(const std::string &name, Event* event)
+bool EventManager::RegisterEvent(const std::string &name, Event* event)
 {
     if (IsEventRegistered(name))
         {
@@ -40,7 +40,7 @@ BOOL EventManager::RegisterEvent(const std::string &name, Event* event)
     _events[name]=event;
     return true;
 }
-BOOL EventManager::RemoveEvent(const std::string &name)
+bool EventManager::RemoveEvent(const std::string &name)
 {
     if (IsEventRegistered(name))
         {
@@ -51,7 +51,7 @@ BOOL EventManager::RemoveEvent(const std::string &name)
     return false;
 }
 
-BOOL EventManager::CallEvent(const std::string &name, EventArgs* args, void* caller)
+bool EventManager::CallEvent(const std::string &name, EventArgs* args, void* caller)
 {
     if (!IsEventRegistered(name))
         {
@@ -68,7 +68,7 @@ BOOL EventManager::CallEvent(const std::string &name, EventArgs* args, void* cal
     return true;
 }
 
-BOOL EventManager::AddCallback(const std::string &name, const EVENTFUNC cb)
+bool EventManager::AddCallback(const std::string &name, const EVENTFUNC cb)
 {
     if (!IsEventRegistered(name))
         {
@@ -80,7 +80,7 @@ BOOL EventManager::AddCallback(const std::string &name, const EVENTFUNC cb)
     return true;
 }
 #ifdef MODULE_SCRIPTING
-BOOL EventManager::AddScriptCallback(Entity* obj, const char* event, int func)
+bool EventManager::AddScriptCallback(Entity* obj, const char* event, int func)
 {
     if (!IsEventRegistered(event))
         {

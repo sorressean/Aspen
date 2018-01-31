@@ -31,22 +31,22 @@ public:
     * The address will be converted from it's string representation.
     * @return true if the address could be added, false otherwise.
     */
-    BOOL AddAddress(const std::string &address);
+    bool AddAddress(const std::string &address);
     /**
     * Removes the specified address from the collection.
     *
     * @param [in] address the address to remove.
     * @return True if the address could be removed, false otherwise.
     */
-    BOOL RemoveAddress(const std::string &address);
+    bool RemoveAddress(const std::string &address);
     /**
     * Determine if the specified address is in the ban list.
     *
     * @param [in] address The address to check.
     * @return True if the address is in the list, false otherwise.
     */
-    BOOL AddressExists(const std::string &address);
-    BOOL AddressExists(unsigned long address);
+    bool AddressExists(const std::string &address);
+    bool AddressExists(unsigned long address);
     /**
     * Gets a list of addresses that have been banned.
     *

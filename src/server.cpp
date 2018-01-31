@@ -74,7 +74,7 @@ void Server::CheckLinkdeaths(Callout* cb)
         }
 }
 
-BOOL Server::Listen(const int port)
+bool Server::Listen(const int port)
 {
     World* world = World::GetPtr();
 
@@ -122,7 +122,7 @@ int Server::GetListener() const
     return control;
 }
 
-BOOL Server::PollSockets()
+bool Server::PollSockets()
 {
     static struct timeval tv;
     std::list<Socket*>::iterator iSocket, iSocketEnd;

@@ -55,7 +55,7 @@ void Listener::Accept()
     memcpy(sock->GetAddr(),&addr,sizeof(sockaddr_in));
 }
 
-BOOL Listener::Listen(int port)
+bool Listener::Listen(int port)
 {
     int unused = 1;
 

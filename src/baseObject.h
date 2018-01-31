@@ -100,14 +100,14 @@ public:
     * @param [in] component a pointer to the component object.
     * @return true if the component could be added, false otherwise.
     */
-    BOOL AddComponent(Component* component);
+    bool AddComponent(Component* component);
     /**
     * Removes the specified component from the list.
     *
     * @param [in] component a pointer to the component to be added.
     * @Return true on success, false on failure.
     */
-    BOOL RemoveComponent(Component* component);
+    bool RemoveComponent(Component* component);
     /**
     * Checks for the existance of a component by name.
     *
@@ -135,11 +135,11 @@ public:
     virtual void Deserialize(tinyxml2::XMLElement* root);
     virtual void Copy(BaseObject* obj) const;
     virtual std::string DoLook(Player* mobile);
-    virtual BOOL IsPlayer() const;
-    virtual BOOL IsLiving() const;
-    virtual BOOL IsRoom() const;
-    virtual BOOL IsNpc() const;
-    virtual BOOL IsObject() const;
+    virtual bool IsPlayer() const;
+    virtual bool IsLiving() const;
+    virtual bool IsRoom() const;
+    virtual bool IsNpc() const;
+    virtual bool IsObject() const;
 };
 
 bool InitializeBaseObjectOlcs();

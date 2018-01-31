@@ -79,11 +79,11 @@ public:
     * @param [in] targ the destination where the object needs to go.
     *Return: true on success, false if the object can not move.
     */
-    virtual BOOL MoveTo(ObjectContainer* targ);
+    virtual bool MoveTo(ObjectContainer* targ);
     /**
     * Removes this object from the room it is in, if possible.
     */
-    BOOL FromRoom();
+    bool FromRoom();
 
     /**
     * Initializes the entity after loaded.
@@ -101,14 +101,14 @@ public:
     * @param [in] alias the name of the alias to add.
     * @return True if the alias could be added, false otherwise.
     */
-    BOOL AddAlias(const std::string &alias);
+    bool AddAlias(const std::string &alias);
     /**
     * checks to see if the alias exists.
     *
     * @param: [in] the name of the alias.
     * @return True on success, false on failure.
     */
-    BOOL AliasExists(const std::string &name);
+    bool AliasExists(const std::string &name);
     /**
     * Returns a pointer to the list of aliases.
     * @return a pointer to a vector of strings.
@@ -120,7 +120,7 @@ public:
     * @param [in] mob the player requesting identification.
     */
     virtual std::string Identify(Player* mob);
-    virtual BOOL IsObject() const;
+    virtual bool IsObject() const;
 
     virtual void Serialize(tinyxml2::XMLElement* root);
     virtual void Deserialize(tinyxml2::XMLElement* root);

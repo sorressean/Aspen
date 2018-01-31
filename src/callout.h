@@ -71,7 +71,7 @@ public:
     *
     * @return True if the callout's elapse time is complete, false otherwise.
     */
-    BOOL CanFire() const;
+    bool CanFire() const;
     /**
     * Fires the callout.
     * This means the time specified has elapsed and the callback will be called.

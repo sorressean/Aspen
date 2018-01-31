@@ -22,7 +22,7 @@ Editor::Editor()
     _arg = nullptr;
 }
 
-BOOL Editor::Load()
+bool Editor::Load()
 {
     EditorLoadedArgs arg(this);
     events.CallEvent("load", &arg, _mobile);
@@ -56,7 +56,7 @@ void Editor::Quit()
         }
 }
 
-void Editor::List(BOOL num)
+void Editor::List(bool num)
 {
     int i = 1;
     std::stringstream st;
@@ -88,7 +88,7 @@ void Editor::List(BOOL num)
         }
 }
 
-void Editor::Add(const std::string &line, BOOL quiet)
+void Editor::Add(const std::string &line, bool quiet)
 {
     std::stringstream st;
     std::vector <std::string>::iterator it;
@@ -216,7 +216,7 @@ void Editor::Delete(int first, int second)
     _mobile->Message(MSG_INFO,"Lines deleted.");
 }
 
-BOOL Editor::EnterEditor(Player* mobile)
+bool Editor::EnterEditor(Player* mobile)
 {
     _mobile=mobile;
     _mobile->Message(MSG_INFO,"Entering editor. use \'h\' for help.");

@@ -48,7 +48,7 @@ unsigned int StaticObject::CountDescendants() const
     return (unsigned int)descendants.size();
 }
 
-BOOL StaticObject::IsDescendant(Entity* obj)
+bool StaticObject::IsDescendant(Entity* obj)
 {
     std::vector<Entity*>::iterator it, itEnd;
 
@@ -62,7 +62,7 @@ BOOL StaticObject::IsDescendant(Entity* obj)
         }
     return false;
 }
-BOOL StaticObject::RemoveDescendant(Entity* obj)
+bool StaticObject::RemoveDescendant(Entity* obj)
 {
     std::vector<Entity*>::iterator it, itEnd;
 
@@ -89,7 +89,7 @@ Entity* StaticObject::Create()
     descendants.push_back(obj);
     return obj;
 }
-BOOL StaticObject::Recycle(Entity* obj)
+bool StaticObject::Recycle(Entity* obj)
 {
     if (obj == NULL)
         {
@@ -105,7 +105,7 @@ BOOL StaticObject::Recycle(Entity* obj)
     return false;
 }
 
-BOOL StaticObject::RecycleContents()
+bool StaticObject::RecycleContents()
 {
     World* world = World::GetPtr();
     ObjectManager* omanager = world->GetObjectManager();
@@ -152,7 +152,7 @@ void StaticObject::Deserialize(tinyxml2::XMLElement* root)
 }
 
 //initialize olcs.
-BOOL InitializeStaticObjectOlcs()
+bool InitializeStaticObjectOlcs()
 {
     World* world = World::GetPtr();
     OlcManager* omanager = world->GetOlcManager();

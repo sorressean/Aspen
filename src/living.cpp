@@ -25,7 +25,7 @@ void Living::Update()
     events.CallEvent("HeartBeat", NULL, (void*)this);
 }
 
-BOOL Living::IsLiving() const
+bool Living::IsLiving() const
 {
     return true;
 }

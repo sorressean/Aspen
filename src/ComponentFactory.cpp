@@ -13,12 +13,12 @@ ComponentFactory::~ComponentFactory()
         }
 }
 
-BOOL ComponentFactory::HasComponent(const std::string &name)
+bool ComponentFactory::HasComponent(const std::string &name)
 {
     return (_components.count(name)==0?false:true);
 }
 
-BOOL ComponentFactory::RegisterComponent(const std::string &name, IComponentMeta* meta)
+bool ComponentFactory::RegisterComponent(const std::string &name, IComponentMeta* meta)
 {
     if (HasComponent(name))
         {

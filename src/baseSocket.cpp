@@ -121,7 +121,7 @@ void BaseSocket::ClrInBuffer()
 {
     _inBuffer.erase();
 }
-BOOL BaseSocket::InputPending() const
+bool BaseSocket::InputPending() const
 {
     return (_inBuffer.empty() ? false : true);
 }
@@ -135,7 +135,7 @@ void BaseSocket::SetAddr(sockaddr_in* addr)
     memcpy(&_addr, addr, sizeof(sockaddr_in));
 }
 
-BOOL BaseSocket::Close()
+bool BaseSocket::Close()
 {
     if (_control != -1)
         {
@@ -146,7 +146,7 @@ BOOL BaseSocket::Close()
 
     return false;
 }
-BOOL BaseSocket::Connect(const char* address, unsigned short port)
+bool BaseSocket::Connect(const char* address, unsigned short port)
 {
     if (_control != -1)
         {

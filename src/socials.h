@@ -46,7 +46,7 @@ public:
     *Param: [in] The name of the social.
     *Return: True if the social exists, false otherwise.
     */
-    BOOL SocialExists(const std::string &name) const;
+    bool SocialExists(const std::string &name) const;
     /*
     *Adds a social to the list of current socials.
     *Param: [in] the name of the social to add.
@@ -56,7 +56,7 @@ public:
     *[in] The message the room sees when a target is provided.
     *[in] The message the target sees when a target was provided.
     */
-    BOOL AddSocial(const std::string &name, const std::string &ynotarg, const std::string &rnotarg, const std::string &ytarg, const std::string &rtarg, const std::string &ttarg);
+    bool AddSocial(const std::string &name, const std::string &ynotarg, const std::string &rnotarg, const std::string &ytarg, const std::string &rtarg, const std::string &ttarg);
     /*
     *Retrieves the social's pointer
     *param: [in] The name of the social.
@@ -87,7 +87,7 @@ class CMDSocials:public Command
 public:
     CMDSocials();
 public:
-    BOOL Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args,int subcmd);
+    bool Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args,int subcmd);
 };
-BOOL InitializeSocials();
+bool InitializeSocials();
 #endif

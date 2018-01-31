@@ -7,7 +7,7 @@
 #include "../optionMeta.h"
 #include "../variant.h"
 
-BOOL InitializeSyslog()
+bool InitializeSyslog()
 {
 #ifdef MODULE_SYSLOG
     OptionMeta* ometa = nullptr;
@@ -41,7 +41,7 @@ SyslogChannel::SyslogChannel(const std::string &name,const std::string &alias,co
 }
 
 
-BOOL SyslogChannel::CanBroadcastWithoutListening(Player* mobile) const
+bool SyslogChannel::CanBroadcastWithoutListening(Player* mobile) const
 {
     return true;
 }

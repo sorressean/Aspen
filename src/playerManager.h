@@ -23,12 +23,12 @@ public:
     Only connected players should be added. Inactive players shouldn't be in this list.
     \param: [in] a pointer to the player object to add.
     */
-    BOOL AddPlayer(Player* player);
+    bool AddPlayer(Player* player);
     /**
     Removes the specified player from the list of active players.
     \param: [in] A pointer to the player object
     */
-    BOOL RemovePlayer(Player* player);
+    bool RemovePlayer(Player* player);
     /*
     *Locates the specified player:
     *Param: [in] The name of the player.

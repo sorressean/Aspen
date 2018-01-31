@@ -29,7 +29,7 @@ std::string Command::GetName() const
     return _name;
 }
 
-BOOL Command::AddAlias(const std::string &name)
+bool Command::AddAlias(const std::string &name)
 {
     if (HasAlias(name))
         {
@@ -39,7 +39,7 @@ BOOL Command::AddAlias(const std::string &name)
     _aliases.push_back(name);
     return true;
 }
-BOOL Command::RemoveAlias(const std::string &name)
+bool Command::RemoveAlias(const std::string &name)
 {
     std::vector <std::string>::iterator it, itEnd;
 
@@ -55,7 +55,7 @@ BOOL Command::RemoveAlias(const std::string &name)
 
     return false;
 }
-BOOL Command::HasAlias(const std::string &name, BOOL partialMatch)
+bool Command::HasAlias(const std::string &name, bool partialMatch)
 {
     for (auto it: _aliases)
         {
@@ -108,7 +108,7 @@ unsigned int Command::GetPosition() const
     return _position;
 }
 
-BOOL Command::CanExecute(Player* mobile, int subcmd)
+bool Command::CanExecute(Player* mobile, int subcmd)
 {
     return true;
 }
@@ -195,7 +195,7 @@ Commandable::~Commandable()
         }
 }
 
-BOOL Commandable::AddCommand(Command* com)
+bool Commandable::AddCommand(Command* com)
 {
     if (CommandExists(com->GetName()))
         {
@@ -205,7 +205,7 @@ BOOL Commandable::AddCommand(Command* com)
     _commands.push_back(com);
     return true;
 }
-BOOL Commandable::RemoveCommand(const std::string &name)
+bool Commandable::RemoveCommand(const std::string &name)
 {
     std::vector<Command*>::iterator it, itEnd;
 
@@ -226,7 +226,7 @@ BOOL Commandable::RemoveCommand(const std::string &name)
 
     return false;
 }
-BOOL Commandable::CommandExists(const std::string &name)
+bool Commandable::CommandExists(const std::string &name)
 {
     for (auto it: _commands)
         {
@@ -258,7 +258,7 @@ std::vector <Command*> *Commandable::GetPtr()
 }
 
 
-BOOL InitializeCommands()
+bool InitializeCommands()
 {
     World* world = World::GetPtr();
 

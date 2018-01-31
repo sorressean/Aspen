@@ -2,4 +2,4 @@
 #include "mud.h"
 #include "conf.h"
 
-BOOL InitializeOlcs();
+bool InitializeOlcs();

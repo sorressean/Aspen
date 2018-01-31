@@ -6,7 +6,7 @@ struct MSDP_VARIABLE
 {
     int var; /*The type of variable*/
     std::string name; /*The name of the variable*/
-    BOOL isString; /*Is this variable a string?*/
+    bool isString; /*Is this variable a string?*/
     bool isConfigurable; /*Can the client change the value of this variable?*/
     bool isWriteOnce; /*Can only write once?*/
     int minimum; /*The minimum value for the variable.*/

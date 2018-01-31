@@ -82,7 +82,7 @@ void BaseObject::SetOnum(VNUM num)
     _onum=num;
 }
 
-BOOL BaseObject::AddComponent(Component* component)
+bool BaseObject::AddComponent(Component* component)
 {
     if (component == nullptr)
         {
@@ -97,7 +97,7 @@ BOOL BaseObject::AddComponent(Component* component)
     component->Attach(this);
     return true;
 }
-BOOL BaseObject::RemoveComponent(Component* component)
+bool BaseObject::RemoveComponent(Component* component)
 {
     std::vector<Component*>::iterator it, itEnd;
 
@@ -234,15 +234,15 @@ std::string BaseObject::DoLook(Player* mobile)
     return str;
 }
 
-BOOL BaseObject::IsNpc() const
+bool BaseObject::IsNpc() const
 {
     return false;
 }
-BOOL BaseObject::IsPlayer() const
+bool BaseObject::IsPlayer() const
 {
     return false;
 }
-BOOL BaseObject::IsLiving() const
+bool BaseObject::IsLiving() const
 {
     if (IsPlayer() || IsNpc())
         {
@@ -251,11 +251,11 @@ BOOL BaseObject::IsLiving() const
 
     return false;
 }
-BOOL BaseObject::IsRoom() const
+bool BaseObject::IsRoom() const
 {
     return false;
 }
-BOOL BaseObject::IsObject() const
+bool BaseObject::IsObject() const
 {
     return false;
 }

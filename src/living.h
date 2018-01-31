@@ -68,7 +68,7 @@ public:
     /**
     * Overwritten to note that this is a living object.
     */
-    BOOL IsLiving() const;
+    bool IsLiving() const;
 
     Gender GetGender() const;
     void SetGender(Gender gender);

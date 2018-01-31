@@ -22,7 +22,7 @@ protected:
     Player* _mobile;
     std::vector <std::string> _lines;
     int _cursor;
-    BOOL _dirty;
+    bool _dirty;
     void* _arg;
 public:
     EventManager events;
@@ -33,7 +33,7 @@ public:
     /**
     * Called to fire the loaded event.
     */
-    virtual BOOL Load();
+    virtual bool Load();
     /**
     * Called to fire the saved event and change editor state.
     */
@@ -52,7 +52,7 @@ public:
     *
     * @param [in] num True to number the lines of output, false otherwise.
     */
-    virtual void List(BOOL lnum);
+    virtual void List(bool lnum);
     /**
     * Adds the specified line to the editor.
     *
@@ -60,7 +60,7 @@ public:
     * @param [in] line the line to add.
     * @param [in] quiet Whether or not to announce the line was added (set this to true if you are populating a buffer).
     */
-    virtual void Add(const std::string &line, BOOL quiet = false);
+    virtual void Add(const std::string &line, bool quiet = false);
     /**
     * Sets the insertion point of the editor.
     *
@@ -88,7 +88,7 @@ public:
     /**
     * Initializes the editor for the player.
     */
-    virtual BOOL EnterEditor(Player* mobile);
+    virtual bool EnterEditor(Player* mobile);
     /**
     * Removes the player from the editor and clears the input handler.
     */

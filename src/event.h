@@ -78,13 +78,13 @@ public:
     *
     * @param [in] cb the callback to add.
     */
-    virtual BOOL operator +=(const EVENTFUNC cb);
+    virtual bool operator +=(const EVENTFUNC cb);
     /**
     * Removes a callback from the list by ID.
     *
     * @param [in] id the ID of the callback.
     */
-    virtual BOOL operator -=(UINT id);
+    virtual bool operator -=(UINT id);
 
     /**
     * Adds a callback to the event list.
@@ -99,7 +99,7 @@ public:
     * @param [in] id the ID of the callback.
     * @return true if the callback can be removed, false otherwise.
     */
-    virtual BOOL Remove(UINT id);
+    virtual bool Remove(UINT id);
 
 #ifdef MODULE_SCRIPTING
     /**

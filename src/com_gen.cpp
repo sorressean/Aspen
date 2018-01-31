@@ -47,7 +47,7 @@ CMDQuit::CMDQuit()
     SetName("quit");
     SetType(CommandType::Misc);
 }
-BOOL CMDQuit::Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args,int subcmd)
+bool CMDQuit::Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args,int subcmd)
 {
     mobile->Write("Thanks for playing, please come back again!\n");
     mobile->GetSocket()->Kill();
@@ -59,7 +59,7 @@ CMDSave::CMDSave()
     SetName("save");
     SetType(CommandType::Misc);
 }
-BOOL CMDSave::Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args,int subcmd)
+bool CMDSave::Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args,int subcmd)
 {
     if (!mobile->Save())
         {
@@ -78,7 +78,7 @@ CMDBackup::CMDBackup()
     SetName("backup");
     SetType(CommandType::Misc);
 }
-BOOL CMDBackup::Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args,int subcmd)
+bool CMDBackup::Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args,int subcmd)
 {
     if (!args.size())
         {
@@ -110,7 +110,7 @@ CMDWho::CMDWho()
     AddAlias("wh");
     SetType(CommandType::Information);
 }
-BOOL CMDWho::Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args,int subcmd)
+bool CMDWho::Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args,int subcmd)
 {
     World* world = World::GetPtr();
     std::list<Player*> *players;
@@ -141,7 +141,7 @@ CMDToggle::CMDToggle()
     AddAlias("tog");
     SetType(CommandType::Misc);
 }
-BOOL CMDToggle::Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args,int subcmd)
+bool CMDToggle::Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args,int subcmd)
 {
     World* world  = World::GetPtr();
     OptionManager* omanager = world->GetOptionManager();
@@ -210,7 +210,7 @@ CMDScore::CMDScore()
     AddAlias("sc");
     SetType(CommandType::Information);
 }
-BOOL CMDScore::Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args,int subcmd)
+bool CMDScore::Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args,int subcmd)
 {
     using std::endl;
     using std::setw;
@@ -235,7 +235,7 @@ CMDChan::CMDChan()
     AddAlias("chan");
     SetType(CommandType::Communication);
 }
-BOOL CMDChan::Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args,int subcmd)
+bool CMDChan::Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args,int subcmd)
 {
     World* world = World::GetPtr();
     Channel* chan = world->FindChannel(subcmd);
@@ -300,7 +300,7 @@ void CMDCommands::Syntax(Player* mobile, int subcmd) const
     mobile->Message(MSG_INFO, st.str());
 }
 
-BOOL CMDCommands::Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args,int subcmd)
+bool CMDCommands::Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args,int subcmd)
 {
     if (!args.size())
         {
@@ -399,7 +399,7 @@ CMDHist::CMDHist()
     AddAlias("hist");
     SetType(CommandType::Information);
 }
-BOOL CMDHist::Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args,int subcmd)
+bool CMDHist::Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args,int subcmd)
 {
     World* world = World::GetPtr();
     Channel* chan=nullptr;
@@ -440,7 +440,7 @@ CMDUptime::CMDUptime()
     SetName("uptime");
     SetType(CommandType::Information);
 }
-BOOL CMDUptime::Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args,int subcmd)
+bool CMDUptime::Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args,int subcmd)
 {
     World* world = World::GetPtr();
     TimeInfo ruptime(time(NULL)-world->GetRealUptime());
@@ -465,11 +465,11 @@ CMDWhois::CMDWhois()
     AddAlias("finger");
     SetType(CommandType::Information);
 }
-BOOL CMDWhois::Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args,int subcmd)
+bool CMDWhois::Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args,int subcmd)
 {
     World* world = World::GetPtr();
     Player* targ=nullptr;
-    BOOL load=false;
+    bool load=false;
     TimeInfo tm;
 
     if ((!args.size())||(args.size()!=1))
@@ -524,7 +524,7 @@ CMDLook::CMDLook()
     AddAlias("l");
     SetType(CommandType::Information);
 }
-BOOL CMDLook::Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args,int subcmd)
+bool CMDLook::Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args,int subcmd)
 {
     World* world = World::GetPtr();
     BaseObject* obj = nullptr;
@@ -556,13 +556,13 @@ CMDSuicide::CMDSuicide()
     SetName("suicide");
     SetType(CommandType::Misc);
 }
-BOOL CMDSuicide::Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args,int subcmd)
+bool CMDSuicide::Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args,int subcmd)
 {
     mobile->Message(MSG_NORMAL, "Are you sure you want to suicide? Please note that this will delete your current character, as well as any equipment you may own. Type yes if you want to continue, or no otherwise.");
     YesNoHandler::CreateHandler(mobile->GetSocket(), std::bind(&CMDSuicide::Confirm, this, std::placeholders::_1, std::placeholders::_2));
     return true;
 }
-void CMDSuicide::Confirm(Socket* sock, BOOL choice)
+void CMDSuicide::Confirm(Socket* sock, bool choice)
 {
     Player* mobile = sock->GetPlayer();
     std::string path = std::string(PLAYER_DIR)+mobile->GetName();
@@ -585,7 +585,7 @@ CMDSay::CMDSay()
     SetName("say");
     SetType(CommandType::Communication);
 }
-BOOL CMDSay::Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args,int subcmd)
+bool CMDSay::Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args,int subcmd)
 {
     if (!args.size())
         {
@@ -604,7 +604,7 @@ CMDEmote::CMDEmote()
     SetName("emote");
     SetType(CommandType::Communication);
 }
-BOOL CMDEmote::Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args,int subcmd)
+bool CMDEmote::Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args,int subcmd)
 {
     if (!args.size())
         {
@@ -623,7 +623,7 @@ CMDPrompt::CMDPrompt()
     SetName("prompt");
     SetType(CommandType::Misc);
 }
-BOOL CMDPrompt::Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args,int subcmd)
+bool CMDPrompt::Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args,int subcmd)
 {
     if (!args.size())
         {
@@ -642,7 +642,7 @@ CMDSockstats::CMDSockstats()
     SetName("sockstats");
     SetType(CommandType::Information);
 }
-BOOL CMDSockstats::Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args,int subcmd)
+bool CMDSockstats::Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args,int subcmd)
 {
     Socket*sock = mobile->GetSocket();
     float ratio = 0;
@@ -677,7 +677,7 @@ CMDExits::CMDExits()
     SetName("exits");
     SetType(CommandType::Movement);
 }
-BOOL CMDExits::Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args, int subcmd)
+bool CMDExits::Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args, int subcmd)
 {
     Room* location = (Room*)mobile->GetLocation();
     if (!location)

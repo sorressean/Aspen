@@ -22,7 +22,7 @@ void YesNoHandler::Input(void* arg, const std::string &input)
         }
 }
 
-BOOL YesNoHandler::CreateHandler(Socket* sock,  YESNOCB cb, void* arg)
+bool YesNoHandler::CreateHandler(Socket* sock,  YESNOCB cb, void* arg)
 {
     in_data* input = nullptr;
     YesNoHandler* handle  = nullptr;
@@ -50,7 +50,7 @@ void LineHandler::Input(void* arg, const std::string &input)
     _cb((Socket*)arg, data, _arg);
 }
 
-BOOL LineHandler::CreateHandler(Socket* sock,  LINECB cb)
+bool LineHandler::CreateHandler(Socket* sock,  LINECB cb)
 {
     in_data* input = nullptr;
     LineHandler* handle = nullptr;
@@ -86,7 +86,7 @@ void TextBlockHandler::Input(void* arg, const std::string &input)
         }
 }
 
-BOOL TextBlockHandler::CreateHandler(Socket* sock, TEXTBLOCKCB cb, std::vector<std::string>* lines, void* arg)
+bool TextBlockHandler::CreateHandler(Socket* sock, TEXTBLOCKCB cb, std::vector<std::string>* lines, void* arg)
 {
     in_data* input = nullptr;
     TextBlockHandler* handle = nullptr;

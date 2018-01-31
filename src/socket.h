@@ -79,8 +79,8 @@ class Socket:public BaseSocket
     Window _winsize;
     int _con;
     Player *_mobile;
-    BOOL _Close;
-    BOOL _compressing;
+    bool _Close;
+    bool _compressing;
     time_t _lastInput;
     z_stream zstream;
     TelnetParser _parser;
@@ -115,7 +115,7 @@ public:
     /*
     *Initializes the zlib internal stuff for mccp.
     */
-    BOOL InitCompression();
+    bool InitCompression();
     virtual size_t Write(const unsigned char* data);
     virtual size_t Write(const void* buffer, size_t count);
     virtual void                 Write(const std::string &txt );
@@ -172,23 +172,23 @@ public:
     short GetWindowWidth() const;
     short GetWindowHeight() const;
     std::string GetTermtype() const;
-    BOOL IsCompressing() const;
+    bool IsCompressing() const;
     /*
     *Checks to see if the socket needs to be closed on next update.
     *Return: true/false.
     */
-    BOOL ShouldClose();
+    bool ShouldClose();
     /*
     *Checks to see if the socket has a handle associated with it.
     *This is used for capturing input before it hits the command checking.
     *Return: True if a handle is linked to the socket, false otherwise.
     */
-    BOOL HasHandle() const;
+    bool HasHandle() const;
     /*
     *Passes the input from the socket to the associated handle, if one exists.
     *Return: True if the input was sent to the handle, false if no handle was associated with the socket.
     */
-    BOOL HandleInput();
+    bool HandleInput();
     /*
     *Clears the current input handler.
     */
@@ -198,7 +198,7 @@ public:
     *Param: [in] a pointer to the function that will capture input.
     *Return: True on success, false if an input handler is already associated with the socket.
     */
-    BOOL SetInput(in_data* data);
+    bool SetInput(in_data* data);
     /*
     *Updates the time at which the last command was entered.
     *This is used for checking how long a player has been idle, etc.
@@ -214,7 +214,7 @@ public:
     *Checks to see if a command is pending in the queue or not.
     *Return: True if one or more commands is in the command queue, false otherwise.
     */
-    BOOL CommandPending() const;
+    bool CommandPending() const;
     /*
     *Pops a command from the queue.
     *Return: The command at the front of the queue, or an empty string if the queue is empty.
@@ -233,6 +233,6 @@ public:
     bool HandleVerpassInput();
     bool HandleGenderInput();
     void InitializeNewPlayer();
-    BOOL HandleCommand();
+    bool HandleCommand();
 };
 #endif

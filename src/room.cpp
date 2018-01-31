@@ -29,7 +29,7 @@ Room::~Room()
         }
 }
 
-BOOL Room::AddExit(Exit* exit)
+bool Room::AddExit(Exit* exit)
 {
     if (exit==nullptr)
         {
@@ -56,7 +56,7 @@ BOOL Room::AddExit(Exit* exit)
     return true;
 }
 
-BOOL Room::ExitExists(ExitDirection dir)
+bool Room::ExitExists(ExitDirection dir)
 {
     if (_exits.size())
         {
@@ -121,7 +121,7 @@ void Room::TellAllBut(const std::string &message, std::list <Player*>* players)
     std::list<Player*>::iterator pit, pitEnd;
     std::list <Living*>::iterator lit, litEnd;
 
-    BOOL found = false;
+    bool found = false;
 
     pitEnd = players->end();
     litEnd = _mobiles.end();
@@ -163,7 +163,7 @@ void Room::TellAllBut(const std::string &message, Player* exclude)
         }
 }
 
-BOOL Room::IsRoom() const
+bool Room::IsRoom() const
 {
     return true;
 }

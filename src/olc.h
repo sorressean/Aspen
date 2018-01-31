@@ -39,7 +39,7 @@ enum class OLCDT
     INTEGER,
     STRING,
     DECIMAL,
-    BOOLEAN,
+    boolEAN,
     FLG,
     ENUM,
     EDITOR
@@ -221,27 +221,27 @@ class CMDPEdit:public Command
 {
 public:
     CMDPEdit();
-    BOOL Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args, int subcmd);
+    bool Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args, int subcmd);
 };
 class CMDREdit:public Command
 {
 public:
     CMDREdit();
-    BOOL Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args, int subcmd);
+    bool Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args, int subcmd);
 };
 
 class CMDMEdit:public Command
 {
 public:
     CMDMEdit();
-    BOOL Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args, int subcmd);
+    bool Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args, int subcmd);
 };
 
 class CMDOEdit:public Command
 {
 public:
     CMDOEdit();
-    BOOL Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args, int subcmd);
+    bool Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args, int subcmd);
 };
 
-BOOL InitializeOlc();
+bool InitializeOlc();

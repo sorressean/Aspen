@@ -21,7 +21,7 @@ std::list <Player*> *PlayerManager::GetPlayers()
     return &_users;
 }
 
-BOOL PlayerManager::AddPlayer(Player* player)
+bool PlayerManager::AddPlayer(Player* player)
 {
     if (!player)
         {
@@ -35,7 +35,7 @@ BOOL PlayerManager::AddPlayer(Player* player)
     _users.push_back(player);
     return true;
 }
-BOOL PlayerManager::RemovePlayer(Player* player)
+bool PlayerManager::RemovePlayer(Player* player)
 {
     std::list<Player*>::iterator it, itEnd;
 

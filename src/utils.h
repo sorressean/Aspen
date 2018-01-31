@@ -14,7 +14,7 @@
 //misc
 int tonum(const char* str);
 bool isnum(const char* str);
-BOOL FileExists(const std::string &name);
+bool FileExists(const std::string &name);
 /*
 *Checks to see if a directory exists.
 *Useful for creating empty dirs after a git checkout.
@@ -58,10 +58,10 @@ void SplitToVector(const std::string &line, std::vector<std::string>* output, in
 */
 std::string TimevalToString(struct timeval *tv);
 //player validation functions
-BOOL IsValidUserName(const std::string &input);
-BOOL IsValidPassword(const std::string &input);
-BOOL PlayerExists(const std::string &name);
-BOOL IsFirstUser();
+bool IsValidUserName(const std::string &input);
+bool IsValidPassword(const std::string &input);
+bool PlayerExists(const std::string &name);
+bool IsFirstUser();
 //string functions:
 void Lower(std::string &str);
 std::string Capitalize(const std::string &str);
@@ -76,7 +76,7 @@ void NumberToString(char* buffer, int number);
 //bitfield manipulation
 FLAG BitSet(FLAG flag,int pos);
 FLAG BitClear(FLAG flag,int pos);
-BOOL BitIsSet(FLAG flag,int pos);
+bool BitIsSet(FLAG flag,int pos);
 std::string GenerateUuid();
 //minmax
 template <typename T>
@@ -121,7 +121,7 @@ std::string SwapExit(const std::string &exit);
 *Param: [in] the name or alias of the exit.\
 *return: true on success, false on failure.
 */
-BOOL IsValidExit(const std::string &name);
+bool IsValidExit(const std::string &name);
 /*
 *Returns the exit direction associated with each exit.
 *Param: [in] the name of the exit.
@@ -168,7 +168,7 @@ public:
     int z;
     point();
     point(int X, int Y, int Z);
-    BOOL operator ==(const point &p);
+    bool operator ==(const point &p);
     point& operator =(point &p);
 };
 

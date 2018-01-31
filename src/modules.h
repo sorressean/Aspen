@@ -4,5 +4,5 @@
 #include "mud.h"
 #include "conf.h"
 
-BOOL InitializeModules();
+bool InitializeModules();
 #endif

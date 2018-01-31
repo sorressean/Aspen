@@ -27,7 +27,7 @@ public:
     * @param [in] the name of the component.
     * @return true if the component was found, false otherwise.
     */
-    BOOL HasComponent(const std::string &name);
+    bool HasComponent(const std::string &name);
     /**
     * Registers the component with the factory if it isn't already registered by the same name.
     *
@@ -35,7 +35,7 @@ public:
     *@param [in] the component meta.
     * @return True on success, false on failure.
     */
-    BOOL RegisterComponent(const std::string &name, IComponentMeta* meta);
+    bool RegisterComponent(const std::string &name, IComponentMeta* meta);
     /**
     * Creates the specified component if it's in the registered components.
     *

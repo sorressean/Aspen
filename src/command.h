@@ -99,14 +99,14 @@ public:
     * @param [in] name the alias to add.
     * @return true if the alias was added, false otherwise (the alias already existed).
     */
-    BOOL AddAlias(const std::string &name);
+    bool AddAlias(const std::string &name);
     /**
     * Removes an alias from the command.
     *
     * @param [in] name the name of the alias.
     * @return true if the alias was removed, false otherwise.
     */
-    BOOL RemoveAlias(const std::string &name);
+    bool RemoveAlias(const std::string &name);
     /**
     * Determines if the command has the specified alias.
     *
@@ -114,7 +114,7 @@ public:
     * @param [in] partialMatch whether or not the alias has to match entirely.
     * @todo could have better matching here.
     */
-    BOOL HasAlias(const std::string &name, BOOL partialMatch = false);
+    bool HasAlias(const std::string &name, bool partialMatch = false);
     /**
     * Sets the subcommand.
     *
@@ -172,12 +172,12 @@ public:
     * @param [in] subcmd the subcommand this object is associated with (0 by default).
     * @return true if execution was successful, false otherwise.
     */
-    virtual BOOL Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args,int subcmd) = 0;
+    virtual bool Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args,int subcmd) = 0;
     /**
     * Determine if the command is able to be executed.
     * @return true until overridden.
     */
-    virtual BOOL CanExecute(Player* mobile, int subcmd);
+    virtual bool CanExecute(Player* mobile, int subcmd);
     /**
     * Print command syntax.
     *
@@ -237,19 +237,19 @@ public:
     *Adds a command to the list of active commands:
     *Param: [in] A pointer to the command to add.
     */
-    virtual BOOL AddCommand(Command* com);
+    virtual bool AddCommand(Command* com);
     /*
     *Removes the command from the list.
     *Param: [in] the name of the command.
     *Return: true if the command was found and removed, false otherwise.
     */
-    virtual BOOL RemoveCommand(const std::string &name);
+    virtual bool RemoveCommand(const std::string &name);
     /*
     *Checks to see if the specified command exists.
     *Param: [in] the name of the command.
     *Return: True if the command exists, false otherwise.
     */
-    virtual BOOL CommandExists(const std::string &name);
+    virtual bool CommandExists(const std::string &name);
     /*
     *Retrieves the names of the commands the player has access to.
     *Param: [out] A pointer to a list of strings that the function can fill in.
@@ -267,5 +267,5 @@ public:
 *Command initialization
 *Param: [in] a pointer to the world object.
 */
-BOOL InitializeCommands();
+bool InitializeCommands();
 #endif

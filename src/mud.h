@@ -14,7 +14,6 @@
 //typedefs:
 typedef int FLAG; //bitfield flags
 typedef int VNUM;
-typedef int BOOL;
 /**
 * @todo clean some of these up.
 */

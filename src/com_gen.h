@@ -18,7 +18,7 @@ class CMDQuit:public Command
 {
 public:
     CMDQuit();
-    BOOL Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args,int subcmd);
+    bool Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args,int subcmd);
 };
 
 /**
@@ -28,7 +28,7 @@ class CMDSave:public Command
 {
 public:
     CMDSave();
-    BOOL Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args,int subcmd);
+    bool Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args,int subcmd);
 };
 
 /**
@@ -38,7 +38,7 @@ class CMDBackup:public Command
 {
 public:
     CMDBackup();
-    BOOL Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args,int subcmd);
+    bool Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args,int subcmd);
 };
 
 /**
@@ -48,7 +48,7 @@ class CMDWho:public Command
 {
 public:
     CMDWho();
-    BOOL Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args,int subcmd);
+    bool Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args,int subcmd);
 };
 
 /**
@@ -58,7 +58,7 @@ class CMDToggle:public Command
 {
 public:
     CMDToggle();
-    BOOL Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args,int subcmd);
+    bool Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args,int subcmd);
 };
 
 /**
@@ -69,7 +69,7 @@ class CMDScore:public Command
 {
 public:
     CMDScore();
-    BOOL Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args,int subcmd);
+    bool Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args,int subcmd);
 };
 
 /**
@@ -79,7 +79,7 @@ class CMDChan:public Command
 {
 public:
     CMDChan();
-    BOOL Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args,int subcmd);
+    bool Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args,int subcmd);
 };
 
 /**
@@ -106,7 +106,7 @@ public:
     */
     void GetCommands(Player*mobile, std::vector<std::string>& names, CommandType filter);
     void Syntax(Player* mobile, int subcmd) const;
-    BOOL Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args,int subcmd);
+    bool Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args,int subcmd);
 };
 
 /**
@@ -117,7 +117,7 @@ class CMDHist:public Command
 {
 public:
     CMDHist();
-    BOOL Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args,int subcmd);
+    bool Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args,int subcmd);
 };
 
 /**
@@ -127,7 +127,7 @@ class CMDUptime:public Command
 {
 public:
     CMDUptime();
-    BOOL Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args,int subcmd);
+    bool Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args,int subcmd);
 };
 
 /**
@@ -138,7 +138,7 @@ class CMDWhois:public Command
 {
 public:
     CMDWhois();
-    BOOL Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args,int subcmd);
+    bool Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args,int subcmd);
 };
 
 /**
@@ -148,7 +148,7 @@ class CMDLook:public Command
 {
 public:
     CMDLook();
-    BOOL Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args,int subcmd);
+    bool Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args,int subcmd);
 };
 
 /**
@@ -158,7 +158,7 @@ class CMDSuicide:public Command
 {
 public:
     CMDSuicide();
-    BOOL Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args,int subcmd);
+    bool Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args,int subcmd);
     /**
     * Used as the input handler to confirm input.
     *
@@ -166,7 +166,7 @@ public:
     * @param [in] choice the result of the yes/no input.
     * @todo remove backup?
     */
-    void Confirm(Socket* sock, BOOL choice);
+    void Confirm(Socket* sock, bool choice);
 };
 
 /**
@@ -176,7 +176,7 @@ class CMDSay:public Command
 {
 public:
     CMDSay();
-    BOOL Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args,int subcmd);
+    bool Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args,int subcmd);
 };
 
 /**
@@ -186,7 +186,7 @@ class CMDEmote:public Command
 {
 public:
     CMDEmote();
-    BOOL Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args,int subcmd);
+    bool Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args,int subcmd);
 };
 
 /**
@@ -197,7 +197,7 @@ class CMDPrompt:public Command
 {
 public:
     CMDPrompt();
-    BOOL Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args,int subcmd);
+    bool Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args,int subcmd);
 };
 
 /**
@@ -208,7 +208,7 @@ class CMDSockstats:public Command
 {
 public:
     CMDSockstats();
-    BOOL Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args, int subcmd);
+    bool Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args, int subcmd);
 };
 
 /**
@@ -218,6 +218,6 @@ class CMDExits:public Command
 {
 public:
     CMDExits();
-    BOOL Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args, int subcmd);
+    bool Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args, int subcmd);
 };
 #endif

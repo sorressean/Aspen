@@ -53,7 +53,7 @@ bool isnum(const char* str)
         }
     return true;
 }
-BOOL FileExists(const std::string &name)
+bool FileExists(const std::string &name)
 {
     struct stat info;
     int res=stat(name.c_str(),&info);
@@ -207,7 +207,7 @@ std::string TimevalToString(struct timeval* tv)
     return st.str();
 }
 
-BOOL IsValidUserName(const std::string &input)
+bool IsValidUserName(const std::string &input)
 {
     const char* ptr=input.c_str();
     if ((input.length()<4)||(input.length()>11))
@@ -225,7 +225,7 @@ BOOL IsValidUserName(const std::string &input)
     return true;
 }
 
-BOOL IsValidPassword(const std::string &input)
+bool IsValidPassword(const std::string &input)
 {
     std::string::const_iterator it, itEnd;
 
@@ -246,12 +246,12 @@ BOOL IsValidPassword(const std::string &input)
     return true;
 }
 
-BOOL PlayerExists(const std::string &name)
+bool PlayerExists(const std::string &name)
 {
     return FileExists(PLAYER_DIR+name);
 }
 
-BOOL IsFirstUser()
+bool IsFirstUser()
 {
     int count = 0;
     std::string path=(PLAYER_DIR);
@@ -515,7 +515,7 @@ FLAG BitClear(FLAG flag,int pos)
 {
     return flag&=~pos;
 }
-BOOL BitIsSet(FLAG flag,int pos)
+bool BitIsSet(FLAG flag,int pos)
 {
     return (flag & pos) == pos;
 }
@@ -628,7 +628,7 @@ std::string SwapExit(const std::string &exit)
         }
 }
 
-BOOL IsValidExit(const std::string &name)
+bool IsValidExit(const std::string &name)
 {
     if ((name == "north" || name == "n") ||
             (name == "south" || name == "s") ||
@@ -726,7 +726,7 @@ point::point(int X, int Y, int Z)
     z = Z;
 }
 
-BOOL point::operator ==(const point &p)
+bool point::operator ==(const point &p)
 {
     return (p.x == x && p.y == y && p.z == z);
 }

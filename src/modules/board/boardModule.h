@@ -23,14 +23,14 @@ public:
     void Show(Player* mobile);
     void Set(Player* mobile, int boardid);
     void Read(Player* mobile, int id);
-    BOOL Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args,int subcmd);
+    bool Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args,int subcmd);
 };
 class CMDABoard:public Command
 {
 public:
     CMDABoard();
     void Help(Player* mobile);
-    BOOL Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args,int subcmd);
+    bool Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args,int subcmd);
 };
 
 EVENT(CleanupBoards);

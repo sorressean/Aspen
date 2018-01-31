@@ -32,7 +32,7 @@ public:
     * @param [in] name the name of the event.
     * @return True on success, false on failure.
     */
-    BOOL IsEventRegistered(const std::string &name);
+    bool IsEventRegistered(const std::string &name);
 
     /**
     *Retrieves the specified eventevent
@@ -49,14 +49,14 @@ public:
     * @param [in] event The event object.
     * @return True on success, false on failure.
     */
-    BOOL RegisterEvent(const std::string &name, Event* event);
+    bool RegisterEvent(const std::string &name, Event* event);
     /**
     * Removes the event from the events table.
     *
     * @param [in] name the name of the event.
     * @return True on success, false on failure.
     */
-    BOOL RemoveEvent(const std::string &name);
+    bool RemoveEvent(const std::string &name);
 
     /**
     *Calls the event, passing in the caller and event args.
@@ -66,7 +66,7 @@ public:
     * @param [in] caller the event caller.
     * @return True on success, false on failure.
     */
-    BOOL CallEvent(const std::string &name, EventArgs* args, void* caller);
+    bool CallEvent(const std::string &name, EventArgs* args, void* caller);
 
     /**
     * Adds a callback to the event.
@@ -74,7 +74,7 @@ public:
     * @param [in] name the name of the event.
     * @param [in] cb the callback.
     */
-    BOOL AddCallback(const std::string &name, const EVENTFUNC cb);
+    bool AddCallback(const std::string &name, const EVENTFUNC cb);
 #ifdef MODULE_SCRIPTING
     /**
     * @todo figure out what this is doing and revamp with scripting.
@@ -84,7 +84,7 @@ public:
     *[in] the name of the callback.
     *Return: True on success, false on failure.
     */
-    BOOL AddScriptCallback(Entity* obj, const char* event, int func);
+    bool AddScriptCallback(Entity* obj, const char* event, int func);
 #endif
 };
 #endif

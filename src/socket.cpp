@@ -237,7 +237,7 @@ void Socket::OnNegotiation(EventArgs* args)
     return;
 }
 
-BOOL Socket::InitCompression()
+bool Socket::InitCompression()
 {
     int ret = 0;
 
@@ -494,21 +494,21 @@ std::string Socket::GetTermtype() const
 {
     return _termtype;
 }
-BOOL Socket::IsCompressing() const
+bool Socket::IsCompressing() const
 {
     return _compressing;
 }
 
-BOOL Socket::ShouldClose()
+bool Socket::ShouldClose()
 {
     return (_Close? true : false);
 }
 
-BOOL Socket::HasHandle() const
+bool Socket::HasHandle() const
 {
     return (_input->empty()==true?false:true);
 }
-BOOL Socket::HandleInput()
+bool Socket::HandleInput()
 {
     if (HasHandle())
         {
@@ -541,7 +541,7 @@ void Socket::ClearInput()
                 }
         }
 }
-BOOL Socket::SetInput(in_data* data)
+bool Socket::SetInput(in_data* data)
 {
     if (data->handle)
         {
@@ -569,7 +569,7 @@ void Socket::ClearMobile()
 {
     _mobile = nullptr;
 }
-BOOL Socket::CommandPending() const
+bool Socket::CommandPending() const
 {
     return (_cqueue.size()==0?false:true);
 }
@@ -842,7 +842,7 @@ void Socket::InitializeNewPlayer()
     world->events.CallEvent("PlayerCreated", NULL, (void*)mob);
 }
 
-BOOL Socket::HandleCommand()
+bool Socket::HandleCommand()
 {
     switch (GetConnectionType())
         {

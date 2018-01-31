@@ -14,8 +14,8 @@ public:
     ~Npc();
     Room* GetOrigin() const;
     void SetOrigin(Room* o);
-    BOOL IsNpc() const;
+    bool IsNpc() const;
     virtual void Copy(BaseObject* obj) const;
 };
-BOOL InitializeNPCOlcs();
+bool InitializeNPCOlcs();
 #endif

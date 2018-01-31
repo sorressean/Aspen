@@ -36,7 +36,7 @@ int Callout::GetDelta() const
     return cdelta-fdelta;
 }
 
-BOOL Callout::CanFire() const
+bool Callout::CanFire() const
 {
     int extra = 0;
     timeval curtime;

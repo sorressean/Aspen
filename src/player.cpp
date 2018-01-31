@@ -67,7 +67,7 @@ Player::~Player()
     delete _watchers;
 }
 
-BOOL Player::IsPlayer() const
+bool Player::IsPlayer() const
 {
     return true;
 }
@@ -190,7 +190,7 @@ void Player::ClearTempPassword()
 {
     _tempPassword.clear();
 }
-BOOL Player::ComparePassword()
+bool Player::ComparePassword()
 {
     return _password == _tempPassword;
 }
@@ -201,7 +201,7 @@ void Player::IncInvalidPassword()
     Save(true);
 }
 
-BOOL Player::Save(BOOL force)
+bool Player::Save(bool force)
 {
     if (!force)
         {
@@ -220,7 +220,7 @@ BOOL Player::Save(BOOL force)
     doc.SaveFile((PLAYER_DIR + GetName()).c_str());
     return true;
 }
-BOOL Player::Backup()
+bool Player::Backup()
 {
     if ((time(NULL)-_lastBackup) < BACKUP_INTERVAL)
         {
@@ -246,7 +246,7 @@ void Player::EnterGame()
 {
     EnterGame(false);
 }
-void Player::EnterGame(BOOL quiet)
+void Player::EnterGame(bool quiet)
 {
     World* world = World::GetPtr();
     ObjectManager* omanager = world->GetObjectManager();
@@ -414,7 +414,7 @@ Option* Player::GetOption(const std::string &option) const
     return nullptr;
 }
 
-BOOL Player::OptionExists(const std::string &option) const
+bool Player::OptionExists(const std::string &option) const
 {
     for (Option* opt: _config)
         {
@@ -426,7 +426,7 @@ BOOL Player::OptionExists(const std::string &option) const
 
     return false;
 }
-BOOL Player::ToggleOption(const std::string &option)
+bool Player::ToggleOption(const std::string &option)
 {
     int temp = 0;
     World* world = World::GetPtr();
@@ -480,7 +480,7 @@ std::vector<Option*>* Player::GetOptions()
     return &_config;
 }
 
-BOOL Player::HasAccess(FLAG access) const
+bool Player::HasAccess(FLAG access) const
 {
     return BitIsSet(_rank,access);
 }

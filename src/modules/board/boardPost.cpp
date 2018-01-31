@@ -42,7 +42,7 @@ std::string BoardPost::GetPoster() const
     return _poster;
 }
 
-BOOL BoardPost::IsPoster(Player* mobile)
+bool BoardPost::IsPoster(Player* mobile)
 {
     return (mobile->GetRealUuid() == _pid);
 }

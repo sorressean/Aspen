@@ -16,11 +16,11 @@ OlcManager::~OlcManager()
         }
 }
 
-BOOL OlcManager::HasGroup(OLCGROUP group)
+bool OlcManager::HasGroup(OLCGROUP group)
 {
     return (_olcs.count((int)group) ? true : false);
 }
-BOOL OlcManager::AddGroup(OLCGROUP g, OlcGroup* group)
+bool OlcManager::AddGroup(OLCGROUP g, OlcGroup* group)
 {
     if (HasGroup(g))
         {

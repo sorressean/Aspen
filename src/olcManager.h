@@ -14,7 +14,7 @@ class OlcManager
 public:
     OlcManager();
     ~OlcManager();
-    BOOL HasGroup(OLCGROUP group);
-    BOOL AddGroup(OLCGROUP g, OlcGroup* group);
+    bool HasGroup(OLCGROUP group);
+    bool AddGroup(OLCGROUP g, OlcGroup* group);
     OlcGroup* GetGroup(OLCGROUP group);
 };

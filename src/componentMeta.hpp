@@ -25,7 +25,7 @@ public:
     virtual Component* Create() = 0;
     virtual void Initialize() = 0;
     virtual std::string GetName() const = 0;
-    virtual     BOOL AddDependency(const std::string &dependency) = 0;
+    virtual     bool AddDependency(const std::string &dependency) = 0;
     virtual     void GetDependencies(std::vector<std::string>* out) const = 0;
     virtual OLCGROUP GetOlcGroup() const = 0;
 };
@@ -56,7 +56,7 @@ public:
     *Param: [in] the name of the dependency.
     *Return: True if the dependency exists in the dependencies list, false otherwise.
     */
-    BOOL DependencyExists(const std::string &name) const
+    bool DependencyExists(const std::string &name) const
     {
         std::vector<std::string>::const_iterator it, itEnd;
 
@@ -76,7 +76,7 @@ public:
     *Will add the specified dependency to the list.
     *Param: [in] The name of the component to add as a dependency.
     */
-    BOOL AddDependency(const std::string &dependency)
+    bool AddDependency(const std::string &dependency)
     {
         if (DependencyExists(dependency))
             {

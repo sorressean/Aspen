@@ -51,7 +51,7 @@ class World
     unsigned long long int _commandElapsed;
     time_t _ruptime; //real uptime.
     time_t _cuptime; //uptime since last copyover.
-    BOOL _running;
+    bool _running;
 //mud text buffers
     char* _motd;
     char* _banner;
@@ -95,7 +95,7 @@ public:
     *Adds a channel to the worlds channel lookup table.
     *Param: [in] A pointer to the object to add.
     */
-    BOOL AddChannel(Channel* chan,BOOL command=true);
+    bool AddChannel(Channel* chan,bool command=true);
     /*
     *Will locate a channel object based on it's ID.
     *Param: [in] the id of the channel.
@@ -118,7 +118,7 @@ public:
     *Param: [in] a pointer to the channel.
     *Return: True if the channel exists, false otherwise.
     */
-    BOOL ChannelExists(Channel* chan);
+    bool ChannelExists(Channel* chan);
     /*
     *Registers the specified component
     *Params: [in] The name of the component.
@@ -126,7 +126,7 @@ public:
     *[in] the component init callback.
     *Return: True if the component was registered, false otherwise.
     */
-    BOOL RegisterComponent(IComponentMeta* meta);
+    bool RegisterComponent(IComponentMeta* meta);
     /*
     *Creates the specified component
     *Parameters: [in] the name of the component to create.
@@ -159,7 +159,7 @@ public:
     *[in] a pointer to the object.
     *Return: true on success, false if the property couldn't be added (null pointer provided, or the property already exists).
     */
-    BOOL AddProperty(const std::string &name,void* ptr);
+    bool AddProperty(const std::string &name,void* ptr);
     /*
     *Retrieves the property from the world's property table.
     *Param: [in] the name of the property.
@@ -172,11 +172,11 @@ public:
     *Return: true on success, false otherwise.
     *Note: this will not call delete on the object associated with that property.
     */
-    BOOL RemoveProperty(const std::string &name);
+    bool RemoveProperty(const std::string &name);
     /*
     *Loads files into memory such as the MOTD so we won't have to read them every time we need them.
     */
-    BOOL InitializeFiles();
+    bool InitializeFiles();
     /*
     *The following functions return pointers to memory where the loaded files can be found.
     */
@@ -195,7 +195,7 @@ public:
     *Returns: true on success, false on failure.
     */
     void ParseArguments(const std::string& args, int start, std::vector<std::string>& params);
-    BOOL DoCommand(Player* mobile, std::string args);
+    bool DoCommand(Player* mobile, std::string args);
 
     /*
     *Matching methods.
@@ -227,13 +227,13 @@ public:
     *Param: [in] a pointer to the zone to add.
     *Return: True on success, false on failure.
     */
-    BOOL AddZone(Zone* zone);
+    bool AddZone(Zone* zone);
     /*
     *Removes the zone from the list.
     *Param: [in] a pointer to the object to remove.
     *Return: True on success, false on failure.
     */
-    BOOL RemoveZone(Zone* zone);
+    bool RemoveZone(Zone* zone);
     /*
     *Retrieves a pointer to the specified zone.
     *Param: [in] The name of the zone object.
@@ -245,20 +245,20 @@ public:
     *Param: [in] a pointer to the vector to populate.
     *Return: True on success, false on failure.
     */
-    BOOL GetZones(std::vector<Zone*> *zones);
+    bool GetZones(std::vector<Zone*> *zones);
 
     /*
     *Checks to see if the log exists.
     *Param: [in] the name of the log.
     *Return: True if the log has been registered, false otherwise.
     */
-    BOOL LogExists(const std::string &name);
+    bool LogExists(const std::string &name);
     /*
     *Registers the logger if it does not already exist.
     *Param: [in] the name of the logger to register.
     *Return: True on success, false on failure.
     */
-    BOOL RegisterLog(const std::string &path, const std::string &name);
+    bool RegisterLog(const std::string &path, const std::string &name);
     /*
     *Writes the specified data.
     *Param: [in] the messsage to write.
@@ -278,26 +278,26 @@ public:
     *Checks to see if the game engine is still running.
     *Return: True if the game loop should continue, false otherwise.
     */
-    BOOL IsRunning() const;
+    bool IsRunning() const;
     /*
     *Sets whether the game loop should continue.
     *This will be caught each iteration.
     *Param: [in] A boolian value that controls the game loop.
     */
-    void SetRunning(BOOL running);
+    void SetRunning(bool running);
     /*
     *Checks to see if the specified prompt handler exists.
     *Param: [in] the letter of the handler to check for.
     *return: True if the prompt exists, false otherwise.
     */
-    BOOL PromptExists(char prompt);
+    bool PromptExists(char prompt);
     /*
     *Registers the prompt variable and handler.
     *Param: [in] the letter to register for the prompt.
     *Param: [in] a std::function that points to the callback to retrieve information.
     *Return: True if the prompt could be registered, false otherwise.
     */
-    BOOL RegisterPrompt(char prompt, PROMPTCB callback);
+    bool RegisterPrompt(char prompt, PROMPTCB callback);
     /*
     *Format's a player's prompt.
     *Param: [in] the string with formatting characters.
@@ -311,25 +311,25 @@ public:
     *Param: [in] a pointer to an object which inherits ISerializable.
     *Return: True if the state could be added, false otherwise.
     */
-    BOOL AddState(const std::string &name, ISerializable* s);
+    bool AddState(const std::string &name, ISerializable* s);
     /*
     *Removes the specified state by name.
     *Param: [in] the name of the state to remove.
     *Return: True if the state can be removed, false otherwise.
     */
-    BOOL RemoveState(const std::string &name);
+    bool RemoveState(const std::string &name);
     /*
     *Checks to see if the specified state exists.
     *Param: [in] the name of the state.
     *Return: True if the state exists, false otherwise.
     */
-    BOOL StateExists(const std::string &name);
+    bool StateExists(const std::string &name);
     /*
     *Saves and loads the world state, respectively.
     *Return: True on success, false on failure.
     */
-    BOOL SaveState();
-    BOOL LoadState();
+    bool SaveState();
+    bool LoadState();
     unsigned long long int GetUpdates() const;
     unsigned long long int GetUpdateTime() const;
     unsigned long long int GetSleepTime() const;

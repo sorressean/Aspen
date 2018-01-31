@@ -31,7 +31,7 @@ class Component
 protected:
     BaseObject* _object; //The object associated with the component (it's parent).
     IComponentMeta* _parent;
-    BOOL _attached; //set if the component is attached to an object.
+    bool _attached; //set if the component is attached to an object.
 public:
     Property variables;
     EventManager events;
