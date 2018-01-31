@@ -158,8 +158,16 @@ bool CMDDig::Execute(const std::string &verb, Player* mobile,std::vector<std::st
 
     if (args.size() == 2)
         {
-            toid = atoi(args[1].c_str());
-            if (!toid)
+            try
+                {
+                    toid = std::stoi(args[1]);
+                }
+            catch(std::invalid_argument&)
+                {
+                    mobile->Message(MSG_ERROR, "Invalid rnum given.");
+                    return false;
+                }
+            if (toid <= 0)
                 {
                     mobile->Message(MSG_ERROR, "Invalid rnum given.");
                     return false;
@@ -167,8 +175,16 @@ bool CMDDig::Execute(const std::string &verb, Player* mobile,std::vector<std::st
         }
     else if (args.size() == 3)
         {
-            toid = atoi(args[1].c_str());
-            if (!toid)
+            try
+                {
+                    toid = std::stoi(args[1]);
+                }
+            catch(std::invalid_argument&)
+                {
+                    mobile->Message(MSG_ERROR, "Invalid rnum given.");
+                    return false;
+                }
+            if (toid <= 0)
                 {
                     mobile->Message(MSG_ERROR, "Invalid rnum given.");
                     return false;
@@ -188,8 +204,8 @@ bool CMDDig::Execute(const std::string &verb, Player* mobile,std::vector<std::st
         }
 
     std::string dir=SwapExit(args[0]);
-
     Room* room = nullptr;
+
     if (!toid)
         {
             Zone* zone = nullptr;
@@ -271,6 +287,7 @@ bool CMDAStats::Execute(const std::string &verb, Player* mobile,std::vector<std:
 std::string CMDAStats::Stats(Player* mobile, Zone* area)
 {
     std::stringstream st;
+
     st << area->GetName() << std::endl;
     st << Repeat('-', 80) << std::endl;
     st << "Range: " << "Minimum Vnum: " << area->GetMinVnum() << " Maximum Vnum: " << area->GetMaxVnum() << std::endl;
@@ -495,17 +512,21 @@ bool CMDMLoad::Execute(const std::string &verb, Player* mobile,std::vector<std::
             return false;
         }
 
-    std::string onum = args[0];
-    for(auto ch: onum)
+    VNUM num = 0;
+    try
         {
-            if (!isdigit(ch))
-                {
-                    mobile->Message(MSG_ERROR, "Syntax: mload <vnum>");
-                    return false;
-                }
+            num = std::stoi(args[1]);
+        }
+    catch(std::invalid_argument&)
+        {
+            mobile->Message(MSG_ERROR, "Syntax: mload <vnum>");
+        }
+    if (num <= 0)
+        {
+            mobile->Message(MSG_ERROR, "Syntax: mload <vnum>");
         }
 
-    Npc* npc = zone->CreateNpc(atoi(onum.c_str()), (Room*)location);
+    Npc* npc = zone->CreateNpc(num, static_cast<Room*>(location));
     if (!npc)
         {
             mobile->Message(MSG_ERROR, "That NPC doesn't exist in the specified zone.");
@@ -553,28 +574,32 @@ bool CMDAddComponent::Execute(const std::string &verb, Player* mobile,std::vecto
             return false;
         }
 
-    std::string onum = args[1];
-    for(auto ch:onum)
+    VNUM num = 0;
+    try
         {
-            if (!isdigit(ch))
-                {
-                    mobile->Message(MSG_ERROR, "Syntax: addcomponent <-m|-o> <vnum>.");
-                    return false;
-                }
+            num = std::stoi(args[1]);
+        }
+    catch(std::invalid_argument&)
+        {
+            mobile->Message(MSG_ERROR, "Syntax: addcomponent <-m|-o> <vnum>.");
+        }
+    if (num <= 0)
+        {
+            mobile->Message(MSG_ERROR, "Syntax: addcomponent <-m|-o> <vnum>.");
         }
 
     BaseObject* obj = nullptr;
     if (args[0] == "-m")
         {
-            obj = zone->GetNpc(atoi(args[1].c_str()));
+            obj = zone->GetNpc(num);
         }
     else
         {
-            obj = zone->GetVirtual(atoi(args[1].c_str()));
+            obj = zone->GetVirtual(num);
         }
 
     World* world = World::GetPtr();
-    std::string component = args[1];
+    std::string component = args[2];
     Component* comobj = nullptr;
     comobj = world->CreateComponent(component);
     if (comobj == nullptr)
@@ -609,8 +634,17 @@ bool CMDGoto::Execute(const std::string &verb, Player* mobile,std::vector<std::s
             return false;
         }
 
-    VNUM toid = atoi(args[0].c_str());
-    if (!toid)
+    VNUM toid = 0;
+    try
+        {
+            toid = std::stoi(args[0]);
+        }
+    catch(std::invalid_argument&)
+        {
+            mobile->Message(MSG_ERROR, "Invalid rnum given.");
+            return false;
+        }
+    if (toid <= 0)
         {
             mobile->Message(MSG_ERROR, "Invalid rnum given.");
             return false;
@@ -646,14 +680,25 @@ bool CMDZcreate::Execute(const std::string &verb, Player* mobile,std::vector<std
             return false;
         }
 
-    World* world = World::GetPtr();
-    int min  = atoi(args[1].c_str());
-    int max   = atoi(args[2].c_str());
+    int min = 0;
+    int max = 0;
+    try
+        {
+            min = stoi(args[1]);
+            max = stoi(args[2]);
+        }
+    catch(std::invalid_argument&)
+        {
+            mobile->Message(MSG_ERROR, "Min and max must be valid numbers.");
+            return false;
+        }
     if (!max || !min || min > max || min <= 0)
         {
             mobile->Message(MSG_ERROR,"Invalid num range. Syntax: zcreate <name of zone> <min> <max> creates a new zone with the name and rooms available in the range from min to max\n");
             return false;
         }
+
+    World* world = World::GetPtr();
     if (world->GetZone(args[0]) != nullptr)
         {
             mobile->Message(MSG_ERROR,"Error: zone with name already  exists.\n");
