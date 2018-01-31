@@ -34,17 +34,20 @@ void InitializeBuilderCommands()
     world->commands.AddCommand(new CMDRcreate());
 }
 
+
 CMDZlist::CMDZlist()
 {
     SetAccess(RANK_BUILDER);
     SetName("zlist");
     SetType(CommandType::Builder);
 }
+
 void CMDZlist::Syntax(Player* mobile, int subcmd) const
 {
     mobile->Message(MSG_INFO, "Syntax: zlist.");
     mobile->Message(MSG_INFO, "Shows a list of all zones.");
 }
+
 bool CMDZlist::Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args,int subcmd)
 {
     World* world = World::GetPtr();
@@ -55,6 +58,7 @@ bool CMDZlist::Execute(const std::string &verb, Player* mobile,std::vector<std::
     if (!zones.size())
         {
             st << "No zones found.";
+            mobile->Message(MSG_ERROR, st.str());
             return true;
         }
 
@@ -67,12 +71,14 @@ bool CMDZlist::Execute(const std::string &verb, Player* mobile,std::vector<std::
     return true;
 }
 
+
 CMDRlist::CMDRlist()
 {
     SetName("rlist");
     SetAccess(RANK_BUILDER);
     SetType(CommandType::Builder);
 }
+
 void CMDRlist::Syntax(Player* mobile, int subcmd) const
 {
     std::stringstream st;
@@ -80,11 +86,11 @@ void CMDRlist::Syntax(Player* mobile, int subcmd) const
     st << "Lists all rooms in the specified zone, or the current zone if no argument is provided.";
     mobile->Message(MSG_INFO, st.str());
 }
+
 bool CMDRlist::Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args,int subcmd)
 {
     World* world = World::GetPtr();
     std::stringstream st;
-    std::vector<Room*> rooms;
     Zone* zone = nullptr;
 
     if (!args.size())
@@ -101,15 +107,18 @@ bool CMDRlist::Execute(const std::string &verb, Player* mobile,std::vector<std::
             return false;
         }
 
+    std::vector<Room*> rooms;
     zone->GetRooms(&rooms);
     for (auto it: rooms)
         {
             st << "[" << it->GetOnum() << "] " << it->GetName() << "\n";
         }
+
     st << "Found " << (int)rooms.size() << ((int)rooms.size()==0?"room":"rooms") << ".\n";
     mobile->Message(MSG_LIST,st.str());
     return true;
 }
+
 
 CMDDig::CMDDig()
 {
@@ -117,6 +126,7 @@ CMDDig::CMDDig()
     SetAccess(RANK_BUILDER);
     SetType(CommandType::Builder);
 }
+
 void CMDDig::Syntax(Player* mobile, int subcmd) const
 {
     std::stringstream st;
@@ -124,55 +134,43 @@ void CMDDig::Syntax(Player* mobile, int subcmd) const
     st << "Digs from the current room to the specified direction. If a vnum is provided, exits will be created to and from the provided room.";
     mobile->Message(MSG_INFO, st.str());
 }
+
 bool CMDDig::Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args,int subcmd)
 {
-    World* world = World::GetPtr();
-    ObjectManager* omanager = world->GetObjectManager();
-    std::stringstream st;
-    Room* room = nullptr;
-    Room* location = (Room*)mobile->GetLocation();
-    VNUM toid = 0;
-    Zone* zone = nullptr;
-    Exit* orig = nullptr; //from current room to another room.
-    Exit* other = nullptr; //from other room to current.
-    std::string dir;
-
 //initial error checking and argument parsing
     if (!args.size())
         {
             Syntax(mobile);
             return false;
         }
+
+    Room* location = (Room*)mobile->GetLocation();
     if (!location)
         {
             mobile->Message(MSG_ERROR, "You can't dig here.");
             return false;
         }
-    if (args.size() > 1)
+
+    World* world = World::GetPtr();
+    ObjectManager* omanager = world->GetObjectManager();
+    std::stringstream st;
+    VNUM toid = 0;
+
+    if (args.size() == 2)
         {
-            if (args.size() == 2)
+            toid = atoi(args[1].c_str());
+            if (!toid)
                 {
-                    toid = atoi(args[1].c_str());
-                    if (!toid)
-                        {
-                            mobile->Message(MSG_ERROR, "Invalid rnum given.");
-                            return false;
-                        }
+                    mobile->Message(MSG_ERROR, "Invalid rnum given.");
+                    return false;
                 }
-            else if (args.size() == 3)
+        }
+    else if (args.size() == 3)
+        {
+            toid = atoi(args[1].c_str());
+            if (!toid)
                 {
-                    toid = atoi(args[1].c_str());
-                    if (!toid)
-                        {
-                            mobile->Message(MSG_ERROR, "Invalid rnum given.");
-                            return false;
-                        }
-                }
-            else
-                {
-                    mobile->Message(MSG_ERROR,"Syntax: dig <direction> Creates another room in the direction you specified, and creates exits back and forth.\n"
-                                    "dig <direction> <rnum> Creates an exit in the specified direction to the specified rnum.\n"
-                                    "dig <direction> to <rnum> Creates an exit in the specified room to the specified rnum.");
+                    mobile->Message(MSG_ERROR, "Invalid rnum given.");
                     return false;
                 }
         }
@@ -182,16 +180,20 @@ bool CMDDig::Execute(const std::string &verb, Player* mobile,std::vector<std::st
             mobile->Message(MSG_ERROR, "That is an invalid direction.\nYou can dig <north|n, south|s, east|e, west|w,\nnortheast|ne, southeast|se, northwest|sw, or southwest|sw");
             return false;
         }
+
     if (location->ExitExists(GetDirectionByName(args[0])))
         {
             mobile->Message(MSG_ERROR, "That exit already exists.");
             return false;
         }
 
-    dir=SwapExit(args[0]);
+    std::string dir=SwapExit(args[0]);
 
+    Room* room = nullptr;
     if (!toid)
         {
+            Zone* zone = nullptr;
+
             zone=location->GetZone();
             try
                 {
@@ -215,13 +217,13 @@ bool CMDDig::Execute(const std::string &verb, Player* mobile,std::vector<std::st
             st << "Found room " << room->GetOnum() << "\n";
         }
 
-    orig=new Exit(room->GetOnum());
+    Exit* orig=new Exit(room->GetOnum());
     orig->SetDirection(GetDirectionByName(args[0]));
     location->AddExit(orig);
     st << "Added exit from " << location->GetName() << "(" << location->GetOnum() << ") to newly created room.\n";
     if (dir!="")
         {
-            other=new Exit(location->GetOnum());
+            Exit* other=new Exit(location->GetOnum());
             other->SetDirection(GetDirectionByName(dir));
             room->AddExit(other);
             st << "Added exit from newly created room to " << location->GetName() << "(" << location->GetOnum() << ").\nDone.\n";
@@ -231,6 +233,7 @@ bool CMDDig::Execute(const std::string &verb, Player* mobile,std::vector<std::st
     return true;
 }
 
+
 CMDAStats::CMDAStats()
 {
     SetName("astat");
@@ -238,6 +241,7 @@ CMDAStats::CMDAStats()
     SetAccess(RANK_BUILDER);
     SetType(CommandType::Builder);
 }
+
 bool CMDAStats::Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args,int subcmd)
 {
     Zone* area = nullptr;
@@ -263,6 +267,7 @@ bool CMDAStats::Execute(const std::string &verb, Player* mobile,std::vector<std:
         }
     return true;
 }
+
 std::string CMDAStats::Stats(Player* mobile, Zone* area)
 {
     std::stringstream st;
@@ -272,33 +277,31 @@ std::string CMDAStats::Stats(Player* mobile, Zone* area)
     return st.str();
 }
 
+
 CMDVCreate::CMDVCreate()
 {
     SetAccess(RANK_BUILDER);
     SetName("vcreate");
     SetType(CommandType::Builder);
 }
+
 bool CMDVCreate::Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args,int subcmd)
 {
-    Zone* zone = nullptr;
-    ObjectContainer* location = nullptr;
-    StaticObject* vobj = nullptr;
-    std::stringstream st;
-
-    location = mobile->GetLocation();
+    ObjectContainer* location = mobile->GetLocation();
     if (!location || !location->IsRoom())
         {
             mobile->Message(MSG_ERROR, "You are not in a room.");
             return false;
         }
 
-    zone = location->GetZone();
+    Zone* zone = location->GetZone();
     if (!zone)
         {
             mobile->Message(MSG_ERROR, "The room you are in does not have a zone.");
             return false;
         }
 
+    StaticObject* vobj = nullptr;
     try
         {
             vobj = zone->AddVirtual();
@@ -309,11 +312,13 @@ bool CMDVCreate::Execute(const std::string &verb, Player* mobile,std::vector<std
             return false;
         }
 
+    std::stringstream st;
     st << "Created static object " << vobj->GetOnum() << ".";
     mobile->Message(MSG_INFO, st.str());
     Zone::SaveZones();
     return true;
 }
+
 
 CMDVList::CMDVList()
 {
@@ -321,6 +326,7 @@ CMDVList::CMDVList()
     SetName("vlist");
     SetType(CommandType::Builder);
 }
+
 bool CMDVList::Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args,int subcmd)
 {
     using std::left;
@@ -328,28 +334,23 @@ bool CMDVList::Execute(const std::string &verb, Player* mobile,std::vector<std::
     using std::endl;
     using std::right;
 
-    Zone* zone = nullptr;
-    BaseObject* location = nullptr;
-    std::vector<StaticObject*> objects;
-    size_t count = 0;
-    std::stringstream st;
-
-    location = mobile->GetLocation();
+    BaseObject* location = mobile->GetLocation();
     if (!location || !location->IsRoom())
         {
             mobile->Message(MSG_ERROR, "You are not in a room.");
             return false;
         }
 
-    zone = location->GetZone();
+    Zone* zone = location->GetZone();
     if (!zone)
         {
             mobile->Message(MSG_ERROR, "The room you are in does not have a zone.");
             return false;
         }
 
+    std::vector<StaticObject*> objects;
     zone->GetVirtuals(&objects);
-    count = objects.size();
+    size_t count = objects.size();
 
     if (!count)
         {
@@ -357,6 +358,7 @@ bool CMDVList::Execute(const std::string &verb, Player* mobile,std::vector<std::
             return false;
         }
 
+    std::stringstream st;
     st << left << setw(10) << "vnum" << right << "name" << Repeat(" ", 20) << "Zone: " << zone->GetName() << endl;
     st << Repeat('-', 80) << endl;
     for (auto it: objects)
@@ -369,33 +371,31 @@ bool CMDVList::Execute(const std::string &verb, Player* mobile,std::vector<std::
     return true;
 }
 
+
 CMDMCreate::CMDMCreate()
 {
     SetAccess(RANK_BUILDER);
     SetName("mcreate");
     SetType(CommandType::Builder);
 }
+
 bool CMDMCreate::Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args,int subcmd)
 {
-    Zone* zone = nullptr;
-    ObjectContainer* location = nullptr;
-    Npc* npc = nullptr;
-    std::stringstream st;
-
-    location = mobile->GetLocation();
+    ObjectContainer* location = mobile->GetLocation();
     if (!location || !location->IsRoom())
         {
             mobile->Message(MSG_ERROR, "You are not in a room.");
             return false;
         }
 
-    zone = location->GetZone();
+    Zone* zone = location->GetZone();
     if (!zone)
         {
             mobile->Message(MSG_ERROR, "The room you are in does not have a zone.");
             return false;
         }
 
+    Npc* npc = nullptr;
     try
         {
             npc = zone->AddNpc();
@@ -406,10 +406,12 @@ bool CMDMCreate::Execute(const std::string &verb, Player* mobile,std::vector<std
             return false;
         }
 
+    std::stringstream st;
     st << "Created NPC " << npc->GetOnum() << ".";
     mobile->Message(MSG_INFO, st.str());
     return true;
 }
+
 
 CMDMList::CMDMList()
 {
@@ -417,6 +419,7 @@ CMDMList::CMDMList()
     SetName("mlist");
     SetType(CommandType::Builder);
 }
+
 bool CMDMList::Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args,int subcmd)
 {
     using std::left;
@@ -424,34 +427,32 @@ bool CMDMList::Execute(const std::string &verb, Player* mobile,std::vector<std::
     using std::endl;
     using std::right;
 
-    Zone* zone = nullptr;
-    ObjectContainer* location = nullptr;
-    size_t count = 0;
-    std::vector<Npc*> npcs;
-    std::stringstream st;
 
-    location = mobile->GetLocation();
+    ObjectContainer* location = mobile->GetLocation();
     if (!location || !location->IsRoom())
         {
             mobile->Message(MSG_ERROR, "You are not in a room.");
             return false;
         }
 
-    zone = location->GetZone();
+    Zone* zone = location->GetZone();
     if (!zone)
         {
             mobile->Message(MSG_ERROR, "The room you are in does not have a zone.");
             return false;
         }
 
+    std::vector<Npc*> npcs;
     zone->GetNpcs(&npcs);
-    count = npcs.size();
 
+    size_t count = npcs.size();
     if (!count)
         {
             mobile->Message(MSG_INFO, "No npcs found.");
             return true;
         }
+
+    std::stringstream st;
     st << left << setw(10) << "vnum" << right << "name" << endl;
     st << Repeat('-', 80) << endl;
     for (auto it: npcs)
@@ -464,27 +465,24 @@ bool CMDMList::Execute(const std::string &verb, Player* mobile,std::vector<std::
     return true;
 }
 
+
 CMDMLoad::CMDMLoad()
 {
     SetName("mload");
     SetAccess(RANK_BUILDER);
     SetType(CommandType::Builder);
 }
+
 bool CMDMLoad::Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args,int subcmd)
 {
-    Zone* zone = nullptr;
-    ObjectContainer* location = nullptr;
-    Npc* npc = nullptr;
-    std::string onum;
-
-    location = mobile->GetLocation();
+    ObjectContainer* location = mobile->GetLocation();
     if (!location || !location->IsRoom())
         {
             mobile->Message(MSG_ERROR, "You are not in a room.");
             return false;
         }
 
-    zone = location->GetZone();
+    Zone* zone = location->GetZone();
     if (!zone)
         {
             mobile->Message(MSG_ERROR, "The room you are in does not have a zone.");
@@ -497,8 +495,8 @@ bool CMDMLoad::Execute(const std::string &verb, Player* mobile,std::vector<std::
             return false;
         }
 
-    onum = args[0];
-    for(auto ch:onum)
+    std::string onum = args[0];
+    for(auto ch: onum)
         {
             if (!isdigit(ch))
                 {
@@ -507,7 +505,7 @@ bool CMDMLoad::Execute(const std::string &verb, Player* mobile,std::vector<std::
                 }
         }
 
-    npc = zone->CreateNpc(atoi(onum.c_str()), (Room*)location);
+    Npc* npc = zone->CreateNpc(atoi(onum.c_str()), (Room*)location);
     if (!npc)
         {
             mobile->Message(MSG_ERROR, "That NPC doesn't exist in the specified zone.");
@@ -518,6 +516,7 @@ bool CMDMLoad::Execute(const std::string &verb, Player* mobile,std::vector<std::
     return true;
 }
 
+
 CMDAddComponent::CMDAddComponent()
 {
     SetName("addcomponent");
@@ -525,24 +524,17 @@ CMDAddComponent::CMDAddComponent()
     SetAccess(RANK_BUILDER);
     SetType(CommandType::Builder);
 }
+
 bool CMDAddComponent::Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args,int subcmd)
 {
-    World* world = World::GetPtr();
-    Zone* zone = nullptr;
-    ObjectContainer* location = nullptr;
-    BaseObject* obj = nullptr;
-    std::string onum;
-    std::string component;
-    Component* comp = nullptr;
-
-    location = mobile->GetLocation();
+    ObjectContainer* location = mobile->GetLocation();
     if (!location || !location->IsRoom())
         {
             mobile->Message(MSG_ERROR, "You are not in a room.");
             return false;
         }
 
-    zone = location->GetZone();
+    Zone* zone = location->GetZone();
     if (!zone)
         {
             mobile->Message(MSG_ERROR, "The room you are in does not have a zone.");
@@ -554,13 +546,14 @@ bool CMDAddComponent::Execute(const std::string &verb, Player* mobile,std::vecto
             mobile->Message(MSG_ERROR, "Syntax: addcomponent <-m|-o> <vnum>.");
             return false;
         }
+
     if (args[0] != "-m" && args[0] != "-o")
         {
             mobile->Message(MSG_ERROR, "Syntax: addcomponent <-m|-o> <vnum>.");
             return false;
         }
 
-    onum = args[1];
+    std::string onum = args[1];
     for(auto ch:onum)
         {
             if (!isdigit(ch))
@@ -570,6 +563,7 @@ bool CMDAddComponent::Execute(const std::string &verb, Player* mobile,std::vecto
                 }
         }
 
+    BaseObject* obj = nullptr;
     if (args[0] == "-m")
         {
             obj = zone->GetNpc(atoi(args[1].c_str()));
@@ -579,20 +573,19 @@ bool CMDAddComponent::Execute(const std::string &verb, Player* mobile,std::vecto
             obj = zone->GetVirtual(atoi(args[1].c_str()));
         }
 
-    comp = world->CreateComponent(component);
-    if (comp == nullptr)
+    World* world = World::GetPtr();
+    std::string component = args[1];
+    Component* comobj = nullptr;
+    comobj = world->CreateComponent(component);
+    if (comobj == nullptr)
         {
             mobile->Message(MSG_ERROR, "That component does not exist.");
             return false;
         }
 
-    if (!obj->AddComponent(comp))
+    if (!obj->AddComponent(comobj))
         {
             mobile->Message(MSG_ERROR, "Could not add that component.");
-            if (comp)
-                {
-                    delete comp;
-                }
             return false;
         }
 
@@ -600,33 +593,32 @@ bool CMDAddComponent::Execute(const std::string &verb, Player* mobile,std::vecto
     return true;
 }
 
+
 CMDGoto::CMDGoto()
 {
     SetName("goto");
     SetAccess(RANK_BUILDER);
     SetType(CommandType::Builder);
 }
+
 bool CMDGoto::Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args,int subcmd)
 {
-    World* world = World::GetPtr();
-    ObjectManager* omanager = world->GetObjectManager();
-    Room* room = nullptr;
-    VNUM toid = 0;
-
     if (args.size() != 1)
         {
             mobile->Message(MSG_ERROR,"Syntax: goto <room number> teleports you to that room.\n");
             return false;
         }
 
-    toid = atoi(args[0].c_str());
+    VNUM toid = atoi(args[0].c_str());
     if (!toid)
         {
             mobile->Message(MSG_ERROR, "Invalid rnum given.");
             return false;
         }
 
-    room = omanager->GetRoom(toid);
+    World* world = World::GetPtr();
+    ObjectManager* omanager = world->GetObjectManager();
+    Room* room = omanager->GetRoom(toid);
     if (!room)
         {
             mobile->Message(MSG_ERROR, "That rnum does not exist.");
@@ -635,9 +627,9 @@ bool CMDGoto::Execute(const std::string &verb, Player* mobile,std::vector<std::s
 
     mobile->MoveTo(room);
     mobile->Message(MSG_INFO, room->DoLook(mobile));
-
     return true;
 }
+
 
 CMDZcreate::CMDZcreate()
 {
@@ -645,25 +637,18 @@ CMDZcreate::CMDZcreate()
     SetAccess(RANK_BUILDER);
     SetType(CommandType::Builder);
 }
+
 bool CMDZcreate::Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args,int subcmd)
 {
-    World* world = World::GetPtr();
-    std::stringstream st;
-    Room* room = nullptr;
-    int  min=0;
-    int max = 0;
-    Zone* newZone = nullptr;
-    std::vector<Zone*> zones;
-
     if (args.size() != 3)
         {
             mobile->Message(MSG_ERROR,"Syntax: zcreate <name of zone> <min> <max> creates a new zone with the name and rooms available in the range from min to max\n");
             return false;
         }
 
-    min  = atoi(args[1].c_str());
-    max   = atoi(args[2].c_str());
-
+    World* world = World::GetPtr();
+    int min  = atoi(args[1].c_str());
+    int max   = atoi(args[2].c_str());
     if (!max || !min || min > max || min <= 0)
         {
             mobile->Message(MSG_ERROR,"Invalid num range. Syntax: zcreate <name of zone> <min> <max> creates a new zone with the name and rooms available in the range from min to max\n");
@@ -675,6 +660,7 @@ bool CMDZcreate::Execute(const std::string &verb, Player* mobile,std::vector<std
             return false;
         }
 
+    std::vector<Zone*> zones;
     world->GetZones(&zones);
     for (auto it: zones)
         {
@@ -685,17 +671,19 @@ bool CMDZcreate::Execute(const std::string &verb, Player* mobile,std::vector<std
                 }
         }
 
-    newZone = new Zone();
+    Zone* newZone = new Zone();
     newZone->SetName(args[0]);
     newZone->SetRange(min, max);
-    room = newZone->AddRoom();
+    Room* room = newZone->AddRoom();
     room->SetName("An empty room");
     world->AddZone(newZone);
+
+    std::stringstream st;
     st << "Created zone with name " <<  newZone->GetName() << " with one empty room."  << "\n";
     mobile->Message(MSG_INFO, st.str());
-
     return true;
 }
+
 
 CMDRcreate::CMDRcreate()
 {
@@ -703,27 +691,24 @@ CMDRcreate::CMDRcreate()
     SetName("rcreate");
     SetType(CommandType::Builder);
 }
+
 bool CMDRcreate::Execute(const std::string &verb, Player* mobile, std::vector<std::string> &args, int subcmd)
 {
-    Zone* zone = nullptr;
-    ObjectContainer* location = nullptr;
-    Room* room = nullptr;
-    std::stringstream st;
-
-    location = mobile->GetLocation();
+    ObjectContainer* location = mobile->GetLocation();
     if (!location || !location->IsRoom())
         {
             mobile->Message(MSG_ERROR, "You are not in a room.");
             return false;
         }
 
-    zone = location->GetZone();
+    Zone* zone = location->GetZone();
     if (!zone)
         {
             mobile->Message(MSG_ERROR, "The room you are in does not have a zone.");
             return false;
         }
 
+    Room* room = nullptr;
     try
         {
             room = zone->AddRoom();
@@ -734,6 +719,7 @@ bool CMDRcreate::Execute(const std::string &verb, Player* mobile, std::vector<st
             return false;
         }
 
+    std::stringstream st;
     st << "Created Room " << room->GetOnum() << ".";
     mobile->Message(MSG_INFO, st.str());
     return true;
