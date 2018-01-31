@@ -37,7 +37,6 @@ class Entity;
 class Socket;
 class Player;
 class Component;
-class Variant;
 class BaseObject;
 class StaticObject;
 class Zone;
