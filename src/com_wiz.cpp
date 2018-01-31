@@ -79,7 +79,7 @@ bool CMDMkwiz::Execute(const std::string &verb, Player* mobile,std::vector<std::
             return false;
         }
 
-    target->SetRank(BitSet(mobile->GetRank(), RANK_PLAYTESTER|RANK_NEWBIEHELPER|RANK_BUILDER|RANK_ADMIN|RANK_GOD));
+    target->SetRank(BitSet(mobile->GetRank(), RANK_BUILDER|RANK_ADMIN|RANK_GOD));
     target->Message(MSG_INFO,"You suddenly feel more wizardly.");
     mobile->Message(MSG_INFO, Capitalize(target->GetName())+" has been made a wizard.");
     return true;

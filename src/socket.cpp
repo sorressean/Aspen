@@ -829,7 +829,7 @@ void Socket::InitializeNewPlayer()
 //passwords matched, see if the player is the first user. If so, make it a god.
     if (IsFirstUser())
         {
-            mob->SetRank(RANK_PLAYER|RANK_PLAYTESTER|RANK_NEWBIEHELPER|RANK_BUILDER|RANK_ADMIN|RANK_GOD);
+            mob->SetRank(RANK_PLAYER|RANK_BUILDER|RANK_ADMIN|RANK_GOD);
             Write("You are the first player to create, rank set to God.\n");
         }
 

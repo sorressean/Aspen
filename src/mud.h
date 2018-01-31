@@ -38,27 +38,18 @@ struct OLC_DATA;
 
 //player rankings:
 #define RANK_PLAYER 1<<1
-#define RANK_PLAYTESTER 1<<2
-#define RANK_NEWBIEHELPER 1<<3
-#define RANK_NEWBIE 1<<4
-#define RANK_BUILDER 1<<5
+#define RANK_NEWBIE 1<<2
+#define RANK_BUILDER 1<<3
 #define RANK_ADMIN 1<<29
 #define RANK_GOD 1<<30
 
 //player flags
 #define PF_SILENCE 1<<1 //player can't broadcast
-#define FKILLER 1<<2 //player is PK
-#define PF_FROZEN 1<<3 //player can't do anything.
-#define PF_NOTITLE 1<<4 //player can't set a title
+#define PF_FROZEN 1<<2 //player can't do anything.
+#define PF_NOTITLE 1<<3 //player can't set a title
 //room flags
 #define RF_NOSAY 1<<1
-#define RF_DARK 1<<2
-#define RF_DEATH 1<<3
-#define RF_NOMOB 1<<4
-#define RF_INDOORS 1<<5
-#define RF_PEACE 1<<6
-#define RF_PRIVATE 1<<7
-#define RF_HOUSE 1<<8
+#define RF_NOMOB 1<<2
 //NPC flags
 #define MF_STATIC 1<<1 //mob does not move
 #define MF_SCAVENGER 1<<2 //mob picks up eq on the ground.
