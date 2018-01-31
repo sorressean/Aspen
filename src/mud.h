@@ -32,14 +32,13 @@ struct range
 * @todo remove these or as many as possible, put forward declarations in the files that require them.
 */
 //forward declarations
-//I wanted to avoid these, but it seems I have no choice
+class Entity;
 class Socket;
 class Player;
 class Component;
 class BaseObject;
 class StaticObject;
 class Zone;
-class Room;
 
 //olc forward declarations
 struct OLC_DATA;
