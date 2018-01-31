@@ -42,7 +42,7 @@ public:
     ~Server ();
     /**
     *Establishes a listening point
-    *param [in] The port to open as a listening poDWORD.
+    *param [in] The port to open as a listening point.
     *Returns True on success, false on failure.
     */
     bool                 Listen          (const int port );
@@ -63,7 +63,7 @@ public:
     /**
     *sleeps for the remainder of the pulses that haven't been used up.
     */
-    int Sleep            ( DWORD pps );
+    int Sleep            ( int pps );
     /**
     *returns A list of pointers to the currently connected sockets.
     */

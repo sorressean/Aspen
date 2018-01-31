@@ -80,12 +80,12 @@ public:
     void SetRank(const FLAG s);
     FLAG GetPflag() const;
     void SetPflag(FLAG flag);
-    UINT GetOnlineTime() const;
-    void SetOnlineTime(UINT s);
-    UINT GetFirstLogin() const;
-    void SetFirstLogin(UINT first);
-    UINT GetLastLogin() const;
-    void SetLastLogin(UINT last);
+    unsigned int GetOnlineTime() const;
+    void SetOnlineTime(unsigned int s);
+    unsigned int GetFirstLogin() const;
+    void SetFirstLogin(unsigned int first);
+    unsigned int GetLastLogin() const;
+    void SetLastLogin(unsigned int last);
     std::string GetPrompt() const;
     void SetPrompt(const std::string &prompt);
     /*

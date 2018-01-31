@@ -718,7 +718,7 @@ bool Socket::HandlePasswordInput()
             return true;
         }
 
-    mobile->SetLastLogin((UINT)time(NULL));
+    mobile->SetLastLogin((unsigned int)time(NULL));
     mobile->EnterGame(false);
     return true;
 }
@@ -833,7 +833,7 @@ void Socket::InitializeNewPlayer()
             Write("You are the first player to create, rank set to God.\n");
         }
 
-    mob->SetFirstLogin((UINT)time(NULL));
+    mob->SetFirstLogin((unsigned int)time(NULL));
 //Set the connection type to game and enter the player.
     SetConnectionType(CON_Game);
     mob->SetSocket(this);

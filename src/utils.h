@@ -25,14 +25,14 @@ bool DirectoryExists(const std::string& path);
 *Param: [in] the fd of the file.
 *Return: the size of the file in bytes.
 */
-UINT GetFileSize(int fd);
+unsigned int GetFileSize(int fd);
 /*
 *Retrieves the size of the specified file.
 *Param: [in] the name of the file.
 *return: the size of the file.
 */
-UINT GetFileSize(const char* path);
-UINT GetFileSize(const std::string &path);
+unsigned int GetFileSize(const char* path);
+unsigned int GetFileSize(const std::string &path);
 /*
 *Tokenizes the string into chunks based on the delimiter.
 *Param: [in] the string to tokenize.
@@ -154,7 +154,7 @@ class TimeInfo
     void Initialize();
 public:
     TimeInfo(time_t data);
-    TimeInfo(UINT data);
+    TimeInfo(unsigned int data);
     TimeInfo();
     void Calculate(time_t data);
     std::string ToString();

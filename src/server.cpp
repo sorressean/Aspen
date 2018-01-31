@@ -87,7 +87,7 @@ bool Server::Listen(const int port)
             return false;
         }
     // set options for this control socket
-    if (setsockopt(control, SOL_SOCKET, SO_REUSEADDR, (const char *)&reuse, sizeof(DWORD)) == -1)
+    if (setsockopt(control, SOL_SOCKET, SO_REUSEADDR, (const char *)&reuse, sizeof(int)) == -1)
         {
             world->WriteLog("Setting socket options failed.");
             close(control);
@@ -207,7 +207,7 @@ void Server::FlushSockets()
 // like 4, 5, 8 or 10. This is the amount of "commands" that will
 // be processed each second, and it is recommended to have a
 // constant defined for this purpose.
-int Server::Sleep(DWORD pps)
+int Server::Sleep(int pps)
 {
     World* world = World::GetPtr();
     struct timeval newTime;
@@ -255,7 +255,7 @@ void Server::Accept()
 {
     Socket *pSocket = NULL;
     sockaddr_in addr;
-    DWORD len = sizeof(addr);
+    unsigned int len = sizeof(addr);
     int desc=0;
     int argp = 1;
 

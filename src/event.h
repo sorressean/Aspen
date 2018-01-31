@@ -45,7 +45,7 @@ typedef std::function<void (EventArgs*, void*)> EVENTFUNC;
 struct EventContainer
 {
     EVENTFUNC cb;
-    UINT id;
+    unsigned int id;
 };
 
 /**
@@ -84,7 +84,7 @@ public:
     *
     * @param [in] id the ID of the callback.
     */
-    virtual bool operator -=(UINT id);
+    virtual bool operator -=(unsigned int id);
 
     /**
     * Adds a callback to the event list.
@@ -92,20 +92,20 @@ public:
     * @param [in] cb the callback to add.
     * @return the new ID of the callback.
     */
-    virtual UINT Add(const EVENTFUNC cb);
+    virtual unsigned int Add(const EVENTFUNC cb);
     /**
     * Removes a callback from the list by ID.
     *
     * @param [in] id the ID of the callback.
     * @return true if the callback can be removed, false otherwise.
     */
-    virtual bool Remove(UINT id);
+    virtual bool Remove(unsigned int id);
 
 #ifdef MODULE_SCRIPTING
     /**
     * @todo figure out what this is supposed to do.
     */
-    virtual UINT AddScriptCallback(Entity* obj, int func);
+    virtual unsigned int AddScriptCallback(Entity* obj, int func);
 #endif
     /**
     * Trigger all events in the callback list, passing args.

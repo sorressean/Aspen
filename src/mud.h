@@ -14,12 +14,6 @@
 //typedefs:
 typedef int FLAG; //bitfield flags
 typedef int VNUM;
-/**
-* @todo clean some of these up.
-*/
-typedef unsigned int UINT;
-typedef unsigned int DWORD;
-typedef unsigned long long int OBJID;
 
 struct range
 {

@@ -65,7 +65,7 @@ bool Listener::Listen(int port)
             return false;
         }
 
-    if (setsockopt(_control, SOL_SOCKET, SO_REUSEADDR, (const char *)&unused, sizeof(DWORD)) == -1)
+    if (setsockopt(_control, SOL_SOCKET, SO_REUSEADDR, (const char *)&unused, sizeof(int)) == -1)
         {
             close(_control);
             return false;

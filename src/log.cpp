@@ -73,7 +73,7 @@ void Log::Write(const std::string &data,LOG_LEVEL l)
 }
 void Log::CheckSize()
 {
-    UINT size = GetFileSize(fileno(_out));
+    unsigned int size = GetFileSize(fileno(_out));
     if (size >= LOG_MAXSIZE)
         {
             CycleFiles();

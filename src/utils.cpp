@@ -75,7 +75,7 @@ bool DirectoryExists(const std::string& path)
     return false;
 }
 
-UINT GetFileSize(int fd)
+unsigned int GetFileSize(int fd)
 {
     struct stat info;
     int res=fstat(fd, &info);
@@ -88,7 +88,7 @@ UINT GetFileSize(int fd)
             return info.st_size;
         }
 }
-UINT GetFileSize(const char* path)
+unsigned int GetFileSize(const char* path)
 {
     struct stat info;
     int res = stat(path, &info);
@@ -101,7 +101,7 @@ UINT GetFileSize(const char* path)
             return info.st_size;
         }
 }
-UINT GetFileSize(const std::string &path)
+unsigned int GetFileSize(const std::string &path)
 {
     return GetFileSize(path.c_str());
 }
@@ -680,7 +680,7 @@ TimeInfo::TimeInfo(time_t data)
     Initialize();
     Calculate(data);
 }
-TimeInfo::TimeInfo(UINT data)
+TimeInfo::TimeInfo(unsigned int data)
 {
     Initialize();
     Calculate((time_t)data);
@@ -692,7 +692,7 @@ TimeInfo::TimeInfo()
 
 void TimeInfo::Calculate(time_t data)
 {
-    UINT count=data;
+    unsigned int count=data;
     hour=count/3600;
     count%=3600;
     minute=count/60;

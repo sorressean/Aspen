@@ -341,29 +341,29 @@ void Player::SetPflag(FLAG flag)
 {
     _pflag = flag;
 }
-UINT Player::GetOnlineTime() const
+unsigned int Player::GetOnlineTime() const
 {
-    return (UINT)_onlineTime;
+    return (unsigned int)_onlineTime;
 }
-void Player::SetOnlineTime(UINT s)
+void Player::SetOnlineTime(unsigned int s)
 {
     _onlineTime=(time_t)s;
 }
 
-UINT Player::GetFirstLogin() const
+unsigned int Player::GetFirstLogin() const
 {
-    return (UINT)_firstLogin;
+    return (unsigned int)_firstLogin;
 }
-void Player::SetFirstLogin(UINT first)
+void Player::SetFirstLogin(unsigned int first)
 {
     _firstLogin=(time_t)first;
 }
 
-UINT Player::GetLastLogin() const
+unsigned int Player::GetLastLogin() const
 {
     return (time_t) _lastLogin;
 }
-void Player::SetLastLogin(UINT last)
+void Player::SetLastLogin(unsigned int last)
 {
     _lastLogin=(time_t)last;
 }

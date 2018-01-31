@@ -21,7 +21,7 @@ bool Event::operator +=(const EVENTFUNC cb)
     Add(cb);
     return true;
 }
-UINT Event::Add(const EVENTFUNC cb)
+unsigned int Event::Add(const EVENTFUNC cb)
 {
     EventContainer* c = new EventContainer();
 
@@ -32,12 +32,12 @@ UINT Event::Add(const EVENTFUNC cb)
     return c->id;
 }
 
-bool Event::operator -=(UINT id)
+bool Event::operator -=(unsigned int id)
 {
     Remove(id);
     return true;
 }
-bool Event::Remove(UINT id)
+bool Event::Remove(unsigned int id)
 {
     std::vector<EventContainer*>::iterator it, itEnd;
 
@@ -55,7 +55,7 @@ bool Event::Remove(UINT id)
 }
 
 #ifdef MODULE_SCRIPTING
-UINT Event::AddScriptCallback(Entity* obj, int func)
+unsigned int Event::AddScriptCallback(Entity* obj, int func)
 {
     /** @todo fix this for scripting. */
     return 0;
