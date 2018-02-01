@@ -11,6 +11,7 @@ Living::Living()
 
     _position = POSITION_STANDING;
     _gender = Gender::Neuter;
+    _following = nullptr;
 }
 
 void Living::EnterGame()
