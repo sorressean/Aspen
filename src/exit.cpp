@@ -6,6 +6,7 @@
 Exit::Exit(VNUM to):
     _to(to)
 {
+    _direction = nowhere;
 }
 Exit::Exit():
     _to(EXIT_NOWHERE)
