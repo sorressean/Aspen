@@ -104,15 +104,15 @@ void Property::RemoveSelf()
         return;
 
     _parent->RemoveProperty(this);
-    _parent = NULL;
+    _parent = nullptr;
 }
 void Property::RemoveProperty(const std::string &name)
 {
     Property *prop = FindProperty(name);
     if (! prop)
-        {
-            return;
-        }
+{
+        return;
+}
 
     for (auto it :prop->_children)
         {
@@ -122,18 +122,18 @@ void Property::RemoveProperty(const std::string &name)
 void Property::RemoveProperty(Property* prop)
 {
     if (! prop)
-        {
-            return;
-        }
+{
+        return;
+}
 
     // first we have to remove all of its children first
-    for (auto it:prop->_children)
-        {
+for (auto it:prop->_children)
+{
             Property *tmp = it;
             prop->RemoveProperty(tmp);
-            delete tmp;
+delete tmp;
         }
-    delete prop;
+            delete prop;
 }
 
 Property* Property::FindProperty(const std::string &name)
