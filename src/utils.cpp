@@ -256,7 +256,7 @@ bool IsFirstUser()
     int count = 0;
     std::string path=(PLAYER_DIR);
     DIR* search=opendir(path.c_str());
-    struct dirent* dir = NULL;
+    dirent* dir = nullptr;
 
     if (!search)
         {
@@ -281,6 +281,7 @@ bool IsFirstUser()
                 }
         }
 
+closedir(search);
     return (count==1?false:true);
 }
 
