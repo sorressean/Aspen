@@ -1,37 +1,172 @@
 find_package(ZLIB REQUIRED)
 find_package(OpenSSL REQUIRED)
-find_package(Boost COMPONENTS system filesystem REQUIRED)
+find_package(Boost REQUIRED COMPONENTS filesystem )
 
-add_executable(aspen
-world.cpp variant.cpp baseObject.cpp entity.cpp player.cpp
-socket.cpp utils.cpp log.cpp server.cpp main.cpp
-exception.cpp command.cpp com_gen.cpp com_wiz.cpp event.cpp
-delayedEvent.cpp eventManager.cpp staticObject.cpp living.cpp channel.cpp
-modules.cpp component.cpp npc.cpp editor.cpp exit.cpp
-room.cpp zone.cpp com_builder.cpp com_movement.cpp ComponentFactory.cpp
-alias.cpp olc.cpp socials.cpp olcs.cpp callout.cpp
-option.cpp baseSocket.cpp banList.cpp listener.cpp inputHandlers.cpp
-property.cpp uuid.cpp olcGroup.cpp olcManager.cpp playerManager.cpp
-match.cpp calloutManager.cpp optionManager.cpp objectContainer.cpp telnetParser.cpp
-optionMeta.cpp bitfield.cpp attribute.cpp affect.cpp objectManager.cpp
-page.cpp
-serializationHelpers.cpp
-configuration.cpp
-extensions/extensions.cpp
-extensions/utils.cpp
-modules/modules.cpp
-modules/board/board.cpp
-modules/board/boardManager.cpp
-modules/board/boardModule.cpp
-modules/board/boardPost.cpp
-syslog/syslog.cpp
-scripts/scr_BaseObject.cpp
-scripts/scr_Entity.cpp
-scripts/scr_Exit.cpp
-scripts/scr_ObjectContainer.cpp
-scripts/scr_Room.cpp
-scripts/script.cpp
+SET(SOURCE
+  ComponentFactory.cpp
+  affect.cpp
+  alias.cpp
+  attribute.cpp
+  banList.cpp
+  baseObject.cpp
+  baseSocket.cpp
+  bitfield.cpp
+  callout.cpp
+  calloutManager.cpp
+  channel.cpp
+  com_builder.cpp
+  com_gen.cpp
+  com_movement.cpp
+  com_wiz.cpp
+  command.cpp
+  component.cpp
+  configuration.cpp
+  delayedEvent.cpp
+  editor.cpp
+  entity.cpp
+  event.cpp
+  eventManager.cpp
+  exception.cpp
+  exit.cpp
+  inputHandlers.cpp
+  listener.cpp
+  living.cpp
+  log.cpp
+  main.cpp
+  match.cpp
+  modules.cpp
+  npc.cpp
+  objectContainer.cpp
+  objectManager.cpp
+  olc.cpp
+  olcGroup.cpp
+  olcManager.cpp
+  olcs.cpp
+  option.cpp
+  optionManager.cpp
+  optionMeta.cpp
+  page.cpp
+  player.cpp
+  playerManager.cpp
+  property.cpp
+  room.cpp
+  serializationHelpers.cpp
+  server.cpp
+  socials.cpp
+  socket.cpp
+  staticObject.cpp
+  syslog/syslog.cpp
+  telnetParser.cpp
+  utils.cpp
+  uuid.cpp
+  variant.cpp
+  world.cpp
+  zone.cpp
+  extensions/extensions.cpp
+  extensions/utils.cpp
+  modules/board/board.cpp
+  modules/board/boardManager.cpp
+  modules/board/boardModule.cpp
+  modules/board/boardPost.cpp
+  modules/modules.cpp
+  scripts/scr_BaseObject.cpp
+  scripts/scr_Entity.cpp
+  scripts/scr_Exit.cpp
+  scripts/scr_ObjectContainer.cpp
+  scripts/scr_Room.cpp
+  scripts/script.cpp
 )
+set(HEADERS
+  affect.h
+  alias.h
+  attribute.h
+  banList.h
+  baseObject.h
+  baseSocket.h
+  bitfield.h
+  callout.h
+  calloutManager.h
+  channel.h
+  com_builder.h
+  com_gen.h
+  com_movement.h
+  com_wiz.h
+  command.h
+  component.h
+  ComponentFactory.h
+  componentMeta.hpp
+  conf.h
+  configuration.h
+  delayedEvent.h
+  editor.h
+  entity.h
+  event.h
+  eventManager.h
+  eventargs.h
+  exception.h
+  exit.h
+  inputHandlers.h
+  listener.h
+  living.h
+  log.h
+  match.h
+  mccp.h
+  modules.h
+  msdp.h
+  mud.h
+  npc.h
+  objectContainer.h
+  objectManager.h
+  olc.h
+  olcGroup.h
+  olcManager.h
+  olcs.h
+  option.h
+  optionManager.h
+  optionMeta.h
+  page.h
+  player.h
+  playerManager.h
+  property.h
+  room.h
+  serializationHelpers.h
+  serializationHelpers.hpp
+  serializer.h
+  server.h
+  socials.h
+  socket.h
+  staticObject.h
+  syslog/syslog.h
+  tableManager.hpp
+  telnet.h
+  telnetParser.h
+  telnetParserEvents.hpp
+  utils.h
+  uuid.h
+  variant.h
+  world.h
+  zone.h
+  extensions/conf.h
+  extensions/extensions.h
+  extensions/utils.h
+  modules/board/board.h
+  modules/board/boardManager.h
+  modules/board/boardModule.h
+  modules/board/boardPost.h
+  modules/modules.h
+  scripts/helper.h
+  scripts/helper.hpp
+  scripts/scr_BaseObject.h
+  scripts/scr_Entity.h
+  scripts/scr_Exit.h
+  scripts/scr_ObjectContainer.h
+  scripts/scr_Room.h
+  scripts/script.h
+)
+
+source_group("headers" FILES ${HEADERS})
+add_executable(aspen
+${SOURCE})
 
 link_directories(${Boost_LIBRARY_DIR})
 target_link_libraries (aspen LINK_PUBLIC
@@ -40,10 +175,9 @@ tinyxml
 ${ZLIB_LIBRARIES}
 ${OPENSSL_SSL_LIBRARY}
 ${OPENSSL_CRYPTO_LIBRARY}
-${Boost_LIBRARIES}
+Boost::filesystem
 )
 
     include_directories( ${ZLIB_INCLUDE_DIRS} 
 ${OpenSSL_INCLUDE_DIRS}
-${Boost_INCLUDE_DIRS} 
 )
