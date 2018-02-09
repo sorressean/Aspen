@@ -11,6 +11,7 @@
 Property::Property(const std::string &name, const Variant& value, Property* parent):
     _name(name), _value(value), _parent(parent)
 {
+    _owner = nullptr;
 }
 Property::Property():
     _name("root"), _parent(NULL)
@@ -104,37 +105,36 @@ void Property::RemoveSelf()
         return;
 
     _parent->RemoveProperty(this);
-    _parent = NULL;
+    _parent = nullptr;
 }
 void Property::RemoveProperty(const std::string &name)
 {
     Property *prop = FindProperty(name);
     if (! prop)
-        return;
-    std::vector<Property*>::iterator it, itEnd;
-
-    itEnd = prop->_children.end();
-    for (it = prop->_children.begin(); it != itEnd; ++it)
         {
-            RemoveProperty(*it);
+            return;
+        }
+
+    for (auto it :prop->_children)
+        {
+            RemoveProperty(it);
         }
 }
 void Property::RemoveProperty(Property* prop)
 {
     if (! prop)
-        return;
+        {
+            return;
+        }
 
     // first we have to remove all of its children first
-    std::vector<Property*>::iterator it, itEnd;
-
-    itEnd = prop->_children.end();
-    for (it = prop->_children.end(); it != itEnd; ++it)
+    for (auto it:prop->_children)
         {
-            Property *tmp = *it;
+            Property *tmp = it;
             prop->RemoveProperty(tmp);
-            it = _children.erase(it);
-            delete prop;
+            delete tmp;
         }
+    delete prop;
 }
 
 Property* Property::FindProperty(const std::string &name)
