@@ -164,9 +164,9 @@ set(HEADERS
   scripts/script.h
 )
 
-source_group("headers" FILES ${HEADERS})
 add_executable(aspen
-${SOURCE})
+${SOURCE} ${HEADERS})
+source_group("headers" FILES ${HEADERS})
 
 link_directories(${Boost_LIBRARY_DIR})
 target_link_libraries (aspen LINK_PUBLIC

@@ -11,7 +11,6 @@
 #pragma once
 #ifndef EVENT_H
 #define EVENT_H
-#include <sys/time.h>
 #include <vector>
 #include <map>
 #include <string>
