@@ -62,13 +62,19 @@ SET(SOURCE
   variant.cpp
   world.cpp
   zone.cpp
+)
+set(EXTENSION_SOURCE
   extensions/extensions.cpp
   extensions/utils.cpp
+)
+set(MODULE_SOURCE
   modules/board/board.cpp
   modules/board/boardManager.cpp
   modules/board/boardModule.cpp
   modules/board/boardPost.cpp
   modules/modules.cpp
+)
+set(SCRIPT_SOURCE
   scripts/scr_BaseObject.cpp
   scripts/scr_Entity.cpp
   scripts/scr_Exit.cpp
@@ -76,6 +82,7 @@ SET(SOURCE
   scripts/scr_Room.cpp
   scripts/script.cpp
 )
+
 set(HEADERS
   affect.h
   alias.h
@@ -146,14 +153,20 @@ set(HEADERS
   variant.h
   world.h
   zone.h
+)
+set(EXTENSION_HEADERS
   extensions/conf.h
   extensions/extensions.h
   extensions/utils.h
+)
+set(MODULE_HEADERS
   modules/board/board.h
   modules/board/boardManager.h
   modules/board/boardModule.h
   modules/board/boardPost.h
   modules/modules.h
+)
+set(SCRIPT_HEADERS
   scripts/helper.h
   scripts/helper.hpp
   scripts/scr_BaseObject.h
@@ -165,7 +178,11 @@ set(HEADERS
 )
 
 add_executable(aspen
-${SOURCE} ${HEADERS})
+${SOURCE} ${HEADERS}
+${EXTENSION_SOURCE} ${EXTENSION_HEADERS}
+${MODULE_SOURCE} ${MODULE_HEADERS}
+${SCRIPT_SOURCE} ${SCRIPT_HEADERS}
+)
 source_group("headers" FILES ${HEADERS})
 
 link_directories(${Boost_LIBRARY_DIR})
