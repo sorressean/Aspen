@@ -1,4 +1,9 @@
 #angelscript CMakefile
+cmake_minimum_required (VERSION 2.6)
+project (Angelscript)
+set(CMAKE_CXX_FLAGS "-O2")
+set(CMAKE_C_FLAGS "-O2")
+
 add_library(angelscript
 as_atomic.cpp as_builder.cpp as_bytecode.cpp as_callfunc.cpp as_callfunc_x86.cpp
 as_callfunc_x64_gcc.cpp as_compiler.cpp as_configgroup.cpp as_context.cpp as_datatype.cpp
@@ -9,5 +14,3 @@ as_string_util.cpp as_thread.cpp as_tokenizer.cpp as_typeinfo.cpp as_variablesco
 scriptstdstring.cpp scriptstdstring_utils.cpp scriptarray.cpp contextmgr.cpp
 scripthelper.cpp scriptdictionary.cpp scriptmath.cpp scriptgrid.cpp
 )
-
-
