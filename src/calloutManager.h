@@ -6,16 +6,18 @@
 #pragma once
 #include <queue>
 #include <deque>
+#include <memory>
+
 #include "mud.h"
 #include "conf.h"
 #include "callout.h"
 
 /**
-* Used to compare for the priority queue.
+* Functor used for comparison for the priority queue.
 */
 struct _cm_comp
 {
-    bool operator ()(Callout* a, Callout* b)
+    bool operator ()(const CalloutPTR&a, const CalloutPTR& b)
     {
         return (a->GetTime() > b->GetTime() ? true : false);
     }
@@ -28,7 +30,7 @@ class CalloutManager
 {
     unsigned int _curid;
     static CalloutManager* _instance;
-    std::priority_queue<Callout*, std::vector<Callout*>, _cm_comp> _callouts;
+    std::priority_queue<CalloutPTR, std::vector<CalloutPTR>, _cm_comp> _callouts;
 #ifdef PROFILE_CALLOUTS
     unsigned long long int _fired;
     unsigned long long int _delta;
@@ -36,7 +38,7 @@ class CalloutManager
     unsigned long long int _deltaMax;
 #endif
     CalloutManager();
-    virtual ~CalloutManager();
+    ~CalloutManager() = default;
 public:
     /**
     * Initializes the callout manager.

@@ -7,16 +7,19 @@
 */
 #pragma once
 #include <sys/time.h>
+
 #include <functional>
+#include <memory>
+
 #include "mud.h"
 #include "conf.h"
 
 class Callout;
 
-/**
-* Callout callback.
-*/
+//Callout callback.
 typedef std::function<void (Callout*)> CALLOUT_CB;
+//Callout smart pointer
+typedef std::shared_ptr<Callout> CalloutPTR;
 
 /**
 * Callouts are timed events.

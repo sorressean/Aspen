@@ -20,17 +20,6 @@ CalloutManager::CalloutManager():_curid(1)
     _deltaMax = 0;
 #endif
 }
-CalloutManager::~CalloutManager()
-{
-    Callout* cur = NULL;
-
-    while (!_callouts.empty())
-        {
-            cur = _callouts.top();
-            _callouts.pop();
-            delete cur;
-        }
-}
 
 void CalloutManager::Initialize()
 {
@@ -57,14 +46,12 @@ CalloutManager* CalloutManager::GetInstance()
 
 void CalloutManager::Update()
 {
-    Callout* cur = NULL;
-
     if (_callouts.empty())
         {
             return;
         }
 
-    cur = _callouts.top();
+    auto cur = _callouts.top();
     if (cur->CanFire())
         {
 #ifdef PROFILE_CALLOUTS
@@ -78,7 +65,7 @@ void CalloutManager::Update()
             _callouts.pop();
             if (cur->IsOneShot())
                 {
-                    delete cur;
+                    cur.reset();
                 }
             else
                 {
@@ -90,14 +77,12 @@ void CalloutManager::Update()
 
 unsigned int CalloutManager::RegisterCallout(int sec, int msec, const CALLOUT_CB cb, bool oneShot)
 {
-    Callout* call = nullptr;
-
     if (sec <= 0 && msec <= 0)
         {
             return 0;
         }
 
-    call = new Callout(sec, msec, cb, oneShot);
+    auto call = std::make_shared<Callout>(sec, msec, cb, oneShot);
     call->SetId(_curid);
     _curid++;
     _callouts.push(call);
