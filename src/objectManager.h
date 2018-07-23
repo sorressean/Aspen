@@ -1,6 +1,5 @@
 #pragma once
 #include "mud.h"
-#include "conf.h"
 #include "baseObject.h"
 #include "staticObject.h"
 #include "entity.h"
@@ -18,8 +17,8 @@ class ObjectManager
     std::unordered_map<VNUM, StaticObject*> _objects;
     std::unordered_map<VNUM, Npc*> _npcs;
 public:
-    ObjectManager();
-    ~ObjectManager();
+    ObjectManager() = default;
+    ~ObjectManager() = default;
 
     /**
     Updates the objects that require individually updating.

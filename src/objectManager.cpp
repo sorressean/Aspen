@@ -1,5 +1,4 @@
 #include "mud.h"
-#include "conf.h"
 #include "objectManager.h"
 #include "baseObject.h"
 #include "staticObject.h"
@@ -7,13 +6,6 @@
 #include "npc.h"
 #include "room.h"
 #include "world.h"
-
-ObjectManager::ObjectManager()
-{
-}
-ObjectManager::~ObjectManager()
-{
-}
 
 void ObjectManager::Update()
 {
@@ -24,14 +16,14 @@ void ObjectManager::Update()
 }
 Entity* ObjectManager::CreateObject(VNUM obj)
 {
-    Entity* object = NULL;
-    StaticObject* virt = NULL;
+    Entity* object = nullptr;
+    StaticObject* virt = nullptr;
     World* world = World::GetPtr();
 
     if (obj != 0 && !VirtualExists(obj))
         {
             world->WriteLog("Tried to create virtual with nonexistant vnum", ERR);
-            return NULL;
+            return nullptr;
         }
 
     virt = _objects[obj];
@@ -41,8 +33,8 @@ Entity* ObjectManager::CreateObject(VNUM obj)
 bool ObjectManager::RecycleObject(ObjectContainer* obj)
 {
     World* world = World::GetPtr();
-    ObjectContainer* location = NULL;
-    StaticObject* vobj = NULL;
+    ObjectContainer* location = nullptr;
+    StaticObject* vobj = nullptr;
 
     if(!obj)
         {
@@ -50,14 +42,12 @@ bool ObjectManager::RecycleObject(ObjectContainer* obj)
         }
 
 //we recursively recycle everything in contents.
-    std::list<Entity*>::iterator it, itEnd;
     std::list<Entity*>* contents = obj->GetContents();
 
 //recursively delete objects held by the object being deleted.
-    itEnd = contents->end();
-    for (it = contents->begin(); it != itEnd; ++it)
+    for (auto it :*contents)
         {
-            RecycleObject((*it));
+            RecycleObject(it);
         }
 
 //check to see if this object is stored in another. If so, we need to remove it.
@@ -81,20 +71,19 @@ bool ObjectManager::RecycleObject(ObjectContainer* obj)
                 }
         }
 
-    world->events.CallEvent("ObjectDestroyed", NULL, (void*)obj);
+    world->events.CallEvent("ObjectDestroyed", nullptr, (void*)obj);
     delete obj;
     return true;
 }
 
 bool ObjectManager::AddVirtual(StaticObject* obj)
 {
-    VNUM num = 0;
     if (!obj)
         {
             return false;
         }
 
-    num = obj->GetOnum();
+    VNUM num = obj->GetOnum();
     if (VirtualExists(num))
         {
             return false;
@@ -111,7 +100,7 @@ StaticObject* ObjectManager::GetVirtual(VNUM num)
 {
     if (!VirtualExists(num))
         {
-            return NULL;
+            return nullptr;
         }
 
     return _objects[num];
@@ -130,13 +119,12 @@ bool ObjectManager::RemoveVirtual(VNUM num)
 }
 VNUM ObjectManager::GetFreeVirtualVnum(VNUM min, VNUM max, VNUM num)
 {
-    int i = min;
     if (num != 0)
         {
             return (!VirtualExists(num) ? num : 0);
         }
 
-    for (; i <= max; ++i)
+    for (int i = min; i <= max; ++i)
         {
             if (!VirtualExists(i))
                 {
@@ -149,13 +137,12 @@ VNUM ObjectManager::GetFreeVirtualVnum(VNUM min, VNUM max, VNUM num)
 
 bool ObjectManager::AddRoom(Room* room)
 {
-    VNUM num = 0;
     if (!room)
         {
             return false;
         }
 
-    num = room->GetOnum();
+    VNUM num = room->GetOnum();
     if (RoomExists(num))
         {
             return false;
@@ -166,7 +153,7 @@ bool ObjectManager::AddRoom(Room* room)
 }
 bool ObjectManager::RemoveRoom(VNUM num)
 {
-    Room* room = NULL;
+    Room* room = nullptr;
 
     room = GetRoom(num);
     if (!room)
@@ -174,7 +161,7 @@ bool ObjectManager::RemoveRoom(VNUM num)
             return false;
         }
 
-    _rooms.erase(room->GetOnum());
+    _rooms.erase(num);
     return true;
 }
 bool ObjectManager::RoomExists(VNUM num)
@@ -185,20 +172,19 @@ Room* ObjectManager::GetRoom(VNUM num)
 {
     if (!RoomExists(num))
         {
-            return NULL;
+            return nullptr;
         }
 
     return _rooms[num];
 }
 VNUM ObjectManager::GetFreeRoomVnum(VNUM min, VNUM max, VNUM num)
 {
-    int i = min;
     if (num)
         {
-            return (RoomExists(num) ? num : 0);
+            return (RoomExists(num) ? 0 : num);
         }
 
-    for (; i <= max; ++i)
+    for (int i = min; i <= max; ++i)
         {
             if (!RoomExists(i))
                 {
@@ -211,14 +197,12 @@ VNUM ObjectManager::GetFreeRoomVnum(VNUM min, VNUM max, VNUM num)
 
 bool ObjectManager::AddNpc(Npc* mob)
 {
-    VNUM num = 0;
-
     if (!mob)
         {
             return false;
         }
 
-    num = mob->GetOnum();
+    VNUM num = mob->GetOnum();
     if (NpcExists(num))
         {
             return false;
@@ -229,15 +213,13 @@ bool ObjectManager::AddNpc(Npc* mob)
 }
 bool ObjectManager::RemoveNpc(VNUM num)
 {
-    Npc* mob = NULL;
-
-    mob = GetNpc(num);
+    Npc* mob = GetNpc(num);
     if (!mob)
         {
             return false;
         }
 
-    _npcs.erase(mob->GetOnum());
+    _npcs.erase(num);
     return true;
 }
 bool ObjectManager::NpcExists(VNUM num)
@@ -248,20 +230,19 @@ Npc*  ObjectManager::GetNpc(VNUM num)
 {
     if (!NpcExists(num))
         {
-            return NULL;
+            return nullptr;
         }
 
     return _npcs[num];
 }
 VNUM ObjectManager::GetFreeNpcVnum(VNUM min, VNUM max, VNUM num)
 {
-    int i = min;
     if (!num)
         {
-            return (NpcExists(num) ? num : 0);
+            return (NpcExists(num) ? 0 : num);
         }
 
-    for (; i <= max; ++i)
+    for (int i = min; i <= max; ++i)
         {
             if (!NpcExists(i))
                 {
