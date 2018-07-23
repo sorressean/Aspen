@@ -18,6 +18,21 @@ I began work on aspen in late 2009, after trying out a few different engines for
 ## Is Aspen ready-to-use?
 The short answer is probably not. The even longer answer is no; Aspen is currently in development, and as such is not ready for primetime. We still welcome anyone who wishes to use it; if you would like to contribute to the engine, we would greatly appreciate any contributions. Our todo list can     be found [[here|todo]]. You are more than welcome to work  on any individual items, as well as any other section of your choosing.
 
+## Setup Aspen for Development (Mac Sierra v.10.12.6)
+The following steps should get you up and running for development on Aspen
+1. Clone the repo to your local file system: `git clone https://github.com/sorressean/Aspen.git`
+2. Change directories to the cloned repo: `cd aspen`
+3. Make a build directory: `mkdir build`
+4. Change directories to the build directory: `cd build`
+5. Install SSL using homebrew (or other package managers): `brew install openssl`
+6. Create a symbolic link to SSL in your standard includes:
+  * `cd /usr/local/include`
+  * `ln -s ../opt/openssl/include/openssl .`
+7. Generate the makefiles using cmake: `cmake ../`
+8. `make` the project: `make`
+9. Change directories into bin: `cd ../bin/`
+10. Run Aspen: `./aspen`
+
 ## Community
 We do not currently have a mailing list in place for discussions; you can find us on IRC: irc.freenode.net, #aspenmud.
 
