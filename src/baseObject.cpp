@@ -23,11 +23,8 @@ BaseObject::BaseObject()
 
     _name="A blank object";
     _desc="You see nothing special.";
-    _script="";
     _onum=0;
-    _zone = NULL;
-
-//    variables.SetObject(this);
+    _zone = nullptr;
 }
 BaseObject::~BaseObject()
 {
@@ -100,11 +97,6 @@ bool BaseObject::AddComponent(Component* component)
 bool BaseObject::RemoveComponent(Component* component)
 {
     std::vector<Component*>::iterator it, itEnd;
-
-    if (!HasComponent(component->GetMeta()->GetName()))
-        {
-            return false;
-        }
 
     itEnd = _components.end();
     for (it = _components.begin(); it != itEnd; ++it)
