@@ -45,14 +45,14 @@ public:
     * @param [in] address The address to check.
     * @return True if the address is in the list, false otherwise.
     */
-    bool AddressExists(const std::string &address);
-    bool AddressExists(unsigned long address);
+    bool AddressExists(const std::string &address) const;
+    bool AddressExists(unsigned long address) const;
     /**
     * Gets a list of addresses that have been banned.
     *
     * @param [out] A vector that can take a list of all addresses, in readable form.
     */
-    void ListAddresses(std::vector<std::string> *addresses);
+    void ListAddresses(std::vector<std::string> &addresses);
 
     void Serialize(tinyxml2::XMLElement* root);
     void Deserialize(tinyxml2::XMLElement* root);

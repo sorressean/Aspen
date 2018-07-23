@@ -23,27 +23,25 @@ bool BanList::AddAddress(const std::string &address)
 }
 bool BanList::RemoveAddress(const std::string &address)
 {
-    std::vector<unsigned long>::iterator it, itEnd;
     in_addr addr;
 
     if (inet_aton(address.c_str(), &addr))
         {
             return false;
         }
-
-    itEnd = _addresses.end();
-    for (it = _addresses.begin(); it != itEnd; ++it)
+auto end = _addresses.end();
+    for (auto it=_addresses.begin(); it != end; ++it)
         {
             if ((*it) == addr.s_addr)
                 {
-                    it = _addresses.erase(it);
+                    _addresses.erase(it);
                     return true;
                 }
         }
 
     return false;
 }
-bool BanList::AddressExists(const std::string &address)
+bool BanList::AddressExists(const std::string &address) const
 {
     in_addr addr;
 
@@ -62,7 +60,7 @@ bool BanList::AddressExists(const std::string &address)
 
     return false;
 }
-bool BanList::AddressExists(unsigned long address)
+bool BanList::AddressExists(unsigned long address) const
 {
     for (auto it: _addresses)
         {
@@ -74,7 +72,7 @@ bool BanList::AddressExists(unsigned long address)
 
     return false;
 }
-void BanList::ListAddresses(std::vector<std::string>* addresses)
+void BanList::ListAddresses(std::vector<std::string>& addresses)
 {
     in_addr addr;
     std::string val;
@@ -83,7 +81,7 @@ void BanList::ListAddresses(std::vector<std::string>* addresses)
         {
             addr.s_addr = it;
             val = inet_ntoa(addr);
-            addresses->push_back(val);
+            addresses.push_back(val);
         }
 }
 

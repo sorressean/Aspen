@@ -161,7 +161,7 @@ bool CMDBan::Execute(const std::string &verb, Player* mobile,std::vector<std::st
                     header.push_back("address");
                 }
 
-            blist->ListAddresses(&addresses);
+            blist->ListAddresses(addresses);
             mobile->Message(MSG_LIST, Columnize(&addresses, 5, &header));
             return true;
         }
