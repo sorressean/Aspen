@@ -22,4 +22,6 @@
 bin/aspen
 
 #directories
-build/
+build/ 
+data/
+logs/
