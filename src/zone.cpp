@@ -78,15 +78,15 @@ Room* Zone::AddRoom()
     World* world = World::GetPtr();
     ObjectManager* omanager = world->GetObjectManager();
     Room* room = NULL;
-    VNUM freeVNUM = omanager->GetFreeRoomVnum(_vnumrange.min, _vnumrange.max);
+    VNUM num = omanager->GetFreeRoomVnum(_vnumrange.min, _vnumrange.max);
 
-    if (freeVNUM != 0)
+    if (!num)
         {
             throw(std::runtime_error("No more vnums available"));
         }
 
     room = new Room();
-    room->SetOnum(freeVNUM);
+    room->SetOnum(num);
     room->SetZone(this);
     _roomobjs.push_back(room);
     omanager->AddRoom(room);
@@ -97,14 +97,13 @@ Room* Zone::AddRoom(VNUM num)
     World* world = World::GetPtr();
     ObjectManager* omanager = world->GetObjectManager();
     Room* room = NULL;
-    VNUM freeVNUM = omanager->GetFreeRoomVnum(_vnumrange.min, _vnumrange.max, num);
-    if (freeVNUM != 0)
+    if (!omanager->GetFreeRoomVnum(_vnumrange.min, _vnumrange.max, num))
         {
             throw(std::runtime_error("No more vnums available"));
         }
 
     room = new Room();
-    room->SetOnum(freeVNUM);
+    room->SetOnum(num);
     room->SetZone(this);
     _roomobjs.push_back(room);
     omanager->AddRoom(room);
@@ -153,15 +152,15 @@ StaticObject* Zone::AddVirtual()
     World* world = World::GetPtr();
     ObjectManager* omanager = world->GetObjectManager();
     StaticObject* obj = NULL;
-    VNUM freeVNUM = omanager->GetFreeVirtualVnum(_vnumrange.min, _vnumrange.max);
+    VNUM num = omanager->GetFreeVirtualVnum(_vnumrange.min, _vnumrange.max);
 
-    if (freeVNUM != 0)
+    if (!num)
         {
             throw(std::runtime_error("No more vnums available"));
         }
 
     obj = new StaticObject();
-    obj->SetOnum(freeVNUM);
+    obj->SetOnum(num);
     _virtualobjs.push_back(obj);
     omanager->AddVirtual(obj);
     return obj;
@@ -218,15 +217,15 @@ Npc* Zone::AddNpc()
     World* world = World::GetPtr();
     ObjectManager* omanager = world->GetObjectManager();
     Npc* mob = nullptr;
-    VNUM freeVNUM = omanager->GetFreeNpcVnum(_vnumrange.min, _vnumrange.max);
+    VNUM num = omanager->GetFreeNpcVnum(_vnumrange.min, _vnumrange.max);
 
-    if (freeVNUM != 0)
+    if (!num)
         {
             throw(std::runtime_error("No more vnums available"));
         }
 
     mob = new Npc();
-    mob->SetOnum(freeVNUM);
+    mob->SetOnum(num);
     _mobobjs.push_back(mob);
     omanager->AddNpc(mob);
     return mob;
