@@ -29,7 +29,7 @@ bool BanList::RemoveAddress(const std::string &address)
         {
             return false;
         }
-auto end = _addresses.end();
+    auto end = _addresses.end();
     for (auto it=_addresses.begin(); it != end; ++it)
         {
             if ((*it) == addr.s_addr)

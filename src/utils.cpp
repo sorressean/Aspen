@@ -281,7 +281,7 @@ bool IsFirstUser()
                 }
         }
 
-closedir(search);
+    closedir(search);
     return (count==1?false:true);
 }
 
