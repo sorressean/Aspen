@@ -21,8 +21,8 @@
 Entity::Entity():
     _location(nullptr), _parent(nullptr)
 {
-    events.RegisterEvent("PostLook", new Event());
-    events.RegisterEvent("PreLook",new Event());
+    events.RegisterEvent("PostLook");
+    events.RegisterEvent("PreLook");
 }
 
 std::string Entity::GetShort() const

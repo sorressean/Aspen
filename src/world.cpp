@@ -56,16 +56,16 @@ World::World()
     _commandElapsed = 0;
     RegisterLog(EVENT_FILE, EVENT_NAME);
 //events
-    events.RegisterEvent("LivingPulse",new DelayedEvent(LIVING_PULSE,0));
-    events.RegisterEvent("WorldPulse", new DelayedEvent(WORLD_PULSE, 0));
-    events.RegisterEvent("PlayerConnect", new Event());
-    events.RegisterEvent("PlayerDisconnect", new Event());
-    events.RegisterEvent("PlayerCreated", new Event());
-    events.RegisterEvent("PlayerDeleted", new Event());
-    events.RegisterEvent("Shutdown", new Event());
-    events.RegisterEvent("Copyover", new Event());
-    events.RegisterEvent("ObjectLoaded", new Event());
-    events.RegisterEvent("ObjectDestroyed", new Event());
+    events.RegisterEvent("LivingPulse");
+    events.RegisterEvent("WorldPulse");
+    events.RegisterEvent("PlayerConnect");
+    events.RegisterEvent("PlayerDisconnect");
+    events.RegisterEvent("PlayerCreated");
+    events.RegisterEvent("PlayerDeleted");
+    events.RegisterEvent("Shutdown");
+    events.RegisterEvent("Copyover");
+    events.RegisterEvent("ObjectLoaded");
+    events.RegisterEvent("ObjectDestroyed");
 }
 World::~World()
 {

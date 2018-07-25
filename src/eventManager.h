@@ -49,7 +49,7 @@ public:
     * @param [in] event The event object.
     * @return True on success, false on failure.
     */
-    bool RegisterEvent(const std::string &name, Event* event);
+    bool RegisterEvent(const std::string &name);
     /**
     * Removes the event from the events table.
     *

@@ -7,7 +7,7 @@
 
 Living::Living()
 {
-    events.RegisterEvent("HeartBeat", new DelayedEvent(LIVING_PULSE,0));
+    events.RegisterEvent("HeartBeat");
 
     _position = POSITION_STANDING;
     _gender = Gender::Neuter;

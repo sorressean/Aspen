@@ -12,10 +12,10 @@
 
 Editor::Editor()
 {
-    events.RegisterEvent("save", new Event());
-    events.RegisterEvent("load", new Event());
-    events.RegisterEvent("abort", new Event());
-    events.RegisterEvent("atexit", new Event());
+    events.RegisterEvent("save");
+    events.RegisterEvent("load");
+    events.RegisterEvent("abort");
+    events.RegisterEvent("atexit");
 
     _cursor = -1;
     _dirty=false;

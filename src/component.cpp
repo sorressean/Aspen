@@ -9,10 +9,10 @@ void Component::Initialize()
 {
     _attached = false;
 
-    events.RegisterEvent("OnCreate", new Event());
-    events.RegisterEvent("OnDestroy", new Event());
-    events.RegisterEvent("OnAttach", new Event());
-    events.RegisterEvent("OnDetach", new Event());
+    events.RegisterEvent("OnCreate");
+    events.RegisterEvent("OnDestroy");
+    events.RegisterEvent("OnAttach");
+    events.RegisterEvent("OnDetach");
     events.CallEvent("OnCreate", NULL, (void*)this);
 }
 

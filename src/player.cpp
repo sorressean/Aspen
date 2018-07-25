@@ -48,9 +48,9 @@ Player::Player()
     AddMessage(MSG_LIST, C_CYAN);
 
 //events
-    events.RegisterEvent("EnterGame", new Event());
-    events.RegisterEvent("LeaveGame", new Event());
-    events.RegisterEvent("OptionChanged", new Event());
+    events.RegisterEvent("EnterGame");
+    events.RegisterEvent("LeaveGame");
+    events.RegisterEvent("OptionChanged");
 }
 Player::~Player()
 {

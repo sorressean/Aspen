@@ -5,9 +5,12 @@
 
 EventManager::~EventManager()
 {
-    for (auto it: _events)
+    for (auto it:_events)
         {
-            delete it.second;
+            if (it.second)
+                {
+                    delete it.second;
+                }
         }
 }
 
@@ -26,24 +29,25 @@ Event* EventManager::GetEvent(const std::string &name)
     return _events[name];
 }
 
-bool EventManager::RegisterEvent(const std::string &name, Event* event)
+bool EventManager::RegisterEvent(const std::string &name)
 {
     if (IsEventRegistered(name))
         {
             return false;
         }
-    if (event == nullptr)
-        {
-            return false;
-        }
 
-    _events[name]=event;
+    _events[name] = nullptr;
     return true;
 }
 bool EventManager::RemoveEvent(const std::string &name)
 {
     if (IsEventRegistered(name))
         {
+            auto event = _events[name];
+            if (event)
+                {
+                    delete event;
+                }
             _events.erase(name);
             return true;
         }
@@ -58,10 +62,11 @@ bool EventManager::CallEvent(const std::string &name, EventArgs* args, void* cal
             throw(EventNotFoundException("Tried to call "+name+"."));
             return false;
         }
+
+//this will be true if there are no events attached.
     if (_events[name]==nullptr)
         {
-//this should never be the case, but...
-            return false;
+            return true;
         }
 
     (_events[name])->Invoke(args,caller);
@@ -76,6 +81,10 @@ bool EventManager::AddCallback(const std::string &name, const EVENTFUNC cb)
             return false;
         }
 
+    if (!_events[name])
+        {
+            _events[name] = new Event();
+        }
     (_events[name])->Add(cb);
     return true;
 }
@@ -88,6 +97,10 @@ bool EventManager::AddScriptCallback(Entity* obj, const char* event, int func)
             return false;
         }
 
+    if (!_events[event])
+        {
+            _events[event] = new Event();
+        }
     (_events[event])->AddScriptCallback(obj, func);
     return true;
 }

@@ -12,8 +12,8 @@ TelnetParser::TelnetParser()
     _buff = nullptr;
     _newbuff = nullptr;
     Reset();
-    events.RegisterEvent("OnNegotiation", new Event());
-    events.RegisterEvent("OnOption", new Event());
+    events.RegisterEvent("OnNegotiation");
+    events.RegisterEvent("OnOption");
 }
 TelnetParser::~TelnetParser()
 {
