@@ -188,6 +188,7 @@ source_group("headers" FILES ${HEADERS})
 link_directories(${Boost_LIBRARY_DIR})
 target_link_libraries (aspen LINK_PUBLIC
 angelscript
+jsoncpp
 tinyxml
 ${ZLIB_LIBRARIES}
 ${OPENSSL_SSL_LIBRARY}
