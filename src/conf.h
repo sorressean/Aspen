@@ -36,11 +36,11 @@
 * Should we write log messages to console?
 */
 #define LOG_CONSOLE
+#define LOG_DIRECTORY "../logs/"
+#define LOG_MAX_COLLECTED_FILES_SIZE 256*1024*1024*1024
+#define LOG_MAX_FILES 365 //enough for a year
+#define LOG_FILE_PATTERN "../logs/%Y%m%d_%H%M%S_%5N.log"
 
-/**
-* Max size, in bytes of the log.
-*/
-#define LOG_MAXSIZE 1024*1024
 /**
 * Max amount of files to keep from rotating log.
 */

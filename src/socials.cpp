@@ -4,6 +4,7 @@
 #include "socials.h"
 #include "world.h"
 #include "living.h"
+#include "log.h"
 #include "command.h"
 #include "utils.h"
 
@@ -57,7 +58,6 @@ void Socials::Save()
 }
 void Socials::Load()
 {
-    World* world = World::GetPtr();
     int id = 0;
     tinyxml2::XMLDocument doc;
     tinyxml2::XMLElement* socials = nullptr;
@@ -67,7 +67,7 @@ void Socials::Load()
     if (!FileExists(SOCIALS_FILE))
         {
 #ifdef NO_INIT_DEFAULTS
-            world->WriteLog("No socials file exists, and NO_INIT_DEFAULTS was enabled.", CRIT);
+            WriteLog("No socials file exists, and NO_INIT_DEFAULTS was enabled.", CRIT);
 #else
             InitializeDefaultSocials();
 #endif
@@ -76,14 +76,13 @@ void Socials::Load()
 
     if (doc.LoadFile(SOCIALS_FILE) != tinyxml2::XML_NO_ERROR)
         {
-            world->WriteLog("Could not load XML socials file.");
+            WriteLog("Could not load XML socials file.");
             return;
         }
 
     socials = doc.FirstChildElement("socials");
     if (socials)
         {
-
             for (social = socials->FirstChildElement(); social; social = social->NextSiblingElement())
                 {
                     data = new SOCIAL_DATA();
@@ -162,7 +161,7 @@ void Socials::AddCommands()
 {
     World* world = World::GetPtr();
 
-    world->WriteLog("Adding social commands.");
+    WriteLog("Adding social commands.");
     for (auto it: _slist)
         {
             CMDSocials*com = new CMDSocials();
@@ -175,8 +174,7 @@ void Socials::AddCommands()
 
 EVENT(socials_shutdown)
 {
-    World* world = World::GetPtr();
-    world->WriteLog("Cleaning up socials.");
+    WriteLog("Cleaning up socials.");
     Socials* soc = Socials::GetPtr();
     soc->Save();
     delete soc;
@@ -200,7 +198,7 @@ bool CMDSocials::Execute(const std::string &verb, Player* mobile,std::vector<std
 bool InitializeSocials()
 {
     World* world = World::GetPtr();
-    world->WriteLog("Initializing socials.");
+    WriteLog("Initializing socials.");
     Socials* soc = Socials::GetPtr();
     soc->Load();
     soc->AddCommands();

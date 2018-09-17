@@ -9,6 +9,7 @@
 #include <algorithm>
 #include "zone.h"
 #include "world.h"
+#include "log.h"
 #include "objectManager.h"
 #include "room.h"
 #include "staticObject.h"
@@ -358,7 +359,7 @@ bool InitializeZones()
     World* world = World::GetPtr();
     struct stat FInfo;
 
-    world->WriteLog("Initializing areas.");
+    WriteLog("Initializing areas.");
     if ((stat(AREA_STARTFILE,&FInfo))!=-1)
         {
             Zone::LoadZones();
@@ -366,11 +367,11 @@ bool InitializeZones()
     else
         {
 #ifdef NO_INIT_DEFAULTS
-            world->WriteLog("No area file exists, and NO_INIT_DEFAULTS was enabled, exiting.");
+            WriteLog("No area file exists, and NO_INIT_DEFAULTS was enabled, exiting.");
             return false;
         }
 #else
-            world->WriteLog("No area found, creating default.");
+            WriteLog("No area found, creating default.");
 //no zones and rooms exist, create a first zone/room.
             Zone*zone=new Zone();
             if (!zone)

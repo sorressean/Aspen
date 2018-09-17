@@ -1,123 +1,131 @@
-#include <cstdio>
+#include <iostream>
+#include <memory>
 #include <string>
-#include <sstream>
-#include <ctime>
-#include <cstring>
-#include <cstdlib>
-#include <unistd.h>
-#include "mud.h"
-#include "conf.h"
+#include <stdexcept>
+
+#define BOOST_LOG_DYN_LINK 1
+#include <boost/core/null_deleter.hpp>
+#include <boost/date_time/posix_time/posix_time.hpp>
+
+#include <boost/log/common.hpp>
+#include <boost/log/expressions.hpp>
+#include <boost/log/attributes.hpp>
+#include <boost/log/sinks.hpp>
+#include <boost/log/sources/logger.hpp>
+#include <boost/log/utility/manipulators/add_value.hpp>
+#include <boost/log/attributes/scoped_attribute.hpp>
+#include <boost/log/support/date_time.hpp>
+#include <boost/log/sinks/sync_frontend.hpp>
+#include <boost/log/sinks/text_ostream_backend.hpp>
+#include <boost/log/sinks/text_file_backend.hpp>
+
 #include "log.h"
-#include "utils.h"
 
-Log::Log(const std::string &file)
+namespace logging = boost::log;
+namespace attrs = boost::log::attributes;
+namespace src = boost::log::sources;
+namespace sinks = boost::log::sinks;
+namespace expr = boost::log::expressions;
+namespace keywords = boost::log::keywords;
+using namespace std;
+
+typedef sinks::synchronous_sink< sinks::text_file_backend > file_sink;
+typedef sinks::synchronous_sink< sinks::text_ostream_backend > text_sink;
+
+template< typename CharT, typename TraitsT >
+inline std::basic_ostream< CharT, TraitsT >& operator<< (std::basic_ostream< CharT, TraitsT >& strm, SeverityLevel lvl)
 {
-    _out = fopen(file.c_str(), "w");
-    _name = file;
+    static const char* const str[] =
+    {
+        "normal",
+        "notification",
+        "warning",
+        "error",
+        "critical"
+    };
+    if (static_cast<int>(lvl) < sizeof(str))
+        strm << str[static_cast<size_t>(lvl)];
+    else
+        strm << static_cast< int >(lvl);
+    return strm;
 }
-Log::~Log()
+
+struct LogData
 {
-    if (_out)
+//we need to use boost's shared_ptr otherwise it won't accept our sink.
+    boost::shared_ptr<file_sink> fileSink;
+    boost::shared_ptr<text_sink> consoleSink;
+    src::severity_logger< SeverityLevel> severityLogger;
+};
+
+Log* Log::_instance = nullptr;
+
+void Log::Initialize()
+{
+    if (!Log::_instance)
+        Log::_instance = new Log();
+}
+void Log::Release()
+{
+    if (Log::_instance)
         {
-            fclose(_out);
-            _out = NULL;
+            delete Log::_instance;
+            Log::_instance = nullptr;
         }
 }
-
-void Log::Write(const std::string &data,LOG_LEVEL l)
+Log* Log::Instance()
 {
-    time_t curtime;
-    char stime[32];
-    std::string level;
-    struct tm *tinfo;
+    return Log::_instance;
+}
 
-    if (_out)
-        {
-            time(&curtime);
-            tinfo=localtime(&curtime);
 
-            strftime(stime,32,"%x %X",tinfo);
 
-            switch (l)
-                {
-                case INFORM:
-                    level="[INFO] ";
-                    break;
-                case WARN:
-                    level="[WARNING] ";
-                    break;
-                case ERR:
-                    level="[ERROR] ";
-                    break;
-                case CRIT:
-                    level="[CRITICAL ERROR] ";
-                    break;
-                case SCRIPT:
-                    level="[SCRIPT] ";
-                    break;
-                case PLAYER:
-                    level="[player]";
-                    break;
-                case CONNECTION:
-                    level="[CONNECTION]";
-                    break;
-                default:
-                    break;
-                }
+void Log::Setup()
+{
+    auto instance = Log::_instance;
+    if (!instance)
+        throw(std::logic_error("Can not set up without initialize being called."));
 
-            fprintf(_out, "%s %s: %s\n", level.c_str(), stime, data.c_str());
+    _logData = make_unique<LogData>();
+    _logData->fileSink  = boost::shared_ptr< file_sink > (new file_sink(keywords::file_name =LOG_FILE_PATTERN));
+    auto fileBackend = _logData->fileSink->locked_backend();
+    fileBackend->auto_flush();
+    fileBackend->set_file_collector(sinks::file::make_collector(
+                                        keywords::target = LOG_DIRECTORY,
+                                        keywords::time_based_rotation = sinks::file::rotation_at_time_point(0, 0, 0),
+                                        keywords::max_size = LOG_MAX_COLLECTED_FILES_SIZE,
+                                        keywords::max_files = LOG_MAX_FILES));
+    fileBackend->scan_for_files();
+    _logData->fileSink->set_formatter(
+        expr::format("%1%: [%2%] - %3%")
+        % expr::attr< unsigned int >("RecordID")
+        % expr::attr< boost::posix_time::ptime >("TimeStamp")
+        % expr::smessage
+    );
+    logging::core::get()->add_sink(_logData->fileSink);
+
 #ifdef LOG_CONSOLE
-            printf("%s %s: %s\n", level.c_str(),stime,data.c_str());
+    _logData->consoleSink = boost::shared_ptr<text_sink>(new text_sink);
+    auto consoleBackend = _logData->consoleSink->locked_backend();
+    _logData->consoleSink->set_formatter(
+        expr::format("[%2%] - %3%")
+        % expr::attr< boost::posix_time::ptime >("TimeStamp")
+        % expr::smessage
+    );
+    boost::shared_ptr< std::ostream > outputStream(&std::clog, boost::null_deleter());
+    consoleBackend->add_stream(outputStream);
+    logging::core::get()->add_sink(_logData->consoleSink);
 #endif
-        }
+
+    logging::core::get()->add_global_attribute("TimeStamp", attrs::local_clock());
+    logging::core::get()->add_global_attribute("RecordID", attrs::counter< unsigned int >());
 }
-void Log::CheckSize()
+
+void Log::Write(const std::string& message)
 {
-    unsigned int size = GetFileSize(fileno(_out));
-    if (size >= LOG_MAXSIZE)
-        {
-            CycleFiles();
-        }
+    Write(SeverityLevel::Info, message);
 }
-void Log::CycleFiles()
+void Log::Write(SeverityLevel level, const std::string& message)
 {
-    int top = 0;
-    int counter = 0;
-    std::stringstream st;
-    std::stringstream st2;
-
-//we need the highest file that exists.
-    for (counter = 0; counter <= LOG_MAXFILES; counter++)
-        {
-            st << _name << counter;
-            if (!FileExists(st.str()))
-                {
-                    top = counter;
-                    break;
-                }
-        }
-//the file will be renamed, so it needs closed.
-    fflush(_out);
-    fclose(_out);
-//if we had the maximum amount of files, top will be equal to 0 and we will need to remove one.
-    if (top == 0)
-        {
-            st.str("");
-            st << _name << ".log." << LOG_MAXFILES;
-            unlink(st.str().c_str());
-            top = counter;
-        }
-//now we run backwards and rename:
-    for (counter = top; counter > 0; counter++)
-        {
-            st.str("");
-            st2.str("");
-            st << _name << ".log." << counter-1;
-            st2 << _name << ".log." << counter;
-
-            rename(st.str().c_str(), st2.str().c_str());
-        }
-
-    rename(_name.c_str(), (_name+".log.1").c_str());
-    _out = fopen(_name.c_str(), "w");
+    BOOST_LOG_SEV(_logData->severityLogger, level) << message;
 }

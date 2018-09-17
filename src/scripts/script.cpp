@@ -6,9 +6,9 @@
 #include <sstream>
 #include <cassert>
 #include "../mud.h"
-#include "../conf.h"
 #include "../world.h"
 #include "../event.h"
+#include "../log.h"
 #include "script.h"
 #include "scr_BaseObject.h"
 #include "scr_Entity.h"
@@ -39,7 +39,7 @@ static void MessageCallback(const asSMessageInfo *msg, void *param)
     st << " @" << msg->section << ":";
     st << "LN " << msg->row << ", COL " << msg->col << ":";
     st << msg->message;
-    world->WriteLog(st.str(), SCRIPT);
+    WriteLog(st.str());
 }
 
 ScriptEngine* ScriptEngine::_ptr;
@@ -102,7 +102,7 @@ bool ScriptEngine::RegisterObject(const char* obj)
 CEVENT(ScriptEngine, Shutdown)
 {
     World* world = World::GetPtr();
-    world->WriteLog("Cleaning up scripting.");
+    WriteLog("Cleaning up scripting.");
     ScriptEngine::Release();
 }
 
@@ -143,7 +143,7 @@ bool InitializeScript()
     World* world = World::GetPtr();
     ScriptEngine* engine = nullptr;
 
-    world->WriteLog("Initializing scripting.");
+    WriteLog("Initializing scripting.");
 
     ScriptEngine::Initialize();
     engine = ScriptEngine::GetPtr();

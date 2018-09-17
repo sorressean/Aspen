@@ -1,4 +1,3 @@
-#include <iostream>
 #include <iomanip>
 #include <vector>
 #include <string>
@@ -7,14 +6,14 @@
 #include "boardPost.h"
 #include "board.h"
 #include "../modules.h"
-#include "../../mud.h"
-#include "../../conf.h"
-#include "../../property.h"
-#include "../../event.h"
 #include "../../command.h"
+#include "../../editor.h"
+#include "../../event.h"
+#include "../../mud.h"
+#include "../../log.h"
+#include "../../property.h"
 #include "../../world.h"
 #include "../../utils.h"
-#include "../../editor.h"
 
 #ifdef MODULE_BOARD
 
@@ -369,7 +368,7 @@ bool InitializeBoards()
     World* world = World::GetPtr();
     BoardManager* bmanager = new BoardManager();
 
-    world->WriteLog("Initializing boards.");
+    WriteLog("Initializing boards.");
     world->AddState("boards", bmanager);
     world->commands.AddCommand(new CMDBoard());
     world->commands.AddCommand(new CMDABoard());

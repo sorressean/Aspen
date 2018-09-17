@@ -10,7 +10,6 @@
 #include <sys/types.h>
 
 #include "mud.h"
-#include "conf.h"
 #include "configuration.h"
 #include "socket.h"
 #include "server.h"
@@ -33,6 +32,8 @@ static bool InitializeDirectories();
 
 int main(int argc, const char** argv)
 {
+    Log::Initialize();
+    Log::Instance()->Setup();
     World* world = nullptr;
     bool copyover=false; //are we rebooting for copyover?
     int listener=0; //the socket to listen on when recovering from copyover
@@ -61,7 +62,7 @@ int main(int argc, const char** argv)
         }
 
     world = World::GetPtr();
-    world->WriteLog("Initializing "+std::string(MUD_NAME)+".");
+    WriteLog("Initializing "+std::string(MUD_NAME)+".");
 
 //initialize the server class:
 //determine if a port was specified. If not, use default.
@@ -70,7 +71,7 @@ int main(int argc, const char** argv)
             port = atoi(argv[1]);
             if ((port < 1024)||(port>65535))
                 {
-                    world->WriteLog("Invalid port specified, program will now exit.", ERR);
+                    WriteLog(SeverityLevel::Fatal, "Invalid port specified, program will now exit.");
                     return EXIT_FAILURE;
                 }
         }
@@ -90,25 +91,25 @@ int main(int argc, const char** argv)
 
     if (!world->InitializeFiles())
         {
-            world->WriteLog("Could not load mud text files.", ERR);
+            WriteLog(SeverityLevel::Fatal, "Could not load mud text files.");
             return EXIT_FAILURE;
         }
 
 //game initialization calls
     if (!InitializeCommands())
         {
-            world->WriteLog("Could not initialize commands.", ERR);
+            WriteLog(SeverityLevel::Fatal, "Could not initialize commands.");
             return EXIT_FAILURE;
         }
     InitializeChannels();
     if (!InitializeModules())
         {
-            world->WriteLog("Could not initialize modules.", ERR);
+            WriteLog(SeverityLevel::Fatal, "Could not initialize modules.");
             return EXIT_FAILURE;
         }
     if (!InitializeZones())
         {
-            world->WriteLog("could not initialize zones.", ERR);
+            WriteLog(SeverityLevel::Fatal, "could not initialize zones.");
             return EXIT_FAILURE;
         }
     world->SetRealUptime(time(NULL));
@@ -116,7 +117,7 @@ int main(int argc, const char** argv)
     srand(time(NULL));
 
 //make the server listen:
-    world->WriteLog("Attempting to establish listening point.");
+    WriteLog("Attempting to establish listening point.");
     if (copyover)
         {
 //set the listening socket to the descripter specified
@@ -136,7 +137,7 @@ int main(int argc, const char** argv)
         }
 
 //initialize signal callbacks
-    world->WriteLog("Initializing signal callbacks.");
+    WriteLog("Initializing signal callbacks.");
     signal(SIGTERM,sig);
     signal(SIGINT,sig);
     signal(SIGQUIT,sig);
@@ -146,12 +147,12 @@ int main(int argc, const char** argv)
     world->LoadState();
 
 //start the game loop:
-    world->WriteLog("Entering game loop.");
+    WriteLog("Entering game loop.");
     GameLoop();
     CalloutManager::Release();
     Configuration::GetPtr()->Save();
     Configuration::Release();
-    world->WriteLog("Game loop finished, exiting.");
+    WriteLog("Game loop finished, exiting.");
     delete world;
     return EXIT_SUCCESS;
 }
@@ -169,11 +170,11 @@ static bool CopyoverRecover()
     int desc = 0;
     int ruptime = 0;
 
-    world->WriteLog("Starting copyover recovery");
+    WriteLog("Starting copyover recovery");
     recover=fopen(COPYOVER_FILE,"rb");
     if (recover == nullptr)
         {
-            world->WriteLog("There was an error opening the copyover recovery file, now exiting.", ERR);
+            WriteLog(SeverityLevel::Fatal, "There was an error opening the copyover recovery file, now exiting.");
             return false;
         }
 
@@ -199,7 +200,7 @@ static bool CopyoverRecover()
             saddr->sin_addr.s_addr=addr;
             sock->SetHost(host);
             sock->AllocatePlayer();
-            world->WriteLog("Loading "+std::string(name)+".");
+            WriteLog("Loading "+std::string(name)+".");
             person = sock->GetPlayer();
             person->SetName(name);
             person->Load();
@@ -214,7 +215,7 @@ static bool CopyoverRecover()
     delete []host;
     fclose(recover);
     remove(COPYOVER_FILE);
-    world->WriteLog("Copyover completed.");
+    WriteLog("Copyover completed.");
     return true;
 }
 
@@ -234,7 +235,7 @@ static void GameLoop()
 void sig(int sig)
 {
     World* world = World::GetPtr();
-    world->WriteLog("Caught signal, cleaning up.");
+    WriteLog("Caught signal, cleaning up.");
     world->SetRunning(false);
 }
 

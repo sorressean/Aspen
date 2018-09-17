@@ -9,7 +9,6 @@
 #include "mud.h"
 #include "conf.h"
 #include "server.h"
-#include "log.h"
 #include "command.h"
 #include "channel.h"
 #include "eventManager.h"
@@ -36,7 +35,6 @@ class World
     ComponentFactory _cfactory;
     std::unordered_map<char, PROMPTCB> _prompts;
     std::map <int,Channel*> _channels;
-    std::map<std::string, Log*> _logs;
     std::map <std::string,void*> _properties;
     std::map<std::string, ISerializable*> _state;
     std::vector<Zone*> _zones;
@@ -246,33 +244,6 @@ public:
     *Return: True on success, false on failure.
     */
     bool GetZones(std::vector<Zone*> *zones);
-
-    /*
-    *Checks to see if the log exists.
-    *Param: [in] the name of the log.
-    *Return: True if the log has been registered, false otherwise.
-    */
-    bool LogExists(const std::string &name);
-    /*
-    *Registers the logger if it does not already exist.
-    *Param: [in] the name of the logger to register.
-    *Return: True on success, false on failure.
-    */
-    bool RegisterLog(const std::string &path, const std::string &name);
-    /*
-    *Writes the specified data.
-    *Param: [in] the messsage to write.
-    *[in] [optional] the log file to write to.
-    *note: The log file must have already been registered with RegisterLog
-    *[in] the level of the message.
-    */
-    void WriteLog(const std::string &data, LOG_LEVEL l=INFORM, const std::string &name = EVENT_NAME);
-    /*
-    *Returns a pointer to the logger.
-    *Param: [in] the name of the logger.
-    *Return: A pointer to the specified logger, or NULL if it does not exist.
-    */
-    Log* GetLog(const std::string &name);
     OptionManager* GetOptionManager();
     /*
     *Checks to see if the game engine is still running.

@@ -17,12 +17,13 @@
 #include "inputHandlers.h"
 #include "property.h"
 #include "living.h"
+#include "log.h"
 
 void InitializeGenCommands()
 {
     World* world = World::GetPtr();
 
-    world->WriteLog("Initializing general commands.");
+    WriteLog("Initializing general commands.");
     world->commands.AddCommand(new CMDQuit());
     world->commands.AddCommand(new CMDSave());
     world->commands.AddCommand(new CMDBackup());
@@ -566,7 +567,6 @@ void CMDSuicide::Confirm(Socket* sock, bool choice)
 {
     Player* mobile = sock->GetPlayer();
     std::string path = std::string(PLAYER_DIR)+mobile->GetName();
-    World* world = World::GetPtr();
 
     if (!choice)
         {
@@ -575,7 +575,7 @@ void CMDSuicide::Confirm(Socket* sock, bool choice)
             return;
         }
 
-    world->WriteLog(mobile->GetName()+" has just suicided.");
+    WriteLog(mobile->GetName()+" has just suicided.");
     sock->Kill();
     unlink(path.c_str());
 }

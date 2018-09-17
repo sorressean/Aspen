@@ -1,7 +1,7 @@
 #include <sstream>
-#include "../mud.h"
-#include "../conf.h"
 #include "syslog.h"
+#include "../mud.h"
+#include "../log.h"
 #include "../player.h"
 #include "../optionManager.h"
 #include "../optionMeta.h"
@@ -14,7 +14,7 @@ bool InitializeSyslog()
     World* world = World::GetPtr();
     OptionManager* omanager = world->GetOptionManager();
 
-    world->WriteLog("Initializing syslog.");
+    WriteLog("Initializing syslog.");
 
     ometa = new OptionMeta();
     ometa->SetName("enabled");
@@ -57,7 +57,7 @@ EVENT(SYSLOG_PlayerConnect)
     world->FindChannel("syslog")->Broadcast(mobile,st.str(),false);
     st.str("");
     st << mobile->GetName() << mobile->GetSocket()->GetHost() << " (" << inet_ntoa(addr->sin_addr) << ").";
-    world->WriteLog(st.str(), CONNECTION);
+    WriteLog(st.str());
 }
 
 EVENT(SYSLOG_PlayerDisconnect)
@@ -66,6 +66,6 @@ EVENT(SYSLOG_PlayerDisconnect)
 
     Player* mobile=(Player*)caller;
     world->FindChannel("syslog")->Broadcast(mobile,"Disconnected",false);
-    world->WriteLog(mobile->GetName()+" disconnected.");
+    WriteLog(mobile->GetName()+" disconnected.");
 }
 #endif

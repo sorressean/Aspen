@@ -1,6 +1,6 @@
 find_package(ZLIB REQUIRED)
 find_package(OpenSSL REQUIRED)
-find_package(Boost REQUIRED COMPONENTS filesystem )
+find_package(Boost REQUIRED COMPONENTS filesystem log system date_time)
 
 SET(SOURCE
   ComponentFactory.cpp
@@ -31,7 +31,7 @@ SET(SOURCE
   inputHandlers.cpp
   listener.cpp
   living.cpp
-  log.cpp
+log.cpp
   main.cpp
   match.cpp
   modules.cpp
@@ -115,7 +115,7 @@ set(HEADERS
   inputHandlers.h
   listener.h
   living.h
-  log.h
+log.h
   match.h
   mccp.h
   modules.h
@@ -193,7 +193,11 @@ tinyxml
 ${ZLIB_LIBRARIES}
 ${OPENSSL_SSL_LIBRARY}
 ${OPENSSL_CRYPTO_LIBRARY}
+Boost::system
 Boost::filesystem
+Boost::log
+Boost::log_setup
+Boost::date_time
 )
 
     include_directories( ${ZLIB_INCLUDE_DIRS} 

@@ -1,6 +1,6 @@
 cmake_minimum_required (VERSION 2.6)
 project (aspen)
-set (CMAKE_CXX_STANDARD 11)
+set (CMAKE_CXX_STANDARD 14)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${PROJECT_SOURCE_DIR}/bin")
 set (aspen_VERSION_MAJOR 1)
 set (aspen_VERSION_MINOR 0)

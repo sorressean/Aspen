@@ -2,6 +2,7 @@
 #include "objectManager.h"
 #include "baseObject.h"
 #include "staticObject.h"
+#include "log.h"
 #include "entity.h"
 #include "npc.h"
 #include "room.h"
@@ -22,7 +23,7 @@ Entity* ObjectManager::CreateObject(VNUM obj)
 
     if (obj != 0 && !VirtualExists(obj))
         {
-            world->WriteLog("Tried to create virtual with nonexistant vnum", ERR);
+            WriteLog(SeverityLevel::Fatal, "Tried to create virtual with nonexistant vnum");
             return nullptr;
         }
 

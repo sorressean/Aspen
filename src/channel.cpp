@@ -3,18 +3,18 @@
 #include <list>
 #include <functional>
 #include "mud.h"
-#include "conf.h"
 #include "channel.h"
 #include "player.h"
 #include "world.h"
 #include "utils.h"
 #include "option.h"
+#include "log.h"
 
 void InitializeChannels()
 {
     World* world = World::GetPtr();
 
-    world->WriteLog("Initializing channels");
+    WriteLog("Initializing channels");
     world->events.AddCallback("PlayerConnect", std::bind(&Channel::SubscribeChannels, std::placeholders::_1, std::placeholders::_2));
     world->events.AddCallback("PlayerDisconnect", std::bind(&Channel::UnsubscribeChannels, std::placeholders::_1, std::placeholders::_2));
 

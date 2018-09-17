@@ -22,6 +22,7 @@
 #include "ComponentFactory.h"
 #include "utils.h"
 #include "zone.h"
+#include "log.h"
 #include "option.h"
 #include "optionManager.h"
 #include "objectManager.h"
@@ -54,7 +55,6 @@ World::World()
     _totalSleepTime = 0;
     _commands = 0;
     _commandElapsed = 0;
-    RegisterLog(EVENT_FILE, EVENT_NAME);
 //events
     events.RegisterEvent("LivingPulse");
     events.RegisterEvent("WorldPulse");
@@ -76,11 +76,6 @@ World::~World()
     if (_banner)
         {
             delete [] _banner;
-        }
-
-    for (auto lit: _logs)
-        {
-            delete lit.second;
         }
 
     for (auto cit: _channels)
@@ -183,17 +178,6 @@ PlayerManager& World::GetPlayerManager()
     return _pmanager;
 }
 
-Log* World::GetLog(const std::string &name)
-{
-    if (LogExists(name))
-        {
-            return (_logs)[name];
-        }
-    else
-        {
-            return NULL;
-        }
-}
 OptionManager* World::GetOptionManager()
 {
     return &_options;
@@ -295,7 +279,7 @@ bool World::InitializeFiles()
 //retrieve size of file so we can create the buffer:
     if(stat(LOGIN_FILE, &fs))
         {
-            WriteLog("Could not stat login file.", CRIT);
+            WriteLog(SeverityLevel::Fatal, "Could not stat login file.");
             return false;
         }
 
@@ -306,14 +290,14 @@ bool World::InitializeFiles()
     FILE* banner_fd=fopen(LOGIN_FILE,"r");
     if (!banner_fd)
         {
-            WriteLog("Could not fopen banner file.", CRIT);
+            WriteLog(SeverityLevel::Fatal, "Could not fopen banner file.");
             delete []_banner;
             _banner = NULL;
             return false;
         }
     if (fread(_banner,1, static_cast<size_t>(fs.st_size), banner_fd) != static_cast<size_t>(fs.st_size))
         {
-            WriteLog("Error loading banner.", CRIT);
+            WriteLog("SeverityLevel::Fatal, Error loading banner.");
             delete []_banner;
             _banner = NULL;
             fclose(banner_fd);
@@ -325,7 +309,7 @@ bool World::InitializeFiles()
 //retrieve size of file so we can create the buffer:
     if (stat(MOTD_FILE, &fs))
         {
-            WriteLog("Could not stat MOTD file.", CRIT);
+            WriteLog(SeverityLevel::Fatal, "Could not stat MOTD file.");
             delete []_banner;
             _banner = NULL;
             return false;
@@ -337,7 +321,7 @@ bool World::InitializeFiles()
     FILE* motd_fd=fopen(MOTD_FILE,"r");
     if (!motd_fd)
         {
-            WriteLog("Could not fopen MOTD.", CRIT);
+            WriteLog(SeverityLevel::Fatal, "Could not fopen MOTD.");
             delete [] _banner;
             delete [] _motd;
             _motd = _banner = NULL;
@@ -346,7 +330,7 @@ bool World::InitializeFiles()
 
     if (fread(_motd,1,static_cast<size_t>(fs.st_size), motd_fd) != static_cast<size_t>(fs.st_size))
         {
-            WriteLog("Error loading MOTD.", CRIT);
+            WriteLog(SeverityLevel::Fatal, "Error loading MOTD.");
             delete [] _motd;
             _banner = NULL;
             fclose(motd_fd);
@@ -636,40 +620,6 @@ bool World::GetZones(std::vector<Zone*> *zones)
     return true;
 }
 
-bool World::LogExists(const std::string &name)
-{
-    if (_logs.count(name))
-        {
-            return true;
-        }
-
-    return false;
-}
-bool World::RegisterLog(const std::string &path, const std::string &name)
-{
-    if (LogExists(name))
-        {
-            return false;
-        }
-    else
-        {
-            Log* log = new Log(path);
-            if (log)
-                {
-                    _logs[name] = log;
-                    return true;
-                }
-        }
-
-    return false;
-}
-void World::WriteLog(const std::string &data, LOG_LEVEL l, const std::string &name)
-{
-    if (LogExists(name))
-        {
-            GetLog(name)->Write(data, l);
-        }
-}
 bool World::IsRunning() const
 {
     return _running;
@@ -788,7 +738,7 @@ bool World::LoadState()
             std::string name;
             if (doc.LoadFile((std::string(STATE_DIR)+dir->d_name).c_str()) != tinyxml2::XML_NO_ERROR)
                 {
-                    WriteLog("Could not load"+std::string(dir->d_name)+" state file.", WARN);
+                    WriteLog(SeverityLevel::Warning, "Could not load"+std::string(dir->d_name)+" state file.");
                     closedir(statedir);
                     return false;
                 }
@@ -797,7 +747,7 @@ bool World::LoadState()
             name = root->Attribute("name");
             if (!StateExists(name))
                 {
-                    WriteLog("Could not find a matching registered state for "+name+" in the state register. This state will not be deserialized.", WARN);
+                    WriteLog(SeverityLevel::Warning, "Could not find a matching registered state for "+name+" in the state register. This state will not be deserialized.");
                     continue;
                 }
             else

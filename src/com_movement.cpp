@@ -5,12 +5,13 @@
 #include "objectManager.h"
 #include "room.h"
 #include "exit.h"
+#include "log.h"
 
 void InitializeMovementCommands()
 {
     World* world = World::GetPtr();
 
-    world->WriteLog("Initializing movement commands.");
+    WriteLog("Initializing movement commands.");
     world->commands.AddCommand(new CMDMove(DIR_NORTH));
     world->commands.AddCommand(new CMDMove(DIR_SOUTH));
     world->commands.AddCommand(new CMDMove(DIR_EAST));
@@ -110,8 +111,7 @@ CMDMove::CMDMove(int direction)
             AddAlias("d");
             break;
         default:
-            World* world = World::GetPtr();
-            world->WriteLog("Invalid direction specified.", ERR);
+            WriteLog(SeverityLevel::Error, "Invalid direction specified.");
         }
 }
 bool CMDMove::Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args,int subcmd)

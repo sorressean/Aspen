@@ -13,12 +13,13 @@
 #include "utils.h"
 #include "baseObject.h"
 #include "objectContainer.h"
+#include "log.h"
 
 void InitializeBuilderCommands()
 {
     World* world = World::GetPtr();
 
-    world->WriteLog("Initializing builder commands.");
+    WriteLog("Initializing builder commands.");
     world->commands.AddCommand(new CMDZlist());
     world->commands.AddCommand(new CMDRlist());
     world->commands.AddCommand(new CMDDig());

@@ -1,6 +1,7 @@
 #include "command.h"
 #include "world.h"
 #include "utils.h"
+#include "log.h"
 #include "com_gen.h"
 #include "com_wiz.h"
 #include "com_builder.h"
@@ -262,7 +263,7 @@ bool InitializeCommands()
 {
     World* world = World::GetPtr();
 
-    world->WriteLog("Initializing commands.");
+    WriteLog("Initializing commands.");
     InitializeGenCommands();
     InitializeMovementCommands();
     InitializeWizCommands();

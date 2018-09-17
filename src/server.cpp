@@ -76,20 +76,18 @@ void Server::CheckLinkdeaths(Callout* cb)
 
 bool Server::Listen(const int port)
 {
-    World* world = World::GetPtr();
-
     int reuse = 1;
     // try to create a communications endpoint
     control = socket(PF_INET, SOCK_STREAM, 0);
     if (control == -1)
         {
-            world->WriteLog("could not create socket.", ERR);
+            WriteLog(SeverityLevel::Fatal, "could not create socket.");
             return false;
         }
     // set options for this control socket
     if (setsockopt(control, SOL_SOCKET, SO_REUSEADDR, (const char *)&reuse, sizeof(int)) == -1)
         {
-            world->WriteLog("Setting socket options failed.");
+            WriteLog(SeverityLevel::Fatal, "Setting socket options failed.");
             close(control);
             return false;
         }
@@ -102,14 +100,14 @@ bool Server::Listen(const int port)
     // try to bind the mud port
     if (bind(control, (struct sockaddr *) &my_addr, sizeof(my_addr)) == -1)
         {
-            world->WriteLog("Could not bind socket.", CRIT);
+            WriteLog(SeverityLevel::Fatal, "Could not bind socket.");
             close(control);
             return false;
         }
     // start listening
     if (listen(control, LISTEN_BACKLOG) == -1)
         {
-            world->WriteLog("Could not set parent socket to listening state.", CRIT);
+            WriteLog(SeverityLevel::Fatal, "Could not set parent socket to listening state.");
             close(control);
             return false;
         }
@@ -209,7 +207,6 @@ void Server::FlushSockets()
 // constant defined for this purpose.
 int Server::Sleep(int pps)
 {
-    World* world = World::GetPtr();
     struct timeval newTime;
     unsigned long long int spent = 0; //time spent updating (not sleeping)
     unsigned long long int remaining = 0; //time remaining to sleep for.
@@ -226,7 +223,7 @@ int Server::Sleep(int pps)
     if (spent >= remaining)
         {
             gettimeofday(&lastSleep, NULL);
-            world->WriteLog("Exceeded frame time.", WARN);
+            WriteLog(SeverityLevel::Warning, "Exceeded frame time.");
             return 0;
         }
     remaining -= spent;
@@ -267,7 +264,6 @@ void Server::Accept()
 
 //clear the address buffer:
     memset(&addr,0,len);
-    World* world = World::GetPtr();
 
     // try to accept new connection
     desc = accept(control, (struct sockaddr*)&addr, &len);
@@ -292,6 +288,7 @@ void Server::Accept()
             return;
         }
 
+    World* world = World::GetPtr();
 //negotiation stuff
     pSocket->Write(TELNET_DO_TERMTYPE);
     pSocket->Write(TELNET_DO_COMPRESS2);
@@ -323,7 +320,7 @@ void Server::Accept()
             pSocket->SetHost(std::string(host->h_name));
         }
 
-    world->WriteLog("New connection from "+pSocket->GetHost()+".", CONNECTION);
+    WriteLog("New connection from "+pSocket->GetHost()+".");
 }
 
 std::list<Socket*> Server::GetSocketList()

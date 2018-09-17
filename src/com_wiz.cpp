@@ -11,12 +11,13 @@
 #include "utils.h"
 #include "calloutManager.h"
 #include "editor.h"
+#include "log.h"
 
 void InitializeWizCommands()
 {
     World* world = World::GetPtr();
 
-    world->WriteLog("Initializing wizard commands.");
+    WriteLog("Initializing wizard commands.");
     world->commands.AddCommand(new CMDCopyover());
     world->commands.AddCommand(new CMDMkwiz());
     world->commands.AddCommand(new CMDShutdown());
@@ -220,7 +221,7 @@ bool CMDSilence::Execute(const std::string &verb, Player* mobile,std::vector<std
 
     targ->SetPflag(BitSet(targ->GetPflag(), PF_SILENCE));
     mobile->Message(MSG_INFO, Capitalize(targ->GetName())+" was silenced.");
-    world->WriteLog(Capitalize(targ->GetName())+" was silenced by "+Capitalize(mobile->GetName())+".");
+    WriteLog(Capitalize(targ->GetName())+" was silenced by "+Capitalize(mobile->GetName())+".");
     targ->Message(MSG_ERROR, "You were silenced by "+Capitalize(mobile->GetName())+".");
     return true;
 }
@@ -257,7 +258,7 @@ bool CMDUnsilence::Execute(const std::string &verb, Player* mobile,std::vector<s
 
     targ->SetPflag(BitClear(mobile->GetPflag(), PF_SILENCE));
     mobile->Message(MSG_INFO, Capitalize(targ->GetName())+" has been unsilenced.");
-    world->WriteLog(Capitalize(targ->GetName())+" was unsilenced by "+Capitalize(mobile->GetName())+".");
+    WriteLog(Capitalize(targ->GetName())+" was unsilenced by "+Capitalize(mobile->GetName())+".");
     targ->Message(MSG_INFO, "You were unsilenced by "+Capitalize(mobile->GetName())+".");
     return true;
 }
