@@ -33,7 +33,6 @@ static bool InitializeDirectories();
 int main(int argc, const char** argv)
 {
     Log::Initialize();
-    Log::Instance()->Setup();
     World* world = nullptr;
     bool copyover=false; //are we rebooting for copyover?
     int listener=0; //the socket to listen on when recovering from copyover

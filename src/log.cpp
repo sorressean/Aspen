@@ -58,27 +58,21 @@ struct LogData
     src::severity_logger< SeverityLevel> severityLogger;
 };
 
-Log* Log::_instance = nullptr;
+std::shared_ptr<Log> Log::_instance = nullptr;
 
-void Log::Initialize()
-{
-    if (!Log::_instance)
-        Log::_instance = new Log();
-}
-void Log::Release()
-{
-    if (Log::_instance)
-        {
-            delete Log::_instance;
-            Log::_instance = nullptr;
-        }
-}
-Log* Log::Instance()
+shared_ptr<Log> Log::Instance()
 {
     return Log::_instance;
 }
 
-
+void Log::Initialize()
+{
+    if (!Log::_instance)
+        {
+            Log::_instance = shared_ptr<Log>(new Log);
+//Log::_instance->Setup();
+        }
+}
 
 void Log::Setup()
 {

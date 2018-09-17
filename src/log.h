@@ -26,14 +26,15 @@ enum class SeverityLevel
 
 class Log
 {
-    static Log* _instance;
+    static std::shared_ptr<Log> _instance;
     std::unique_ptr<LogData> _logData;
 
-    Log() = default;
-    ~Log() = default;
     Log(const Log& what) = delete;
     Log& operator =(const Log what) = delete;
 public:
+    Log() = default;
+    ~Log() = default;
+
     /**
     * Called to initialize the logger singleton instance.
     * Note: This does not call Setup, nor does
@@ -41,13 +42,9 @@ public:
     */
     static void Initialize();
     /**
-    * Frees up the instance pointer.
-    */
-    static void Release();
-    /**
     * Retrieves a pointer to the instance.
     */
-    static Log* Instance();
+    static std::shared_ptr<Log> Instance();
     /**
     * Sets up logging based on configuration values.
     */
