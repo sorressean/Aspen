@@ -19,7 +19,6 @@ Entity* ObjectManager::CreateObject(VNUM obj)
 {
     Entity* object = nullptr;
     StaticObject* virt = nullptr;
-    World* world = World::GetPtr();
 
     if (obj != 0 && !VirtualExists(obj))
         {

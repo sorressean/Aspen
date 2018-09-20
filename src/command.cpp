@@ -261,8 +261,6 @@ std::vector <Command*> *Commandable::GetPtr()
 
 bool InitializeCommands()
 {
-    World* world = World::GetPtr();
-
     WriteLog("Initializing commands.");
     InitializeGenCommands();
     InitializeMovementCommands();

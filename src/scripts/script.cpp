@@ -17,7 +17,6 @@
 
 static void MessageCallback(const asSMessageInfo *msg, void *param)
 {
-    World* world = World::GetPtr();
     std::stringstream st;
 
 //error type:
@@ -101,7 +100,6 @@ bool ScriptEngine::RegisterObject(const char* obj)
 
 CEVENT(ScriptEngine, Shutdown)
 {
-    World* world = World::GetPtr();
     WriteLog("Cleaning up scripting.");
     ScriptEngine::Release();
 }
