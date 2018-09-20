@@ -70,7 +70,7 @@ void Log::Initialize()
     if (!Log::_instance)
         {
             Log::_instance = shared_ptr<Log>(new Log);
-//Log::_instance->Setup();
+Log::_instance->Setup();
         }
 }
 
