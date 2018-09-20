@@ -4,6 +4,7 @@
 #include <sstream>
 #include <iomanip>
 #include <cstring>
+
 #include "com_wiz.h"
 #include "command.h"
 #include "player.h"
@@ -12,6 +13,9 @@
 #include "calloutManager.h"
 #include "editor.h"
 #include "log.h"
+#include "scripts/script.h"
+
+using namespace std;
 
 void InitializeWizCommands()
 {
@@ -30,6 +34,7 @@ void InitializeWizCommands()
     world->commands.AddCommand(new CMDSstatus());
     world->commands.AddCommand(new CMDForce());
     world->commands.AddCommand(new CMDPaste());
+    world->commands.AddCommand(new CMDScriptStats());
 }
 
 CMDCopyover::CMDCopyover()
@@ -480,4 +485,58 @@ void CMDPaste::TextInput(Socket* sock, std::vector<std::string>* lines, void* ar
     mobile->GetSocket()->ClearInput();
     mobile->Message(MSG_INFO, "Paste finished.");
     delete lines;
+}
+
+CMDScriptStats::CMDScriptStats()
+{
+    SetName("scriptstats");
+    SetAccess(RANK_ADMIN);
+    SetType(CommandType::God);
+}
+bool CMDScriptStats::Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args,int subcmd)
+{
+    auto scriptEngine = ScriptEngine::GetPtr();
+    if (!scriptEngine)
+        {
+            mobile->Message(MSG_ERROR, "Script engine could not be retrieved.");
+            return false;
+        }
+
+    auto base = scriptEngine->GetBaseEngine();
+    if (!base)
+        {
+            mobile->Message(MSG_ERROR, "Could not retrieve base angelscript engine.");
+            return false;
+        }
+
+
+//garbage collection variables
+    asUINT currentSize = 0;
+    asUINT totalDestroyed = 0;
+    asUINT totalDetected = 0;
+    asUINT newObjects = 0;
+    asUINT totalNewDestroyed = 0;
+    base->GetGCStatistics(&currentSize, &totalDestroyed, &totalDetected, &newObjects, &totalNewDestroyed);
+
+    vector<string> columns =
+    {
+        "global function count", to_string(base->GetGlobalFunctionCount()),
+        "global property count", to_string(base->GetGlobalPropertyCount()),
+        "object type count", to_string(base->GetObjectTypeCount()),
+        "enum count", to_string(base->GetEnumCount()),
+        "function definition count", to_string(base->GetFuncdefCount()),
+        "typedef count", to_string(base->GetTypedefCount()),
+        "module count", to_string(base->GetModuleCount()),
+        "Garbage Collection Stats:", "",
+        "current size", to_string(currentSize),
+        "total destroyed", to_string(totalDestroyed),
+        "total detected", to_string(totalDetected),
+        "new objects", to_string(newObjects),
+        "total new destroyed", to_string(totalNewDestroyed)
+    };
+
+    vector<string>headers = {"variable", "value"};
+    string table = Columnize(&columns, 2, &headers);
+    mobile->Message(MSG_LIST, table);
+    return true;
 }

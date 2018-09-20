@@ -151,4 +151,15 @@ public:
     bool Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args,int subcmd);
     void TextInput(Socket* sock, std::vector<std::string>* lines, void* args);
 };
+
+/**
+* Retrieves stats on scripts.
+* These are all internal stats.
+*/
+class CMDScriptStats:public Command
+{
+public:
+    CMDScriptStats();
+    bool Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args,int subcmd);
+};
 #endif
