@@ -115,7 +115,7 @@ static void InitializeObjects()
     ScriptEngine* engine = ScriptEngine::GetPtr();
 
     assert(engine->GetBaseEngine()->RegisterTypedef("vnum", "int") >= 0);
-    assert(engine->GetBaseEngine()->RegisterTypedef("flag", "unsigned int") >= 0);
+    assert(engine->GetBaseEngine()->RegisterTypedef("flag", "uint") >= 0);
     ret = engine->RegisterObject("BaseObject");
     assert(ret);
     ret = engine->RegisterObject("Entity");
