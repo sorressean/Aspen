@@ -79,6 +79,7 @@ set(SCRIPT_SOURCE
   scripts/scr_Entity.cpp
   scripts/scr_Exit.cpp
   scripts/scr_ObjectContainer.cpp
+  scripts/scr_Player.cpp
   scripts/scr_Room.cpp
   scripts/script.cpp
 )
@@ -173,6 +174,7 @@ set(SCRIPT_HEADERS
   scripts/scr_Entity.h
   scripts/scr_Exit.h
   scripts/scr_ObjectContainer.h
+  scripts/scr_Player.h
   scripts/scr_Room.h
   scripts/script.h
 )
