@@ -68,7 +68,7 @@ struct Window
 
 class Socket:public BaseSocket
 {
-    std::stack <in_data*> *_input;
+    std::stack <in_data*> _input;
     std::queue<std::string> _cqueue;
     std::string _host;
     std::string _termtype;

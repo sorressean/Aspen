@@ -41,8 +41,7 @@ Socket::Socket(const int desc):
     _termtype = "unknown";
     _mobile=NULL;
     _Close=false;
-    _input = new std::stack<in_data*>();
-    _lastInput = time(NULL);
+        _lastInput = time(NULL);
     _compressing = false;
     _port = -1;
     _totalReceived = 0;
@@ -65,18 +64,17 @@ Socket::~Socket()
             _mobile=NULL;
         }
 
-    while (!_input->empty())
+    while (!_input.empty())
         {
-            data = _input->top();
-            _input->pop();
+            data = _input.top();
+            _input.pop();
             if (data->handle)
                 {
                     delete data->handle;
                 }
             delete data;
         }
-    delete _input;
-    if (cbuff)
+        if (cbuff)
         {
             delete []cbuff;
         }
@@ -506,14 +504,14 @@ bool Socket::ShouldClose()
 
 bool Socket::HasHandle() const
 {
-    return (_input->empty()==true?false:true);
+    return (_input.empty()==true?false:true);
 }
 bool Socket::HandleInput()
 {
     if (HasHandle())
         {
-            in_data* data = _input->top();
-            data->handle->Input(_input->top()->args, PopCommand());
+            in_data* data = _input.top();
+            data->handle->Input(_input.top()->args, PopCommand());
             ClrInBuffer();
             return true;
         }
@@ -524,8 +522,8 @@ void Socket::ClearInput()
 {
     if (HasHandle())
         {
-            in_data* in = _input->top();
-            _input->pop();
+            in_data* in = _input.top();
+            _input.pop();
             if (in)
                 {
                     if (in->handle)
@@ -536,7 +534,7 @@ void Socket::ClearInput()
                 }
             if (HasHandle())
                 {
-                    in = _input->top();
+                    in = _input.top();
                     in->handle->Active(in);
                 }
         }
@@ -547,7 +545,7 @@ bool Socket::SetInput(in_data* data)
         {
             data->handle->Attach(this);
         }
-    _input->push(data);
+    _input.push(data);
     data->handle->Active(data);
     ClrInBuffer();
     return true;
