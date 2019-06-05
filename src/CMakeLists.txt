@@ -14,6 +14,7 @@ SET(SOURCE
   callout.cpp
   calloutManager.cpp
   channel.cpp
+  ChannelManager.cpp
   com_builder.cpp
   com_gen.cpp
   com_movement.cpp
@@ -95,6 +96,7 @@ set(HEADERS
   callout.h
   calloutManager.h
   channel.h
+  ChannelManager.h
   com_builder.h
   com_gen.h
   com_movement.h

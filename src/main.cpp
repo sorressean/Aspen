@@ -1,4 +1,3 @@
-#include <sstream>
 #include <iostream>
 #include <cstdlib>
 #include <cstring>
@@ -11,6 +10,7 @@
 
 #include "mud.h"
 #include "configuration.h"
+#include "ChannelManager.h"
 #include "socket.h"
 #include "server.h"
 #include "log.h"
@@ -30,14 +30,17 @@ void sig(int sig);
 //check directories:
 static bool InitializeDirectories();
 
+static void InitializeSignalCallbacks()
+{
+    WriteLog("Initializing signal callbacks.");
+    signal(SIGTERM,sig);
+    signal(SIGINT,sig);
+    signal(SIGQUIT,sig);
+    signal(SIGHUP,sig);
+}
+
 int main(int argc, const char** argv)
 {
-    Log::Initialize();
-    World* world = nullptr;
-    bool copyover=false; //are we rebooting for copyover?
-    int listener=0; //the socket to listen on when recovering from copyover
-    int port = 0;
-
 //are we running as root?
     if (getuid() == 0)
         {
@@ -45,6 +48,7 @@ int main(int argc, const char** argv)
             return EXIT_FAILURE;
         }
 
+    Log::Initialize();
 //load and read configuration
     Configuration::Initialize();
     Configuration::GetPtr()->Load();
@@ -60,11 +64,14 @@ int main(int argc, const char** argv)
             return EXIT_FAILURE;
         }
 
-    world = World::GetPtr();
+    auto world = World::GetPtr();
     WriteLog("Initializing "+std::string(MUD_NAME)+".");
 
 //initialize the server class:
 //determine if a port was specified. If not, use default.
+int port = 0;
+int listener = 0;
+bool copyover = false;
     if (argc == 2)
         {
             port = atoi(argv[1]);
@@ -100,6 +107,7 @@ int main(int argc, const char** argv)
             WriteLog(SeverityLevel::Fatal, "Could not initialize commands.");
             return EXIT_FAILURE;
         }
+ChannelManager::Initialize();
     InitializeChannels();
     if (!InitializeModules())
         {
@@ -135,13 +143,7 @@ int main(int argc, const char** argv)
                 }
         }
 
-//initialize signal callbacks
-    WriteLog("Initializing signal callbacks.");
-    signal(SIGTERM,sig);
-    signal(SIGINT,sig);
-    signal(SIGQUIT,sig);
-    signal(SIGHUP,sig);
-
+InitializeSignalCallbacks();
 //load state:
     world->LoadState();
 
@@ -151,6 +153,7 @@ int main(int argc, const char** argv)
     CalloutManager::Release();
     Configuration::GetPtr()->Save();
     Configuration::Release();
+ChannelManager::Release();
     WriteLog("Game loop finished, exiting.");
     delete world;
     return EXIT_SUCCESS;
