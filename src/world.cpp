@@ -350,9 +350,16 @@ const char* World::GetMotd() const
     return _motd;
 }
 
+void World::UpdateZones()
+{
+    for (auto zone: _zones)
+        {
+            zone->Update();
+        }
+}
+
 void World::Update()
 {
-    CalloutManager* callouts = CalloutManager::GetInstance();
     timeval start, end;
     gettimeofday(&start, NULL);
 //checks for incoming connections or commands
@@ -361,11 +368,9 @@ void World::Update()
     _server->FlushSockets();
 //update living objects:
     _pmanager.Update();
-    for (auto zone: _zones)
-        {
-            zone->Update();
-        }
+UpdateZones();
     _objectManager.Update();
+    CalloutManager* callouts = CalloutManager::GetInstance();
     callouts->Update();
 
     _updates ++;
