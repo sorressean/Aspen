@@ -200,7 +200,6 @@ ${OPENSSL_CRYPTO_LIBRARY}
 Boost::system
 Boost::filesystem
 Boost::log
-Boost::log_setup
 Boost::date_time
 )
 
