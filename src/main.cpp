@@ -20,6 +20,8 @@
 #include "zone.h"
 #include "world.h"
 
+using namespace std;
+
 //prototypes:
 //recovers from a copyover
 static bool CopyoverRecover();
@@ -44,7 +46,7 @@ int main(int argc, const char** argv)
 //are we running as root?
     if (getuid() == 0)
         {
-            std::cerr << "You should not be running as root, exiting." << std::endl;
+            cerr << "You should not be running as root, exiting." << endl;
             return EXIT_FAILURE;
         }
 
@@ -60,15 +62,13 @@ int main(int argc, const char** argv)
 //if we can create them, we do so. Otherwise we just fail when they don't exist.
     if (!InitializeDirectories())
         {
-            std::cerr << "Error: could not create directories." << std::endl;
+            cerr << "Error: could not create directories." << endl;
             return EXIT_FAILURE;
         }
 
     auto world = World::GetPtr();
-    WriteLog("Initializing "+std::string(MUD_NAME)+".");
+    WriteLog("Initializing "+string(MUD_NAME)+".");
 
-//initialize the server class:
-//determine if a port was specified. If not, use default.
 int port = 0;
 int listener = 0;
 bool copyover = false;
@@ -164,32 +164,30 @@ static bool CopyoverRecover()
     World* world = World::GetPtr();
     Player* person = nullptr;
     sockaddr_in* saddr = nullptr;
-    FILE* recover = nullptr;
     unsigned short port = 0;
     unsigned long addr = 0;
-    char *name = nullptr;
-    char* host = nullptr;
     int desc = 0;
-    int ruptime = 0;
 
     WriteLog("Starting copyover recovery");
-    recover=fopen(COPYOVER_FILE,"rb");
+    FILE* recover=fopen(COPYOVER_FILE,"rb");
     if (recover == nullptr)
         {
             WriteLog(SeverityLevel::Fatal, "There was an error opening the copyover recovery file, now exiting.");
             return false;
         }
 
-    host = new char[256];
-    name = new char[15];
+int ruptime = 0;
     fscanf(recover, "%d\n", &ruptime);
-
     world->SetRealUptime((time_t)ruptime);
     world->SetCopyoverUptime(time(NULL));
 
     while (1)
         {
-            fscanf(recover,"%d %s %hu %lu %s\n",
+
+char host[256];
+char name[15];
+
+     fscanf(recover,"%d %s %hu %lu %s\n",
                    &desc,name, &port,&addr, host);
             if (desc==-1)
                 {
@@ -213,8 +211,6 @@ static bool CopyoverRecover()
             sock->Write("Copyover complete.\n");
         }
 
-    delete []name;
-    delete []host;
     fclose(recover);
     remove(COPYOVER_FILE);
     WriteLog("Copyover completed.");
