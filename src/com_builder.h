@@ -59,7 +59,17 @@ public:
 };
 
 /**
-* Creates a virtual object.
+* Loads a virtual object.
+*/
+class CMDVLoad:public Command
+{
+public:
+    CMDVLoad();
+    bool Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args,int subcmd);
+};
+
+/**
+* Creates virtual zone objects.
 */
 class CMDVCreate:public Command
 {

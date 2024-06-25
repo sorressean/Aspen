@@ -139,8 +139,12 @@ void StaticObject::Deserialize(tinyxml2::XMLElement* root)
 {
     World* world = World::GetPtr();
 
-    _short = root->Attribute("short");
-    _plural = root->Attribute("plural");
+    const char* val_short = root->Attribute("short");
+    if (val_short)
+        _short = val_short;
+    const char* plural = root->Attribute("plural");
+    if (plural)
+        _plural = plural;
     DeserializeCollection(root, "components", [world](tinyxml2::XMLElement* visitor)
     {
         IComponentMeta* com = nullptr;

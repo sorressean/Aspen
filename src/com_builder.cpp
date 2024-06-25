@@ -24,6 +24,7 @@ void InitializeBuilderCommands()
     world->commands.AddCommand(new CMDRlist());
     world->commands.AddCommand(new CMDDig());
     world->commands.AddCommand(new CMDVCreate());
+    world->commands.AddCommand(new CMDVLoad());
     world->commands.AddCommand(new CMDVList());
     world->commands.AddCommand(new CMDMCreate());
     world->commands.AddCommand(new CMDMList());
@@ -493,14 +494,14 @@ CMDMLoad::CMDMLoad()
 
 bool CMDMLoad::Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args,int subcmd)
 {
-    ObjectContainer* location = mobile->GetLocation();
+    const auto  location = mobile->GetLocation();
     if (!location || !location->IsRoom())
         {
             mobile->Message(MSG_ERROR, "You are not in a room.");
             return false;
         }
 
-    Zone* zone = location->GetZone();
+    const auto zone = location->GetZone();
     if (!zone)
         {
             mobile->Message(MSG_ERROR, "The room you are in does not have a zone.");
@@ -768,5 +769,62 @@ bool CMDRcreate::Execute(const std::string &verb, Player* mobile, std::vector<st
     std::stringstream st;
     st << "Created Room " << room->GetOnum() << ".";
     mobile->Message(MSG_INFO, st.str());
+    return true;
+}
+
+CMDVLoad::CMDVLoad()
+{
+    SetAccess(RANK_BUILDER);
+    SetName("vload");
+    SetType(CommandType::Builder);
+}
+
+bool CMDVLoad::Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args,int subcmd)
+{
+    const auto  location = mobile->GetLocation();
+    if (!location || !location->IsRoom())
+        {
+            mobile->Message(MSG_ERROR, "You are not in a room.");
+            return false;
+        }
+
+    const auto zone = location->GetZone();
+    if (!zone)
+        {
+            mobile->Message(MSG_ERROR, "The room you are in does not have a zone.");
+            return false;
+        }
+
+    if (args.size() != 1)
+        {
+            mobile->Message(MSG_ERROR, "Syntax: vload <vnum>");
+            return false;
+        }
+
+    VNUM num = 0;
+    try
+        {
+            num = std::stoi(args[0]);
+        }
+    catch(std::invalid_argument&)
+        {
+            mobile->Message(MSG_ERROR, "Syntax: vload <vnum>");
+            return false;
+        }
+    if (num <= 0)
+        {
+            mobile->Message(MSG_ERROR, "Syntax: vload <vnum>");
+            return false;
+        }
+
+    const auto object = zone->CreateObject(num);
+    if (!object)
+        {
+            mobile->Message(MSG_ERROR, "That object doesn't exist in the specified zone.");
+            return false;
+        }
+
+    object->MoveTo(mobile);
+    mobile->Message(MSG_INFO, "Object loaded.");
     return true;
 }

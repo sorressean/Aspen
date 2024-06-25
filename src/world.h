@@ -55,10 +55,10 @@ class World
     char* _banner;
     OptionManager _options;
 
-/**
-* Todo: update zones to use a manager.
-*/
-void UpdateZones();
+    /**
+    * Todo: update zones to use a manager.
+    */
+    void UpdateZones();
 public:
     static World* GetPtr();
 //these are objects we need to store on each entity.

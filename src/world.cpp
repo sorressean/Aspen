@@ -368,7 +368,7 @@ void World::Update()
     _server->FlushSockets();
 //update living objects:
     _pmanager.Update();
-UpdateZones();
+    UpdateZones();
     _objectManager.Update();
     CalloutManager* callouts = CalloutManager::GetInstance();
     callouts->Update();

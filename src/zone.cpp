@@ -300,6 +300,18 @@ Npc* Zone::CreateNpc(VNUM num, Room* origin)
     return ret;
 }
 
+Entity* Zone::CreateObject(VNUM num)
+{
+    const auto templ = GetVirtual(num);
+    if (!templ)
+        {
+            return nullptr;
+        }
+
+    auto object = templ->Create();
+    return object;
+}
+
 void Zone::Update()
 {
 }

@@ -69,9 +69,9 @@ int main(int argc, const char** argv)
     auto world = World::GetPtr();
     WriteLog("Initializing "+string(MUD_NAME)+".");
 
-int port = 0;
-int listener = 0;
-bool copyover = false;
+    int port = 0;
+    int listener = 0;
+    bool copyover = false;
     if (argc == 2)
         {
             port = atoi(argv[1]);
@@ -107,7 +107,7 @@ bool copyover = false;
             WriteLog(SeverityLevel::Fatal, "Could not initialize commands.");
             return EXIT_FAILURE;
         }
-ChannelManager::Initialize();
+    ChannelManager::Initialize();
     InitializeChannels();
     if (!InitializeModules())
         {
@@ -143,7 +143,7 @@ ChannelManager::Initialize();
                 }
         }
 
-InitializeSignalCallbacks();
+    InitializeSignalCallbacks();
 //load state:
     world->LoadState();
 
@@ -153,7 +153,7 @@ InitializeSignalCallbacks();
     CalloutManager::Release();
     Configuration::GetPtr()->Save();
     Configuration::Release();
-ChannelManager::Release();
+    ChannelManager::Release();
     WriteLog("Game loop finished, exiting.");
     delete world;
     return EXIT_SUCCESS;
@@ -176,7 +176,7 @@ static bool CopyoverRecover()
             return false;
         }
 
-int ruptime = 0;
+    int ruptime = 0;
     fscanf(recover, "%d\n", &ruptime);
     world->SetRealUptime((time_t)ruptime);
     world->SetCopyoverUptime(time(NULL));
@@ -184,10 +184,10 @@ int ruptime = 0;
     while (1)
         {
 
-char host[256];
-char name[15];
+            char host[256];
+            char name[15];
 
-     fscanf(recover,"%d %s %hu %lu %s\n",
+            fscanf(recover,"%d %s %hu %lu %s\n",
                    &desc,name, &port,&addr, host);
             if (desc==-1)
                 {

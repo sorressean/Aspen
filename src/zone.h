@@ -89,6 +89,7 @@ public:
     bool NpcExists(VNUM num);
     void GetNpcs(std::vector<Npc*>* npcs);
     Npc* CreateNpc(VNUM num, Room* origin);
+    Entity* CreateObject(VNUM num);
     void Update();
     virtual void Serialize(tinyxml2::XMLElement* root);
     virtual void Deserialize(tinyxml2::XMLElement* zone);

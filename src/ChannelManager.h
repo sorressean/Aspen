@@ -6,13 +6,13 @@
 
 class ChannelManager
 {
-static ChannelManager* _instance;
+    static ChannelManager* _instance;
 
-ChannelManager() = default;
-~ChannelManager() = default;
+    ChannelManager() = default;
+    ~ChannelManager() = default;
 public:
-static ChannelManager* GetInstance();
-static void Initialize();
-static void Release();
+    static ChannelManager* GetInstance();
+    static void Initialize();
+    static void Release();
 };
 #endif

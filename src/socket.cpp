@@ -41,7 +41,7 @@ Socket::Socket(const int desc):
     _termtype = "unknown";
     _mobile=NULL;
     _Close=false;
-        _lastInput = time(NULL);
+    _lastInput = time(NULL);
     _compressing = false;
     _port = -1;
     _totalReceived = 0;
@@ -74,7 +74,7 @@ Socket::~Socket()
                 }
             delete data;
         }
-        if (cbuff)
+    if (cbuff)
         {
             delete []cbuff;
         }
