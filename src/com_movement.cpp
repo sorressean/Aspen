@@ -59,7 +59,7 @@ static bool DoMove(const std::string &verb, Player* mobile,std::vector<std::stri
 
     dest = omanager->GetRoom(exit->GetTo());
     mobile->MoveTo(dest);
-    dest->events.CallEvent("OnEnter", NULL, (void*)dest);
+    dest->events.CallEvent("OnEnter", nullptr, (void*)dest);
     mobile->Message(MSG_INFO, dest->DoLook(mobile));
     return true;
 }

@@ -20,7 +20,7 @@ protected:
     std::vector<Property *> _children;
     BaseObject* _owner;
 public:
-    Property(const std::string &name, const Variant& value, Property *parent = NULL);
+    Property(const std::string &name, const Variant& value, Property *parent = nullptr);
     Property();
     ~Property();
     Variant GetValue();
@@ -45,6 +45,6 @@ public:
     // Finds a Property based on its name.
     Property *FindProperty(const std::string &name);
     void Serialize(tinyxml2::XMLElement *root);
-    void Deserialize(tinyxml2::XMLElement* root, Property* parent = NULL);
+    void Deserialize(tinyxml2::XMLElement* root, Property* parent = nullptr);
 };
 #endif /* _Property_HPP */

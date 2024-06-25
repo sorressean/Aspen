@@ -119,9 +119,9 @@ int main(int argc, const char** argv)
             WriteLog(SeverityLevel::Fatal, "could not initialize zones.");
             return EXIT_FAILURE;
         }
-    world->SetRealUptime(time(NULL));
+    world->SetRealUptime(time(nullptr));
     world->SetCopyoverUptime(0);
-    srand(time(NULL));
+    srand(time(nullptr));
 
 //make the server listen:
     WriteLog("Attempting to establish listening point.");
@@ -179,7 +179,7 @@ static bool CopyoverRecover()
     int ruptime = 0;
     fscanf(recover, "%d\n", &ruptime);
     world->SetRealUptime((time_t)ruptime);
-    world->SetCopyoverUptime(time(NULL));
+    world->SetCopyoverUptime(time(nullptr));
 
     while (1)
         {

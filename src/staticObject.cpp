@@ -91,7 +91,7 @@ Entity* StaticObject::Create()
 }
 bool StaticObject::Recycle(Entity* obj)
 {
-    if (obj == NULL)
+    if (obj == nullptr)
         {
             return false;
         }

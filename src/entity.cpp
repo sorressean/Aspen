@@ -76,7 +76,7 @@ bool Entity::FromRoom()
             return false;
         }
     loc->ObjectLeave(this);
-    loc->events.CallEvent("OnExit", NULL, (void*)this);
+    loc->events.CallEvent("OnExit", nullptr, (void*)this);
 
     return true;
 }
@@ -178,7 +178,7 @@ void Entity::Deserialize(tinyxml2::XMLElement* root)
         }
 
 //and now we notify everything that an object was loaded:
-    world->events.CallEvent("ObjectLoaded", NULL, this);
+    world->events.CallEvent("ObjectLoaded", nullptr, this);
 
     _uuid.Deserialize(root);
     DeserializeCollection(root, "aliases", [this](tinyxml2::XMLElement* visitor)

@@ -30,7 +30,7 @@ int Callout::GetDelta() const
     int fdelta = (_fireTime.tv_sec * 1000) + (_fireTime.tv_usec/1000);
     int cdelta = 0;
 
-    gettimeofday(&curtime, NULL);
+    gettimeofday(&curtime, nullptr);
     cdelta = (curtime.tv_sec * 1000) + (curtime.tv_usec/1000);
 
     return cdelta-fdelta;
@@ -39,7 +39,7 @@ int Callout::GetDelta() const
 bool Callout::CanFire() const
 {
     timeval curtime;
-    gettimeofday(&curtime, NULL);
+    gettimeofday(&curtime, nullptr);
     int extra = ((_fireTime.tv_sec - curtime.tv_sec) * 1000);
     extra += ((_fireTime.tv_usec - curtime.tv_usec) / 1000);
     return (extra <= 0? true : false);
@@ -57,7 +57,7 @@ bool Callout::IsOneShot() const
 void Callout::Reset()
 {
     timeval curtime;
-    gettimeofday(&curtime, NULL);
+    gettimeofday(&curtime, nullptr);
     _fireTime.tv_sec = curtime.tv_sec + _sec;
     int extra = curtime.tv_usec + (_msec * 1000);
     while (extra >= 1000000)

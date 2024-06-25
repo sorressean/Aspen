@@ -169,7 +169,7 @@ void BaseObject::Serialize(tinyxml2::XMLElement* root)
 void BaseObject::Deserialize(tinyxml2::XMLElement* root)
 {
     World* world = World::GetPtr();
-    tinyxml2::XMLElement* properties = NULL;
+    tinyxml2::XMLElement* properties = nullptr;
 
     DeserializeCollection(root, "components", [this, world](tinyxml2::XMLElement* visitor)
     {

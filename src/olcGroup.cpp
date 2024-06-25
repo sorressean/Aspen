@@ -35,7 +35,7 @@ IOlcEntry* OlcGroup::GetEntry(const std::string& name)
                 }
         }
 
-    return NULL;
+    return nullptr;
 }
 void OlcGroup::ListEntries(std::vector<IOlcEntry*>* entries)
 {

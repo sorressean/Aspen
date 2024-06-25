@@ -36,7 +36,7 @@ void Socials::Save()
     tinyxml2::XMLDocument doc;
     tinyxml2::XMLElement* socials = doc.NewElement("socials");
     tinyxml2::XMLElement* social = nullptr;
-    SOCIAL_DATA* sdata = NULL;
+    SOCIAL_DATA* sdata = nullptr;
     doc.InsertEndChild(doc.NewDeclaration());
 
     for (auto it: _slist)
@@ -132,7 +132,7 @@ SOCIAL_DATA* Socials::GetSocial(const std::string &name)
 {
     if (!SocialExists(name))
         {
-            return NULL;
+            return nullptr;
         }
 
     return _slist[name];
@@ -187,7 +187,7 @@ bool CMDSocials::Execute(const std::string &verb, Player* mobile,std::vector<std
 {
     Socials* soc = Socials::GetPtr();
     SOCIAL_DATA* data = soc->GetSocial(verb);
-    if (data == NULL)
+    if (data == nullptr)
         {
             mobile->Message(MSG_ERROR, "That social doesn't exist.");
             return false;

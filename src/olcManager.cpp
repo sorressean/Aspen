@@ -34,7 +34,7 @@ OlcGroup* OlcManager::GetGroup(OLCGROUP group)
 {
     if (!HasGroup(group))
         {
-            return NULL;
+            return nullptr;
         }
 
     return _olcs[(int)group];

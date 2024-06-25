@@ -43,7 +43,7 @@ public:
     * @param [in] cb the callback to fire on comletion.
     * @param [in] args associated args with this handler.
     */
-    YesNoHandler(YESNOCB cb, void* arg=NULL);
+    YesNoHandler(YESNOCB cb, void* arg=nullptr);
     /**
     * @copydoc InputHandle::Input
     */
@@ -74,7 +74,7 @@ public:
     * @param [in] cb the callback to fire on comletion.
     * @param [in] args associated args with this handler.
     */
-    LineHandler(LINECB cb, void* arg = NULL);
+    LineHandler(LINECB cb, void* arg = nullptr);
     /**
     * @copydoc InputHandle::Input
     */
@@ -104,7 +104,7 @@ public:
     * @param [in] lines a pointer to a vector which will receive the lines from the handler.
     * @param [in] args associated args with this handler.
     */
-    TextBlockHandler(TEXTBLOCKCB cb,  std::vector<std::string>* lines, void* arg = NULL);
+    TextBlockHandler(TEXTBLOCKCB cb,  std::vector<std::string>* lines, void* arg = nullptr);
     /**
     * @copydoc InputHandle::Input
     */

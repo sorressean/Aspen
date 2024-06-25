@@ -50,7 +50,7 @@ ScriptEngine::ScriptEngine()
     RegisterStdString(_engine);
     RegisterStdStringUtils(_engine);
     RegisterScriptDictionary(_engine);
-    _engine->SetMessageCallback(asFUNCTION(MessageCallback), NULL, asCALL_CDECL);
+    _engine->SetMessageCallback(asFUNCTION(MessageCallback), nullptr, asCALL_CDECL);
 }
 ScriptEngine::~ScriptEngine()
 {

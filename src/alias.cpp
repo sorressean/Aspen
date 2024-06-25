@@ -58,7 +58,7 @@ void Alias::Serialize(tinyxml2::XMLElement* root)
 
     alias->SetAttribute("name", _name.c_str());
 
-    SerializeCollection<std::vector<std::string>, std::string>("commands", "command", root, _aliases, [this](tinyxml2::XMLElement* visitor, std::string command)
+    SerializeCollection<std::vector<std::string>, std::string>("commands", "command", root, _aliases, [](tinyxml2::XMLElement* visitor, std::string command)
     {
         visitor->SetAttribute("value", command.c_str());
     });

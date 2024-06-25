@@ -112,7 +112,7 @@ void Channel::_AddHistoryEntry(const std::string &message)
         }
 
     node=new HistoryNode();
-    node->when=time(NULL);
+    node->when=time(nullptr);
     node->message=message;
     _history.push_back(node);
 }

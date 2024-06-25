@@ -105,7 +105,7 @@ void World::Shutdown()
 {
     _pmanager.Shutdown();
     SaveState();
-    events.CallEvent("Shutdown", NULL, static_cast<void*>(this));
+    events.CallEvent("Shutdown", nullptr, static_cast<void*>(this));
     _running = false;
 }
 
@@ -114,18 +114,18 @@ void World::Copyover(Player* mobile)
     std::list<Player*>* _users;
     int ruptime = (int)GetRealUptime();
 
-    FILE* copyover = NULL;
+    FILE* copyover = nullptr;
     char buff[16];
 
     copyover=fopen(COPYOVER_FILE,"wb");
-    if (copyover==NULL)
+    if (copyover==nullptr)
         {
             mobile->Message(MSG_ERROR,"couldn't open the copyover file.\nCopyover will not continue.");
             return;
         }
 
     fprintf(copyover, "%d\n", ruptime);
-    sockaddr_in* addr=NULL;
+    sockaddr_in* addr=nullptr;
 //itterate through the players and write info to their copyover file:
     _users = _pmanager.GetPlayers();
     for (auto person: *_users)
@@ -148,12 +148,12 @@ void World::Copyover(Player* mobile)
     fprintf(copyover,"-1\n");
     fclose(copyover);
 
-    events.CallEvent("Copyover", NULL, static_cast<void*>(this));
+    events.CallEvent("Copyover", nullptr, static_cast<void*>(this));
     snprintf(buff,16,"%d",_server->GetListener());
 
     Update();
     SaveState();
-    execl(BIN_FILE,BIN_FILE,"-c",buff,(char*)NULL);
+    execl(BIN_FILE,BIN_FILE,"-c",buff,(char*)nullptr);
 
     mobile->Write("Copyover failed!\n");
 }
@@ -251,7 +251,7 @@ Channel* World::FindChannel(int id)
 {
     if (!_channels.count(id))
         {
-            return NULL;
+            return nullptr;
         }
 
     return _channels[id];
@@ -269,7 +269,7 @@ Channel* World::FindChannel(const std::string &name)
                 }
         }
 
-    return NULL;
+    return nullptr;
 }
 
 bool World::InitializeFiles()
@@ -292,14 +292,14 @@ bool World::InitializeFiles()
         {
             WriteLog(SeverityLevel::Fatal, "Could not fopen banner file.");
             delete []_banner;
-            _banner = NULL;
+            _banner = nullptr;
             return false;
         }
     if (fread(_banner,1, static_cast<size_t>(fs.st_size), banner_fd) != static_cast<size_t>(fs.st_size))
         {
             WriteLog("SeverityLevel::Fatal, Error loading banner.");
             delete []_banner;
-            _banner = NULL;
+            _banner = nullptr;
             fclose(banner_fd);
             return false;
         }
@@ -311,7 +311,7 @@ bool World::InitializeFiles()
         {
             WriteLog(SeverityLevel::Fatal, "Could not stat MOTD file.");
             delete []_banner;
-            _banner = NULL;
+            _banner = nullptr;
             return false;
         }
 
@@ -324,7 +324,7 @@ bool World::InitializeFiles()
             WriteLog(SeverityLevel::Fatal, "Could not fopen MOTD.");
             delete [] _banner;
             delete [] _motd;
-            _motd = _banner = NULL;
+            _motd = _banner = nullptr;
             return false;
         }
 
@@ -332,7 +332,7 @@ bool World::InitializeFiles()
         {
             WriteLog(SeverityLevel::Fatal, "Error loading MOTD.");
             delete [] _motd;
-            _banner = NULL;
+            _banner = nullptr;
             fclose(motd_fd);
             return false;
         }
@@ -361,7 +361,7 @@ void World::UpdateZones()
 void World::Update()
 {
     timeval start, end;
-    gettimeofday(&start, NULL);
+    gettimeofday(&start, nullptr);
 //checks for incoming connections or commands
     _server->PollSockets();
 //flushes the output buffers of all sockets.
@@ -374,7 +374,7 @@ void World::Update()
     callouts->Update();
 
     _updates ++;
-    gettimeofday(&end, NULL);
+    gettimeofday(&end, nullptr);
     _totalUpdateTime += ((end.tv_sec - start.tv_sec) * 1000000);
     _totalUpdateTime += (end.tv_usec - start.tv_usec);
 
@@ -426,7 +426,7 @@ void* World::GetProperty(const std::string &name)
             return _properties[name];
         }
 
-    return NULL;
+    return nullptr;
 }
 bool World::RemoveProperty(const std::string &name)
 {
@@ -494,7 +494,7 @@ bool World::DoCommand(Player* mobile,std::string args)
     //std::list<Command*>* externals; //external commands
 
 //start measuring elapsed time.
-    gettimeofday(&start, NULL);
+    gettimeofday(&start, nullptr);
 
 //handle special commands.
     if (args[0] == '\"' || args[0] == '\'')
@@ -538,7 +538,7 @@ bool World::DoCommand(Player* mobile,std::string args)
 //execute command.
                     /*todo: add script command handling here.*/
                     it->Execute(it->GetName(), mobile, params, it->GetSubcmd());
-                    gettimeofday(&end, NULL);
+                    gettimeofday(&end, nullptr);
                     _commandElapsed += ((end.tv_sec - start.tv_sec) * 1000000);
                     _commandElapsed += (end.tv_usec-start.tv_usec);
                     _commands ++;
@@ -617,7 +617,7 @@ Zone* World::GetZone(const std::string &name)
                 }
         }
 
-    return NULL;
+    return nullptr;
 }
 bool World::GetZones(std::vector<Zone*> *zones)
 {
@@ -724,7 +724,7 @@ bool World::SaveState()
 bool World::LoadState()
 {
     DIR* statedir = opendir(STATE_DIR);
-    dirent* dir = NULL;
+    dirent* dir = nullptr;
 
 //we need to open the directory for reading.
     if (!statedir)

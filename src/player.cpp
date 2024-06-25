@@ -36,7 +36,7 @@ Player::Player()
     _lastLogin=0;
     _lastSave = 0;
     _lastBackup = 0;
-    _watching = NULL;
+    _watching = nullptr;
     _watchers = new std::list<Player*>();
 
 //messages:
@@ -57,7 +57,7 @@ Player::~Player()
     if (_messages)
         {
             delete _messages;
-            _messages=NULL;
+            _messages=nullptr;
         }
 
     for (Option* oit: _config)
@@ -205,11 +205,11 @@ bool Player::Save(bool force)
 {
     if (!force)
         {
-            if ((time(NULL)-_lastSave) < SAVE_INTERVAL)
+            if ((time(nullptr)-_lastSave) < SAVE_INTERVAL)
                 {
                     return false;
                 }
-            _lastSave = time(NULL);
+            _lastSave = time(nullptr);
         }
 
     tinyxml2::XMLDocument doc;
@@ -222,7 +222,7 @@ bool Player::Save(bool force)
 }
 bool Player::Backup()
 {
-    if ((time(NULL)-_lastBackup) < BACKUP_INTERVAL)
+    if ((time(nullptr)-_lastBackup) < BACKUP_INTERVAL)
         {
             return false;
         }
@@ -278,8 +278,8 @@ void Player::EnterGame(bool quiet)
 //show the login banner:
             Write("\n"+std::string(world->GetMotd())+"\n");
         }
-    world->events.CallEvent("PlayerConnect", NULL,this);
-    events.CallEvent("EnterGame", NULL, this);
+    world->events.CallEvent("PlayerConnect", nullptr,this);
+    events.CallEvent("EnterGame", nullptr, this);
     Attach();
     Save();
 
@@ -296,8 +296,8 @@ void Player::LeaveGame()
     Living::LeaveGame();
 //take the player from the users list:
     world->GetPlayerManager().RemovePlayer(this);
-    world->events.CallEvent("PlayerDisconnect", NULL, this);
-    events.CallEvent("LeaveGame", NULL,this);
+    world->events.CallEvent("PlayerDisconnect", nullptr, this);
+    events.CallEvent("LeaveGame", nullptr,this);
 }
 
 void Player::Write(const std::string &text) const

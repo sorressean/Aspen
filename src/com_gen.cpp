@@ -429,7 +429,7 @@ bool CMDHist::Execute(const std::string &verb, Player* mobile,std::vector<std::s
 
     for (auto it: *history)
         {
-            tm.Calculate(time(NULL) - it->when);
+            tm.Calculate(time(nullptr) - it->when);
             mobile->Message(MSG_LIST,tm.ToString() + ": " + it->message);
         }
 
@@ -444,8 +444,8 @@ CMDUptime::CMDUptime()
 bool CMDUptime::Execute(const std::string &verb, Player* mobile,std::vector<std::string> &args,int subcmd)
 {
     World* world = World::GetPtr();
-    TimeInfo ruptime(time(NULL)-world->GetRealUptime());
-    TimeInfo cuptime(time(NULL)-world->GetCopyoverUptime());
+    TimeInfo ruptime(time(nullptr)-world->GetRealUptime());
+    TimeInfo cuptime(time(nullptr)-world->GetCopyoverUptime());
 
     mobile->Message(MSG_INFO,Capitalize(MUD_NAME)+" has been up for "+ruptime.ToString()+".");
     if (world->GetCopyoverUptime() == 0)
@@ -542,7 +542,7 @@ bool CMDLook::Execute(const std::string &verb, Player* mobile,std::vector<std::s
         }
 
     obj =world->MatchObject(args[0],mobile);
-    if (obj==NULL)
+    if (obj==nullptr)
         {
             mobile->Message(MSG_ERROR,"You don't see that here.");
             return false;

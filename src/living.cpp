@@ -23,7 +23,7 @@ void Living::LeaveGame()
 
 void Living::Update()
 {
-    events.CallEvent("HeartBeat", NULL, (void*)this);
+    events.CallEvent("HeartBeat", nullptr, (void*)this);
 }
 
 bool Living::IsLiving() const

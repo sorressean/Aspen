@@ -93,10 +93,10 @@ bool Listener::Listen(int port)
 void Listener::Poll()
 {
     std::list<BaseSocket*>::iterator it, itEnd;
-    BaseSocket* sock = NULL;
+    BaseSocket* sock = nullptr;
 
     memcpy(&rset, &fset, sizeof(fd_set));
-    if (select(FD_SETSIZE, &rset, NULL, NULL, NULL) < 0)
+    if (select(FD_SETSIZE, &rset, nullptr, nullptr, nullptr) < 0)
         {
             return;
         }

@@ -24,7 +24,7 @@ void Uuid::Initialize()
     std::mt19937 generator(seed);
     _id = generator();
     _id <<= 32;
-    _id |= (0xFFFF&time(NULL));
+    _id |= (0xFFFF&time(nullptr));
 }
 std::string Uuid::ToString() const
 {

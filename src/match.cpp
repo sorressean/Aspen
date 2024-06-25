@@ -33,7 +33,7 @@ Entity* World::MatchKeyword(const std::string &name, Player* caller)
         {
             return caller;
         }
-    return NULL;
+    return nullptr;
 }
 
 Entity* World::MatchObject(const std::string &name,Player* caller)
@@ -41,7 +41,7 @@ Entity* World::MatchObject(const std::string &name,Player* caller)
     std::list<Entity*> *contents; //holds contents for the location and current caller.
     std::list<Entity*>* val;
     std::list<Entity*>::iterator it, itEnd;
-    Entity* obj = NULL;
+    Entity* obj = nullptr;
 
     obj = MatchKeyword(name, caller);
     if (obj)
@@ -64,8 +64,8 @@ Entity* World::MatchObjectInList(const std::string &name, std::list<Entity*> *ol
     std::string sub; //used for holding the subpart of the number.
     std::string temp; //used for holding a temp copy of the name after it is trimmed.
     std::string alias; //holds a copy of the alias.
-    Entity* obj = NULL; //the object we are currently examining/returning.
-    std::vector<std::string>* aliases = NULL; //a list of aliases.
+    Entity* obj = nullptr; //the object we are currently examining/returning.
+    std::vector<std::string>* aliases = nullptr; //a list of aliases.
     std::vector<std::string>::iterator ait, aitEnd;
     int number = 0; //used for holding the actual number.
     int count = 0; //used for holding the number of objects found.
@@ -73,7 +73,7 @@ Entity* World::MatchObjectInList(const std::string &name, std::list<Entity*> *ol
 
     if (!olist->size())
         {
-            return NULL;
+            return nullptr;
         }
 
 //we check to see if the string has a '.', if so, there's a number.
@@ -81,7 +81,7 @@ Entity* World::MatchObjectInList(const std::string &name, std::list<Entity*> *ol
 //check to see if it is 1) at the beginning, or 2) at the end.
     if ((marker == 0) || (marker == name.length()))
         {
-            return NULL;
+            return nullptr;
         }
 
     if (marker != std::string::npos)   //we found something.
@@ -91,7 +91,7 @@ Entity* World::MatchObjectInList(const std::string &name, std::list<Entity*> *ol
             number = atoi(sub.c_str());
             if (number == 0)
                 {
-                    return NULL;
+                    return nullptr;
                 }
 
             itEnd = olist->end();
@@ -138,7 +138,7 @@ Entity* World::MatchObjectInList(const std::string &name, std::list<Entity*> *ol
                 }
             if (count != (number -1))
                 {
-                    return NULL;
+                    return nullptr;
                 }
             else
                 {
@@ -188,7 +188,7 @@ Entity* World::MatchObjectInList(const std::string &name, std::list<Entity*> *ol
                 }
         }
 
-    return NULL;
+    return nullptr;
 }
 Entity* World::MatchObjectInVector(const std::string &name, std::vector<Entity*> *olist)
 {
@@ -196,8 +196,8 @@ Entity* World::MatchObjectInVector(const std::string &name, std::vector<Entity*>
     std::string sub; //used for holding the subpart of the number.
     std::string temp; //used for holding a temp copy of the name after it is trimmed.
     std::string alias; //holds a copy of the alias.
-    Entity* obj = NULL; //the object we are currently examining/returning.
-    std::vector<std::string>* aliases = NULL; //a list of aliases.
+    Entity* obj = nullptr; //the object we are currently examining/returning.
+    std::vector<std::string>* aliases = nullptr; //a list of aliases.
     std::vector<std::string>::iterator ait, aitEnd;
     int number = 0; //used for holding the actual number.
     int count = 0; //used for holding the number of objects found.
@@ -205,7 +205,7 @@ Entity* World::MatchObjectInVector(const std::string &name, std::vector<Entity*>
 
     if (!olist->size())
         {
-            return NULL;
+            return nullptr;
         }
 
 //we check to see if the string has a '.', if so, there's a number.
@@ -213,7 +213,7 @@ Entity* World::MatchObjectInVector(const std::string &name, std::vector<Entity*>
 //check to see if it is 1) at the beginning, or 2) at the end.
     if ((marker == 0) || (marker == name.length()))
         {
-            return NULL;
+            return nullptr;
         }
 
     if (marker != std::string::npos)   //we found something.
@@ -223,7 +223,7 @@ Entity* World::MatchObjectInVector(const std::string &name, std::vector<Entity*>
             number = atoi(sub.c_str());
             if (number == 0)
                 {
-                    return NULL;
+                    return nullptr;
                 }
 
             itEnd = olist->end();
@@ -270,7 +270,7 @@ Entity* World::MatchObjectInVector(const std::string &name, std::vector<Entity*>
                 }
             if (count != (number -1))
                 {
-                    return NULL;
+                    return nullptr;
                 }
             else
                 {
@@ -320,5 +320,5 @@ Entity* World::MatchObjectInVector(const std::string &name, std::vector<Entity*>
                 }
         }
 
-    return NULL;
+    return nullptr;
 }

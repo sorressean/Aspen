@@ -19,7 +19,7 @@
 
 InputHandle::InputHandle()
 {
-    _sock = NULL;
+    _sock = nullptr;
 }
 InputHandle::~InputHandle()
 {
@@ -39,9 +39,9 @@ Socket::Socket(const int desc):
     BaseSocket(desc)
 {
     _termtype = "unknown";
-    _mobile=NULL;
+    _mobile=nullptr;
     _Close=false;
-    _lastInput = time(NULL);
+    _lastInput = time(nullptr);
     _compressing = false;
     _port = -1;
     _totalReceived = 0;
@@ -57,11 +57,11 @@ Socket::Socket(const int desc):
 }
 Socket::~Socket()
 {
-    in_data* data = NULL;
+    in_data* data = nullptr;
     if (_mobile)
         {
             delete _mobile;
-            _mobile=NULL;
+            _mobile=nullptr;
         }
 
     while (!_input.empty())
@@ -84,8 +84,8 @@ void Socket::Linkdeath()
 {
     if (_mobile)
         {
-            _mobile->SetSocket(NULL);
-            _mobile = NULL;
+            _mobile->SetSocket(nullptr);
+            _mobile = nullptr;
             _Close = true;
         }
 }
@@ -239,10 +239,10 @@ bool Socket::InitCompression()
 {
     int ret = 0;
 
-    zstream.zalloc = NULL;
-    zstream.zfree = NULL;
-    zstream.opaque = NULL;
-    zstream.next_in = NULL;
+    zstream.zalloc = nullptr;
+    zstream.zfree = nullptr;
+    zstream.opaque = nullptr;
+    zstream.next_in = nullptr;
     zstream.avail_in = 0;
     zstream.next_out = cbuff;
     zstream.avail_out = 4096;
@@ -334,7 +334,7 @@ bool Socket::Flush()
 
     _totalSent += _outBuffer.length();
 //prepend buffer to prompt
-    if ((_mobile!=NULL)&&(_con==CON_Game))
+    if ((_mobile!=nullptr)&&(_con==CON_Game))
         {
             _outBuffer+="\r\n"+world->BuildPrompt(_mobile->GetPrompt(), _mobile)+(char)TELNET_IAC+(char)TELNET_GA;
         }
@@ -553,7 +553,7 @@ bool Socket::SetInput(in_data* data)
 
 void Socket::UpdateLastCommand()
 {
-    _lastInput = time(NULL);
+    _lastInput = time(nullptr);
 }
 time_t Socket::GetLastCommand()
 {
@@ -716,7 +716,7 @@ bool Socket::HandlePasswordInput()
             return true;
         }
 
-    mobile->SetLastLogin((unsigned int)time(NULL));
+    mobile->SetLastLogin((unsigned int)time(nullptr));
     mobile->EnterGame(false);
     return true;
 }
@@ -831,13 +831,13 @@ void Socket::InitializeNewPlayer()
             Write("You are the first player to create, rank set to God.\n");
         }
 
-    mob->SetFirstLogin((unsigned int)time(NULL));
+    mob->SetFirstLogin((unsigned int)time(nullptr));
 //Set the connection type to game and enter the player.
     SetConnectionType(CON_Game);
     mob->SetSocket(this);
 //call the Create event:
     mob->EnterGame(false);
-    world->events.CallEvent("PlayerCreated", NULL, (void*)mob);
+    world->events.CallEvent("PlayerCreated", nullptr, (void*)mob);
 }
 
 bool Socket::HandleCommand()

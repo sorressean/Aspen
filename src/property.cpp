@@ -14,10 +14,10 @@ Property::Property(const std::string &name, const Variant& value, Property* pare
     _owner = nullptr;
 }
 Property::Property():
-    _name("root"), _parent(NULL)
+    _name("root"), _parent(nullptr)
 {
     _value = Variant();
-    _owner = NULL;
+    _owner = nullptr;
 }
 Property::~Property()
 {
@@ -72,7 +72,7 @@ void Property::AddProperty(Property* prop)
 Property* Property::AddProperty(const std::string &name, const Variant& value)
 {
     size_t dotInd = name.find_first_of(".");
-    Property *prop = NULL;
+    Property *prop = nullptr;
 
     if (dotInd != std::string::npos)
         {
@@ -171,7 +171,7 @@ Property* Property::FindProperty(const std::string &name)
                 }
         }
 
-    return NULL;
+    return nullptr;
 }
 
 void Property::Serialize(tinyxml2::XMLElement *root)

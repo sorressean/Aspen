@@ -39,7 +39,7 @@ Server::Server()
     blist = new BanList();
     world->AddState("banlist", blist);
     // initialize lastSleep
-    gettimeofday(&lastSleep, NULL);
+    gettimeofday(&lastSleep, nullptr);
     manager->RegisterCallout(30, 0, [this](Callout* cb)
     {
         CheckLinkdeaths(cb);
@@ -56,7 +56,7 @@ Server::~Server()
 
 void Server::CheckLinkdeaths(Callout* cb)
 {
-    time_t tm = time(NULL);
+    time_t tm = time(nullptr);
     std::list<LinkdeathNode*>::iterator it, itEnd;
     LinkdeathNode* node = nullptr;
 
@@ -124,7 +124,7 @@ bool Server::PollSockets()
 {
     static struct timeval tv;
     std::list<Socket*>::iterator iSocket, iSocketEnd;
-    Socket *sock = NULL;
+    Socket *sock = nullptr;
     std::string input;
 
     iSocketEnd = socketList.end();
@@ -148,7 +148,7 @@ bool Server::PollSockets()
                             if (sock->GetMobile() && sock->GetConnectionType() == CON_Game)
                                 {
                                     LinkdeathNode* ld = new LinkdeathNode();
-                                    ld->added = time(NULL);
+                                    ld->added = time(nullptr);
                                     ld->mobile = sock->GetMobile();
                                     _linkdead.push_back(ld);
                                     sock->Linkdeath();
@@ -175,7 +175,7 @@ bool Server::PollSockets()
     // attempt to establish new connections
     memcpy(&rSet, &fSet, sizeof(fd_set));
     // poll the descriptor set
-    if (select(FD_SETSIZE, &rSet, NULL, NULL, &tv) < 0)
+    if (select(FD_SETSIZE, &rSet, nullptr, nullptr, &tv) < 0)
         {
             return false;
         }
@@ -187,7 +187,7 @@ void Server::FlushSockets()
 {
     std::list<Socket*>::iterator iSocket, iSocketEnd;
     iSocketEnd = socketList.end();
-    Socket *pSocket = NULL;
+    Socket *pSocket = nullptr;
 
     // iterate through all sockets and flush outgoing data
     for (iSocket = socketList.begin(); iSocket != iSocketEnd; ++iSocket)
@@ -216,13 +216,13 @@ int Server::Sleep(int pps)
             return 0;
         }
 
-    gettimeofday(&newTime, NULL);
+    gettimeofday(&newTime, nullptr);
     spent = (newTime.tv_sec - lastSleep.tv_sec) * 1000000;
     spent += (newTime.tv_usec-lastSleep.tv_usec);
     remaining = (MS_PER_PULSE*1000);
     if (spent >= remaining)
         {
-            gettimeofday(&lastSleep, NULL);
+            gettimeofday(&lastSleep, nullptr);
             WriteLog(SeverityLevel::Warning, "Exceeded frame time.");
             return 0;
         }
@@ -230,8 +230,8 @@ int Server::Sleep(int pps)
 
     newTime.tv_sec = 0;
     newTime.tv_usec = remaining;
-    select(0, NULL, NULL, NULL, &newTime);
-    gettimeofday(&lastSleep, NULL);
+    select(0, nullptr, nullptr, nullptr, &newTime);
+    gettimeofday(&lastSleep, nullptr);
     return remaining;
 }
 
@@ -250,7 +250,7 @@ std::list<Socket*>::iterator Server::CloseSocket(std::list<Socket*>::iterator &i
 
 void Server::Accept()
 {
-    Socket *pSocket = NULL;
+    Socket *pSocket = nullptr;
     sockaddr_in addr;
     unsigned int len = sizeof(addr);
     int desc=0;
@@ -309,7 +309,7 @@ void Server::Accept()
 //copy the address to memory:
     memcpy(pSocket->GetAddr(),&addr,sizeof(sockaddr_in));
 //perform lookup:
-    struct hostent *host = NULL;
+    struct hostent *host = nullptr;
     host = gethostbyaddr((&addr.sin_addr), sizeof(in_addr), AF_INET);
     if ((!host)||(!host->h_name))
         {

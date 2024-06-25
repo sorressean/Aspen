@@ -13,7 +13,7 @@ void Component::Initialize()
     events.RegisterEvent("OnDestroy");
     events.RegisterEvent("OnAttach");
     events.RegisterEvent("OnDetach");
-    events.CallEvent("OnCreate", NULL, (void*)this);
+    events.CallEvent("OnCreate", nullptr, (void*)this);
 }
 
 Component::Component(IComponentMeta* parent):_parent(parent)
@@ -25,7 +25,7 @@ Component::Component()
 }
 Component::~Component()
 {
-    events.CallEvent("OnDestroy", NULL, (void*)this);
+    events.CallEvent("OnDestroy", nullptr, (void*)this);
 }
 
 void Component::Serialize(tinyxml2::XMLElement* root)
@@ -83,5 +83,5 @@ void Component::Detach()
 
     SetObject(nullptr);
     _attached = false;
-    events.CallEvent("OnDetach", NULL, (void*) this);
+    events.CallEvent("OnDetach", nullptr, (void*) this);
 }

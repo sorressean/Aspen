@@ -25,8 +25,8 @@ Zone::Zone()
     _vnumrange.max = 0;
     _resetfreq = 240;
     _resetmsg = "With a pop, the area resets around you.";
-    _lastreset=time(NULL);
-    _creation = time(NULL);
+    _lastreset=time(nullptr);
+    _creation = time(nullptr);
     _opened = 0;
     _flags = 0;
 }
@@ -78,7 +78,7 @@ Room* Zone::AddRoom()
 {
     World* world = World::GetPtr();
     ObjectManager* omanager = world->GetObjectManager();
-    Room* room = NULL;
+    Room* room = nullptr;
     VNUM num = omanager->GetFreeRoomVnum(_vnumrange.min, _vnumrange.max);
 
     if (!num)
@@ -97,7 +97,7 @@ Room* Zone::AddRoom(VNUM num)
 {
     World* world = World::GetPtr();
     ObjectManager* omanager = world->GetObjectManager();
-    Room* room = NULL;
+    Room* room = nullptr;
     if (!omanager->GetFreeRoomVnum(_vnumrange.min, _vnumrange.max, num))
         {
             throw(std::runtime_error("No more vnums available"));
@@ -152,7 +152,7 @@ StaticObject* Zone::AddVirtual()
 {
     World* world = World::GetPtr();
     ObjectManager* omanager = world->GetObjectManager();
-    StaticObject* obj = NULL;
+    StaticObject* obj = nullptr;
     VNUM num = omanager->GetFreeVirtualVnum(_vnumrange.min, _vnumrange.max);
 
     if (!num)
